@@ -62,7 +62,9 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Remark getRemark() { return remark; }
+    public Remark getRemark() {
+        return remark;
+    }
 
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
@@ -119,7 +121,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Remark: " )
+        builder.append(" Remark: ")
                 .append(getRemark());
         return builder.toString();
     }
