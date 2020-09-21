@@ -17,3 +17,4 @@ You can reach us at the email `<placeholder>[at]comp.nus.edu.sg`
 [[portfolio](team/benclmnt.md)]
 
 * Role: Developer
+* Responsibilities: Data
