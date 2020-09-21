@@ -20,6 +20,15 @@ You can reach us at the email `<placeholder>[at]comp.nus.edu.sg`
 
 ### Maguire Ong
 
-<img src="images/github_maguireong.png" width="200px">
+<img src="images/maguireong.png" width="200px">
 
 [[github](http://github.com/maguireong)] 
+
+### Kelvin Wong Jian Quan
+
+<img src="images/kelvinvin.png" width="200px">
+
+[[github](http://github.com/kelvinvin)] [[portfolio](https://github.com/kelvinvin?tab=repositories)]
+* Role: Developer
+* Responsibilities: Data
+
