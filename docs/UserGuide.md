@@ -28,7 +28,7 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
    * **`cadd`**`cadd n/Jane Doe p/91234567 e/jane@gmail.com` : Adds a client named `Jane Doe` to the Address Book.
 
-   * **`cdel`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`cdel`**`3` : Deletes the 3rd client shown in the current list.
 
    * **`exit`** : Exits the app.
 
@@ -123,7 +123,7 @@ Examples:
 
 Deletes the specified client from the clients list.
 
-Format: `delete INDEX`
+Format: `cdel INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
