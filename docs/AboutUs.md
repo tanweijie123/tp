@@ -19,13 +19,13 @@ You can reach us at the email `<placeholder>[at]comp.nus.edu.sg`
 <img src="images/benclmnt.png" width="200px">
 
 [[github](https://github.com/benclmnt)]
- [[portfolio](team/benclmnt.md)]
- 
+[[portfolio](team/benclmnt.md)]
+
 ### Maguire Ong
 
 <img src="images/maguireong.png" width="200px">
 
-[[github](http://github.com/maguireong)] 
+[[github](http://github.com/maguireong)]
 
 ### Kelvin Wong Jian Quan
 
