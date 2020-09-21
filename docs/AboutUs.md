@@ -3,8 +3,6 @@ layout: page
 title: About Us
 ---
 
-<head> <title> About Us </title> </head>
-
 # About Us
 ---
 
