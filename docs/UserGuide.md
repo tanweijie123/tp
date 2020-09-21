@@ -1,178 +1,99 @@
----
-layout: page
-title: User Guide
----
+# CS2103T T13 -3 Notes
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+###### tags: `public`
 
-* Table of Contents
-{:toc}
+## v1.2 
 
---------------------------------------------------------------------------------------------------------------------
+### User stories, User persona
 
-## Quick start
+[User Stories - Google Sheet](https://docs.google.com/spreadsheets/d/1Wnxh09G_kulcrVm8KdVAO8Plp0QbcuYURpJgDAsRJ8A/edit?usp=sharing)
 
-1. Ensure you have Java `11` or above installed in your Computer.
+[User Persona - Google Docs](https://docs.google.com/document/d/10sCbxKIGwXaMuc7OAX-FBAqKdgKGCFyxBUurQ1taiLY/edit?usp=sharing)
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+### Syntax Help
+| Type     | Acronym  | 
+| -------- | -------- | 
+| Client   | c        | 
+| Session  | s        |
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+### Command Summary 
+| Action | Format | Example | 
+| -------| -------| --------| 
+|Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
+|Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
+|Deleting Client Info |`cdel INDEX` |`cdel 1`|
+|List All Clients | `clist`  |  `clist`  |
+|Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
+|Adding Gym Session |`sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME` | `sadd Upper Body dt/this Thursday 4pm dur/2hr g/UTown Gym`|
+|Assign a Client to Gym Session  |`sched add c/CLIENT_INDEX s/SESSION_INDEX`| `sched add c/1 s/3`|
+|Unassign a Client to Gym Session |`sched rm c/CLIENT_INDEX s/SESSION_INDEX`  | `sched rm c/2 s/3` |
+|Updating Session Info |`sedit INDEX [s/SESSIONTYPE] [dt/DATETIME] [dur/DURATION] [g/GYM_NAME]`| `sedit 1 dt/this Friday 6pm`|
+|Deleting a Session |`sdel INDEX` | `sdel 1`|
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+### Feature List
+1. add, update, remove clients
+2. add, update, remove sessions
+3. assign, unassign client to gym session
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+### Draft UG
+![](https://i.imgur.com/6V6yt9b.png)
 
-   * **`clear`** : Deletes all contacts.
+#### Features / Commands summary
 
-   * **`exit`** : Exits the app.
+##### navigation
+- Viewing help: `help`
+- Exiting a program: `exit`
 
-1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
 
-## Features
+##### clients
+- Adding a client: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
+    - calls "Adding a session" flow (optional)
+- Updating a client:  `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+- Deleting client: `cdel INDEX`
+- Listing all clients: `clist`
+- Find client by name: `cfind KEYWORD [MORE_KEYWORDS]`
 
-<div markdown="block" class="alert alert-info">
+##### sessions
+- Adding a session: `sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME`
+- Schedule a client to a session: `sched add c/CLIENT_INDEX s/SESSION_INDEX`
+- Deschedule a client a session : `sched rm c/CLIENT_INDEX s/SESSION_INDEX` 
+- Updating a session: `sedit INDEX [s/SESSIONTYPE] [dt/DATETIME] [dur/DURATION] [g/GYM_NAME]`
+- Deleting a session: `sdel INDEX`
 
-**:information_source: Notes about the command format:**<br>
+### Draft DG
+![](https://i.imgur.com/XahU2X1.png)
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+- Client (Class)
+    - Add clients (**ClientID**, First Name, Last Name, Age, DOB, Weight, Height, Contact)
+    - update clients
+    - Remove clients
 
-</div>
+- GymSession (Class)
+    - Add, Edit, Delete (session type, **DateTime**: `14/09/2020 1300`, duration, location)
 
-### Viewing help : `help`
+- Schedule (As a collection of sessions)
+    - View Allocated Schedule (for today - v1.2)
 
-Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
 
-Format: `help`
+> Current Constraints: 
+> * All Gym Name are unique. 
 
 
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Archiving data files `[coming in v2.0]`
-
-_{explain the feature here}_
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+## v1.25 and beyond (Stretch Goals)
+- should every object have its own unique identifier, some sort of 5-digit num (?) if add, edit, delete session need session index then yes, need unique id e.g. 00001
+- view all session by client
+- view all session by date / today: `sfind d/DATE`
+- Search client by initials 
+- Implement gym object (Name, Address, Phone Number)
+- Add gym `gadd n/NAME a/ADDRESS p/PHONE_NUMBER`
+- update gym location `gedit`
+- delete gym location `gdel`
+- list all gym locations `glist`
