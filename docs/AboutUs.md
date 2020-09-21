@@ -29,12 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+[[github](https://github.com/benclmnt)]
+ [[portfolio](team/benclmnt.md)]
+ 
+ ### Maguire Ong
 
-<img src="images/github_maguireong.png" width="200px">
+ <img src="images/maguireong.png" width="200px">
 
-[[github](http://github.com/maguireong)] 
-[[portfolio](team/johndoe.md)]
+ [[github](http://github.com/maguireong)]
 
 * Role: Developer
 * Responsibilities: Data
