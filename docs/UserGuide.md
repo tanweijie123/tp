@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+FitEgo is a **desktop app for fitness instructors to manage their clients and schedules, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FitEgo can get your client management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,7 +14,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `fitego.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -24,13 +24,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`clist`** : Lists all clients.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`cadd`**`cadd n/Jane Doe p/91234567 e/jane@gmail.com` : Adds a client named `Jane Doe` to the clients list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
+   * **`cdel`**`3` : Deletes the 3rd client shown in the current list.
 
    * **`exit`** : Exits the app.
 
@@ -67,31 +65,31 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a client: `cadd`
 
-Adds a person to the address book.
+Adds a client to the clients list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/vegetarian`
 
-### Listing all persons : `list`
+### Listing all clients : `clist`
 
-Shows a list of all persons in the address book.
+Shows a list of all clients in the clients list.
 
-Format: `list`
+Format: `clist`
 
-### Editing a person : `edit`
+### Editing a person : `cedit`
 
-Edits an existing person in the address book.
+Edits an existing person in the clients list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -101,14 +99,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `cedit 1 n/Janie Doe` Edits the name of the 1st person to be `Janie Doe`.
 
-### Locating persons by name: `find`
+### Locating clients by name: `cfind`
 
-Finds persons whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `cfind KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -122,25 +119,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `cdel`
 
-Deletes the specified person from the address book.
+Deletes the specified client from the clients list.
 
-Format: `delete INDEX`
+Format: `cdel INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
+* `list` followed by `cdel 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `cdel 1` deletes the 1st person in the results of the `find` command.
 
 ### Exiting the program : `exit`
 
@@ -152,9 +143,9 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Archiving data files `[coming in v2.0]`
+### Adding and deleting gym sessions `[coming in v1.2]`
 
-_{explain the feature here}_
+_Allow the creation of sessions and tagging of its associated client_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -165,14 +156,16 @@ _{explain the feature here}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+## Command Summary 
+| Action | Format | Example | 
+| -------| -------| --------| 
+|Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
+|Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
+|Deleting Client Info |`cdel INDEX` |`cdel 1`|
+|List All Clients | `clist`  |  `clist`  |
+|Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
+|Adding Gym Session |`sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME` | `sadd Upper Body dt/this Thursday 4pm dur/2hr g/UTown Gym`|
+|Assign a Client to Gym Session  |`sched add c/CLIENT_INDEX s/SESSION_INDEX`| `sched add c/1 s/3`|
+|Unassign a Client to Gym Session |`sched rm c/CLIENT_INDEX s/SESSION_INDEX`  | `sched rm c/2 s/3` |
+|Updating Session Info |`sedit INDEX [s/SESSIONTYPE] [dt/DATETIME] [dur/DURATION] [g/GYM_NAME]`| `sedit 1 dt/this Friday 6pm`|
+|Deleting a Session |`sdel INDEX` | `sdel 1`|
