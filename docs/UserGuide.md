@@ -14,7 +14,7 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `fitego.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -143,7 +143,7 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Adding and deleting gym sessions `[coming in v2.0]`
+### Adding and deleting gym sessions `[coming in v1.2]`
 
 _Allow the creation of sessions and tagging of its associated client_
 
