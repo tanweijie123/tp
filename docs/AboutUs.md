@@ -9,6 +9,11 @@ You can reach us at the email `<placeholder>[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Dhafin Razaq Oktoyuzan
+<img src="images/dhafinrazaq.png" width="200px">
+
+[[github](https://github.com/dhafinrazaq)]
+
 ### Bennett Clement
 
 <img src="images/benclmnt.png" width="200px">
