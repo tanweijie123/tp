@@ -26,7 +26,7 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
    * **`clist`** : Lists all clients.
 
-   * **`cadd`**`cadd n/Jane Doe p/91234567 e/jane@gmail.com` : Adds a client named `Jane Doe` to the Address Book.
+   * **`cadd`**`cadd n/Jane Doe p/91234567 e/jane@gmail.com` : Adds a client named `Jane Doe` to the clients list.
 
    * **`cdel`**`3` : Deletes the 3rd client shown in the current list.
 
