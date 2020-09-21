@@ -56,35 +56,96 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 </div>
 
-##### Clients
-- Adding a client: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
-    - calls "Adding a session" flow (optional)
-- Updating a client:  `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
-- Deleting client: `cdel INDEX`
-- Listing all clients: `clist`
-- Find client by name: `cfind KEYWORD [MORE_KEYWORDS]`
+### Viewing help : `help`
 
-##### Sessions
-- Adding a session: `sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME`
-- Schedule a client to a session: `sched add c/CLIENT_INDEX s/SESSION_INDEX`
-- Deschedule a client a session : `sched rm c/CLIENT_INDEX s/SESSION_INDEX` 
-- Updating a session: `sedit INDEX [s/SESSIONTYPE] [dt/DATETIME] [dur/DURATION] [g/GYM_NAME]`
-- Deleting a session: `sdel INDEX`
+Shows a message explaning how to access the help page.
 
-- Client (Class)
-    - Add clients (**ClientID**, First Name, Last Name, Age, DOB, Weight, Height, Contact)
-    - update clients
-    - Remove clients
+![help message](images/helpMessage.png)
 
-- GymSession (Class)
-    - Add, Edit, Delete (session type, **DateTime**: `14/09/2020 1300`, duration, location)
+Format: `help`
 
-- Schedule (As a collection of sessions)
-    - View Allocated Schedule (for today - v1.2)
 
-> Current Constraints: 
-> * All Gym Name are unique. 
+### Adding a client: `cadd`
 
+Adds a client to the clients list.
+
+Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of tags (including 0)
+</div>
+
+Examples:
+* `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/vegetarian`
+
+### Listing all clients : `clist`
+
+Shows a list of all clients in the clients list.
+
+Format: `clist`
+
+### Editing a person : `cedit`
+
+Edits an existing person in the clients list.
+
+Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+    specifying any tags after it.
+
+Examples:
+*  `cedit 1 n/Janie Doe` Edits the name of the 1st person to be `Janie Doe`.
+
+### Locating clients by name: `cfind`
+
+Finds clients whose names contain any of the given keywords.
+
+Format: `cfind KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Deleting a person : `cdel`
+
+Deletes the specified client from the clients list.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `cdel 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `cdel 1` deletes the 1st person in the results of the `find` command.
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Adding and deleting gym sessions `[coming in v2.0]`
+
+_Allow the creation of sessions and tagging of its associated client_
 
 --------------------------------------------------------------------------------------------------------------------
 
