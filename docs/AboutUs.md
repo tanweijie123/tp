@@ -37,7 +37,7 @@ You can reach us at the email `<placeholder>[at]comp.nus.edu.sg`
 
 ### Tan Wei Jie
 
-<img src="images/tanweijie.png" width="200px">
+<img src="images/tanweijie123.png" width="200px">
 
 [[github](http://github.com/tanweijie123)]
 
