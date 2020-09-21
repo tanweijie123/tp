@@ -5,48 +5,35 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `<placeholder>[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Dhafin Razaq Oktoyuzan
+<img src="images/dhafinrazaq.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](https://github.com/dhafinrazaq)]
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Bennett Clement
 
-* Role: Project Advisor
+<img src="images/benclmnt.png" width="200px">
 
-### Jane Doe
+[[github](https://github.com/benclmnt)]
+ [[portfolio](team/benclmnt.md)]
+ 
+### Maguire Ong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/maguireong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/maguireong)] 
 
-* Role: Team Lead
-* Responsibilities: UI
+### Kelvin Wong Jian Quan
 
-### Johnny Doe
+<img src="images/kelvinvin.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
+[[github](http://github.com/kelvinvin)] [[portfolio](https://github.com/kelvinvin?tab=repositories)]
 * Role: Developer
 * Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Maguire Ong
 
