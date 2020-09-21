@@ -2,7 +2,7 @@
 
 ###### tags: `public`
 
-## v1.2 
+## v1.1
 
 ### User stories, User persona
 
