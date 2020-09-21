@@ -9,6 +9,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Dhafin Razaq Oktoyuzan
+<img src="images/dhafinrazaq.png" width="200px">
+
+[[github](https://github.com/dhafinrazaq)]
+
 ### John Doe
 
 <img src="images/johndoe.png" width="200px">
