@@ -12,14 +12,14 @@
 
 
 ### Syntax Help
-| Type     | Acronym  | 
-| -------- | -------- | 
-| Client   | c        | 
+| Type     | Acronym  |
+| -------- | -------- |
+| Client   | c        |
 | Session  | s        |
 
-### Command Summary 
-| Action | Format | Example | 
-| -------| -------| --------| 
+### Command Summary
+| Action | Format | Example |
+| -------| -------| --------|
 |Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
 |Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
 |Deleting Client Info |`cdel INDEX` |`cdel 1`|
@@ -60,7 +60,7 @@
 ##### sessions
 - Adding a session: `sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME`
 - Schedule a client to a session: `sched add c/CLIENT_INDEX s/SESSION_INDEX`
-- Deschedule a client a session : `sched rm c/CLIENT_INDEX s/SESSION_INDEX` 
+- Deschedule a client a session : `sched rm c/CLIENT_INDEX s/SESSION_INDEX`
 - Updating a session: `sedit INDEX [s/SESSIONTYPE] [dt/DATETIME] [dur/DURATION] [g/GYM_NAME]`
 - Deleting a session: `sdel INDEX`
 
@@ -83,15 +83,15 @@
 
 
 
-> Current Constraints: 
-> * All Gym Name are unique. 
+> Current Constraints:
+> * All Gym Name are unique.
 
 
 ## v1.25 and beyond (Stretch Goals)
 - should every object have its own unique identifier, some sort of 5-digit num (?) if add, edit, delete session need session index then yes, need unique id e.g. 00001
 - view all session by client
 - view all session by date / today: `sfind d/DATE`
-- Search client by initials 
+- Search client by initials
 - Implement gym object (Name, Address, Phone Number)
 - Add gym `gadd n/NAME a/ADDRESS p/PHONE_NUMBER`
 - update gym location `gedit`
