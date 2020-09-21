@@ -44,7 +44,9 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/kelvinvin.png" width="200px">
 
-[[github](http://github.com/kelvinvin)] [[portfolio](https://github.com/kelvinvin?tab=repositories)]
+[[github](http://github.com/kelvinvin)] 
+[[portfolio](https://github.com/kelvinvin?tab=repositories)]
+
 #### Developer & Documentation in-charge
 * Responsible for the quality of various project documents.
 ---
