@@ -64,8 +64,8 @@ public class TypicalClients {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Client Client : getTypicalClients()) {
-            ab.addClient(Client);
+        for (Client client : getTypicalClients()) {
+            ab.addClient(client);
         }
         return ab;
     }

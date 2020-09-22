@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
-import seedu.address.model.Client.exceptions.DuplicateClientException;
+import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.testutil.ClientBuilder;
 
 public class AddressBookTest {
@@ -60,18 +60,18 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasClient_ClientNotInAddressBook_returnsFalse() {
+    public void hasClient_clientNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_ClientInAddressBook_returnsTrue() {
+    public void hasClient_clientInAddressBook_returnsTrue() {
         addressBook.addClient(ALICE);
         assertTrue(addressBook.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_ClientWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasClient_clientWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addClient(ALICE);
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -87,15 +87,15 @@ public class AddressBookTest {
      * A stub ReadOnlyAddressBook whose Clients list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Client> Clients = FXCollections.observableArrayList();
+        private final ObservableList<Client> clients = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Client> Clients) {
-            this.Clients.setAll(Clients);
+        AddressBookStub(Collection<Client> clients) {
+            this.clients.setAll(clients);
         }
 
         @Override
         public ObservableList<Client> getClientList() {
-            return Clients;
+            return clients;
         }
     }
 

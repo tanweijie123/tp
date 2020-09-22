@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Client.exceptions.DuplicateClientException;
-import seedu.address.model.Client.exceptions.ClientNotFoundException;
+import seedu.address.model.client.exceptions.ClientNotFoundException;
+import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.testutil.ClientBuilder;
 
 public class UniqueClientListTest {
@@ -29,18 +29,18 @@ public class UniqueClientListTest {
     }
 
     @Test
-    public void contains_ClientNotInList_returnsFalse() {
+    public void contains_clientNotInList_returnsFalse() {
         assertFalse(uniqueClientList.contains(ALICE));
     }
 
     @Test
-    public void contains_ClientInList_returnsTrue() {
+    public void contains_clientInList_returnsTrue() {
         uniqueClientList.add(ALICE);
         assertTrue(uniqueClientList.contains(ALICE));
     }
 
     @Test
-    public void contains_ClientWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_clientWithSameIdentityFieldsInList_returnsTrue() {
         uniqueClientList.add(ALICE);
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -115,7 +115,7 @@ public class UniqueClientListTest {
     }
 
     @Test
-    public void remove_ClientDoesNotExist_throwsClientNotFoundException() {
+    public void remove_clientDoesNotExist_throwsClientNotFoundException() {
         assertThrows(ClientNotFoundException.class, () -> uniqueClientList.remove(ALICE));
     }
 
@@ -149,8 +149,8 @@ public class UniqueClientListTest {
     @Test
     public void setClients_list_replacesOwnListWithProvidedList() {
         uniqueClientList.add(ALICE);
-        List<Client> ClientList = Collections.singletonList(BOB);
-        uniqueClientList.setClients(ClientList);
+        List<Client> clientList = Collections.singletonList(BOB);
+        uniqueClientList.setClients(clientList);
         UniqueClientList expectedUniqueClientList = new UniqueClientList();
         expectedUniqueClientList.add(BOB);
         assertEquals(expectedUniqueClientList, uniqueClientList);

@@ -1,4 +1,4 @@
-package seedu.address.model.Client.exceptions;
+package seedu.address.model.client.exceptions;
 
 /**
  * Signals that the operation is unable to find the specified Client.

@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        Clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
+        this.Clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,7 +47,7 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedClient jsonAdaptedClient : Clients) {
+        for (JsonAdaptedClient jsonAdaptedClient : this.Clients) {
             Client client = jsonAdaptedClient.toModelType();
             if (addressBook.hasClient(client)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);

@@ -10,9 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +24,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
-import seedu.address.testutil.EditClientDescriptorBuilder;
 import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -53,8 +53,8 @@ public class EditCommandTest {
         Index indexLastClient = Index.fromOneBased(model.getFilteredClientList().size());
         Client lastClient = model.getFilteredClientList().get(indexLastClient.getZeroBased());
 
-        ClientBuilder ClientInList = new ClientBuilder(lastClient);
-        Client editedClient = ClientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ClientBuilder clientInList = new ClientBuilder(lastClient);
+        Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -112,9 +112,9 @@ public class EditCommandTest {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
         // edit Client in filtered list into a duplicate in address book
-        Client ClientInList = model.getAddressBook().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
+        Client clientInList = model.getAddressBook().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT,
-                new EditClientDescriptorBuilder(ClientInList).build());
+                new EditClientDescriptorBuilder(clientInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CLIENT);
     }

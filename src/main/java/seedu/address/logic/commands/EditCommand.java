@@ -87,17 +87,17 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Client} with the details of {@code ClientToEdit}
+     * Creates and returns a {@code Client} with the details of {@code clientToEdit}
      * edited with {@code editClientDescriptor}.
      */
-    private static Client createEditedClient(Client ClientToEdit, EditClientDescriptor editClientDescriptor) {
-        assert ClientToEdit != null;
+    private static Client createEditedClient(Client clientToEdit, EditClientDescriptor editClientDescriptor) {
+        assert clientToEdit != null;
 
-        Name updatedName = editClientDescriptor.getName().orElse(ClientToEdit.getName());
-        Phone updatedPhone = editClientDescriptor.getPhone().orElse(ClientToEdit.getPhone());
-        Email updatedEmail = editClientDescriptor.getEmail().orElse(ClientToEdit.getEmail());
-        Address updatedAddress = editClientDescriptor.getAddress().orElse(ClientToEdit.getAddress());
-        Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(ClientToEdit.getTags());
+        Name updatedName = editClientDescriptor.getName().orElse(clientToEdit.getName());
+        Phone updatedPhone = editClientDescriptor.getPhone().orElse(clientToEdit.getPhone());
+        Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
+        Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
+        Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }

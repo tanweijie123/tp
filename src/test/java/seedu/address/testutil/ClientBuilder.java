@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -41,12 +41,12 @@ public class ClientBuilder {
     /**
      * Initializes the ClientBuilder with the data of {@code ClientToCopy}.
      */
-    public ClientBuilder(Client ClientToCopy) {
-        name = ClientToCopy.getName();
-        phone = ClientToCopy.getPhone();
-        email = ClientToCopy.getEmail();
-        address = ClientToCopy.getAddress();
-        tags = new HashSet<>(ClientToCopy.getTags());
+    public ClientBuilder(Client clientToCopy) {
+        name = clientToCopy.getName();
+        phone = clientToCopy.getPhone();
+        email = clientToCopy.getEmail();
+        address = clientToCopy.getAddress();
+        tags = new HashSet<>(clientToCopy.getTags());
     }
 
     /**

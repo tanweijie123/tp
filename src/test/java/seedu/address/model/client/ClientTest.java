@@ -19,8 +19,8 @@ public class ClientTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Client Client = new ClientBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> Client.getTags().remove(0));
+        Client client = new ClientBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> client.getTags().remove(0));
     }
 
     @Test

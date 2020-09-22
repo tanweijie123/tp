@@ -6,9 +6,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -30,13 +30,13 @@ public class EditClientDescriptorBuilder {
     /**
      * Returns an {@code EditClientDescriptor} with fields containing {@code Client}'s details
      */
-    public EditClientDescriptorBuilder(Client Client) {
+    public EditClientDescriptorBuilder(Client client) {
         descriptor = new EditClientDescriptor();
-        descriptor.setName(Client.getName());
-        descriptor.setPhone(Client.getPhone());
-        descriptor.setEmail(Client.getEmail());
-        descriptor.setAddress(Client.getAddress());
-        descriptor.setTags(Client.getTags());
+        descriptor.setName(client.getName());
+        descriptor.setPhone(client.getPhone());
+        descriptor.setEmail(client.getEmail());
+        descriptor.setAddress(client.getAddress());
+        descriptor.setTags(client.getTags());
     }
 
     /**

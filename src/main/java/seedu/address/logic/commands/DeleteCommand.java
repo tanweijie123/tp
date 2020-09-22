@@ -39,9 +39,9 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Client ClientToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteClient(ClientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, ClientToDelete));
+        Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteClient(clientToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete));
     }
 
     @Override

@@ -55,7 +55,7 @@ public interface Model {
     /**
      * Returns true if a Client with the same identity as {@code Client} exists in the address book.
      */
-    boolean hasClient(Client Client);
+    boolean hasClient(Client client);
 
     /**
      * Deletes the given Client.
@@ -65,9 +65,9 @@ public interface Model {
 
     /**
      * Adds the given Client.
-     * {@code Client} must not already exist in the address book.
+     * {@code client} must not already exist in the address book.
      */
-    void addClient(Client Client);
+    void addClient(Client client);
 
     /**
      * Replaces the given Client {@code target} with {@code editedClient}.
