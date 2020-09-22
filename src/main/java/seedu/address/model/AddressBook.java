@@ -14,7 +14,7 @@ import seedu.address.model.client.UniqueClientList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueClientList Clients;
+    private final UniqueClientList clients;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        Clients = new UniqueClientList();
+        clients = new UniqueClientList();
     }
 
     public AddressBook() {}
@@ -43,8 +43,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the Client list with {@code Clients}.
      * {@code Clients} must not contain duplicate Clients.
      */
-    public void setClients(List<Client> Clients) {
-        this.Clients.setClients(Clients);
+    public void setClients(List<Client> clients) {
+        this.clients.setClients(clients);
     }
 
     /**
@@ -63,7 +63,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasClient(Client Client) {
         requireNonNull(Client);
-        return Clients.contains(Client);
+        return clients.contains(Client);
     }
 
     /**
@@ -71,7 +71,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The Client must not already exist in the address book.
      */
     public void addClient(Client p) {
-        Clients.add(p);
+        clients.add(p);
     }
 
     /**
@@ -82,7 +82,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
 
-        Clients.setClient(target, editedClient);
+        clients.setClient(target, editedClient);
     }
 
     /**
@@ -90,31 +90,31 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeClient(Client key) {
-        Clients.remove(key);
+        clients.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return Clients.asUnmodifiableObservableList().size() + " Clients";
+        return clients.asUnmodifiableObservableList().size() + " Clients";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Client> getClientList() {
-        return Clients.asUnmodifiableObservableList();
+        return clients.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && Clients.equals(((AddressBook) other).Clients));
+                && clients.equals(((AddressBook) other).clients));
     }
 
     @Override
     public int hashCode() {
-        return Clients.hashCode();
+        return clients.hashCode();
     }
 }

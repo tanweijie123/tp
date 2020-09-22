@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.Client.exceptions.DuplicateClientException;
 import seedu.address.model.Client.exceptions.ClientNotFoundException;
+import seedu.address.model.Client.exceptions.DuplicateClientException;
 
 /**
  * A list of Clients that enforces uniqueness between its elements and does not allow nulls.
@@ -29,7 +29,7 @@ public class UniqueClientList implements Iterable<Client> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent Client as the given argument.
+     * Returns true if the list contains an equivalent client as the given argument.
      */
     public boolean contains(Client toCheck) {
         requireNonNull(toCheck);
@@ -37,8 +37,8 @@ public class UniqueClientList implements Iterable<Client> {
     }
 
     /**
-     * Adds a Client to the list.
-     * The Client must not already exist in the list.
+     * Adds a client to the list.
+     * The client must not already exist in the list.
      */
     public void add(Client toAdd) {
         requireNonNull(toAdd);
@@ -90,7 +90,7 @@ public class UniqueClientList implements Iterable<Client> {
      */
     public void setClients(List<Client> Clients) {
         requireAllNonNull(Clients);
-        if (!ClientsAreUnique(Clients)) {
+        if (!clientsAreUnique(Clients)) {
             throw new DuplicateClientException();
         }
 
@@ -124,7 +124,7 @@ public class UniqueClientList implements Iterable<Client> {
     /**
      * Returns true if {@code Clients} contains only unique Clients.
      */
-    private boolean ClientsAreUnique(List<Client> Clients) {
+    private boolean clientsAreUnique(List<Client> Clients) {
         for (int i = 0; i < Clients.size() - 1; i++) {
             for (int j = i + 1; j < Clients.size(); j++) {
                 if (Clients.get(i).isSameClient(Clients.get(j))) {

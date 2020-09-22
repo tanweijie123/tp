@@ -24,7 +24,7 @@ public class ClientCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Client Client;
+    public final Client client;
 
     @FXML
     private HBox cardPane;
@@ -44,15 +44,15 @@ public class ClientCard extends UiPart<Region> {
     /**
      * Creates a {@code ClientCode} with the given {@code Client} and index to display.
      */
-    public ClientCard(Client Client, int displayedIndex) {
+    public ClientCard(Client client, int displayedIndex) {
         super(FXML);
-        this.Client = Client;
+        this.client = client;
         id.setText(displayedIndex + ". ");
-        name.setText(Client.getName().fullName);
-        phone.setText(Client.getPhone().value);
-        address.setText(Client.getAddress().value);
-        email.setText(Client.getEmail().value);
-        Client.getTags().stream()
+        name.setText(client.getName().fullName);
+        phone.setText(client.getPhone().value);
+        address.setText(client.getAddress().value);
+        email.setText(client.getEmail().value);
+        client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
@@ -72,6 +72,6 @@ public class ClientCard extends UiPart<Region> {
         // state check
         ClientCard card = (ClientCard) other;
         return id.getText().equals(card.id.getText())
-                && Client.equals(card.Client);
+                && client.equals(card.client);
     }
 }

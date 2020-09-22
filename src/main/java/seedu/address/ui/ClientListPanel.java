@@ -23,9 +23,9 @@ public class ClientListPanel extends UiPart<Region> {
     /**
      * Creates a {@code ClientListPanel} with the given {@code ObservableList}.
      */
-    public ClientListPanel(ObservableList<Client> ClientList) {
+    public ClientListPanel(ObservableList<Client> clientList) {
         super(FXML);
-        clientListView.setItems(ClientList);
+        clientListView.setItems(clientList);
         clientListView.setCellFactory(listView -> new ClientListViewCell());
     }
 
@@ -34,14 +34,14 @@ public class ClientListPanel extends UiPart<Region> {
      */
     class ClientListViewCell extends ListCell<Client> {
         @Override
-        protected void updateItem(Client Client, boolean empty) {
-            super.updateItem(Client, empty);
+        protected void updateItem(Client client, boolean empty) {
+            super.updateItem(client, empty);
 
-            if (empty || Client == null) {
+            if (empty || client == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ClientCard(Client, getIndex() + 1).getRoot());
+                setGraphic(new ClientCard(client, getIndex() + 1).getRoot());
             }
         }
     }
