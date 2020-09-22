@@ -85,8 +85,8 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
-        Client ClientInFilteredList = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        Client editedClient = new ClientBuilder(ClientInFilteredList).withName(VALID_NAME_BOB).build();
+        Client clientInFilteredList = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client editedClient = new ClientBuilder(clientInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT,
                 new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 

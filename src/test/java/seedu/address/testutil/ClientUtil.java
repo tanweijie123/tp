@@ -21,20 +21,20 @@ public class ClientUtil {
     /**
      * Returns an add command string for adding the {@code Client}.
      */
-    public static String getAddCommand(Client Client) {
-        return AddCommand.COMMAND_WORD + " " + getClientDetails(Client);
+    public static String getAddCommand(Client client) {
+        return AddCommand.COMMAND_WORD + " " + getClientDetails(client);
     }
 
     /**
      * Returns the part of command string for the given {@code Client}'s details.
      */
-    public static String getClientDetails(Client Client) {
+    public static String getClientDetails(Client client) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + Client.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + Client.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + Client.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + Client.getAddress().value + " ");
-        Client.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + client.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + client.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + client.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + client.getAddress().value + " ");
+        client.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
