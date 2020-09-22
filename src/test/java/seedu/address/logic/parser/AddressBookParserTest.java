@@ -23,7 +23,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Client.NameContainsKeywordsPredicate;
+import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 import seedu.address.testutil.ClientBuilder;
