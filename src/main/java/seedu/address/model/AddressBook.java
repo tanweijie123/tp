@@ -61,9 +61,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a Client with the same identity as {@code Client} exists in the address book.
      */
-    public boolean hasClient(Client Client) {
-        requireNonNull(Client);
-        return clients.contains(Client);
+    public boolean hasClient(Client client) {
+        requireNonNull(client);
+        return clients.contains(client);
     }
 
     /**

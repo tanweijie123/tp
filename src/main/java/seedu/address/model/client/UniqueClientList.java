@@ -124,10 +124,10 @@ public class UniqueClientList implements Iterable<Client> {
     /**
      * Returns true if {@code Clients} contains only unique Clients.
      */
-    private boolean clientsAreUnique(List<Client> Clients) {
-        for (int i = 0; i < Clients.size() - 1; i++) {
-            for (int j = i + 1; j < Clients.size(); j++) {
-                if (Clients.get(i).isSameClient(Clients.get(j))) {
+    private boolean clientsAreUnique(List<Client> clients) {
+        for (int i = 0; i < clients.size() - 1; i++) {
+            for (int j = i + 1; j < clients.size(); j++) {
+                if (clients.get(i).isSameClient(clients.get(j))) {
                     return false;
                 }
             }
