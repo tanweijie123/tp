@@ -235,14 +235,17 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* is a fitness instructor who have trouble managing a significant number of clients and sessions
 * prefer desktop apps over other types
+* favours a All-in-One software tracker
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using CLI apps while appreciates a nice GUI that can show his weekly schedule
+* prefers a simple and minimalistic view, as he does not like clutters.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: to help a fitness instructor keeps track of his customers easily, via CLI as he’s a fast typer. 
+He can spend more time on his clients/his routine rather than manually using alternative software like Excel to track 
+administrative matters.
 
 
 ### User stories
@@ -292,15 +295,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 clients and sessions without a noticeable sluggishness in performance for typical usage.
+3.  A fitness instructor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
