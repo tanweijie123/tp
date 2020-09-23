@@ -72,12 +72,13 @@ Adds a client to the clients list.
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0). Each tag can only include
+alphanumeric characters or dash (`-`)
 </div>
 
 Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
-* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/vegetarian`
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
 
 ### Listing all clients : `clist`
 
