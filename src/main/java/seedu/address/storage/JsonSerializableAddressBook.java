@@ -27,7 +27,7 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given Clients.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("Clients") List<JsonAdaptedClient> clients) {
+    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
         this.Clients.addAll(clients);
     }
 
