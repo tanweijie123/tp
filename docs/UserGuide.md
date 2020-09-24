@@ -72,7 +72,7 @@ Adds a client to the clients list.
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A Client can have any number of tags (including 0)
 </div>
 
 Examples:
@@ -85,21 +85,21 @@ Shows a list of all clients in the clients list.
 
 Format: `clist`
 
-### Editing a person : `cedit`
+### Editing a Client : `cedit`
 
-Edits an existing person in the clients list.
+Edits an existing Client in the clients list.
 
 Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the Client at the specified `INDEX`. The index refers to the index number shown in the displayed Client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the Client will be removed i.e adding of tags is not cumulative.
+* You can remove all the Client’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `cedit 1 n/Janie Doe` Edits the name of the 1st person to be `Janie Doe`.
+*  `cedit 1 n/Janie Doe` Edits the name of the 1st Client to be `Janie Doe`.
 
 ### Locating clients by name: `cfind`
 
@@ -111,7 +111,7 @@ Format: `cfind KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -119,19 +119,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `cdel`
+### Deleting a Client : `cdel`
 
 Deletes the specified client from the clients list.
 
 Format: `cdel INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the Client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `cdel 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `cdel 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `cdel 2` deletes the 2nd Client in the address book.
+* `find Betsy` followed by `cdel 1` deletes the 1st Client in the results of the `find` command.
 
 ### Exiting the program : `exit`
 
