@@ -29,7 +29,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing Client in the address book.
  */
-public class EditCommand extends Command {
+public class EditClientCommand extends Command {
 
     public static final String COMMAND_WORD = "cedit";
 
@@ -57,7 +57,7 @@ public class EditCommand extends Command {
      * @param index of the Client in the filtered Client list to edit
      * @param editClientDescriptor details to edit the Client with
      */
-    public EditCommand(Index index, EditClientDescriptor editClientDescriptor) {
+    public EditClientCommand(Index index, EditClientDescriptor editClientDescriptor) {
         requireNonNull(index);
         requireNonNull(editClientDescriptor);
 
@@ -110,12 +110,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditClientCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditClientCommand e = (EditClientCommand) other;
         return index.equals(e.index)
                 && editClientDescriptor.equals(e.editClientDescriptor);
     }
