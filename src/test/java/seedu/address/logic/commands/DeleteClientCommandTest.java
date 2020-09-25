@@ -23,7 +23,7 @@ import seedu.address.model.client.Client;
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
  * {@code DeleteClientCommand}.
  */
-public class DeleteCommandTest {
+public class DeleteClientCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
