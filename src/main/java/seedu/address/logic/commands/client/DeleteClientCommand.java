@@ -28,7 +28,7 @@ public class DeleteClientCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteClientCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -49,7 +49,7 @@ public class DeleteClientCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteClientCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteClientCommand) other).targetIndex)); // state check
     }
 }
