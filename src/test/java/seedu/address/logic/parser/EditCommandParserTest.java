@@ -160,7 +160,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_ALLERGY;
-        descriptor = new EditClientDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditClientDescriptorBuilder().withTags(VALID_TAG_ALLERGY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
