@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.client;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
@@ -15,7 +15,7 @@ import seedu.address.model.client.Client;
 /**
  * Deletes a Client identified using it's displayed index from the address book.
  */
-public class DeleteClientCommand extends Command {
+public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "cdel";
 
