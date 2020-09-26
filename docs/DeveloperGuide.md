@@ -254,13 +254,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new Client               |                                                                        |
-| `* * *`  | user                                       | edit a Client                  | change the details of a client                                                                       |
-| `* * *`  | user                                       | delete a Client                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a Client by name          | locate details of Clients without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many Clients in the address book | sort Clients by name           | locate a Client easily                                                 |
+| `* * *`  | new trainer                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | trainer                                       | add a new client               |                                                                        |
+| `* * *`  | trainer                                       | edit a client                  | change the details of a client                                                                       |
+| `* * *`  | trainer                                       | delete a client                | remove entries that I no longer need                                   |
+| `* * *`  | trainer                                       | find a client by name          | locate details of clients without having to go through the entire list |
+| `* * *`  | trainer                                       | add tags to my clients         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
+| `* *`    | trainer                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `*`      | trainer with many clients in the address book | sort clients by name           | locate a client easily                                                 |
 
 *{More to be added}*
 
@@ -315,7 +316,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -326,12 +326,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  The application should be usable without internet connection
 6.  The user interface should be intuitive enough for users who are not IT-savvy
 7.  The product can be downloaded freely from Github.
-8.  The user should be able to access and edit the data files.
-9.  The user should be able to use the application on different OSes by moving the previous
-data file to the new OS.
+8.  The user should be able to read the data files.
+9.  The user should be able to modify the data files.
+10.  The user should be able to use the application on different machines just by moving the data file
+from your previous machine to your new machine.
 
 
-*{More to be added}*
 
 ### Glossary
 
