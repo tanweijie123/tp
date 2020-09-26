@@ -93,13 +93,4 @@ public class ViewClientCommandTest {
         // different Client -> returns false
         assertFalse(viewFirstCommand.equals(viewSecondCommand));
     }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoClient(Model model) {
-        model.updateFilteredClientList(p -> false);
-
-        assertTrue(model.getFilteredClientList().isEmpty());
-    }
 }
