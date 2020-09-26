@@ -186,7 +186,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `clist`. Commands that do not modify the address book, such as `clist`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -235,14 +235,17 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* is a fitness instructor who have trouble managing a significant number of clients and sessions
 * prefer desktop apps over other types
+* favours a All-in-One software tracker
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using CLI apps while appreciates a nice GUI that can show his weekly schedule
+* prefers a simple and minimalistic view, as he does not like clutters.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: to help a fitness instructor keeps track of his customers easily, via CLI as he’s a fast typer. 
+He can spend more time on his clients/his routine rather than manually using alternative software like Excel to track 
+administrative matters.
 
 
 ### User stories
@@ -253,6 +256,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add a new Client               |                                                                        |
+| `* * *`  | user                                       | edit a Client                  | change the details of a client                                                                       |
 | `* * *`  | user                                       | delete a Client                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a Client by name          | locate details of Clients without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
@@ -262,16 +266,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FitEgo` and the **Actor** is the `user`, unless specified otherwise)
+
 
 **Use case: Add a Client**
 
 **MSS**
 
 1.  User requests to add a specific Client in the list
-2.  AddressBook add the Client
+2.  FitEgo add the Client
 
     Use case ends.
+
+**Use case: Edit a Client**
+
+**MSS**
+
+1.  User requests to list Clients
+2.  FitEgo shows a list of Clients
+3.  User requests to edit a specific Client in the list
+4.  FitEgo edits the Client according to the specified details
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FitEgo shows an error message.
+
+      Use case resumes at step 2.
 
 **Use case: Delete a Client**
 
@@ -283,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  AddressBook deletes the Client
 
     Use case ends.
-
+    
 **Extensions**
 
 * 2a. The list is empty.
@@ -301,15 +329,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 Clients without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 clients and sessions without a noticeable sluggishness in performance for typical usage.
+3.  A fitness instructor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -351,7 +378,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a Client while all Clients are being shown
 
-   1. Prerequisites: List all Clients using the `list` command. Multiple Clients in the list.
+   1. Prerequisites: List all Clients using the `clist` command. Multiple Clients in the list.
 
    1. Test case: `cdel 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
