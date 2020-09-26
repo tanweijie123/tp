@@ -15,6 +15,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import seedu.address.commons.util.AppUtil;
 import seedu.address.model.client.Client;
 
 public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
@@ -22,9 +23,6 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
     private static ClientInfoPage clientInfoPage;
     private final Client client;
     private Stage stage;
-
-    @FXML
-    private AnchorPane anchorPane;
 
     @FXML
     private ImageView imgProfile;
@@ -54,7 +52,6 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
      */
     public ClientInfoPage(Client client) {
         super(FXML);
-        this.anchorPane = getRoot();
         this.client = client;
 
         //TODO: update profile image
@@ -95,6 +92,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
         primaryStage.setTitle("View Client Profile");
+        primaryStage.getIcons().add(AppUtil.getImage("/images/profile_info.png"));
         this.stage = primaryStage;
     }
 

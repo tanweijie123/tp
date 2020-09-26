@@ -9,25 +9,25 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fx:id="imgProfile" fitHeight="128.0" fitWidth="128.0" layoutX="21.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/anonymous_128x128.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="lblName" layoutX="190.0" layoutY="24.0" text="{name:placeholder}">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="192.0" layoutY="59.0" text="Phone" />
-      <Label fx:id="lblPhone" layoutX="248.0" layoutY="59.0" prefHeight="18.0" prefWidth="242.0" text="{phone:placeholder}" />
-      <Label layoutX="192.0" layoutY="89.0" text="Email" />
-      <Label fx:id="lblEmail" layoutX="248.0" layoutY="89.0" prefHeight="18.0" prefWidth="242.0" text="{email:placeholder}" />
-      <Label layoutX="192.0" layoutY="119.0" text="Address" />
-      <Label fx:id="lblAddress" layoutX="248.0" layoutY="119.0" prefHeight="18.0" prefWidth="242.0" text="{address:placeholder}" />
-      <Button fx:id="btnClose" cancelButton="true" defaultButton="true" layoutX="517.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="34.0" prefWidth="62.0" text="Close" />
-      <FlowPane fx:id="fpTags" layoutX="14.0" layoutY="164.0" prefHeight="18.0" prefWidth="582.0" />
-      <Label layoutX="21.0" layoutY="146.0" text="Tags" />
-   </children>
+    <children>
+        <ImageView fx:id="imgProfile" fitHeight="128.0" fitWidth="128.0" layoutX="21.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <image>
+                <Image url="@../images/anonymous_128x128.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="lblName" layoutX="190.0" layoutY="24.0" prefHeight="30.0" prefWidth="390.0" text="{name:placeholder}" AnchorPane.leftAnchor="192.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="192.0" layoutY="59.0" text="Phone" AnchorPane.leftAnchor="192.0" />
+        <Label fx:id="lblPhone" layoutX="248.0" layoutY="59.0" prefHeight="18.0" prefWidth="338.0" text="{phone:placeholder}" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" />
+        <Label layoutX="192.0" layoutY="89.0" text="Email" AnchorPane.leftAnchor="192.0" />
+        <Label fx:id="lblEmail" layoutX="248.0" layoutY="89.0" prefHeight="18.0" prefWidth="338.0" text="{email:placeholder}" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" />
+        <Label layoutX="192.0" layoutY="119.0" text="Address" AnchorPane.leftAnchor="192.0" />
+        <Label fx:id="lblAddress" layoutX="248.0" layoutY="119.0" prefHeight="18.0" prefWidth="338.0" text="{address:placeholder}" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" />
+        <Button fx:id="btnClose" cancelButton="true" defaultButton="true" layoutX="517.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="34.0" prefWidth="62.0" text="Close" AnchorPane.bottomAnchor="23.6" AnchorPane.rightAnchor="20.6" />
+        <FlowPane fx:id="fpTags" layoutX="14.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="18.0" prefWidth="569.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+        <Label layoutX="21.0" layoutY="149.0" text="Tags" AnchorPane.leftAnchor="20.0" />
+    </children>
 </AnchorPane>
