@@ -64,7 +64,7 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter`, `ClientInfoPage` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -252,11 +252,12 @@ administrative matters.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add a new Client               |                                                                        |
-| `* * *`  | user                                       | edit a Client                  | change the details of a client                                                                       |
+| `* * *`  | user                                       | edit a Client                  | change the details of a client                                         |
+| `* * *`  | user                                       | view a Client's detail         | view at all of the client's details at a glance                        |
 | `* * *`  | user                                       | delete a Client                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a Client by name          | locate details of Clients without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
@@ -267,6 +268,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+---
 
 **Use case: Edit a Client**
 
@@ -291,6 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+---
 
 **Use case: Delete a Client**
 
@@ -314,6 +318,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+---
+
+**Use case: Find Clients**
+
+**MSS**
+
+1.  User requests to find some Client based on keyword or text. 
+2.  AddressBook displays the client's whose name matches the keyword or text. 
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The search result is empty.
+    2a1. AddressBook displays no clients found. 
+
+  Use case ends.
+
+---
+
+**Use case: View a Client**
+
+**MSS**
+
+1.  User requests to list Clients
+2.  AddressBook shows a list of Clients
+3.  User requests to view a specific Client in the list
+4.  AddressBook opens the client's profile in a new window. 
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. Previous Client's profile window is not closed
+    * 4a1. The previous client's profile will be closed. 
+    * 4a2. The current client's profile will be displayed. 
+
+      Use case ends
 
 *{More to be added}*
 

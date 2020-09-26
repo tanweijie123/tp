@@ -47,6 +47,11 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
     @FXML
     private Button btnClose;
 
+    /**
+     * Displays a client's profile in a separate window.
+     * It should display all the details pertaining to this {@code Client}
+     * @param client The client to display
+     */
     public ClientInfoPage(Client client) {
         super(FXML);
         this.anchorPane = getRoot();
@@ -61,8 +66,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label lbl = new Label(tag.tagName);
-                    lbl.setBackground(new Background(new BackgroundFill(Color.TURQUOISE, new CornerRadii(5), new Insets(0,3,0,3))));
-                    lbl.setPadding(new Insets(5,5,5,5));
+                    lbl.setBackground(new Background(new BackgroundFill(Color.TURQUOISE,
+                            new CornerRadii(5), new Insets(0, 3, 0, 3))));
+                    lbl.setPadding(new Insets(5, 5, 5, 5));
                     fpTags.getChildren().add(lbl);
                 });
     }

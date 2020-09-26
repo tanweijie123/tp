@@ -111,8 +111,8 @@ Format: `cfind KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Clients matching at least one keyword will be returned (i.e. `OR` search).
+* Partial names will be matched e.g. `Han` will match `Hans`
+* Clients matching any substring will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -133,6 +133,21 @@ Format: `cdel INDEX`
 Examples:
 * `list` followed by `cdel 2` deletes the 2nd Client in the address book.
 * `find Betsy` followed by `cdel 1` deletes the 1st Client in the results of the `find` command.
+
+### View a Client : `cview`
+
+View the specified client from the clients list.
+
+Format: `cview INDEX`
+
+* Views the Client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `cview 2` opens the 2nd Client in the address book.
+* `find Betsy` followed by `cview 1` opens the 1st Client in the results of the `find` command.
+
 
 ### Exiting the program : `exit`
 
@@ -164,6 +179,7 @@ _Allow the creation of sessions and tagging of its associated client_
 |Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
 |Deleting Client Info |`cdel INDEX` |`cdel 1`|
 |List All Clients | `clist`  |  `clist`  |
+|View a Client's Full Profile | `cview INDEX` | `cview 1`|
 |Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 |Adding Gym Session |`sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME` | `sadd Upper Body dt/this Thursday 4pm dur/2hr g/UTown Gym`|
 |Assign a Client to Gym Session  |`sched add c/CLIENT_INDEX s/SESSION_INDEX`| `sched add c/1 s/3`|
