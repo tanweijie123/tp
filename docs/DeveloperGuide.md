@@ -256,6 +256,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add a new Client               |                                                                        |
+| `* * *`  | user                                       | edit a Client                  | change the details of a client                                                                       |
 | `* * *`  | user                                       | delete a Client                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a Client by name          | locate details of Clients without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
@@ -267,6 +268,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Edit a Client**
+
+**MSS**
+
+1.  User requests to list Clients
+2.  FitEgo shows a list of Clients
+3.  User requests to edit a specific Client in the list
+4.  FitEgo edits the Client according to the specified details
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FitEgo shows an error message.
+
+      Use case resumes at step 2.
+
+
 **Use case: Delete a Client**
 
 **MSS**
@@ -277,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  AddressBook deletes the Client
 
     Use case ends.
-
+    
 **Extensions**
 
 * 2a. The list is empty.
