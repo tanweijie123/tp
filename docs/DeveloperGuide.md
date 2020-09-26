@@ -274,7 +274,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add a specific Client in the list
-2.  FitEgo add the Client
+2.  FitEgo adds the Client
 
     Use case ends.
 
