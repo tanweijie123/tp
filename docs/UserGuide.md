@@ -46,10 +46,10 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/injured-thigh` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/injured-thigh`, `t/injured-thigh t/allergy-dairy` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -72,12 +72,13 @@ Adds a client to the clients list.
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A Client can have any number of tags (including 0)
+A Client can have any number of tags (including 0). Each tag can only include
+alphanumeric characters or dash (`-`)
 </div>
 
 Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
-* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/vegetarian`
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
 
 ### Listing all clients : `clist`
 
