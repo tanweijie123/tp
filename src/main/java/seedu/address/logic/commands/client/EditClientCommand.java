@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -17,6 +17,8 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Address;
@@ -29,9 +31,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing Client in the address book.
  */
-public class EditCommand extends Command {
+public class EditClientCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "cedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the Client identified "
             + "by the index number used in the displayed Client list. "
@@ -57,7 +59,7 @@ public class EditCommand extends Command {
      * @param index of the Client in the filtered Client list to edit
      * @param editClientDescriptor details to edit the Client with
      */
-    public EditCommand(Index index, EditClientDescriptor editClientDescriptor) {
+    public EditClientCommand(Index index, EditClientDescriptor editClientDescriptor) {
         requireNonNull(index);
         requireNonNull(editClientDescriptor);
 
@@ -110,12 +112,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditClientCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditClientCommand e = (EditClientCommand) other;
         return index.equals(e.index)
                 && editClientDescriptor.equals(e.editClientDescriptor);
     }
