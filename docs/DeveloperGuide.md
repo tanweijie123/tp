@@ -259,7 +259,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | trainer                                       | edit a client                  | change the details of a client                                                                       |
 | `* * *`  | trainer                                       | delete a client                | remove entries that I no longer need                                   |
 | `* * *`  | trainer                                       | find a client by name          | locate details of clients without having to go through the entire list |
-| `* * *`  | trainer                                       | add tags to my clients         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
+| `* * *`  | trainer                                       | tag my client         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
 | `* *`    | trainer                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | trainer with many clients in the address book | sort clients by name           | locate a client easily                                                 |
 
@@ -316,6 +316,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Tag a Client**
+
+**MSS**
+
+1.  User requests to list Clients
+2.  AddressBook shows a list of Clients
+3.  User requests to tag a specific client from the list
+4.  FitEgo changes the client's current tag(s) according to the specified details
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. No tag is defined.
+
+  Use case ends.
+
+* 3a. The given tag is invalid.
+
+    * 3a1. FitEgo shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
