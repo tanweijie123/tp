@@ -146,7 +146,10 @@ Format: `cview INDEX`
 
 Examples:
 * `list` followed by `cview 2` opens the 2nd Client in the address book.
-* `find Betsy` followed by `cview 1` opens the 1st Client in the results of the `find` command.
+* `find Bernice` followed by `cview 1` opens the 1st Client (Bernice) in the results of the `find` command.
+
+<img src="images/cview_sample.png" alt="result for 'cview 1'" height="500" width="500"/></br>
+  > This profile window will be updated when more functionalities are available.
 
 
 ### Exiting the program : `exit`

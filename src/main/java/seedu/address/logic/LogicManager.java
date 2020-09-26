@@ -5,10 +5,12 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.client.ViewClientCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -16,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.storage.Storage;
+import seedu.address.ui.ClientInfoPage;
 
 /**
  * The main LogicManager of the app.
@@ -44,6 +47,16 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        /* DISPLAY ANY OTHER UIs */
+        //ViewClientCommand has an additional UI to display profile
+        if (command instanceof ViewClientCommand) {
+            ViewClientCommand viewClient = (ViewClientCommand) command;
+            Stage clientView = new Stage();
+            ClientInfoPage cip = new ClientInfoPage(viewClient.getClient());
+            cip.start(clientView);
+            cip.show();
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
