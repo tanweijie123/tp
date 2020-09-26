@@ -371,7 +371,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Client while all Clients are being shown
 
    1. Test case: `cadd n/David …​` <br>
-      Expected: First contact is added to the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
 
 
 ### Deleting a Client
