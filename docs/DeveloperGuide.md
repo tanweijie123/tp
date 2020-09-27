@@ -155,7 +155,7 @@ Step 2. The user executes `cdel 5` command to delete the 5th Client in the addre
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `cadd n/David …​` to add a new Client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `cadd n/David …​` to add a new Client. The `cadd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -266,7 +266,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FitEgo` and the **Actor** is the `user`, unless specified otherwise)
+
+
+**Use case: Add a Client**
+
+**MSS**
+
+1.  User requests to add a specific Client in the list
+2.  FitEgo adds the Client
+
+    Use case ends.
 
 **Use case: Edit a Client**
 
@@ -290,7 +300,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
-
 
 **Use case: Delete a Client**
 
@@ -356,6 +365,14 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
+
+### Adding a Client
+
+1. Adding a Client while all Clients are being shown
+
+   1. Test case: `cadd n/David …​` <br>
+      Expected: First contact is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
+
 
 ### Deleting a Client
 
