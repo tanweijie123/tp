@@ -267,7 +267,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `FitEgo` and the **Actor** is the `user`, unless specified otherwise)
 
 ---
 
@@ -301,9 +301,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list Clients
-2.  AddressBook shows a list of Clients
+2.  FitEgo shows a list of Clients
 3.  User requests to delete a specific Client in the list
-4.  AddressBook deletes the Client
+4.  FitEgo deletes the Client
 
     Use case ends.
     
@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
 
@@ -326,14 +326,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to find some Client based on keyword or text. 
-2.  AddressBook displays the client's whose name matches the keyword or text. 
+2.  FitEgo displays the client's whose name matches the keyword or text. 
 
     Use case ends.
     
 **Extensions**
 
 * 2a. The search result is empty.
-    2a1. AddressBook displays no clients found. 
+    2a1. FitEgo displays no clients found. 
 
   Use case ends.
 
@@ -344,9 +344,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list Clients
-2.  AddressBook shows a list of Clients
+2.  FitEgo shows a list of Clients
 3.  User requests to view a specific Client in the list
-4.  AddressBook opens the client's profile in a new window. 
+4.  FitEgo opens the client's profile in a new window. 
 
     Use case ends.
     
@@ -358,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 3.
 
