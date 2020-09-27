@@ -243,8 +243,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps while appreciates a nice GUI that can show his weekly schedule
 * prefers a simple and minimalistic view, as he does not like clutters.
 
-**Value proposition**: to help a fitness instructor keeps track of his customers easily, via CLI as he’s a fast typer. 
-He can spend more time on his clients/his routine rather than manually using alternative software like Excel to track 
+**Value proposition**: to help a fitness instructor keeps track of his customers easily, via CLI as he’s a fast typer.
+He can spend more time on his clients/his routine rather than manually using alternative software like Excel to track
 administrative matters.
 
 
@@ -263,7 +263,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | trainer                                       | tag my client         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
 | `* *`    | trainer                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | trainer with many clients in the address book | sort clients by name           | locate a client easily                                                 |
-
 
 *{More to be added}*
 
@@ -291,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  FitEgo edits the Client according to the specified details
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -314,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  FitEgo deletes the Client
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -327,7 +326,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
 **Use case: Tag a Client**
 
 **MSS**
@@ -337,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to tag a specific Client from the list
 4.  FitEgo changes the Client's current tag(s) according to the specified details
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. No tag is defined.
@@ -354,30 +352,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find some Client based on keyword or text. 
-2.  FitEgo displays the client's whose name matches the keyword or text. 
+1.  User requests to find some Client based on keyword or text.
+2.  FitEgo displays the client's whose name matches the keyword or text.
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The search result is empty.
-    2a1. FitEgo displays no clients found. 
+    2a1. FitEgo displays no clients found.
 
   Use case ends.
-
 
 **Use case: View a Client**
 
 **MSS**
 
-1.  User requests to list Clients
-2.  FitEgo shows a list of Clients
+1.  User requests to list Clients.
+2.  FitEgo shows a list of Clients.
 3.  User requests to view a specific Client in the list
-4.  FitEgo opens the client's profile in a new window. 
+4.  FitEgo opens the client's profile in a new window.
 
     Use case ends.
-    
+
 **Extensions**
 * 2a. The list is empty.
 
@@ -389,9 +386,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-* 4a. Previous Client's profile window is not closed
-    * 4a1. The previous client's profile will be closed. 
-    * 4a2. The current client's profile will be displayed. 
+* 4a. Previous Client's profile window is not closed.
+    * 4a1. The previous client's profile will be closed.
+    * 4a2. The current client's profile will be displayed.
 
       Use case ends
 
