@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.stage.Stage;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -11,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.ui.ClientInfoPage;
 
 /**
  * View the selected clients' profile.
@@ -49,8 +51,14 @@ public class ViewClientCommand extends Command {
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         this.client = clientToView;
 
-        return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView),
-                false, false);
+        Runnable run = () -> {
+            Stage clientView = new Stage();
+            ClientInfoPage cip = new ClientInfoPage(client);
+            cip.start(clientView);
+            cip.show();
+        };
+
+        return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView), run);
     }
 
     @Override
