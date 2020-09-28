@@ -64,7 +64,7 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter`, `ClientInfoPage` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -243,8 +243,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps while appreciates a nice GUI that can show his weekly schedule
 * prefers a simple and minimalistic view, as he does not like clutters.
 
-**Value proposition**: to help a fitness instructor keeps track of his customers easily, via CLI as he’s a fast typer. 
-He can spend more time on his clients/his routine rather than manually using alternative software like Excel to track 
+**Value proposition**: to help a fitness instructor keeps track of his customers easily, via CLI as he’s a fast typer.
+He can spend more time on his clients/his routine rather than manually using alternative software like Excel to track
 administrative matters.
 
 
@@ -252,11 +252,12 @@ administrative matters.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new trainer                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | trainer                                       | add a new client               |                                                                        |
-| `* * *`  | trainer                                       | edit a client                  | change the details of a client                                                                       |
+| `* * *`  | trainer                                       | edit a client                  | change the details of a client                                         |
+| `* * *`  | trainer                                       | view a Client's detail         | view at all of the client's details at a glance                        |
 | `* * *`  | trainer                                       | delete a client                | remove entries that I no longer need                                   |
 | `* * *`  | trainer                                       | find a client by name          | locate details of clients without having to go through the entire list |
 | `* * *`  | trainer                                       | tag my client         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
@@ -289,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  FitEgo edits the Client according to the specified details
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -307,12 +308,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list Clients
-2.  AddressBook shows a list of Clients
+2.  FitEgo shows a list of Clients
 3.  User requests to delete a specific Client in the list
-4.  AddressBook deletes the Client
+4.  FitEgo deletes the Client
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -321,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
 
@@ -333,9 +334,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  FitEgo shows a list of Clients
 3.  User requests to tag a specific Client from the list
 4.  FitEgo changes the Client's current tag(s) according to the specified details
-
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. No tag is defined.
@@ -347,6 +347,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Find Clients**
+
+**MSS**
+
+1.  User requests to find some Client based on keyword or text.
+2.  FitEgo displays the client's whose name matches the keyword or text.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The search result is empty.
+    2a1. FitEgo displays no clients found.
+
+  Use case ends.
+
+**Use case: View a Client**
+
+**MSS**
+
+1.  User requests to list Clients.
+2.  FitEgo shows a list of Clients.
+3.  User requests to view a specific Client in the list
+4.  FitEgo opens the client's profile in a new window.
+
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FitEgo shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. Previous Client's profile window is not closed.
+    * 4a1. The previous client's profile will be closed.
+    * 4a2. The current client's profile will be displayed.
+
+      Use case ends
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 
