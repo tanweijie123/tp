@@ -56,7 +56,7 @@ public class CommandResult {
         return showHelp;
     }
 
-    public boolean anyFunctionToRun() {
+    public boolean hasFunctionToRun() {
         return !(func == null);
     }
 

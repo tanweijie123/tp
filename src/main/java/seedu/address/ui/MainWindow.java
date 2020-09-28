@@ -182,7 +182,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.anyFunctionToRun()) {
+            if (commandResult.hasFunctionToRun()) {
                 commandResult.getFunction().run();
             }
 
