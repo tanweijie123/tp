@@ -46,10 +46,10 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/injured-thigh` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/injured-thigh`, `t/injured-thigh t/allergy-dairy` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -72,12 +72,13 @@ Adds a client to the clients list.
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A Client can have any number of tags (including 0)
+A Client can have any number of tags (including 0). Each tag can only include
+alphanumeric characters or dash (`-`)
 </div>
 
 Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
-* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/vegetarian`
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
 
 ### Listing all clients : `clist`
 
@@ -110,8 +111,8 @@ Format: `cfind KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Clients matching at least one keyword will be returned (i.e. `OR` search).
+* Partial names will be matched e.g. `Han` will match `Hans`
+* Clients matching any substring will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -132,6 +133,24 @@ Format: `cdel INDEX`
 Examples:
 * `list` followed by `cdel 2` deletes the 2nd Client in the address book.
 * `find Betsy` followed by `cdel 1` deletes the 1st Client in the results of the `find` command.
+
+### View a Client : `cview`
+
+View the specified client from the clients list.
+
+Format: `cview INDEX`
+
+* Views the Client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `cview 2` opens the 2nd Client in the address book.
+* `find Bernice` followed by `cview 1` opens the 1st Client (Bernice) in the results of the `find` command.
+
+<img src="images/cview_sample.png" alt="result for 'cview 1'" height="500" width="500"/></br>
+  > This profile window will be updated when more functionalities are available.
+
 
 ### Exiting the program : `exit`
 
@@ -163,6 +182,7 @@ _Allow the creation of sessions and tagging of its associated client_
 |Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
 |Deleting Client Info |`cdel INDEX` |`cdel 1`|
 |List All Clients | `clist`  |  `clist`  |
+|View a Client's Full Profile | `cview INDEX` | `cview 1`|
 |Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 |Adding Gym Session |`sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME` | `sadd Upper Body dt/this Thursday 4pm dur/2hr g/UTown Gym`|
 |Assign a Client to Gym Session  |`sched add c/CLIENT_INDEX s/SESSION_INDEX`| `sched add c/1 s/3`|

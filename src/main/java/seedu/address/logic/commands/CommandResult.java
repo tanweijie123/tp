@@ -17,6 +17,9 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** A Runnable function for CommandResult to run in MainWindow */
+    private Runnable func;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -24,6 +27,17 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.func = null;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with a stored Runnable function to run during execution
+     * @param feedbackToUser
+     * @param func a Consumer that runs and returns void
+     */
+    public CommandResult(String feedbackToUser, Runnable func) {
+        this(feedbackToUser);
+        this.func = func;
     }
 
     /**
@@ -40,6 +54,14 @@ public class CommandResult {
 
     public boolean isShowHelp() {
         return showHelp;
+    }
+
+    public boolean hasFunctionToRun() {
+        return !(func == null);
+    }
+
+    public Runnable getFunction() {
+        return this.func;
     }
 
     public boolean isExit() {
