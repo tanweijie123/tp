@@ -8,8 +8,8 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyScheduleList;
-import seedu.address.model.ScheduleList;
+import seedu.address.model.ReadOnlySessionList;
+import seedu.address.model.SessionList;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
@@ -68,12 +68,12 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    public static ReadOnlyScheduleList getSampleScheduleList() {
-        ScheduleList sampleScheduleList = new ScheduleList();
+    public static ReadOnlySessionList getSampleSessionList() {
+        SessionList sampleSessionList = new SessionList();
         for (Session sampleSession : getSampleSession()) {
-            sampleScheduleList.addSession(sampleSession);
+            sampleSessionList.addSession(sampleSession);
         }
-        return sampleScheduleList;
+        return sampleSessionList;
     }
 
     /**

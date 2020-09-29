@@ -12,7 +12,7 @@ import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.model.client.exceptions.SessionNotFoundException;
 
-public class UniqueScheduleList implements Iterable<Session> {
+public class UniqueSessionList implements Iterable<Session> {
 
     private final ObservableList<Session> internalList = FXCollections.observableArrayList();
     private final ObservableList<Session> internalUnmodifiableList =
@@ -69,7 +69,7 @@ public class UniqueScheduleList implements Iterable<Session> {
         }
     }
 
-    public void setSessions(UniqueScheduleList replacement) {
+    public void setSessions(UniqueSessionList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -102,8 +102,8 @@ public class UniqueScheduleList implements Iterable<Session> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueScheduleList // instanceof handles nulls
-                && internalList.equals(((UniqueScheduleList) other).internalList));
+                || (other instanceof UniqueSessionList // instanceof handles nulls
+                && internalList.equals(((UniqueSessionList) other).internalList));
     }
 
     @Override

@@ -6,42 +6,42 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyScheduleList;
+import seedu.address.model.ReadOnlySessionList;
 
 /**
- * Represents a storage for {@link seedu.address.model.ScheduleList}.
+ * Represents a storage for {@link seedu.address.model.SessionList}.
  */
-public interface ScheduleListStorage {
+public interface SessionListStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getScheduleListFilePath();
+    Path getSessionListFilePath();
 
     /**
-     * Returns ScheduleList data as a {@link ReadOnlyScheduleList}.
+     * Returns SessionList data as a {@link ReadOnlySessionList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyScheduleList> readScheduleList() throws DataConversionException, IOException;
+    Optional<ReadOnlySessionList> readSessionList() throws DataConversionException, IOException;
 
     /**
-     * @see #getScheduleListFilePath()
+     * @see #getSessionListFilePath()
      */
-    Optional<ReadOnlyScheduleList> readScheduleList(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlySessionList> readSessionList(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveScheduleList(ReadOnlyScheduleList addressBook) throws IOException;
+    void saveSessionList(ReadOnlySessionList addressBook) throws IOException;
 
     /**
-     * @see #saveScheduleList(ReadOnlyScheduleList)
+     * @see #saveSessionList(ReadOnlySessionList)
      */
-    void saveScheduleList(ReadOnlyScheduleList scheduleList, Path filePath) throws IOException;
+    void saveSessionList(ReadOnlySessionList sessionList, Path filePath) throws IOException;
 
 }
 
