@@ -81,7 +81,7 @@ public class JsonAdaptedSession {
         }
 
         final LocalDateTime startDateTime = ParserUtil.parseStringToDateTime(start);
-        final LocalDateTime endDateTime = ParserUtil.parseStringToDateTime(start);
+        final LocalDateTime endDateTime = ParserUtil.parseStringToDateTime(end);
         final int duration = (int) startDateTime.until(endDateTime, ChronoUnit.MINUTES);
         final Interval modelInterval = new Interval(startDateTime, duration);
 
