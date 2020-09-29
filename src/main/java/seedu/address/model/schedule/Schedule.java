@@ -5,27 +5,28 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
 import seedu.address.model.session.Session;
 
 public class Schedule {
-    private final Client client;
-    private final Session session;
+    private Email clientId;
+    private int sessionId;
 
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Client client, Session session) {
-        requireAllNonNull(client, session);
-        this.client = client;
-        this.session = session;
+    public Schedule(Email clientId, int sessionId) {
+        requireAllNonNull(clientId, sessionId);
+        this.clientId = clientId;
+        this.sessionId = sessionId;
     }
 
-    public Client getClient() {
-        return client;
+    public Email getClientId() {
+        return clientId;
     }
 
-    public Session getSession() {
-        return session;
+    public int getSessionId() {
+        return sessionId;
     }
 
     /**
@@ -40,7 +41,7 @@ public class Schedule {
             return false;
         }
 
-        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session);
+        return otherSchedule.clientId.equals(this.clientId) && otherSchedule.sessionId == this.sessionId;
     }
 
     /**
@@ -57,20 +58,20 @@ public class Schedule {
         }
 
         Schedule otherSchedule = (Schedule) other;
-        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session);
+        return otherSchedule.clientId.equals(this.clientId) && otherSchedule.sessionId == this.sessionId;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(client, session);
+        return Objects.hash(clientId, sessionId);
     }
 
     @Override
     public String toString() {
         return "Client "
-                + client
+                + clientId
                 + " with session "
-                + session;
+                + sessionId;
     }
 }
