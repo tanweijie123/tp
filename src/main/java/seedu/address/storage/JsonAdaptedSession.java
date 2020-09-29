@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.client.Address;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
@@ -83,6 +84,10 @@ public class JsonAdaptedSession {
         final LocalDateTime startDateTime = ParserUtil.parseStringToDateTime(start);
         final LocalDateTime endDateTime = ParserUtil.parseStringToDateTime(end);
         final int duration = (int) startDateTime.until(endDateTime, ChronoUnit.MINUTES);
+
+        if (!Interval.isValidInterval(duration)) {
+            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
+        }
         final Interval modelInterval = new Interval(startDateTime, duration);
 
         return new Session(modelGym, modelExerciseType, modelInterval);
