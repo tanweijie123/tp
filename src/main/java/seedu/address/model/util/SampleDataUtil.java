@@ -4,13 +4,18 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyScheduleList;
+import seedu.address.model.ScheduleList;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.session.Session;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,12 +45,35 @@ public class SampleDataUtil {
         };
     }
 
+    public static Session[] getSampleSession() {
+        try {
+            return new Session[] {
+                new Session("Getwell gym", "Endurance",
+                        ParserUtil.parseStringToDateTime("29/09/2020 1300"), 120),
+                new Session("Machoman gym", "Bodybuilder",
+                        ParserUtil.parseStringToDateTime("29/09/2020 1600"), 150)
+            };
+        } catch (ParseException e) {
+            //INFO: if you reach here, it means the date input above is wrong.
+            System.err.println("Default data not initialised. ");
+            throw new UnsupportedOperationException(); //cannot return null
+        }
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Client sampleClient : getSampleClients()) {
             sampleAb.addClient(sampleClient);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyScheduleList getSampleScheduleList() {
+        ScheduleList sampleScheduleList = new ScheduleList();
+        for (Session sampleSession : getSampleSession()) {
+            sampleScheduleList.addSession(sampleSession);
+        }
+        return sampleScheduleList;
     }
 
     /**

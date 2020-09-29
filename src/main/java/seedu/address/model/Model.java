@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.session.Session;
 
 /**
  * The API of the Model component.
@@ -13,7 +14,7 @@ import seedu.address.model.client.Client;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
-
+    Predicate<Session> PREDICATE_SHOW_ALL_SESSIONS = unused -> true;
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -84,4 +85,56 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredClientList(Predicate<Client> predicate);
+
+    /**
+     * Returns the user prefs' schedule list file path.
+     */
+    Path getScheduleListFilePath();
+
+    /**
+     * Sets the user prefs' schedule list file path.
+     */
+    void setScheduleListFilePath(Path scheduleListFilePath);
+
+    /**
+     * Replaces schedule list data with the data in {@code ScheduleList}.
+     */
+    void setScheduleList(ReadOnlyScheduleList scheduleList);
+
+    /** Returns the ScheduleList */
+    ReadOnlyScheduleList getScheduleList();
+
+    /**
+     * Returns true if a Session with the same identity as {@code Session} exists in the Schedule List.
+     */
+    boolean hasSession(Session session);
+
+    /**
+     * Deletes the given Session.
+     * The Session must exist in the Schedule List.
+     */
+    void deleteSession(Session session);
+
+    /**
+     * Adds the given Session.
+     * {@code client} must not already exist in the Schedule List.
+     */
+    void addSession(Session session);
+
+    /**
+     * Replaces the given Session {@code target} with {@code editedSession}.
+     * {@code target} must exist in the Schedule List.
+     * The Session identity of {@code editedSession} must not be the same as another existing Session
+     *     in the address book.
+     */
+    void setSession(Session target, Session editedSession);
+
+    /** Returns an unmodifiable view of the filtered Schedule list */
+    ObservableList<Session> getFilteredSessionList();
+
+    /**
+     * Updates the filter of the filtered Session list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredSessionList(Predicate<Session> predicate);
 }
