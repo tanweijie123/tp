@@ -21,7 +21,6 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final SessionList sessionList;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Session> filteredSessions;
@@ -29,32 +28,20 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook, SessionList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySessionList sessionList,
-                        ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.sessionList = new SessionList(sessionList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
-        filteredSessions = new FilteredList<>(this.sessionList.getSessionList());
+        filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new SessionList(), new UserPrefs());
-    }
-
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        //TODO: TO REMOVE THIS METHOD.
-        //NEED TO REFACTOR TEST CASES TO REMOVE THIS
-        this(addressBook, new SessionList(), userPrefs);
-        logger.warning("THIS SHOULDNT BE HERE");
+        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -159,36 +146,26 @@ public class ModelManager implements Model {
     //=========== SessionList ================================================================================
 
     @Override
-    public void setSessionList(ReadOnlySessionList sessionList) {
-        this.sessionList.resetData(sessionList);
-    }
-
-    @Override
-    public ReadOnlySessionList getSessionList() {
-        return sessionList;
-    }
-
-    @Override
     public boolean hasSession(Session session) {
         requireNonNull(session);
-        return sessionList.hasSession(session);
+        return addressBook.hasSession(session);
     }
 
     @Override
     public void deleteSession(Session session) {
-        sessionList.removeSession(session);
+        addressBook.removeSession(session);
     }
 
     @Override
     public void addSession(Session session) {
-        sessionList.addSession(session);
+        addressBook.addSession(session);
         updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
     }
 
     @Override
     public void setSession(Session target, Session editedSession) {
         requireAllNonNull(target, editedSession);
-        sessionList.setSession(target, editedSession);
+        addressBook.setSession(target, editedSession);
     }
 
     //=========== Filtered Client List Accessors =============================================================

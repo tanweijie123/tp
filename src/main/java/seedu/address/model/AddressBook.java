@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.session.Session;
+import seedu.address.model.session.UniqueSessionList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,8 +16,9 @@ import seedu.address.model.client.UniqueClientList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    //TODO: create a Unique<T>List?
     private final UniqueClientList clients;
-
+    private final UniqueSessionList sessions;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         clients = new UniqueClientList();
+        sessions = new UniqueSessionList();
     }
 
     public AddressBook() {}
@@ -54,6 +58,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setClients(newData.getClientList());
+        setSessions(newData.getSessionList());
     }
 
     //// Client-level operations
@@ -93,17 +98,72 @@ public class AddressBook implements ReadOnlyAddressBook {
         clients.remove(key);
     }
 
+    //=============================== SESSION-RELATED ===========================================
+
+    /**
+     * Replaces the contents of the Session list with {@code Session}.
+     * {@code Sessions} must not contain duplicate Sessions.
+     */
+    public void setSessions(List<Session> sessions) {
+        this.sessions.setSessions(sessions);
+    }
+
+    //// Client-level operations
+
+    /**
+     * Returns true if a Session with the same identity as {@code Session} exists in the address book.
+     */
+    public boolean hasSession(Session session) {
+        requireNonNull(session);
+        return sessions.contains(session);
+    }
+
+    /**
+     * Adds a Session to the session list.
+     * The Session must not already exist in the session list.
+     */
+    public void addSession(Session s) {
+        sessions.add(s);
+    }
+
+    /**
+     * Replaces the given Session {@code target} in the list with {@code editedSession}.
+     * {@code target} must exist in the address book.
+     * The Session identity of {@code editedSession} must not be the same as another existing Session.
+     */
+    public void setSession(Session target, Session editedSession) {
+        requireNonNull(editedSession);
+
+        sessions.setSession(target, editedSession);
+    }
+
+    /**
+     * Removes {@code key} from this {@code SessionList}.
+     * {@code key} must exist in the session list.
+     */
+    public void removeSession(Session key) {
+        sessions.remove(key);
+    }
+
+
     //// util methods
 
     @Override
     public String toString() {
-        return clients.asUnmodifiableObservableList().size() + " Clients";
+        return String.format("%s\n%s",
+                clients.asUnmodifiableObservableList().size() + " Clients",
+                sessions.asUnmodifiableObservableList().size() + " Sessions");
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Client> getClientList() {
         return clients.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Session> getSessionList() {
+        return sessions.asUnmodifiableObservableList();
     }
 
     @Override

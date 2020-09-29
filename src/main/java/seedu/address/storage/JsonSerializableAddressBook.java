@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.session.Session;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,15 +21,18 @@ import seedu.address.model.client.Client;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate Client(s).";
+    public static final String MESSAGE_DUPLICATE_SESSION = "Session list contains duplicate Session(s).";
 
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
-
+    private final List<JsonAdaptedSession> sessions = new ArrayList<>();
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given Clients.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
+    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients,
+                                       @JsonProperty("sessions") List<JsonAdaptedSession> sessions) {
         this.clients.addAll(clients);
+        this.sessions.addAll(sessions);
     }
 
     /**
@@ -38,6 +42,8 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         this.clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
+        this.sessions.addAll(source.getSessionList().stream().map(JsonAdaptedSession::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +60,15 @@ class JsonSerializableAddressBook {
             }
             addressBook.addClient(client);
         }
+
+        for (JsonAdaptedSession jsonAdaptedSession : this.sessions) {
+            Session session = jsonAdaptedSession.toModelType();
+            if (addressBook.hasSession(session)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_SESSION);
+            }
+            addressBook.addSession(session);
+        }
+
         return addressBook;
     }
 
