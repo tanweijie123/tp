@@ -28,8 +28,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonScheduleListStorage;
-import seedu.address.storage.JsonSessionListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ClientBuilder;
@@ -47,13 +45,8 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-        JsonSessionListStorage sessionListStorage =
-                new JsonSessionListStorage(temporaryFolder.resolve("session.json"));
-        JsonScheduleListStorage scheduleListStorage =
-                new JsonScheduleListStorage(temporaryFolder.resolve("schedule.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, sessionListStorage, scheduleListStorage,
-                userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -80,14 +73,9 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
-        JsonSessionListStorage sessionListStorage =
-                new JsonSessionListStorage(temporaryFolder.resolve("ioExceptionSession.json"));
-        JsonScheduleListStorage scheduleListStorage =
-                new JsonScheduleListStorage(temporaryFolder.resolve("ioExceptionSchedule.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, sessionListStorage,
-                scheduleListStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command

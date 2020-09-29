@@ -22,45 +22,29 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final SessionList sessionList;
-    private final ScheduleList scheduleList;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Session> filteredSessions;
     private final FilteredList<Schedule> filteredSchedules;
 
     /**
-     * Initializes a ModelManager with the given addressBook, SessionList and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySessionList sessionList,
-                        ReadOnlyScheduleList scheduleList,
-                        ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.sessionList = new SessionList(sessionList);
-        this.scheduleList = new ScheduleList(scheduleList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
-        filteredSessions = new FilteredList<>(this.sessionList.getSessionList());
-        filteredSchedules = new FilteredList<>(this.scheduleList.getScheduleList());
+        filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
+        filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new SessionList(), new ScheduleList(), new UserPrefs());
-    }
-
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        //TODO: TO REMOVE THIS METHOD.
-        //NEED TO REFACTOR TEST CASES TO REMOVE THIS
-        this(addressBook, new SessionList(), new ScheduleList(), userPrefs);
-        logger.warning("THIS SHOULDNT BE HERE");
+        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -176,36 +160,26 @@ public class ModelManager implements Model {
     //=========== SessionList ================================================================================
 
     @Override
-    public void setSessionList(ReadOnlySessionList sessionList) {
-        this.sessionList.resetData(sessionList);
-    }
-
-    @Override
-    public ReadOnlySessionList getSessionList() {
-        return sessionList;
-    }
-
-    @Override
     public boolean hasSession(Session session) {
         requireNonNull(session);
-        return sessionList.hasSession(session);
+        return addressBook.hasSession(session);
     }
 
     @Override
     public void deleteSession(Session session) {
-        sessionList.removeSession(session);
+        addressBook.removeSession(session);
     }
 
     @Override
     public void addSession(Session session) {
-        sessionList.addSession(session);
+        addressBook.addSession(session);
         updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
     }
 
     @Override
     public void setSession(Session target, Session editedSession) {
         requireAllNonNull(target, editedSession);
-        sessionList.setSession(target, editedSession);
+        addressBook.setSession(target, editedSession);
     }
 
     //=========== Filtered Session List Accessors =============================================================
@@ -224,36 +198,26 @@ public class ModelManager implements Model {
     //=========== Schedule List ===============================================================================
 
     @Override
-    public void setScheduleList(ReadOnlyScheduleList scheduleList) {
-        this.scheduleList.resetData(scheduleList);
-    }
-
-    @Override
-    public ReadOnlyScheduleList getScheduleList() {
-        return scheduleList;
-    }
-
-    @Override
     public boolean hasSchedule(Schedule schedule) {
         requireNonNull(schedule);
-        return scheduleList.hasSchedule(schedule);
+        return addressBook.hasSchedule(schedule);
     }
 
     @Override
     public void deleteSchedule(Schedule schedule) {
-        scheduleList.removeSchedule(schedule);
+        addressBook.removeSchedule(schedule);
     }
 
     @Override
     public void addSchedule(Schedule schedule) {
-        scheduleList.addSchedule(schedule);
+        addressBook.addSchedule(schedule);
         updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
     }
 
     @Override
     public void setSchedule(Schedule target, Schedule editedSchedule) {
         requireAllNonNull(target, editedSchedule);
-        scheduleList.setSchedule(target, editedSchedule);
+        addressBook.setSchedule(target, editedSchedule);
     }
 
     //=========== Filtered Schedule List Accessors =============================================================

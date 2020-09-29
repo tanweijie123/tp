@@ -25,11 +25,8 @@ public class StorageManagerTest {
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
-        JsonSessionListStorage sessionListStorage = new JsonSessionListStorage(getTempFilePath("sessList"));
-        JsonScheduleListStorage scheduleListStorage = new JsonScheduleListStorage(getTempFilePath("schedList"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, sessionListStorage,
-                scheduleListStorage, userPrefsStorage);
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -66,14 +63,6 @@ public class StorageManagerTest {
     @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
-    }
-
-    //TODO: SessionListReadSave -> needs -> TypicalSession, SessionBuilder, SessionUtil
-    //In other words, src/test/java/testutil (everything inside)
-
-    @Test
-    public void getSessionListFilePath() {
-        assertNotNull(storageManager.getSessionListFilePath());
     }
 
 }

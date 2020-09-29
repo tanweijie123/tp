@@ -20,8 +20,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyScheduleList;
-import seedu.address.model.ReadOnlySessionList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
@@ -165,16 +163,6 @@ public class AddClientCommandTest {
         }
 
         @Override
-        public void setSessionList(ReadOnlySessionList sessionList) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlySessionList getSessionList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasSession(Session session) {
             throw new AssertionError("This method should not be called.");
         }
@@ -211,16 +199,6 @@ public class AddClientCommandTest {
 
         @Override
         public void setScheduleListFilePath(Path scheduleListFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setScheduleList(ReadOnlyScheduleList scheduleList) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyScheduleList getScheduleList() {
             throw new AssertionError("This method should not be called.");
         }
 

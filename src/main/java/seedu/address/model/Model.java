@@ -99,14 +99,6 @@ public interface Model {
     void setSessionListFilePath(Path sessionListFilePath);
 
     /**
-     * Replaces session list data with the data in {@code SessionList}.
-     */
-    void setSessionList(ReadOnlySessionList sessionList);
-
-    /** Returns the SessionList */
-    ReadOnlySessionList getSessionList();
-
-    /**
      * Returns true if a Session with the same identity as {@code Session} exists in the Session List.
      */
     boolean hasSession(Session session);
@@ -149,14 +141,6 @@ public interface Model {
      * Sets the user prefs' schedule list file path.
      */
     void setScheduleListFilePath(Path scheduleListFilePath);
-
-    /**
-     * Replaces schedule list data with the data in {@code ScheduleList}.
-     */
-    void setScheduleList(ReadOnlyScheduleList scheduleList);
-
-    /** Returns the ScheduleList */
-    ReadOnlyScheduleList getScheduleList();
 
     /**
      * Returns true if a Schedule with the same identity as {@code Schedule} exists in the Schedule List.
