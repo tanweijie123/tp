@@ -83,7 +83,7 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            if (addressBookOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
@@ -99,7 +99,7 @@ public class MainApp extends Application {
         ReadOnlySessionList initSessionData;
         try {
             sessionListOptional = storage.readSessionList();
-            if (!sessionListOptional.isPresent()) {
+            if (sessionListOptional.isEmpty()) {
                 //TODO: may change this to 0 data init.
                 logger.info("Session Data file not found. Will be starting default sessions allocated.");
             }

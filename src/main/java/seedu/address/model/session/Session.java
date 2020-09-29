@@ -6,47 +6,43 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.client.Client;
 
+/**
+ * Represents a training Session in FitEgo.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Session {
     private static int idCounter = 0; //this also double as the number of sessions already created.
 
-    /* For now, Session values are primitive types */
+    // Identity fields
     private final int id;
-    private String gym;
-    private String typeOfExercise;
-    private LocalDateTime start;
-    private int duration;
+    private final Gym gym;
+    private final Interval interval;
+
+    // Data fields
+    private final ExerciseType exerciseType;
 
     /**
-     * Creates a new Session object.
      * Every field must be present and not null.
-     *
-     * @param gym The gym this session is held at.
-     * @param typeOfExercise The type of exercises planned for this session.
-     * @param start The starting Date and Time of this session.
-     * @param duration The duration of this session.
      */
-    public Session(String gym, String typeOfExercise, LocalDateTime start, int duration) {
-        requireAllNonNull(gym, start, duration);
-        this.id = ++idCounter;
+    public Session(Gym gym, ExerciseType exerciseType, Interval interval) {
+        requireAllNonNull(gym, exerciseType, interval);
+        this.id = ++idCounter; // TODO: This will create same ID on shutdown.
+        this.exerciseType = exerciseType;
+        this.interval = interval;
         this.gym = gym;
-        this.typeOfExercise = typeOfExercise;
-        this.start = start;
-        this.duration = duration;
     }
 
     /**
      * Creates a new Session object.
      * NOTE: DO NOT USE THIS FOR CLIENT INPUT; this is only for loading from database.
      */
-    public Session(int id, String gym, String typeOfExercise, LocalDateTime start, int duration) {
-        requireAllNonNull(id, gym, typeOfExercise, start, duration);
+    public Session(int id, String gym, String exerciseType, LocalDateTime start, int duration) {
+        requireAllNonNull(id, gym, exerciseType, start, duration);
         this.id = id;
-        this.gym = gym;
-        this.typeOfExercise = typeOfExercise;
-        this.start = start;
-        this.duration = duration;
+        this.gym = new Gym(gym);
+        this.exerciseType = new ExerciseType(exerciseType);
+        this.interval = new Interval(start, duration);
 
         //check if current counter is below assigned id
         if (id > idCounter) {
@@ -59,45 +55,40 @@ public class Session {
         return id;
     }
 
-    public String getGym() {
+    public Gym getGym() {
         return gym;
     }
 
-    public String getTypeOfExercise() {
-        return typeOfExercise;
+    public Interval getInterval() {
+        return interval;
     }
 
-    public LocalDateTime getStartTime() {
-        return start;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setGym(String gym) {
-        this.gym = gym;
-    }
-
-    public void setTypeOfExercise(String typeOfExercise) {
-        this.typeOfExercise = typeOfExercise;
-    }
-
-    public void setStart(LocalDateTime start) {
-        this.start = start;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    //Methods
-    public LocalDateTime getEndTime() {
-        return this.start.plusMinutes(duration);
+    public ExerciseType getExerciseType() {
+        return exerciseType;
     }
 
     /**
-     * Returns true if both sessions have the same identifier
+     * Returns true if both Sessions overlap with each other
+     */
+    public boolean isOverlappingSession(Session otherSession) {
+        if (otherSession == this) {
+            return true;
+        }
+
+        if (otherSession == null) {
+            return false;
+        }
+
+        if (otherSession.getInterval().getStart().isAfter(getInterval().getStart())) {
+            return otherSession.getInterval().getStart().isBefore(getInterval().getEnd());
+        } else {
+            return getInterval().getStart().isBefore(otherSession.getInterval().getEnd());
+        }
+    }
+
+    /**
+     * Returns true if both Sessions have the same id
+     * This defines a weaker notion of equality between two Sessions.
      */
     public boolean isSameSession(Session otherSession) {
         if (otherSession == this) {
@@ -105,11 +96,11 @@ public class Session {
         }
 
         return otherSession != null
-                && otherSession.id == this.id;
+                && otherSession.getId() == id;
     }
 
     /**
-     * Returns true if both Sessions have the same identity and data fields.
+     * Returns true if both Session have the same identity and data fields.
      * This defines a stronger notion of equality between two Sessions.
      */
     @Override
@@ -118,36 +109,34 @@ public class Session {
             return true;
         }
 
-        if (!(other instanceof Client)) {
+        if (!(other instanceof Session)) {
             return false;
         }
 
-        Session otherSession = (Session) other;
-        return otherSession.id == this.id
-                && otherSession.gym.equals(this.gym)
-                && otherSession.typeOfExercise.equals(this.typeOfExercise)
-                && otherSession.start.equals(this.start)
-                && otherSession.duration == this.duration;
+        Session otherClient = (Session) other;
+        return otherClient.getGym().equals(getGym())
+                && otherClient.getInterval().equals(getInterval())
+                && otherClient.getExerciseType().equals(getExerciseType());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, gym, typeOfExercise, start, duration);
+        return Objects.hash(id, gym, interval, exerciseType);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("[" + id + "]")
+                .append(" Start: ")
+                .append(ParserUtil.parseDateTimeToString(getInterval().getStart()))
+                .append(" End: ")
+                .append(ParserUtil.parseDateTimeToString(getInterval().getStart()))
                 .append(" Gym: ")
                 .append(gym)
                 .append(" Type_Of_Exercise: ")
-                .append(typeOfExercise)
-                .append(" Start: ")
-                .append(ParserUtil.parseDateTimeToString(start))
-                .append(" Duration: ")
-                .append(duration);
+                .append(exerciseType);
         return builder.toString();
     }
 }

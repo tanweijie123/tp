@@ -1,12 +1,16 @@
 package seedu.address.storage;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Gym;
+import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
 public class JsonAdaptedSession {
@@ -14,23 +18,23 @@ public class JsonAdaptedSession {
 
     private final String id;
     private final String gym;
-    private final String typeOfExercise;
+    private final String exerciseType;
     private final String start;
-    private final String duration;
+    private final String end;
 
     /**
      * Constructs a {@code JsonAdaptedSession} with the given Session details.
      */
     @JsonCreator
     public JsonAdaptedSession(@JsonProperty("id") String id, @JsonProperty("gym") String gym,
-                              @JsonProperty("typeOfExercise") String typeOfExercise,
+                              @JsonProperty("exerciseType") String exerciseType,
                               @JsonProperty("start") String start,
-                              @JsonProperty("duration") String duration) {
+                              @JsonProperty("end") String end) {
         this.id = id;
         this.gym = gym;
-        this.typeOfExercise = typeOfExercise;
+        this.exerciseType = exerciseType;
         this.start = start;
-        this.duration = duration;
+        this.end = end;
     }
 
     /**
@@ -38,10 +42,10 @@ public class JsonAdaptedSession {
      */
     public JsonAdaptedSession(Session source) {
         id = "" + source.getId();
-        gym = source.getGym();
-        typeOfExercise = source.getTypeOfExercise();
-        start = ParserUtil.parseDateTimeToString(source.getStartTime());
-        duration = "" + source.getDuration();
+        gym = source.getGym().toString();
+        exerciseType = source.getExerciseType().toString();
+        start = ParserUtil.parseDateTimeToString(source.getInterval().getStart());
+        end = ParserUtil.parseDateTimeToString(source.getInterval().getEnd());
     }
 
     /**
@@ -60,20 +64,27 @@ public class JsonAdaptedSession {
             throw new IllegalValueException("Gym is blank");
         }
 
-        if (typeOfExercise.isBlank()) {
-            throw new IllegalValueException("TypeOfExercise is blank");
+        final Gym modelGym = new Gym(gym);
+
+        if (exerciseType.isBlank()) {
+            throw new IllegalValueException("ExerciseType is blank");
         }
+
+        final ExerciseType modelExerciseType = new ExerciseType(exerciseType);
 
         if (start.isBlank() || !ParserUtil.tryParseDateTime(start)) {
             throw new IllegalValueException("Start is blank or invalid");
         }
-        final LocalDateTime dateTime = ParserUtil.parseStringToDateTime(start);
 
-        if (duration.isBlank() || !ParserUtil.tryParseInteger(duration)) {
-            throw new IllegalValueException("Duration is blank or invalid");
+        if (end.isBlank() || !ParserUtil.tryParseDateTime(end)) {
+            throw new IllegalValueException("Start is blank or invalid");
         }
-        final int dur = Integer.parseInt(duration); //assume correct
 
-        return new Session(gym, typeOfExercise, dateTime, dur);
+        final LocalDateTime startDateTime = ParserUtil.parseStringToDateTime(start);
+        final LocalDateTime endDateTime = ParserUtil.parseStringToDateTime(start);
+        final int duration = (int) startDateTime.until(endDateTime, ChronoUnit.MINUTES);
+        final Interval modelInterval = new Interval(startDateTime, duration);
+
+        return new Session(modelGym, modelExerciseType, modelInterval);
     }
 }

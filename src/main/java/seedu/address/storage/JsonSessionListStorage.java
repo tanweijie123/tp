@@ -45,7 +45,7 @@ public class JsonSessionListStorage implements SessionListStorage {
 
         Optional<JsonSerializableSessionList> jsonSessionList = JsonUtil.readJsonFile(
                 filePath, JsonSerializableSessionList.class);
-        if (!jsonSessionList.isPresent()) {
+        if (jsonSessionList.isEmpty()) {
             return Optional.empty();
         }
 
