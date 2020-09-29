@@ -1,15 +1,15 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.client;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INJURY;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_TAG_INJURY;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.showClientAtIndex;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.client.EditClientCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.client.EditClientCommand.EditClientDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;

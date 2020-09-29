@@ -1,4 +1,4 @@
-package seedu.address.model.client;
+package seedu.address.model.session;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,11 +12,10 @@ import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
 
 import org.junit.jupiter.api.Test;
-
+import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 
-public class ClientTest {
-
+public class SessionTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Client client = new ClientBuilder().build();
