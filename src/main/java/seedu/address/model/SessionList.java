@@ -6,11 +6,11 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.session.Session;
-import seedu.address.model.session.UniqueScheduleList;
+import seedu.address.model.session.UniqueSessionList;
 
-public class ScheduleList implements ReadOnlyScheduleList {
+public class SessionList implements ReadOnlySessionList {
 
-    private final UniqueScheduleList sessions;
+    private final UniqueSessionList sessions;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -20,15 +20,15 @@ public class ScheduleList implements ReadOnlyScheduleList {
      *   among constructors.
      */
     {
-        sessions = new UniqueScheduleList();
+        sessions = new UniqueSessionList();
     }
 
-    public ScheduleList() {}
+    public SessionList() {}
 
     /**
-     * Creates an ScheduleList using the Sessions in the {@code toBeCopied}
+     * Creates an SessionList using the Sessions in the {@code toBeCopied}
      */
-    public ScheduleList(ReadOnlyScheduleList toBeCopied) {
+    public SessionList(ReadOnlySessionList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -44,12 +44,12 @@ public class ScheduleList implements ReadOnlyScheduleList {
     }
 
     /**
-     * Resets the existing data of this {@code ScheduleList} with {@code newData}.
+     * Resets the existing data of this {@code SessionList} with {@code newData}.
      */
-    public void resetData(ReadOnlyScheduleList newData) {
+    public void resetData(ReadOnlySessionList newData) {
         requireNonNull(newData);
 
-        setSessions(newData.getScheduleList());
+        setSessions(newData.getSessionList());
     }
 
     //// Client-level operations
@@ -63,8 +63,8 @@ public class ScheduleList implements ReadOnlyScheduleList {
     }
 
     /**
-     * Adds a Session to the schedule list.
-     * The Session must not already exist in the schedule list.
+     * Adds a Session to the session list.
+     * The Session must not already exist in the session list.
      */
     public void addSession(Session s) {
         sessions.add(s);
@@ -82,8 +82,8 @@ public class ScheduleList implements ReadOnlyScheduleList {
     }
 
     /**
-     * Removes {@code key} from this {@code ScheduleList}.
-     * {@code key} must exist in the schedule list.
+     * Removes {@code key} from this {@code SessionList}.
+     * {@code key} must exist in the session list.
      */
     public void removeSession(Session key) {
         sessions.remove(key);
@@ -98,15 +98,15 @@ public class ScheduleList implements ReadOnlyScheduleList {
     }
 
     @Override
-    public ObservableList<Session> getScheduleList() {
+    public ObservableList<Session> getSessionList() {
         return sessions.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ScheduleList // instanceof handles nulls
-                && sessions.equals(((ScheduleList) other).sessions));
+                || (other instanceof SessionList // instanceof handles nulls
+                && sessions.equals(((SessionList) other).sessions));
     }
 
     @Override

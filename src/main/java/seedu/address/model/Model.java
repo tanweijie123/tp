@@ -87,49 +87,49 @@ public interface Model {
     void updateFilteredClientList(Predicate<Client> predicate);
 
     /**
-     * Returns the user prefs' schedule list file path.
+     * Returns the user prefs' session list file path.
      */
-    Path getScheduleListFilePath();
+    Path getSessionListFilePath();
 
     /**
-     * Sets the user prefs' schedule list file path.
+     * Sets the user prefs' session list file path.
      */
-    void setScheduleListFilePath(Path scheduleListFilePath);
+    void setSessionListFilePath(Path sessionListFilePath);
 
     /**
-     * Replaces schedule list data with the data in {@code ScheduleList}.
+     * Replaces session list data with the data in {@code SessionList}.
      */
-    void setScheduleList(ReadOnlyScheduleList scheduleList);
+    void setSessionList(ReadOnlySessionList sessionList);
 
-    /** Returns the ScheduleList */
-    ReadOnlyScheduleList getScheduleList();
+    /** Returns the SessionList */
+    ReadOnlySessionList getSessionList();
 
     /**
-     * Returns true if a Session with the same identity as {@code Session} exists in the Schedule List.
+     * Returns true if a Session with the same identity as {@code Session} exists in the Session List.
      */
     boolean hasSession(Session session);
 
     /**
      * Deletes the given Session.
-     * The Session must exist in the Schedule List.
+     * The Session must exist in the Session List.
      */
     void deleteSession(Session session);
 
     /**
      * Adds the given Session.
-     * {@code client} must not already exist in the Schedule List.
+     * {@code client} must not already exist in the Session List.
      */
     void addSession(Session session);
 
     /**
      * Replaces the given Session {@code target} with {@code editedSession}.
-     * {@code target} must exist in the Schedule List.
+     * {@code target} must exist in the Session List.
      * The Session identity of {@code editedSession} must not be the same as another existing Session
      *     in the address book.
      */
     void setSession(Session target, Session editedSession);
 
-    /** Returns an unmodifiable view of the filtered Schedule list */
+    /** Returns an unmodifiable view of the filtered Session list */
     ObservableList<Session> getFilteredSessionList();
 
     /**
