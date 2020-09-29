@@ -8,8 +8,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySessionList;
-import seedu.address.model.SessionList;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
@@ -68,15 +66,11 @@ public class SampleDataUtil {
         for (Client sampleClient : getSampleClients()) {
             sampleAb.addClient(sampleClient);
         }
-        return sampleAb;
-    }
-
-    public static ReadOnlySessionList getSampleSessionList() {
-        SessionList sampleSessionList = new SessionList();
         for (Session sampleSession : getSampleSession()) {
-            sampleSessionList.addSession(sampleSession);
+            sampleAb.addSession(sampleSession);
         }
-        return sampleSessionList;
+
+        return sampleAb;
     }
 
     /**

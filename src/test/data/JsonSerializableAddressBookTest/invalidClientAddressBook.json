@@ -4,5 +4,12 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street"
-  } ]
+  } ],
+  "sessions" : [ {
+    "id" : "1",
+    "gym" : "Getwell gym",
+    "exerciseType" : "Endurance",
+    "start" : "29/09/2020 1300",
+    "end" : "29/09/2020 1500"
+  }]
 }

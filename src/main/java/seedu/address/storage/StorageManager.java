@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySessionList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -20,16 +19,13 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
-    private SessionListStorage sessionListStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, SessionListStorage sessionListStorage,
-                          UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
-        this.sessionListStorage = sessionListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -78,34 +74,5 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
-    }
-
-    // ================ SessionList methods ==============================
-
-    @Override
-    public Path getSessionListFilePath() {
-        return sessionListStorage.getSessionListFilePath();
-    }
-
-    @Override
-    public Optional<ReadOnlySessionList> readSessionList() throws DataConversionException, IOException {
-        return readSessionList(sessionListStorage.getSessionListFilePath());
-    }
-
-    @Override
-    public Optional<ReadOnlySessionList> readSessionList(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return sessionListStorage.readSessionList(filePath);
-    }
-
-    @Override
-    public void saveSessionList(ReadOnlySessionList sessionList) throws IOException {
-        saveSessionList(sessionList, sessionListStorage.getSessionListFilePath());
-    }
-
-    @Override
-    public void saveSessionList(ReadOnlySessionList sessionList, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        sessionListStorage.saveSessionList(sessionList, filePath);
     }
 }

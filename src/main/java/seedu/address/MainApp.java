@@ -19,16 +19,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySessionList;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.SessionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonSessionListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.SessionListStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -61,8 +57,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        SessionListStorage sessionListStorage = new JsonSessionListStorage(userPrefs.getSessionListFilePath());
-        storage = new StorageManager(addressBookStorage, sessionListStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -95,24 +90,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        Optional<ReadOnlySessionList> sessionListOptional;
-        ReadOnlySessionList initSessionData;
-        try {
-            sessionListOptional = storage.readSessionList();
-            if (sessionListOptional.isEmpty()) {
-                //TODO: may change this to 0 data init.
-                logger.info("Session Data file not found. Will be starting default sessions allocated.");
-            }
-            initSessionData = sessionListOptional.orElseGet(SampleDataUtil::getSampleSessionList);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty session List");
-            initSessionData = new SessionList();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty session List");
-            initSessionData = new SessionList();
-        }
-
-        return new ModelManager(initialData, initSessionData, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
