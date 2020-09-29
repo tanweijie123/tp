@@ -229,9 +229,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && clients.equals(((AddressBook) other).clients)
-                && sessions.equals(((AddressBook) other).sessions)
-                && schedules.equals(((AddressBook) other).schedules));
+                && clients.equals(((AddressBook) other).clients));
+        // todo: add equality check for sessions and schedules
     }
 
     @Override
