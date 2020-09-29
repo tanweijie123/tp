@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 

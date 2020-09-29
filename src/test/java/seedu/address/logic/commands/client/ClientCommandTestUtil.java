@@ -16,7 +16,6 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.client.EditClientCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -93,7 +92,7 @@ public class ClientCommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -114,6 +113,7 @@ public class ClientCommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredClientList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the Client at the given {@code targetIndex} in the
      * {@code model}'s address book.
