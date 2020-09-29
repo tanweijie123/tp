@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyScheduleList;
 import seedu.address.model.ReadOnlySessionList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -21,15 +22,17 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private SessionListStorage sessionListStorage;
+    private ScheduleListStorage scheduleListStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, SessionListStorage sessionListStorage,
-                          UserPrefsStorage userPrefsStorage) {
+                          ScheduleListStorage scheduleListStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.sessionListStorage = sessionListStorage;
+        this.scheduleListStorage = scheduleListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -107,5 +110,34 @@ public class StorageManager implements Storage {
     public void saveSessionList(ReadOnlySessionList sessionList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         sessionListStorage.saveSessionList(sessionList, filePath);
+    }
+
+    // ================ SessionList methods ==============================
+
+    @Override
+    public Path getScheduleListFilePath() {
+        return scheduleListStorage.getScheduleListFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyScheduleList> readScheduleList() throws DataConversionException, IOException {
+        return readScheduleList(scheduleListStorage.getScheduleListFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyScheduleList> readScheduleList(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return scheduleListStorage.readScheduleList(filePath);
+    }
+
+    @Override
+    public void saveScheduleList(ReadOnlyScheduleList scheduleList) throws IOException {
+        saveScheduleList(scheduleList, scheduleListStorage.getScheduleListFilePath());
+    }
+
+    @Override
+    public void saveScheduleList(ReadOnlyScheduleList scheduleList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        scheduleListStorage.saveScheduleList(scheduleList, filePath);
     }
 }

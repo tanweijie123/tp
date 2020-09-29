@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 /**
@@ -22,14 +23,17 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final SessionList sessionList;
+    private final ScheduleList scheduleList;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Session> filteredSessions;
+    private final FilteredList<Schedule> filteredSchedules;
 
     /**
      * Initializes a ModelManager with the given addressBook, SessionList and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySessionList sessionList,
+                        ReadOnlyScheduleList scheduleList,
                         ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
@@ -38,13 +42,15 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.sessionList = new SessionList(sessionList);
+        this.scheduleList = new ScheduleList(scheduleList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
         filteredSessions = new FilteredList<>(this.sessionList.getSessionList());
+        filteredSchedules = new FilteredList<>(this.scheduleList.getScheduleList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new SessionList(), new UserPrefs());
+        this(new AddressBook(), new SessionList(), new ScheduleList(), new UserPrefs());
     }
 
     /**
@@ -53,7 +59,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         //TODO: TO REMOVE THIS METHOD.
         //NEED TO REFACTOR TEST CASES TO REMOVE THIS
-        this(addressBook, new SessionList(), userPrefs);
+        this(addressBook, new SessionList(), new ScheduleList(), userPrefs);
         logger.warning("THIS SHOULDNT BE HERE");
     }
 
@@ -101,6 +107,17 @@ public class ModelManager implements Model {
     public void setSessionListFilePath(Path sessionListFilePath) {
         requireNonNull(sessionListFilePath);
         userPrefs.setSessionListFilePath(sessionListFilePath);
+    }
+
+    @Override
+    public Path getScheduleListFilePath() {
+        return userPrefs.getScheduleListFilePath();
+    }
+
+    @Override
+    public void setScheduleListFilePath(Path scheduleListFilePath) {
+        requireNonNull(scheduleListFilePath);
+        userPrefs.setScheduleListFilePath(scheduleListFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -191,7 +208,7 @@ public class ModelManager implements Model {
         sessionList.setSession(target, editedSession);
     }
 
-    //=========== Filtered Client List Accessors =============================================================
+    //=========== Filtered Session List Accessors =============================================================
 
     @Override
     public ObservableList<Session> getFilteredSessionList() {
@@ -202,6 +219,54 @@ public class ModelManager implements Model {
     public void updateFilteredSessionList(Predicate<Session> predicate) {
         requireNonNull(predicate);
         filteredSessions.setPredicate(predicate);
+    }
+
+    //=========== Schedule List ===============================================================================
+
+    @Override
+    public void setScheduleList(ReadOnlyScheduleList scheduleList) {
+        this.scheduleList.resetData(scheduleList);
+    }
+
+    @Override
+    public ReadOnlyScheduleList getScheduleList() {
+        return scheduleList;
+    }
+
+    @Override
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return scheduleList.hasSchedule(schedule);
+    }
+
+    @Override
+    public void deleteSchedule(Schedule schedule) {
+        scheduleList.removeSchedule(schedule);
+    }
+
+    @Override
+    public void addSchedule(Schedule schedule) {
+        scheduleList.addSchedule(schedule);
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
+    }
+
+    @Override
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireAllNonNull(target, editedSchedule);
+        scheduleList.setSchedule(target, editedSchedule);
+    }
+
+    //=========== Filtered Schedule List Accessors =============================================================
+
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return filteredSchedules;
+    }
+
+    @Override
+    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredSchedules.setPredicate(predicate);
     }
 
     @Override

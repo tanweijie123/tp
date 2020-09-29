@@ -16,6 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private Path sessionListFilePath = Paths.get("data", "session.json");
+    private Path scheduleListFilePath = Paths.get("data", "schedule.json");
 
 
     /**
@@ -67,6 +68,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.sessionListFilePath = sessionFilePath;
     }
 
+    public Path getScheduleListFilePath() {
+        return scheduleListFilePath;
+    }
+
+    public void setScheduleListFilePath(Path scheduleListFilePath) {
+        requireNonNull(scheduleListFilePath);
+        this.sessionListFilePath = scheduleListFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -80,12 +90,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         return guiSettings.equals(o.guiSettings)
                 && addressBookFilePath.equals(o.addressBookFilePath)
-                && sessionListFilePath.equals(o.sessionListFilePath);
+                && sessionListFilePath.equals(o.sessionListFilePath)
+                && scheduleListFilePath.equals(o.scheduleListFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, sessionListFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, sessionListFilePath,
+                scheduleListFilePath);
     }
 
     @Override
@@ -94,6 +106,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
         sb.append("\nLocal session file location: " + sessionListFilePath);
+        sb.append("\nLocal schedule file location: " + scheduleListFilePath);
         return sb.toString();
     }
 

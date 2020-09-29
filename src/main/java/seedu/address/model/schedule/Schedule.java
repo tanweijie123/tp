@@ -4,9 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
-import seedu.address.model.session.Session;
 
 public class Schedule {
     private Email clientId;

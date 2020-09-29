@@ -20,9 +20,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyScheduleList;
 import seedu.address.model.ReadOnlySessionList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.ClientBuilder;
 
@@ -199,6 +201,56 @@ public class AddClientCommandTest {
 
         @Override
         public void updateFilteredSessionList(Predicate<Session> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getScheduleListFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setScheduleListFilePath(Path scheduleListFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setScheduleList(ReadOnlyScheduleList scheduleList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyScheduleList getScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSchedule(Schedule target, Schedule editedSchedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Schedule> getFilteredScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyScheduleList;
 import seedu.address.model.ReadOnlySessionList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -13,7 +14,7 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, SessionListStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, SessionListStorage, ScheduleListStorage, UserPrefsStorage {
 
     @Override
     Path getUserPrefsFilePath();
@@ -41,4 +42,13 @@ public interface Storage extends AddressBookStorage, SessionListStorage, UserPre
 
     @Override
     void saveSessionList(ReadOnlySessionList sessionList) throws IOException;
+
+    @Override
+    Path getScheduleListFilePath();
+
+    @Override
+    Optional<ReadOnlyScheduleList> readScheduleList() throws DataConversionException, IOException;
+
+    @Override
+    void saveScheduleList(ReadOnlyScheduleList scheduleList) throws IOException;
 }
