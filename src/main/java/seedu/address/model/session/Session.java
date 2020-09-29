@@ -2,14 +2,20 @@ package seedu.address.model.session;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
+
+import seedu.address.logic.parser.ParserUtil;
 
 /**
  * Represents a training Session in FitEgo.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Session {
+    private static int idCounter = 0; //this also double as the number of sessions already created.
+
     // Identity fields
+    private final int id;
     private final Gym gym;
     private final Interval interval;
 
@@ -21,9 +27,32 @@ public class Session {
      */
     public Session(Gym gym, ExerciseType exerciseType, Interval interval) {
         requireAllNonNull(gym, exerciseType, interval);
+        this.id = ++idCounter; // TODO: This will create same ID on shutdown.
         this.exerciseType = exerciseType;
         this.interval = interval;
         this.gym = gym;
+    }
+
+    /**
+     * Creates a new Session object.
+     * NOTE: DO NOT USE THIS FOR CLIENT INPUT; this is only for loading from database.
+     */
+    public Session(int id, String gym, String exerciseType, LocalDateTime start, int duration) {
+        requireAllNonNull(id, gym, exerciseType, start, duration);
+        this.id = id;
+        this.gym = new Gym(gym);
+        this.exerciseType = new ExerciseType(exerciseType);
+        this.interval = new Interval(start, duration);
+
+        //check if current counter is below assigned id
+        if (id > idCounter) {
+            idCounter = id;
+        }
+    }
+
+    //Getters / Setters
+    public int getId() {
+        return id;
     }
 
     public Gym getGym() {
@@ -40,7 +69,6 @@ public class Session {
 
     /**
      * Returns true if both Sessions overlap with each other
-     * This defines a weaker notion of equality between two Sessions.
      */
     public boolean isOverlappingSession(Session otherSession) {
         if (otherSession == this) {
@@ -56,6 +84,19 @@ public class Session {
         } else {
             return getInterval().getStart().isBefore(otherSession.getInterval().getEnd());
         }
+    }
+
+    /**
+     * Returns true if both Sessions have the same id
+     * This defines a weaker notion of equality between two Sessions.
+     */
+    public boolean isSameSession(Session otherSession) {
+        if (otherSession == this) {
+            return true;
+        }
+
+        return otherSession != null
+                && otherSession.getId() == id;
     }
 
     /**
@@ -81,16 +122,21 @@ public class Session {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(gym, interval, exerciseType);
+        return Objects.hash(id, gym, interval, exerciseType);
     }
 
     @Override
     public String toString() {
-        return getInterval()
-                + " Exercise Type: "
-                + getExerciseType()
-                + " Gym: "
-                + getGym()
-                + " Tags: ";
+        final StringBuilder builder = new StringBuilder();
+        builder.append("[" + id + "]")
+                .append(" Start: ")
+                .append(ParserUtil.parseDateTimeToString(getInterval().getStart()))
+                .append(" End: ")
+                .append(ParserUtil.parseDateTimeToString(getInterval().getStart()))
+                .append(" Gym: ")
+                .append(gym)
+                .append(" Type_Of_Exercise: ")
+                .append(exerciseType);
+        return builder.toString();
     }
 }
