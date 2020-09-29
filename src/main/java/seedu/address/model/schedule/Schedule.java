@@ -1,11 +1,11 @@
 package seedu.address.model.schedule;
 
-import seedu.address.model.client.Client;
-import seedu.address.model.session.Session;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.model.client.Client;
+import seedu.address.model.session.Session;
 
 public class Schedule {
     private final Client client;
@@ -29,7 +29,7 @@ public class Schedule {
     }
 
     /**
-     * Returns true if both sessions have the same identifier.
+     * Returns true if both Schedules have the same identity.
      */
     public boolean isSameSchedule(Schedule otherSchedule) {
         if (otherSchedule == this) {
