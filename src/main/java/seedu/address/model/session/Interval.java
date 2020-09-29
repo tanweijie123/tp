@@ -14,8 +14,8 @@ public class Interval {
     public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, and it have a positive duration";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("E, dd MMM yyyy, HH:mm");
 
-    public final LocalDateTime start;
-    public final int durationInMinutes;
+    private final LocalDateTime start;
+    private final int durationInMinutes;
 
     /**
      * Constructs an {@code Gym}.
