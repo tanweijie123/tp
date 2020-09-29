@@ -8,9 +8,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.client.exceptions.ClientNotFoundException;
-import seedu.address.model.client.exceptions.DuplicateClientException;
-import seedu.address.model.client.exceptions.SessionNotFoundException;
+import seedu.address.model.session.exceptions.DuplicateSessionException;
+import seedu.address.model.session.exceptions.OverlapSessionException;
+import seedu.address.model.session.exceptions.SessionNotFoundException;
 
 public class UniqueSessionList implements Iterable<Session> {
 
@@ -33,7 +33,7 @@ public class UniqueSessionList implements Iterable<Session> {
     public void add(Session toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateClientException();
+            throw new OverlapSessionException();
         }
         internalList.add(toAdd);
     }
@@ -48,11 +48,11 @@ public class UniqueSessionList implements Iterable<Session> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new ClientNotFoundException();
+            throw new SessionNotFoundException();
         }
 
         if (!target.isSameSession(editedSession) && contains(editedSession)) {
-            throw new DuplicateClientException();
+            throw new DuplicateSessionException();
         }
 
         internalList.set(index, editedSession);
@@ -81,7 +81,7 @@ public class UniqueSessionList implements Iterable<Session> {
     public void setSessions(List<Session> sessions) {
         requireAllNonNull(sessions);
         if (!sessionsAreUnique(sessions)) {
-            throw new DuplicateClientException();
+            throw new OverlapSessionException();
         }
 
         internalList.setAll(sessions);
