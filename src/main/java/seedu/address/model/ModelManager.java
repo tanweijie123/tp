@@ -15,21 +15,21 @@ import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
 
 /**
- * Represents the in-memory model of the FitEgo's data (client + schedule).
+ * Represents the in-memory model of the FitEgo's data (client + session).
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final ScheduleList scheduleList;
+    private final SessionList sessionList;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Session> filteredSessions;
 
     /**
-     * Initializes a ModelManager with the given addressBook, scheduleList and userPrefs.
+     * Initializes a ModelManager with the given addressBook, SessionList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyScheduleList scheduleList,
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySessionList sessionList,
                         ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
@@ -37,14 +37,14 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.scheduleList = new ScheduleList(scheduleList);
+        this.sessionList = new SessionList(sessionList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
-        filteredSessions = new FilteredList<>(this.scheduleList.getScheduleList());
+        filteredSessions = new FilteredList<>(this.sessionList.getSessionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new ScheduleList(), new UserPrefs());
+        this(new AddressBook(), new SessionList(), new UserPrefs());
     }
 
     /**
@@ -53,7 +53,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         //TODO: TO REMOVE THIS METHOD.
         //NEED TO REFACTOR TEST CASES TO REMOVE THIS
-        this(addressBook, new ScheduleList(), userPrefs);
+        this(addressBook, new SessionList(), userPrefs);
         logger.warning("THIS SHOULDNT BE HERE");
     }
 
@@ -93,14 +93,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getScheduleListFilePath() {
+    public Path getSessionListFilePath() {
         return userPrefs.getSessionListFilePath();
     }
 
     @Override
-    public void setScheduleListFilePath(Path scheduleListFilePath) {
-        requireNonNull(scheduleListFilePath);
-        userPrefs.setSessionListFilePath(scheduleListFilePath);
+    public void setSessionListFilePath(Path sessionListFilePath) {
+        requireNonNull(sessionListFilePath);
+        userPrefs.setSessionListFilePath(sessionListFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -156,39 +156,39 @@ public class ModelManager implements Model {
         filteredClients.setPredicate(predicate);
     }
 
-    //=========== ScheduleList ================================================================================
+    //=========== SessionList ================================================================================
 
     @Override
-    public void setScheduleList(ReadOnlyScheduleList scheduleList) {
-        this.scheduleList.resetData(scheduleList);
+    public void setSessionList(ReadOnlySessionList sessionList) {
+        this.sessionList.resetData(sessionList);
     }
 
     @Override
-    public ReadOnlyScheduleList getScheduleList() {
-        return scheduleList;
+    public ReadOnlySessionList getSessionList() {
+        return sessionList;
     }
 
     @Override
     public boolean hasSession(Session session) {
         requireNonNull(session);
-        return scheduleList.hasSession(session);
+        return sessionList.hasSession(session);
     }
 
     @Override
     public void deleteSession(Session session) {
-        scheduleList.removeSession(session);
+        sessionList.removeSession(session);
     }
 
     @Override
     public void addSession(Session session) {
-        scheduleList.addSession(session);
+        sessionList.addSession(session);
         updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
     }
 
     @Override
     public void setSession(Session target, Session editedSession) {
         requireAllNonNull(target, editedSession);
-        scheduleList.setSession(target, editedSession);
+        sessionList.setSession(target, editedSession);
     }
 
     //=========== Filtered Client List Accessors =============================================================
