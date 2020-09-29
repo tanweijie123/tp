@@ -2,8 +2,6 @@ package seedu.address.model.session;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -11,49 +9,37 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Session {
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy, HH:mm");
-
     // Identity fields
-    private final String gymName;
-    private final LocalDateTime startDateTime;
-    private final int durationInMinute;
+    private final Gym gym;
+    private final Interval interval;
 
     // Data fields
-    private final String exerciseType;
+    private final ExerciseType exerciseType;
 
     /**
      * Every field must be present and not null.
      */
-    public Session(String gymName, String exerciseType, LocalDateTime startDateTime, int durationInMinute) {
-        requireAllNonNull(gymName, exerciseType, startDateTime, durationInMinute);
-        this.gymName = gymName;
+    public Session(Gym gym, ExerciseType exerciseType, Interval interval) {
+        requireAllNonNull(gym, exerciseType, interval);
         this.exerciseType = exerciseType;
-        this.startDateTime = startDateTime;
-        this.durationInMinute = durationInMinute;
+        this.interval = interval;
+        this.gym = gym;
     }
 
-    public String getGym() {
-        return gymName;
+    public Gym getGym() {
+        return gym;
     }
 
-    public LocalDateTime getStartDateTime() {
-        return startDateTime;
+    public Interval getInterval() {
+        return interval;
     }
 
-    public LocalDateTime getEndDateTime() {
-        return startDateTime.plusMinutes(durationInMinute);
-    }
-
-    public int getDuration() {
-        return durationInMinute;
-    }
-
-    public String getExerciseType() {
+    public ExerciseType getExerciseType() {
         return exerciseType;
     }
 
     /**
-     * Returns true if both Sessions do not overlap with each other
+     * Returns true if both Sessions overlap with each other
      * This defines a weaker notion of equality between two Sessions.
      */
     public boolean isOverlappingSession(Session otherSession) {
@@ -65,10 +51,10 @@ public class Session {
             return false;
         }
 
-        if (otherSession.getStartDateTime().isAfter(startDateTime)) {
-            return otherSession.getStartDateTime().isBefore(getEndDateTime());
+        if (otherSession.getInterval().getStart().isAfter(getInterval().getStart())) {
+            return otherSession.getInterval().getStart().isBefore(getInterval().getEnd());
         } else {
-            return startDateTime.isBefore(otherSession.getEndDateTime());
+            return getInterval().getStart().isBefore(otherSession.getInterval().getEnd());
         }
     }
 
@@ -88,28 +74,23 @@ public class Session {
 
         Session otherClient = (Session) other;
         return otherClient.getGym().equals(getGym())
-                && otherClient.getStartDateTime().equals(getStartDateTime())
-                && otherClient.getDuration() == getDuration()
+                && otherClient.getInterval().equals(getInterval())
                 && otherClient.getExerciseType().equals(getExerciseType());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(gymName, startDateTime, durationInMinute, exerciseType);
+        return Objects.hash(gym, interval, exerciseType);
     }
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getStartDateTime().format(formatter))
-                .append(" - ")
-                .append(getEndDateTime().format(formatter))
-                .append(" Exercise Type: ")
-                .append(getExerciseType())
-                .append(" Gym: ")
-                .append(getGym())
-                .append(" Tags: ");
-        return builder.toString();
+        return getInterval()
+                + " Exercise Type: "
+                + getExerciseType()
+                + " Gym: "
+                + getGym()
+                + " Tags: ";
     }
 }
