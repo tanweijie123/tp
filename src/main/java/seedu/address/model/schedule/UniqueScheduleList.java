@@ -9,9 +9,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.client.exceptions.ClientNotFoundException;
-import seedu.address.model.client.exceptions.DuplicateClientException;
-import seedu.address.model.session.exceptions.SessionNotFoundException;
+import seedu.address.model.schedule.exceptions.DuplicateScheduleException;
+import seedu.address.model.schedule.exceptions.ScheduleNotFoundException;
 
 public class UniqueScheduleList implements Iterable<Schedule> {
 
@@ -34,8 +33,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void add(Schedule toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            // todo change to DuplicateScheduleException
-            throw new DuplicateClientException();
+            throw new DuplicateScheduleException();
         }
         internalList.add(toAdd);
     }
@@ -50,13 +48,11 @@ public class UniqueScheduleList implements Iterable<Schedule> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            // todo change to ScheduleNotFoundException
-            throw new ClientNotFoundException();
+            throw new ScheduleNotFoundException();
         }
 
         if (!target.isSameSchedule(editedSchedule) && contains(editedSchedule)) {
-            // todo change to DuplicateScheduleException
-            throw new DuplicateClientException();
+            throw new DuplicateScheduleException();
         }
 
         internalList.set(index, editedSchedule);
@@ -69,8 +65,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void remove(Schedule toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            // todo change to ScheduleNotFoundException
-            throw new SessionNotFoundException();
+            throw new ScheduleNotFoundException();
         }
     }
 
@@ -86,8 +81,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void setSchedules(List<Schedule> schedules) {
         requireAllNonNull(schedules);
         if (!schedulesAreUnique(schedules)) {
-            // todo change to DuplicateScheduleException
-            throw new DuplicateClientException();
+            throw new DuplicateScheduleException();
         }
 
         internalList.setAll(schedules);
