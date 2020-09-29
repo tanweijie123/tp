@@ -11,7 +11,8 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidInterval(int)}
  */
 public class Interval {
-    public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, and it have a positive duration";
+    public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, but end time must be strictly"
+            + "after start time";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("E, dd MMM yyyy, HH:mm");
 
     private final LocalDateTime start;
@@ -20,7 +21,7 @@ public class Interval {
     /**
      * Constructs an {@code Gym}.
      *
-     * @param start A valid start datetime.
+     * @param start    A valid start datetime.
      * @param duration A valid duration.
      */
     public Interval(LocalDateTime start, int duration) {
