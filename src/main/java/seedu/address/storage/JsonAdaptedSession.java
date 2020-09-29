@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.client.Address;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
