@@ -11,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
-import seedu.address.model.client.exceptions.SessionNotFoundException;
+import seedu.address.model.session.exceptions.SessionNotFoundException;
 
 public class UniqueScheduleList implements Iterable<Schedule> {
 
