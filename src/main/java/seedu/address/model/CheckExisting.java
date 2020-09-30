@@ -1,9 +1,12 @@
 package seedu.address.model;
 
 /**
- * This interface provides a weaker equality to check if there exist another
- * object with the same unique identifier.
+ * This interface provides a weaker equality check.
  */
 public interface CheckExisting<T> {
+    /**
+     * Returns true if 2 elements has the same unique identifier.
+     * This defines a weaker notion of equality between two elements.
+     */
     public boolean isExisting(T other);
 }
