@@ -6,12 +6,13 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.CheckExisting;
 
 /**
  * Represents a training Session in FitEgo.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Session {
+public class Session implements CheckExisting<Session> {
     private static int idCounter = 0; //this also double as the number of sessions already created.
 
     // Identity fields
@@ -90,7 +91,8 @@ public class Session {
      * Returns true if both Sessions have the same id
      * This defines a weaker notion of equality between two Sessions.
      */
-    public boolean isSameSession(Session otherSession) {
+    @Override
+    public boolean isExisting(Session otherSession) {
         if (otherSession == this) {
             return true;
         }

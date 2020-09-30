@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.exceptions.DuplicateClientException;
+import seedu.address.model.exceptions.DuplicateEntityException;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.ClientBuilder;
@@ -53,7 +53,7 @@ public class AddressBookTest {
         List<Client> newClients = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newClients);
 
-        assertThrows(DuplicateClientException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateEntityException.class, () -> addressBook.resetData(newData));
     }
 
     @Test

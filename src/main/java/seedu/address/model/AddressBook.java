@@ -6,11 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.schedule.Schedule;
-import seedu.address.model.schedule.UniqueScheduleList;
 import seedu.address.model.session.Session;
-import seedu.address.model.session.UniqueSessionList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,10 +15,9 @@ import seedu.address.model.session.UniqueSessionList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    //TODO: create a Unique<T>List?
-    private final UniqueClientList clients;
-    private final UniqueSessionList sessions;
-    private final UniqueScheduleList schedules;
+    private final UniqueTList<Client> clients;
+    private final UniqueTList<Session> sessions;
+    private final UniqueTList<Schedule> schedules;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,9 +27,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        clients = new UniqueClientList();
-        sessions = new UniqueSessionList();
-        schedules = new UniqueScheduleList();
+        clients = new UniqueTList<>();
+        sessions = new UniqueTList<>();
+        schedules = new UniqueTList<>();
     }
 
     public AddressBook() {}
@@ -53,7 +49,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code Clients} must not contain duplicate Clients.
      */
     public void setClients(List<Client> clients) {
-        this.clients.setClients(clients);
+        this.clients.setAll(clients);
     }
 
     /**
@@ -93,7 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
 
-        clients.setClient(target, editedClient);
+        clients.set(target, editedClient);
     }
 
     /**
@@ -111,7 +107,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code Sessions} must not contain duplicate Sessions.
      */
     public void setSessions(List<Session> sessions) {
-        this.sessions.setSessions(sessions);
+        this.sessions.setAll(sessions);
     }
 
     //// Client-level operations
@@ -140,7 +136,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setSession(Session target, Session editedSession) {
         requireNonNull(editedSession);
 
-        sessions.setSession(target, editedSession);
+        sessions.set(target, editedSession);
     }
 
     /**
@@ -158,7 +154,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code Schedule} must not contain duplicate Schedules.
      */
     public void setSchedules(List<Schedule> schedules) {
-        this.schedules.setSchedules(schedules);
+        this.schedules.setAll(schedules);
     }
 
     //// Client-level operations
@@ -187,7 +183,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setSchedule(Schedule target, Schedule editedSchedule) {
         requireNonNull(editedSchedule);
 
-        schedules.setSchedule(target, editedSchedule);
+        schedules.set(target, editedSchedule);
     }
 
     /**
@@ -203,7 +199,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return String.format("%s\n%s",
+        return String.format("%s\n%s\n%s",
                 clients.asUnmodifiableObservableList().size() + " Clients",
                 sessions.asUnmodifiableObservableList().size() + " Sessions",
                 schedules.asUnmodifiableObservableList().size() + " Schedules");
