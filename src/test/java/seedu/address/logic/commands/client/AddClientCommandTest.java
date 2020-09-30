@@ -153,16 +153,6 @@ public class AddClientCommandTest {
         }
 
         @Override
-        public Path getSessionListFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setSessionListFilePath(Path sessionListFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasSession(Session session) {
             throw new AssertionError("This method should not be called.");
         }
@@ -192,15 +182,6 @@ public class AddClientCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public Path getScheduleListFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setScheduleListFilePath(Path scheduleListFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public boolean hasSchedule(Schedule schedule) {

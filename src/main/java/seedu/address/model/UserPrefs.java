@@ -15,9 +15,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private Path sessionListFilePath = Paths.get("data", "session.json");
-    private Path scheduleListFilePath = Paths.get("data", "schedule.json");
-
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -59,24 +56,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
-    public Path getSessionListFilePath() {
-        return sessionListFilePath;
-    }
-
-    public void setSessionListFilePath(Path sessionFilePath) {
-        requireNonNull(sessionFilePath);
-        this.sessionListFilePath = sessionFilePath;
-    }
-
-    public Path getScheduleListFilePath() {
-        return scheduleListFilePath;
-    }
-
-    public void setScheduleListFilePath(Path scheduleListFilePath) {
-        requireNonNull(scheduleListFilePath);
-        this.sessionListFilePath = scheduleListFilePath;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -89,15 +68,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath)
-                && sessionListFilePath.equals(o.sessionListFilePath)
-                && scheduleListFilePath.equals(o.scheduleListFilePath);
+                && addressBookFilePath.equals(o.addressBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, sessionListFilePath,
-                scheduleListFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath);
     }
 
     @Override
@@ -105,8 +81,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nLocal session file location: " + sessionListFilePath);
-        sb.append("\nLocal schedule file location: " + scheduleListFilePath);
         return sb.toString();
     }
 

@@ -82,28 +82,6 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    @Override
-    public Path getSessionListFilePath() {
-        return userPrefs.getSessionListFilePath();
-    }
-
-    @Override
-    public void setSessionListFilePath(Path sessionListFilePath) {
-        requireNonNull(sessionListFilePath);
-        userPrefs.setSessionListFilePath(sessionListFilePath);
-    }
-
-    @Override
-    public Path getScheduleListFilePath() {
-        return userPrefs.getScheduleListFilePath();
-    }
-
-    @Override
-    public void setScheduleListFilePath(Path scheduleListFilePath) {
-        requireNonNull(scheduleListFilePath);
-        userPrefs.setScheduleListFilePath(scheduleListFilePath);
-    }
-
     //=========== AddressBook ================================================================================
 
     @Override
