@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.UniqueScheduleList;
 import seedu.address.model.session.Session;
 import seedu.address.model.session.UniqueSessionList;
 
@@ -19,6 +21,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     //TODO: create a Unique<T>List?
     private final UniqueClientList clients;
     private final UniqueSessionList sessions;
+    private final UniqueScheduleList schedules;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -29,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         clients = new UniqueClientList();
         sessions = new UniqueSessionList();
+        schedules = new UniqueScheduleList();
     }
 
     public AddressBook() {}
@@ -59,6 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setClients(newData.getClientList());
         setSessions(newData.getSessionList());
+        setSchedules(newData.getScheduleList());
     }
 
     //// Client-level operations
@@ -145,6 +151,53 @@ public class AddressBook implements ReadOnlyAddressBook {
         sessions.remove(key);
     }
 
+    //=============================== SCHEDULE-RELATED ===========================================
+
+    /**
+     * Replaces the contents of the Schedule list with {@code Schedule}.
+     * {@code Schedule} must not contain duplicate Schedules.
+     */
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules.setSchedules(schedules);
+    }
+
+    //// Client-level operations
+
+    /**
+     * Returns true if a Schedule with the same identity as {@code Schedule} exists in the address book.
+     */
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return schedules.contains(schedule);
+    }
+
+    /**
+     * Adds a Schedule to the schedule list.
+     * The Schedule must not already exist in the schedule list.
+     */
+    public void addSchedule(Schedule schedule) {
+        schedules.add(schedule);
+    }
+
+    /**
+     * Replaces the given Schedule {@code target} in the list with {@code editedSchedule}.
+     * {@code target} must exist in the address book.
+     * The Schedule identity of {@code editedSchedule} must not be the same as another existing Schedule.
+     */
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireNonNull(editedSchedule);
+
+        schedules.setSchedule(target, editedSchedule);
+    }
+
+    /**
+     * Removes {@code key} from this {@code ScheduleList}.
+     * {@code key} must exist in the schedule list.
+     */
+    public void removeSchedule(Schedule key) {
+        schedules.remove(key);
+    }
+
 
     //// util methods
 
@@ -152,7 +205,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return String.format("%s\n%s",
                 clients.asUnmodifiableObservableList().size() + " Clients",
-                sessions.asUnmodifiableObservableList().size() + " Sessions");
+                sessions.asUnmodifiableObservableList().size() + " Sessions",
+                schedules.asUnmodifiableObservableList().size() + " Schedules");
         // TODO: refine later
     }
 
@@ -167,10 +221,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Schedule> getScheduleList() {
+        return schedules.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && clients.equals(((AddressBook) other).clients));
+        // todo: add equality check for sessions and schedules
     }
 
     @Override

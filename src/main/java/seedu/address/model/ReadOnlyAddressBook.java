@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 /**
@@ -15,4 +16,5 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Client> getClientList();
     ObservableList<Session> getSessionList();
+    ObservableList<Schedule> getScheduleList();
 }

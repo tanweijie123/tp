@@ -11,5 +11,12 @@
     "exerciseType" : "Endurance",
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500"
-  }]
+  }],
+  "schedules" : [ {
+    "clientEmail" : "alexyeoh@example.com",
+    "sessionId" : "1"
+  }, {
+    "clientEmail" : "lidavid@example.com",
+    "sessionId" : "2"
+  } ]
 }

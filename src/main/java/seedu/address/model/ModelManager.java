@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 /**
@@ -24,9 +25,10 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Session> filteredSessions;
+    private final FilteredList<Schedule> filteredSchedules;
 
     /**
-     * Initializes a ModelManager with the given addressBook, SessionList and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -38,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
         filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
+        filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
     }
 
     public ModelManager() {
@@ -88,6 +91,17 @@ public class ModelManager implements Model {
     public void setSessionListFilePath(Path sessionListFilePath) {
         requireNonNull(sessionListFilePath);
         userPrefs.setSessionListFilePath(sessionListFilePath);
+    }
+
+    @Override
+    public Path getScheduleListFilePath() {
+        return userPrefs.getScheduleListFilePath();
+    }
+
+    @Override
+    public void setScheduleListFilePath(Path scheduleListFilePath) {
+        requireNonNull(scheduleListFilePath);
+        userPrefs.setScheduleListFilePath(scheduleListFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -168,7 +182,7 @@ public class ModelManager implements Model {
         addressBook.setSession(target, editedSession);
     }
 
-    //=========== Filtered Client List Accessors =============================================================
+    //=========== Filtered Session List Accessors =============================================================
 
     @Override
     public ObservableList<Session> getFilteredSessionList() {
@@ -179,6 +193,44 @@ public class ModelManager implements Model {
     public void updateFilteredSessionList(Predicate<Session> predicate) {
         requireNonNull(predicate);
         filteredSessions.setPredicate(predicate);
+    }
+
+    //=========== Schedule List ===============================================================================
+
+    @Override
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return addressBook.hasSchedule(schedule);
+    }
+
+    @Override
+    public void deleteSchedule(Schedule schedule) {
+        addressBook.removeSchedule(schedule);
+    }
+
+    @Override
+    public void addSchedule(Schedule schedule) {
+        addressBook.addSchedule(schedule);
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
+    }
+
+    @Override
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireAllNonNull(target, editedSchedule);
+        addressBook.setSchedule(target, editedSchedule);
+    }
+
+    //=========== Filtered Schedule List Accessors =============================================================
+
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return filteredSchedules;
+    }
+
+    @Override
+    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredSchedules.setPredicate(predicate);
     }
 
     @Override

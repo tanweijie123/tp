@@ -13,6 +13,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
@@ -61,6 +62,13 @@ public class SampleDataUtil {
         }
     }
 
+    public static Schedule[] getSampleSchedule() {
+        return new Schedule[]{
+            new Schedule(new Email("alexyeoh@example.com"), 1),
+            new Schedule(new Email("lidavid@example.com"), 2)
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Client sampleClient : getSampleClients()) {
@@ -68,6 +76,9 @@ public class SampleDataUtil {
         }
         for (Session sampleSession : getSampleSession()) {
             sampleAb.addSession(sampleSession);
+        }
+        for (Schedule sampleSchedule : getSampleSchedule()) {
+            sampleAb.addSchedule(sampleSchedule);
         }
 
         return sampleAb;
