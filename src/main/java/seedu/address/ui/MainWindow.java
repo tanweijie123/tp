@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private RightSideBar rightSideBar;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +51,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private Pane mainDisplay;
+
+    @FXML
+    private Pane rightDisplay;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,8 +118,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        clientListPanel = new ClientListPanel(logic.getFilteredClientList());
+        clientListPanel = new ClientListPanel(this, logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
+
+        //main GUI to display session on start up
+        //right GUI to display next 7 days on start up
+        //right bottom GUI to display next session.
+
+        rightSideBar = new RightSideBar(this, logic.getFilteredClientList()); //TODO: change this to sess.
+        rightDisplay.getChildren().add(rightSideBar.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -183,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.hasFunctionToRun()) {
-                commandResult.getFunction().run();
+                setMainDisplay(commandResult.getPane().get());
             }
 
             if (commandResult.isExit()) {
@@ -196,5 +211,10 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    public void setMainDisplay(Pane display) {
+        mainDisplay.getChildren().clear();
+        mainDisplay.getChildren().add(display);
     }
 }
