@@ -2,11 +2,11 @@ package seedu.address.model.client;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INJURY;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_TAG_INJURY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
@@ -26,32 +26,32 @@ public class ClientTest {
     @Test
     public void isSameClient() {
         // same object -> returns true
-        assertTrue(ALICE.isSameClient(ALICE));
+        assertTrue(ALICE.isExisting(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSameClient(null));
+        assertFalse(ALICE.isExisting(null));
 
         // different phone and email -> returns false
         Client editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.isSameClient(editedAlice));
+        assertFalse(ALICE.isExisting(editedAlice));
 
         // different name -> returns false
         editedAlice = new ClientBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameClient(editedAlice));
+        assertFalse(ALICE.isExisting(editedAlice));
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_INJURY).build();
-        assertTrue(ALICE.isSameClient(editedAlice));
+        assertTrue(ALICE.isExisting(editedAlice));
 
         // same name, same email, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_INJURY).build();
-        assertTrue(ALICE.isSameClient(editedAlice));
+        assertTrue(ALICE.isExisting(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_INJURY).build();
-        assertTrue(ALICE.isSameClient(editedAlice));
+        assertTrue(ALICE.isExisting(editedAlice));
     }
 
     @Test

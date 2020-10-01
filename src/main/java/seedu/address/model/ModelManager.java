@@ -12,9 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.session.Session;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the FitEgo's data (client + session).
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -22,6 +24,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
+    private final FilteredList<Session> filteredSessions;
+    private final FilteredList<Schedule> filteredSchedules;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +39,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
+        filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
+        filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
     }
 
     public ModelManager() {
@@ -127,6 +133,82 @@ public class ModelManager implements Model {
     public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
+    }
+
+    //=========== SessionList ================================================================================
+
+    @Override
+    public boolean hasSession(Session session) {
+        requireNonNull(session);
+        return addressBook.hasSession(session);
+    }
+
+    @Override
+    public void deleteSession(Session session) {
+        addressBook.removeSession(session);
+    }
+
+    @Override
+    public void addSession(Session session) {
+        addressBook.addSession(session);
+        updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
+    }
+
+    @Override
+    public void setSession(Session target, Session editedSession) {
+        requireAllNonNull(target, editedSession);
+        addressBook.setSession(target, editedSession);
+    }
+
+    //=========== Filtered Session List Accessors =============================================================
+
+    @Override
+    public ObservableList<Session> getFilteredSessionList() {
+        return filteredSessions;
+    }
+
+    @Override
+    public void updateFilteredSessionList(Predicate<Session> predicate) {
+        requireNonNull(predicate);
+        filteredSessions.setPredicate(predicate);
+    }
+
+    //=========== Schedule List ===============================================================================
+
+    @Override
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return addressBook.hasSchedule(schedule);
+    }
+
+    @Override
+    public void deleteSchedule(Schedule schedule) {
+        addressBook.removeSchedule(schedule);
+    }
+
+    @Override
+    public void addSchedule(Schedule schedule) {
+        addressBook.addSchedule(schedule);
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
+    }
+
+    @Override
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireAllNonNull(target, editedSchedule);
+        addressBook.setSchedule(target, editedSchedule);
+    }
+
+    //=========== Filtered Schedule List Accessors =============================================================
+
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return filteredSchedules;
+    }
+
+    @Override
+    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredSchedules.setPredicate(predicate);
     }
 
     @Override

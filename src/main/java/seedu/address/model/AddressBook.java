@@ -6,7 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.session.Session;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +15,9 @@ import seedu.address.model.client.UniqueClientList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueClientList clients;
+    private final UniqueTList<Client> clients;
+    private final UniqueTList<Session> sessions;
+    private final UniqueTList<Schedule> schedules;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +27,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        clients = new UniqueClientList();
+        clients = new UniqueTList<>();
+        sessions = new UniqueTList<>();
+        schedules = new UniqueTList<>();
     }
 
     public AddressBook() {}
@@ -44,7 +49,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code Clients} must not contain duplicate Clients.
      */
     public void setClients(List<Client> clients) {
-        this.clients.setClients(clients);
+        this.clients.setAll(clients);
     }
 
     /**
@@ -54,6 +59,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setClients(newData.getClientList());
+        setSessions(newData.getSessionList());
+        setSchedules(newData.getScheduleList());
     }
 
     //// Client-level operations
@@ -82,7 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
 
-        clients.setClient(target, editedClient);
+        clients.set(target, editedClient);
     }
 
     /**
@@ -93,11 +100,109 @@ public class AddressBook implements ReadOnlyAddressBook {
         clients.remove(key);
     }
 
+    //=============================== SESSION-RELATED ===========================================
+
+    /**
+     * Replaces the contents of the Session list with {@code Session}.
+     * {@code Sessions} must not contain duplicate Sessions.
+     */
+    public void setSessions(List<Session> sessions) {
+        this.sessions.setAll(sessions);
+    }
+
+    //// Client-level operations
+
+    /**
+     * Returns true if a Session with the same identity as {@code Session} exists in the address book.
+     */
+    public boolean hasSession(Session session) {
+        requireNonNull(session);
+        return sessions.contains(session);
+    }
+
+    /**
+     * Adds a Session to the session list.
+     * The Session must not already exist in the session list.
+     */
+    public void addSession(Session s) {
+        sessions.add(s);
+    }
+
+    /**
+     * Replaces the given Session {@code target} in the list with {@code editedSession}.
+     * {@code target} must exist in the address book.
+     * The Session identity of {@code editedSession} must not be the same as another existing Session.
+     */
+    public void setSession(Session target, Session editedSession) {
+        requireNonNull(editedSession);
+
+        sessions.set(target, editedSession);
+    }
+
+    /**
+     * Removes {@code key} from this {@code SessionList}.
+     * {@code key} must exist in the session list.
+     */
+    public void removeSession(Session key) {
+        sessions.remove(key);
+    }
+
+    //=============================== SCHEDULE-RELATED ===========================================
+
+    /**
+     * Replaces the contents of the Schedule list with {@code Schedule}.
+     * {@code Schedule} must not contain duplicate Schedules.
+     */
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules.setAll(schedules);
+    }
+
+    //// Client-level operations
+
+    /**
+     * Returns true if a Schedule with the same identity as {@code Schedule} exists in the address book.
+     */
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return schedules.contains(schedule);
+    }
+
+    /**
+     * Adds a Schedule to the schedule list.
+     * The Schedule must not already exist in the schedule list.
+     */
+    public void addSchedule(Schedule schedule) {
+        schedules.add(schedule);
+    }
+
+    /**
+     * Replaces the given Schedule {@code target} in the list with {@code editedSchedule}.
+     * {@code target} must exist in the address book.
+     * The Schedule identity of {@code editedSchedule} must not be the same as another existing Schedule.
+     */
+    public void setSchedule(Schedule target, Schedule editedSchedule) {
+        requireNonNull(editedSchedule);
+
+        schedules.set(target, editedSchedule);
+    }
+
+    /**
+     * Removes {@code key} from this {@code ScheduleList}.
+     * {@code key} must exist in the schedule list.
+     */
+    public void removeSchedule(Schedule key) {
+        schedules.remove(key);
+    }
+
+
     //// util methods
 
     @Override
     public String toString() {
-        return clients.asUnmodifiableObservableList().size() + " Clients";
+        return String.format("%s\n%s\n%s",
+                clients.asUnmodifiableObservableList().size() + " Clients",
+                sessions.asUnmodifiableObservableList().size() + " Sessions",
+                schedules.asUnmodifiableObservableList().size() + " Schedules");
         // TODO: refine later
     }
 
@@ -107,10 +212,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Session> getSessionList() {
+        return sessions.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Schedule> getScheduleList() {
+        return schedules.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && clients.equals(((AddressBook) other).clients));
+        // todo: add equality check for sessions and schedules
     }
 
     @Override

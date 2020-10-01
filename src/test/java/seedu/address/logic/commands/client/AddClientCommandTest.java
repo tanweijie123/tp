@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.client;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,13 +15,15 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.client.AddClientCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.session.Session;
 import seedu.address.testutil.ClientBuilder;
 
 public class AddClientCommandTest {
@@ -81,12 +83,12 @@ public class AddClientCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -116,12 +118,12 @@ public class AddClientCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,6 +151,67 @@ public class AddClientCommandTest {
         public void updateFilteredClientList(Predicate<Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasSession(Session session) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteSession(Session session) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSession(Session session) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSession(Session target, Session editedSession) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Session> getFilteredSessionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredSessionList(Predicate<Session> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public boolean hasSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSchedule(Schedule target, Schedule editedSchedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Schedule> getFilteredScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -165,7 +228,7 @@ public class AddClientCommandTest {
         @Override
         public boolean hasClient(Client client) {
             requireNonNull(client);
-            return this.client.isSameClient(client);
+            return this.client.isExisting(client);
         }
     }
 
@@ -178,7 +241,7 @@ public class AddClientCommandTest {
         @Override
         public boolean hasClient(Client client) {
             requireNonNull(client);
-            return clientsAdded.stream().anyMatch(client::isSameClient);
+            return clientsAdded.stream().anyMatch(client::isExisting);
         }
 
         @Override

@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -120,5 +123,59 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Standardize the output format for DateTime string.
+     *
+     * @param dateTime the LocalDateTime object.
+     * @return the String object of datetime parsed.
+     */
+    public static String parseDateTimeToString(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+    }
+
+    /**
+     * Standardize the input format for DateTime string.
+     *
+     * @param input the string to parse into LocalDateTime.
+     * @return the LocalDateTime object converted.
+     */
+    public static LocalDateTime parseStringToDateTime(String input) throws ParseException {
+        try {
+            return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage()); //TODO: change this;
+        }
+    }
+
+    /**
+     * Tries to parse a String input as LocalDateTime
+     *
+     * @param input a String to check whether if it contains a valid date time pattern.
+     * @return true if input is a valid date time pattern, false otherwise.
+     */
+    public static boolean tryParseDateTime(String input) {
+        try {
+            LocalDateTime.parse(input, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Tries to parse a String input as Integer
+     *
+     * @param input a String to check whether if it contains an integer.
+     * @return true if input is integer, false otherwise.
+     */
+    public static boolean tryParseInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

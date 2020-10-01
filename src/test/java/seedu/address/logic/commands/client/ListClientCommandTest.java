@@ -1,14 +1,13 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.client;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.client.ClientCommandTestUtil.showClientAtIndex;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.client.ListClientCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
