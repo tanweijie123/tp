@@ -4,9 +4,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.CheckExisting;
 import seedu.address.model.client.Email;
 
-public class Schedule {
+public class Schedule implements CheckExisting<Schedule> {
     private Email clientId;
     private int sessionId;
 
@@ -30,7 +31,8 @@ public class Schedule {
     /**
      * Returns true if both Schedules have the same identity.
      */
-    public boolean isSameSchedule(Schedule otherSchedule) {
+    @Override
+    public boolean isExisting(Schedule otherSchedule) {
         if (otherSchedule == this) {
             return true;
         }

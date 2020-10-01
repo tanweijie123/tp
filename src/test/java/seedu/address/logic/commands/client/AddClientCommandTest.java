@@ -153,16 +153,6 @@ public class AddClientCommandTest {
         }
 
         @Override
-        public Path getSessionListFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setSessionListFilePath(Path sessionListFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasSession(Session session) {
             throw new AssertionError("This method should not be called.");
         }
@@ -192,15 +182,6 @@ public class AddClientCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public Path getScheduleListFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setScheduleListFilePath(Path scheduleListFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public boolean hasSchedule(Schedule schedule) {
@@ -247,7 +228,7 @@ public class AddClientCommandTest {
         @Override
         public boolean hasClient(Client client) {
             requireNonNull(client);
-            return this.client.isSameClient(client);
+            return this.client.isExisting(client);
         }
     }
 
@@ -260,7 +241,7 @@ public class AddClientCommandTest {
         @Override
         public boolean hasClient(Client client) {
             requireNonNull(client);
-            return clientsAdded.stream().anyMatch(client::isSameClient);
+            return clientsAdded.stream().anyMatch(client::isExisting);
         }
 
         @Override

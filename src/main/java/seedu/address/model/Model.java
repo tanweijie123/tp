@@ -88,15 +88,6 @@ public interface Model {
      */
     void updateFilteredClientList(Predicate<Client> predicate);
 
-    /**
-     * Returns the user prefs' session list file path.
-     */
-    Path getSessionListFilePath();
-
-    /**
-     * Sets the user prefs' session list file path.
-     */
-    void setSessionListFilePath(Path sessionListFilePath);
 
     /**
      * Returns true if a Session with the same identity as {@code Session} exists in the Session List.
@@ -131,16 +122,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSessionList(Predicate<Session> predicate);
-
-    /**
-     * Returns the user prefs' schedule list file path.
-     */
-    Path getScheduleListFilePath();
-
-    /**
-     * Sets the user prefs' schedule list file path.
-     */
-    void setScheduleListFilePath(Path scheduleListFilePath);
 
     /**
      * Returns true if a Schedule with the same identity as {@code Schedule} exists in the Schedule List.

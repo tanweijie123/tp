@@ -7,13 +7,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.CheckExisting;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Client in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Client {
+public class Client implements CheckExisting<Client> {
 
     // Identity fields
     private final Name name;
@@ -64,7 +65,8 @@ public class Client {
      * Returns true if both Clients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two Clients.
      */
-    public boolean isSameClient(Client otherClient) {
+    @Override
+    public boolean isExisting(Client otherClient) {
         if (otherClient == this) {
             return true;
         }
