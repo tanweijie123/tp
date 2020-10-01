@@ -34,7 +34,7 @@ public class ClientListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Client} using a {@code ClientCard}.
      */
-    static class ClientListViewCell extends ListCell<Client> {
+    class ClientListViewCell extends ListCell<Client> {
         @Override
         protected void updateItem(Client client, boolean empty) {
             super.updateItem(client, empty);
