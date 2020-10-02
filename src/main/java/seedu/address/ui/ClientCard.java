@@ -15,6 +15,7 @@ import seedu.address.model.client.Client;
 public class ClientCard extends UiPart<Region> {
 
     private static final String FXML = "ClientListCard.fxml";
+    private static final String nextSessionStart = "Next Session: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -39,6 +40,8 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label nextSession;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -53,6 +56,7 @@ public class ClientCard extends UiPart<Region> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        nextSession.setText(nextSessionStart + "7 Apr 20 (Wed), 3.00pm"); // placeholder
     }
 
     @Override
