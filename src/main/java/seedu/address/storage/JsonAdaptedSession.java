@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
@@ -44,8 +44,8 @@ public class JsonAdaptedSession {
         id = "" + source.getId();
         gym = source.getGym().toString();
         exerciseType = source.getExerciseType().toString();
-        start = ParserUtil.parseDateTimeToString(source.getInterval().getStart());
-        end = ParserUtil.parseDateTimeToString(source.getInterval().getEnd());
+        start = SessionParserUtil.parseDateTimeToString(source.getInterval().getStart());
+        end = SessionParserUtil.parseDateTimeToString(source.getInterval().getEnd());
     }
 
     /**
@@ -72,16 +72,16 @@ public class JsonAdaptedSession {
 
         final ExerciseType modelExerciseType = new ExerciseType(exerciseType);
 
-        if (start.isBlank() || !ParserUtil.tryParseDateTime(start)) {
-            throw new IllegalValueException("Start is blank or invalid");
+        if (start.isBlank() || SessionParserUtil.isInvalidDateTime(start)) {
+            throw new IllegalValueException("Start time is blank or invalid");
         }
 
-        if (end.isBlank() || !ParserUtil.tryParseDateTime(end)) {
-            throw new IllegalValueException("Start is blank or invalid");
+        if (end.isBlank() || SessionParserUtil.isInvalidDateTime(end)) {
+            throw new IllegalValueException("End time is blank or invalid");
         }
 
-        final LocalDateTime startDateTime = ParserUtil.parseStringToDateTime(start);
-        final LocalDateTime endDateTime = ParserUtil.parseStringToDateTime(end);
+        final LocalDateTime startDateTime = SessionParserUtil.parseStringToDateTime(start);
+        final LocalDateTime endDateTime = SessionParserUtil.parseStringToDateTime(end);
         final int duration = (int) startDateTime.until(endDateTime, ChronoUnit.MINUTES);
 
         if (!Interval.isValidInterval(duration)) {

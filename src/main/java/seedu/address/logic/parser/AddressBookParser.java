@@ -16,12 +16,14 @@ import seedu.address.logic.commands.client.EditClientCommand;
 import seedu.address.logic.commands.client.FindClientCommand;
 import seedu.address.logic.commands.client.ListClientCommand;
 import seedu.address.logic.commands.client.ViewClientCommand;
+import seedu.address.logic.commands.session.AddSessionCommand;
 import seedu.address.logic.parser.client.AddClientCommandParser;
 import seedu.address.logic.parser.client.DeleteClientCommandParser;
 import seedu.address.logic.parser.client.EditClientCommandParser;
 import seedu.address.logic.parser.client.FindClientCommandParser;
 import seedu.address.logic.parser.client.ViewClientCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.session.AddSessionCommandParser;
 
 /**
  * Parses user input.
@@ -50,6 +52,10 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        /*
+          Client commands
+         */
+
         case AddClientCommand.COMMAND_WORD:
             return new AddClientCommandParser().parse(arguments);
 
@@ -59,9 +65,6 @@ public class AddressBookParser {
         case DeleteClientCommand.COMMAND_WORD:
             return new DeleteClientCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindClientCommand.COMMAND_WORD:
             return new FindClientCommandParser().parse(arguments);
 
@@ -70,6 +73,20 @@ public class AddressBookParser {
 
         case ListClientCommand.COMMAND_WORD:
             return new ListClientCommand();
+
+        /*
+         * Session commands
+         */
+
+        case AddSessionCommand.COMMAND_WORD:
+            return new AddSessionCommandParser().parse(arguments);
+
+        /*
+         * General commands
+         */
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

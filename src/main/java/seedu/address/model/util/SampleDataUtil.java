@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Address;
@@ -51,9 +51,9 @@ public class SampleDataUtil {
         try {
             return new Session[]{
                 new Session(new Gym("Getwell gym"), new ExerciseType("Endurance"),
-                        new Interval(ParserUtil.parseStringToDateTime("29/09/2020 1300"), 120)),
+                        new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1300"), 120)),
                 new Session(new Gym("Machoman gym"), new ExerciseType("Bodybuilder"),
-                        new Interval(ParserUtil.parseStringToDateTime("29/09/2020 1600"), 150))
+                        new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1600"), 150))
             };
         } catch (ParseException e) {
             //INFO: if you reach here, it means the date input above is wrong.
