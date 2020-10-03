@@ -16,6 +16,7 @@ import seedu.address.model.client.Client;
 public class ClientListPanel extends UiPart<Region> {
     private static final String FXML = "ClientListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ClientListPanel.class);
+    private final MainWindow mainWindow;
 
     @FXML
     private ListView<Client> clientListView;
@@ -23,8 +24,9 @@ public class ClientListPanel extends UiPart<Region> {
     /**
      * Creates a {@code ClientListPanel} with the given {@code ObservableList}.
      */
-    public ClientListPanel(ObservableList<Client> clientList) {
+    public ClientListPanel(MainWindow mainWindow, ObservableList<Client> clientList) {
         super(FXML);
+        this.mainWindow = mainWindow;
         clientListView.setItems(clientList);
         clientListView.setCellFactory(listView -> new ClientListViewCell());
     }
@@ -46,4 +48,12 @@ public class ClientListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * When the user click on any profile in ListView, it will display it on the Main GUI.
+     */
+    public void onMouseClicked_displayClientInfo() {
+        Client toView = clientListView.getFocusModel().getFocusedItem();
+        ClientInfoPage cip = new ClientInfoPage(toView);
+        mainWindow.setMainDisplay(cip.getRoot());
+    }
 }

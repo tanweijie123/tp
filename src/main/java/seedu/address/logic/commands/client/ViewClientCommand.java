@@ -3,8 +3,9 @@ package seedu.address.logic.commands.client;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Supplier;
 
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -50,13 +51,11 @@ public class ViewClientCommand extends Command {
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         this.client = clientToView;
-
-        Runnable run = () -> {
-            Stage clientView = new Stage();
+        Supplier<AnchorPane> run = () -> {
             ClientInfoPage cip = new ClientInfoPage(client);
-            cip.start(clientView);
-            cip.show();
+            return cip.getRoot();
         };
+
 
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView), run);
     }

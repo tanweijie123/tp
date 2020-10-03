@@ -3,17 +3,11 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seedu.address.commons.util.AppUtil;
 import seedu.address.model.client.Client;
@@ -40,10 +34,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
     private Label lblAddress;
 
     @FXML
-    private FlowPane fpTags;
-
-    @FXML
-    private Button btnClose;
+    private FlowPane tags;
 
     /**
      * Displays a client's profile in a separate window.
@@ -61,13 +52,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
         this.lblAddress.setText(client.getAddress().value);
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> {
-                    Label lbl = new Label(tag.tagName);
-                    lbl.setBackground(new Background(new BackgroundFill(Color.TURQUOISE,
-                            new CornerRadii(5), new Insets(0, 3, 0, 3))));
-                    lbl.setPadding(new Insets(5, 5, 5, 5));
-                    fpTags.getChildren().add(lbl);
-                });
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -87,6 +72,10 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
         return client.equals(card.client);
     }
 
+    /**
+     * This method is not used if it is embbed in MAIN GUI.
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(getRoot());
@@ -102,17 +91,10 @@ public class ClientInfoPage extends UiPart<AnchorPane> implements Ui {
      */
     public void show() {
         if (clientInfoPage != null) {
-            clientInfoPage.handleCloseButton();
+            Stage stage = (Stage) clientInfoPage.lblName.getScene().getWindow();
+            stage.close();
         }
         this.stage.show();
         clientInfoPage = this;
-    }
-
-    @FXML
-    void handleCloseButton() {
-        Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
-        this.clientInfoPage = null;
-        return;
     }
 }
