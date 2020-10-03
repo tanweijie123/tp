@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
@@ -14,6 +15,8 @@ import seedu.address.model.session.Session;
 
 public class JsonAdaptedSchedule {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";
+    public static final String MISSING_CLIENT_EMAIL_MESSAGE_FORMAT = "Schedule's %s client email is missing!";
+    public static final String MISSING_SESSION_ID_MESSAGE_FORMAT = "Schedule's %s session ID is missing!";
 
     private final String clientEmail;
     private final String sessionId;
@@ -37,50 +40,40 @@ public class JsonAdaptedSchedule {
     }
 
     /**
-     * Converts this Jackson-friendly adapted Schedule object into the model's {@code Schedule} object.
+     * Converts this Jackson-friendly adapted Schedule object to get its model's {@code Email} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted Schedule.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted Email.
      */
-    public Schedule toModelType(ObservableList<Client> clients, ObservableList<Session> sessions)
-            throws IllegalValueException {
-        /* To do the same as Client's toModelType codes, we need to create field-typed classes */
+    public Email getClientEmail() throws IllegalValueException {
 
         if (clientEmail == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_CLIENT_EMAIL_MESSAGE_FORMAT,
+                    Email.class.getSimpleName()));
         }
+
         if (!Email.isValidEmail(clientEmail)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelClientEmail = new Email(clientEmail);
 
-        // todo: validate id.
+        return modelClientEmail;
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted Schedule object to get its model's {@code session ID} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted session ID.
+     */
+    public int getSessionId() throws IllegalValueException {
+
         if (sessionId == null) {
-            throw new IllegalValueException("Id is blank");
+            throw new IllegalValueException(String.format(MISSING_SESSION_ID_MESSAGE_FORMAT,
+                    Integer.class.getSimpleName()));
         }
+
+        // todo: validate id
         final int modelSessionId = Integer.parseInt(sessionId);
 
-        Client modelClient = null;
-
-        // find client with the same email address
-        for (Client client : clients) {
-            if (client.getEmail().equals(modelClientEmail)) {
-                modelClient = client;
-                break;
-            }
-        }
-
-        Session modelSession = null;
-
-        // find client with the same email address
-        for (Session session : sessions) {
-            if (session.getId() == modelSessionId) {
-                modelSession = session;
-                break;
-            }
-        }
-
-        requireAllNonNull(modelClient, modelSession);
-
-        return new Schedule(modelClient, modelSession);
+        return modelSessionId;
     }
 }
