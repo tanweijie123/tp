@@ -98,7 +98,9 @@ public class Session implements CheckExisting<Session> {
         }
 
         return otherSession != null
-                && otherSession.getId() == id;
+                && otherSession.getGym().equals(getGym())
+                && otherSession.getInterval().equals(getInterval())
+                && otherSession.getExerciseType().equals(getExerciseType());
     }
 
     /**

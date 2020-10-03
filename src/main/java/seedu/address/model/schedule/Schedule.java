@@ -42,7 +42,7 @@ public class Schedule implements CheckExisting<Schedule> {
             return false;
         }
 
-        return otherSchedule.client.equals(this.client) && otherSchedule.session == this.session;
+        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session);
     }
 
     /**

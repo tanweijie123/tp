@@ -1,17 +1,11 @@
 package seedu.address.storage;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javafx.collections.ObservableList;
-import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.schedule.Schedule;
-import seedu.address.model.session.Session;
 
 public class JsonAdaptedSchedule {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";

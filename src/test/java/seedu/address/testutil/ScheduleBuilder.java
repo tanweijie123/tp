@@ -23,15 +23,16 @@ import seedu.address.model.util.SampleDataUtil;
 public class ScheduleBuilder {
 
     public static final String DEFAULT_CLIENT_NAME = "Alice Pauline";
-    public static final String DEFAULT_CLIENT_PHONE = "85355255";
-    public static final String DEFAULT_CLIENT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_CLIENT_PHONE = "94351253";
+    public static final String DEFAULT_CLIENT_EMAIL = "alice@example.com";
     public static final String DEFAULT_CLIENT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_CLIENT_TAGS = "injured-thigh";
 
     public static final int DEFAULT_DURATION = 120;
     public static final String DEFAULT_EXERCISE_TYPE = "Endurance";
     public static final String DEFAULT_GYM = "Getwell gym";
     public static final LocalDateTime DEFAULT_START_TIME =
-            LocalDateTime.of(2020,9,29, 13,0);
+            LocalDateTime.of(2020, 9, 29, 13, 0);
 
     private Name clientName;
     private Phone clientPhone;
@@ -51,7 +52,8 @@ public class ScheduleBuilder {
         clientPhone = new Phone(DEFAULT_CLIENT_PHONE);
         clientEmail = new Email(DEFAULT_CLIENT_EMAIL);
         clientAddress = new Address(DEFAULT_CLIENT_ADDRESS);
-        clientTags = new HashSet<>();
+        clientTags = new HashSet<Tag>();
+        clientTags.add(new Tag(DEFAULT_CLIENT_TAGS));
 
         gym = new Gym(DEFAULT_GYM);
         exerciseType = new ExerciseType(DEFAULT_EXERCISE_TYPE);

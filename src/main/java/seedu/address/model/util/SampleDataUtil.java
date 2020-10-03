@@ -65,7 +65,8 @@ public class SampleDataUtil {
     public static Schedule[] getSampleSchedule() {
         try {
             return new Schedule[]{
-                new Schedule(new Client(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                new Schedule(new Client(new Name("Bernice Yu"), new Phone("99272758"),
+                        new Email("berniceyu@example.com"),
                         new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                         getTagSet("allergy-nuts", "injured-thigh")),
                     new Session(new Gym("Getwell gym"), new ExerciseType("Endurance"),
