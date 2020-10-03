@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
@@ -32,7 +33,7 @@ public class AddScheduleCommand extends Command {
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 ";
 
-    public static final String MESSAGE_SUCCESS = "New Schedule added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New Schedule added: \n%1$s";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
 
     private final Index clientIndex;
@@ -42,8 +43,7 @@ public class AddScheduleCommand extends Command {
      * Creates an AddScheduleCommand to add the specified {@code Schedule}
      */
     public AddScheduleCommand(Index clientIndex, Index sessionIndex) {
-        requireNonNull(clientIndex);
-        requireNonNull(sessionIndex);
+        requireAllNonNull(clientIndex, sessionIndex);
 
         this.clientIndex = clientIndex;
         this.sessionIndex = sessionIndex;
@@ -66,14 +66,14 @@ public class AddScheduleCommand extends Command {
         List<Session> lastShownSessionList = model.getFilteredSessionList();
 
         if (sessionIndex.getZeroBased() >= lastShownSessionList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
 
         Session sessionToSchedule = lastShownSessionList.get(sessionIndex.getZeroBased());
 
         model.updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
 
-        Schedule scheduleToAdd = new Schedule(clientToSchedule.getEmail(), sessionToSchedule.getId());
+        Schedule scheduleToAdd = new Schedule(clientToSchedule, sessionToSchedule);
         if (model.hasSchedule(scheduleToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }

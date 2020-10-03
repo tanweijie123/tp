@@ -77,7 +77,8 @@ class JsonSerializableAddressBook {
         }
 
         for (JsonAdaptedSchedule jsonAdaptedSchedule : this.schedules) {
-            Schedule schedule = jsonAdaptedSchedule.toModelType();
+            Schedule schedule = jsonAdaptedSchedule.toModelType(addressBook.getClientList(),
+                    addressBook.getSessionList());
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }
