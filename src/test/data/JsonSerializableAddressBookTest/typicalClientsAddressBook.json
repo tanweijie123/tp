@@ -52,10 +52,10 @@
     "end" : "29/09/2020 1500"
   }],
   "schedules": [{
-    "clientEmail" : "alexyeoh@example.com",
+    "clientEmail" : "alice@example.com",
     "sessionId" : "1"
   }, {
-    "clientEmail" : "lidavid@example.com",
-    "sessionId" : "2"
+    "clientEmail" : "johnd@example.com",
+    "sessionId" : "1"
   } ]
 }

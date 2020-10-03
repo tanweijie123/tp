@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.CheckExisting;
 
 /**
@@ -132,12 +132,12 @@ public class Session implements CheckExisting<Session> {
         final StringBuilder builder = new StringBuilder();
         builder.append("[" + id + "]")
                 .append(" Start: ")
-                .append(ParserUtil.parseDateTimeToString(getInterval().getStart()))
+                .append(SessionParserUtil.parseDateTimeToString(getInterval().getStart()))
                 .append(" End: ")
-                .append(ParserUtil.parseDateTimeToString(getInterval().getStart()))
+                .append(SessionParserUtil.parseDateTimeToString(getInterval().getEnd()))
                 .append(" Gym: ")
                 .append(gym)
-                .append(" Type_Of_Exercise: ")
+                .append(" Exercise Type: ")
                 .append(exerciseType);
         return builder.toString();
     }
