@@ -1,20 +1,11 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
-import seedu.address.model.client.Address;
-import seedu.address.model.client.Client;
-import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
-import seedu.address.model.client.Phone;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Client objects.
@@ -24,7 +15,7 @@ public class SessionBuilder {
     public static final String DEFAULT_GYM = "Getwell gym";
     public static final String DEFAULT_EXERCISE_TYPE = "Endurance";
     public static final LocalDateTime DEFAULT_START_TIME =
-            LocalDateTime.of(2020,9,29, 13,0);
+            LocalDateTime.of(2020, 9, 29, 13, 0);
     public static final int DEFAULT_DURATION = 120;
 
     private Gym gym;

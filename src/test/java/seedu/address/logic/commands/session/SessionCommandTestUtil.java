@@ -28,9 +28,9 @@ public class SessionCommandTestUtil {
     public static final String VALID_EXERCISE_TYPE_GETWELL = "Endurance";
     public static final String VALID_EXERCISE_TYPE_MACHOMAN = "Bodybuilder";
     public static final LocalDateTime VALID_START_TIME_GETWELL =
-            LocalDateTime.of(2020,9,29, 13,0);
+            LocalDateTime.of(2020, 9, 29, 13, 0);
     public static final LocalDateTime VALID_START_TIME_MACHOMAN =
-            LocalDateTime.of(2020,9,29, 16,0);
+            LocalDateTime.of(2020, 9, 29, 16, 0);
     public static final int VALID_DURATION_GETWELL = 120;
     public static final int VALID_DURATION_MACHOMAN = 150;
 
@@ -57,11 +57,17 @@ public class SessionCommandTestUtil {
     //    public static final EditSessionCommand.EditSessionDescriptor DESC_MACHOMAN;
     //
     //    static {
-    //        DESC_GETWELL = new EditSessionDescriptorBuilder().withGYM(VALID_GYM_GETWELL)
-    //                .withEXERCISE_TYPE(VALID_EXERCISE_TYPE_GETWELL).withSTART_TIME(VALID_START_TIME_GETWELL).withDURATION(VALID_DURATION_GETWELL)
+    //        DESC_GETWELL = new EditSessionDescriptorBuilder()
+    //                .withGYM(VALID_GYM_GETWELL)
+    //                .withEXERCISE_TYPE(VALID_EXERCISE_TYPE_GETWELL)
+    //                .withSTART_TIME(VALID_START_TIME_GETWELL)
+    //                .withDURATION(VALID_DURATION_GETWELL)
     //                .withTags(VALID_TAG_ALLERGY).build();
-    //        DESC_MACHOMAN = new EditSessionDescriptorBuilder().withGYM(VALID_GYM_MACHOMAN)
-    //                .withEXERCISE_TYPE(VALID_EXERCISE_TYPE_MACHOMAN).withSTART_TIME(VALID_START_TIME_MACHOMAN).withDURATION(VALID_DURATION_MACHOMAN)
+    //        DESC_MACHOMAN = new EditSessionDescriptorBuilder()
+    //                .withGYM(VALID_GYM_MACHOMAN)
+    //                .withEXERCISE_TYPE(VALID_EXERCISE_TYPE_MACHOMAN)
+    //                .withSTART_TIME(VALID_START_TIME_MACHOMAN)
+    //                .withDURATION(VALID_DURATION_MACHOMAN)
     //                .withTags(VALID_TAG_INJURY, VALID_TAG_ALLERGY).build();
     //    }
 
@@ -108,18 +114,18 @@ public class SessionCommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredSessionList());
     }
 
-//    /*
-//     * Updates {@code model}'s filtered list to show only the Session at the given {@code targetIndex} in the
-//     * {@code model}'s address book.
-//     */
-//    public static void showSessionAtIndex(Model model, Index targetIndex) {
-//        assertTrue(targetIndex.getZeroBased() < model.getFilteredSessionList().size());
-//
-//        Session session = model.getFilteredSessionList().get(targetIndex.getZeroBased());
-//        final String[] splitName = session.getName().fullName.split("\\s+");
-//        model.updateFilteredSessionList(new NameContainsSubstringPredicate(Arrays.asList(splitName[0])));
-//
-//        assertEquals(1, model.getFilteredSessionList().size());
-//    }
+    //    /*
+    //     * Updates {@code model}'s filtered list to show only the Session at the given {@code targetIndex} in the
+    //     * {@code model}'s address book.
+    //     */
+    //    public static void showSessionAtIndex(Model model, Index targetIndex) {
+    //        assertTrue(targetIndex.getZeroBased() < model.getFilteredSessionList().size());
+    //
+    //        Session session = model.getFilteredSessionList().get(targetIndex.getZeroBased());
+    //        final String[] splitName = session.getName().fullName.split("\\s+");
+    //        model.updateFilteredSessionList(new NameContainsSubstringPredicate(Arrays.asList(splitName[0])));
+    //
+    //        assertEquals(1, model.getFilteredSessionList().size());
+    //    }
 
 }
