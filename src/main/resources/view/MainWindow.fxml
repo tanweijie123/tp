@@ -52,7 +52,7 @@
                <columnConstraints>
                   <ColumnConstraints fx:id="gPaneLeft" hgrow="SOMETIMES" percentWidth="25.0" />
                   <ColumnConstraints fx:id="gPaneCentre" hgrow="SOMETIMES" percentWidth="60.0" />
-                  <ColumnConstraints fx:id="gPaneRight" hgrow="SOMETIMES" percentWidth="15.0" />
+                  <ColumnConstraints fx:id="gPaneRight" hgrow="SOMETIMES" percentWidth="15.0" minWidth="10.0"/>
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
