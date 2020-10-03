@@ -11,9 +11,13 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidInterval(int)}
  */
 public class Interval {
-    public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, but end time must be strictly"
-            + "after start time";
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("E, dd MMM yyyy, HH:mm");
+    private static final String DATE_TIME_PATTERN = "dd/MM/yyyy HHmm";
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+
+    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must follow "
+            + DATE_TIME_PATTERN + " pattern";
+    public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, "
+            + "but duration must be a positive integer and " + MESSAGE_DATE_TIME_CONSTRAINTS;
 
     private final LocalDateTime start;
     private final int durationInMinutes;
