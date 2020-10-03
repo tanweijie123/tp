@@ -4,10 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -36,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private RightSideBar rightSideBar;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -58,6 +61,15 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private Pane rightDisplay;
 
+    @FXML
+    private ColumnConstraints gPaneLeft;
+
+    @FXML
+    private ColumnConstraints gPaneCentre;
+
+    @FXML
+    private ColumnConstraints gPaneRight;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -74,6 +86,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        addDynamicGridPaneChange(primaryStage.getScene());
     }
 
     public Stage getPrimaryStage() {
@@ -121,17 +135,13 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(this, logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
-        //main GUI to display session on start up
-        //right GUI to display next 7 days on start up
-        //right bottom GUI to display next session.
-
         rightSideBar = new RightSideBar(this, logic.getFilteredClientList()); //TODO: change this to sess.
         rightDisplay.getChildren().add(rightSideBar.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -189,6 +199,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            statusBarFooter.setDisplayString("Executing: " + commandText);
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -216,5 +227,26 @@ public class MainWindow extends UiPart<Stage> {
     public void setMainDisplay(Pane display) {
         mainDisplay.getChildren().clear();
         mainDisplay.getChildren().add(display);
+    }
+
+    /**
+     * Adds listener to width property such that if it is below a certain px, it will change to 2-grid mode.
+     * <900px (2 grid); >=900 (3 grid)
+     *
+     * @param scene the scene which listener is added to.
+     */
+    private void addDynamicGridPaneChange(Scene scene) {
+        scene.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            System.out.println("Width changed! old=" + oldWidth + "; new=" + newWidth);
+
+            //if width < 800, change to 2 grid-style
+            if (newWidth.doubleValue() < 900.0 && oldWidth.doubleValue() >= 900.0) {
+                this.gPaneRight.setPercentWidth(0);
+                this.gPaneCentre.setPercentWidth(75);
+            } else if (newWidth.doubleValue() >= 900.0 && oldWidth.doubleValue() < 900) {
+                this.gPaneCentre.setPercentWidth(60);
+                this.gPaneRight.setPercentWidth(15);
+            }
+        });
     }
 }

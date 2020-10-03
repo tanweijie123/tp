@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -49,9 +50,9 @@
         </StackPane>
             <GridPane VBox.vgrow="ALWAYS">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="25.0" percentWidth="25.0" prefWidth="25.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" percentWidth="60.0" prefWidth="60.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" percentWidth="15.0" prefWidth="15.0" />
+                  <ColumnConstraints fx:id="gPaneLeft" hgrow="SOMETIMES" percentWidth="25.0" />
+                  <ColumnConstraints fx:id="gPaneCentre" hgrow="SOMETIMES" percentWidth="60.0" />
+                  <ColumnConstraints fx:id="gPaneRight" hgrow="SOMETIMES" percentWidth="15.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -64,7 +65,11 @@
                 </padding>
                 <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS" />
               </VBox>
-                  <AnchorPane fx:id="mainDisplay" prefHeight="200.0" prefWidth="200.0" styleClass="pane-with-border" GridPane.columnIndex="1" />
+                  <ScrollPane fitToHeight="true" fitToWidth="true" GridPane.columnIndex="1">
+                     <content>
+                        <AnchorPane fx:id="mainDisplay" styleClass="pane-with-border" />
+                     </content>
+                  </ScrollPane>
                   <AnchorPane fx:id="rightDisplay" prefHeight="200.0" prefWidth="200.0" styleClass="pane-with-border" GridPane.columnIndex="2" />
                </children>
             </GridPane>
