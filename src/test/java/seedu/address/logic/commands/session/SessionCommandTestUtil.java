@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +26,10 @@ public class SessionCommandTestUtil {
     public static final String VALID_GYM_MACHOMAN = "Machoman gym";
     public static final String VALID_EXERCISE_TYPE_GETWELL = "Endurance";
     public static final String VALID_EXERCISE_TYPE_MACHOMAN = "Bodybuilder";
-    public static final LocalDateTime VALID_START_TIME_GETWELL =
-            LocalDateTime.of(2020, 9, 29, 13, 0);
-    public static final LocalDateTime VALID_START_TIME_MACHOMAN =
-            LocalDateTime.of(2020, 9, 29, 16, 0);
-    public static final int VALID_DURATION_GETWELL = 120;
-    public static final int VALID_DURATION_MACHOMAN = 150;
+    public static final String VALID_START_TIME_GETWELL = "29/09/2020 1300";
+    public static final String VALID_START_TIME_MACHOMAN = "29/09/2020 1600";
+    public static final String VALID_DURATION_GETWELL = "120";
+    public static final String VALID_DURATION_MACHOMAN = "150";
 
     public static final String GYM_DESC_GETWELL = " " + PREFIX_GYM + VALID_GYM_GETWELL;
     public static final String GYM_DESC_MACHOMAN = " " + PREFIX_GYM + VALID_GYM_MACHOMAN;

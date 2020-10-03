@@ -52,7 +52,8 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
                 argMultimap.getValue(PREFIX_START_TIME).get(),
                 argMultimap.getValue(PREFIX_DURATION).get()
         );
-        ExerciseType exerciseType = SessionParserUtil.parseExerciseType(argMultimap.getValue(PREFIX_START_TIME).get());
+        ExerciseType exerciseType = SessionParserUtil.parseExerciseType(
+                argMultimap.getValue(PREFIX_EXERCISE_TYPE).get());
 
         Session session = new Session(gym, exerciseType, interval);
 
