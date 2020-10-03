@@ -16,11 +16,13 @@ import seedu.address.logic.commands.client.EditClientCommand;
 import seedu.address.logic.commands.client.FindClientCommand;
 import seedu.address.logic.commands.client.ListClientCommand;
 import seedu.address.logic.commands.client.ViewClientCommand;
+import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.logic.parser.client.AddClientCommandParser;
 import seedu.address.logic.parser.client.DeleteClientCommandParser;
 import seedu.address.logic.parser.client.FindClientCommandParser;
 import seedu.address.logic.parser.client.ViewClientCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
 
 /**
  * Parses user input.
@@ -69,6 +71,13 @@ public class AddressBookParser {
 
         case ListClientCommand.COMMAND_WORD:
             return new ListClientCommand();
+
+        /*
+         * Schedule commands
+         */
+
+        case AddScheduleCommand.COMMAND_WORD:
+            return new AddScheduleCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
