@@ -10,7 +10,7 @@ import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
 /**
- * A utility class to help with building Client objects.
+ * A utility class to help with building Session objects.
  */
 public class SessionBuilder {
 
@@ -25,7 +25,7 @@ public class SessionBuilder {
     private Interval interval;
 
     /**
-     * Creates a {@code ClientBuilder} with the default details.
+     * Creates a {@code SessionBuilder} with the default details.
      */
     public SessionBuilder() {
         gym = new Gym(DEFAULT_GYM);
@@ -34,7 +34,7 @@ public class SessionBuilder {
     }
 
     /**
-     * Initializes the ClientBuilder with the data of {@code ClientToCopy}.
+     * Initializes the SessionBuilder with the data of {@code SessionToCopy}.
      */
     public SessionBuilder(Session sessionToCopy) {
         gym = sessionToCopy.getGym();
