@@ -127,5 +127,4 @@ public class ClientCommandTestUtil {
 
         assertEquals(1, model.getFilteredClientList().size());
     }
-
 }
