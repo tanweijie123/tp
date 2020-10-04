@@ -2,25 +2,24 @@ package seedu.address.logic.commands.session;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.*;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.DESC_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.DESC_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalSessions.getTypicalAddressBook;
-import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.session.Session;
-import seedu.address.testutil.SessionBuilder;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
+import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -69,7 +68,8 @@ public class EditSessionCommandTest {
 
 //    @Test
 //    public void execute_noFieldSpecifiedUnfilteredList_success() {
-//        EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_FIRST_SESSION, new EditSessionDescriptor());
+//        EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_FIRST_SESSION,
+//        new EditSessionDescriptor());
 //        Session editedSession = model.getFilteredSessionList().get(INDEX_FIRST_SESSION.getZeroBased());
 //
 //        String expectedMessage = String.format(EditSessionCommand.MESSAGE_EDIT_SESSION_SUCCESS, editedSession);
@@ -109,10 +109,10 @@ public class EditSessionCommandTest {
 //    public void execute_duplicateSessionFilteredList_failure() {
 //        showSessionAtIndex(model, INDEX_FIRST_SESSION);
 //
-//        // edit Session in filtered list into a duplicate in address book
+//        edit Session in filtered list into a duplicate in address book
 //        Session sessionInList = model.getAddressBook().getSessionList().get(INDEX_SECOND_SESSION.getZeroBased());
 //        EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_FIRST_SESSION,
-//                new EditSessionDescriptorBuilder(sessionInList).build());
+//        new EditSessionDescriptorBuilder(sessionInList).build());
 //
 //        assertCommandFailure(editSessionCommand, model, EditSessionCommand.MESSAGE_DUPLICATE_SESSION);
 //    }

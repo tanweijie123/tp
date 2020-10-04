@@ -8,8 +8,6 @@ import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
-import java.time.LocalDateTime;
-
 /**
  * A utility class to help with building EditSessionDescriptor objects.
  */
@@ -28,11 +26,11 @@ public class EditSessionDescriptorBuilder {
     /**
      * Returns an {@code EditSessionDescriptor} with fields containing {@code Session}'s details
      */
-    public EditSessionDescriptorBuilder(Session Session) {
+    public EditSessionDescriptorBuilder(Session session) {
         descriptor = new EditSessionDescriptor();
-        descriptor.setGym(Session.getGym());
-        descriptor.setExerciseType(Session.getExerciseType());
-        descriptor.setInterval(Session.getInterval());
+        descriptor.setGym(session.getGym());
+        descriptor.setExerciseType(session.getExerciseType());
+        descriptor.setInterval(session.getInterval());
     }
 
     /**
@@ -54,8 +52,8 @@ public class EditSessionDescriptorBuilder {
     /**
      * Sets the {@code Interval} of the {@code EditSessionDescriptor} that we are building.
      */
-    public EditSessionDescriptorBuilder withInterval(String start_time, int duration) throws ParseException {
-        descriptor.setInterval(new Interval(SessionParserUtil.parseStringToDateTime(start_time), duration));
+    public EditSessionDescriptorBuilder withInterval(String startTime, int duration) throws ParseException {
+        descriptor.setInterval(new Interval(SessionParserUtil.parseStringToDateTime(startTime), duration));
         return this;
     }
 

@@ -1,5 +1,12 @@
 package seedu.address.logic.commands.session;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
+import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
+import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.testutil.Assert.assertThrows;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -12,13 +19,6 @@ import seedu.address.testutil.EditSessionDescriptorBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.testutil.Assert.assertThrows;
 
 /**
  * Contains helper methods for testing commands.
@@ -123,7 +123,7 @@ public class SessionCommandTestUtil {
 //    /**
 //     * Updates {@code model}'s filtered list to show only the Session at the given {@code targetIndex} in the
 //     * {@code model}'s address book.
-//     */
+//    */
 //    public static void showSessionAtIndex(Model model, Index targetIndex) {
 //        assertTrue(targetIndex.getZeroBased() < model.getFilteredSessionList().size());
 //

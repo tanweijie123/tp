@@ -2,7 +2,12 @@ package seedu.address.logic.commands.session;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.*;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.DESC_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.DESC_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_DURATION_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_EXERCISE_TYPE_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
 
 import org.junit.jupiter.api.Test;
 
