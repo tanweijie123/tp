@@ -32,8 +32,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.session.EditSessionCommand;
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.session.Gym;
 import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Gym;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
 
 public class EditSessionCommandParserTest {
@@ -89,7 +89,7 @@ public class EditSessionCommandParserTest {
 //      assertParseFailure(parser, "1" + VALID_GYM_GETWELL + INVALID_EXERCISE_TYPE_DESC,
 //      ExerciseType.MESSAGE_CONSTRAINTS);
 
-//      multiple invalid values, but only the first invalid value is captured
+//              multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1"
                         + INVALID_GYM_DESC + INVALID_EXERCISE_TYPE_DESC
                         + VALID_START_TIME_MACHOMAN + VALID_DURATION_GETWELL ,

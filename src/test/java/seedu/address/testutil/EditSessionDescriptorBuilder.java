@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.session.SessionParserUtil;
-import seedu.address.model.session.Gym;
 import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 

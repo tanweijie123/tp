@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,5 +132,5 @@ public class SessionCommandTestUtil {
 //        model.updateFilteredSessionList(new NameContainsSubstringPredicate(Arrays.asList(splitName[0])));
 //
 //        assertEquals(1, model.getFilteredSessionList().size());
-//    }
+//  }
 }
