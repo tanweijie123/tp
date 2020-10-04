@@ -18,8 +18,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.testutil.EditSessionDescriptorBuilder;
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
+import seedu.address.testutil.EditSessionDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -115,7 +115,7 @@ public class EditSessionCommandTest {
 //        new EditSessionDescriptorBuilder(sessionInList).build());
 //
 //        assertCommandFailure(editSessionCommand, model, EditSessionCommand.MESSAGE_DUPLICATE_SESSION);
-//    }
+//  }
 
     @Test
     public void execute_invalidSessionIndexUnfilteredList_failure() {
@@ -141,7 +141,7 @@ public class EditSessionCommandTest {
 //                new EditSessionDescriptorBuilder().withGym(VALID_GYM_GETWELL).build());
 //
 //        assertCommandFailure(editSessionCommand, model, Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
-//    }
+//  }
 
     @Test
     public void equals() {

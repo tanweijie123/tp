@@ -7,6 +7,10 @@ import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,9 +20,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains helper methods for testing commands.
