@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.client.Email;
 import seedu.address.model.schedule.Schedule;
 
@@ -54,18 +55,16 @@ public class JsonAdaptedSchedule {
     }
 
     /**
-     * Converts this Jackson-friendly adapted Schedule object to get its model's {@code session ID} object.
+     * Converts a given {@code Schedule} into this class for Jackson use.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted session ID.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted id.
      */
     public int getSessionId() throws IllegalValueException {
-
-        if (sessionId == null) {
+        if (sessionId == null || !StringUtil.isNonNegativeInteger(sessionId)) {
             throw new IllegalValueException(String.format(MISSING_SESSION_ID_MESSAGE_FORMAT,
                     Integer.class.getSimpleName()));
         }
 
-        // todo: validate id
         final int modelSessionId = Integer.parseInt(sessionId);
 
         return modelSessionId;
