@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
+import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.session.EditSessionCommand;
@@ -13,7 +14,6 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import static java.util.Objects.requireNonNull;
 
 public class EditSessionCommandParser implements Parser<EditSessionCommand> {
     /**
