@@ -1,8 +1,7 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
@@ -52,8 +51,8 @@ public class EditSessionDescriptorBuilder {
     /**
      * Sets the {@code Interval} of the {@code EditSessionDescriptor} that we are building.
      */
-    public EditSessionDescriptorBuilder withInterval(String startTime, int duration) throws ParseException {
-        descriptor.setInterval(new Interval(SessionParserUtil.parseStringToDateTime(startTime), duration));
+    public EditSessionDescriptorBuilder withInterval(LocalDateTime startTime, int duration) {
+        descriptor.setInterval(new Interval(startTime, duration));
         return this;
     }
 

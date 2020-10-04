@@ -61,7 +61,7 @@ public class SessionBuilder {
     /**
      * Sets the {@code Interval} of the {@code Session} that we are building.
      */
-    public SessionBuilder withInterval(String start, int duration) {
+    public SessionBuilder withInterval(LocalDateTime start, int duration) {
         try {
             this.interval = new Interval(SessionParserUtil.parseStringToDateTime(start), duration);
             return this;

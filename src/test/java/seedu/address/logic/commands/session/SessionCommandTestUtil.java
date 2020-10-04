@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,10 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
 
@@ -29,8 +31,10 @@ public class SessionCommandTestUtil {
     public static final String VALID_GYM_MACHOMAN = "Machoman gym";
     public static final String VALID_EXERCISE_TYPE_GETWELL = "Endurance";
     public static final String VALID_EXERCISE_TYPE_MACHOMAN = "Bodybuilder";
-    public static final String VALID_START_TIME_GETWELL = "29/09/2020 1300";
-    public static final String VALID_START_TIME_MACHOMAN = "29/09/2020 1600";
+    public static final LocalDateTime VALID_START_TIME_GETWELL =
+            LocalDateTime.parse("29/09/2020 1300", Interval.DATE_TIME_FORMATTER);
+    public static final LocalDateTime VALID_START_TIME_MACHOMAN =
+            LocalDateTime.parse("29/09/2020 1600", Interval.DATE_TIME_FORMATTER);
     public static final int VALID_DURATION_GETWELL = 120;
     public static final int VALID_DURATION_MACHOMAN = 150;
 
@@ -53,29 +57,16 @@ public class SessionCommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static EditSessionDescriptor DESC_GETWELL;
-    public static EditSessionDescriptor DESC_MACHOMAN;
-
-    static {
-        try {
-            DESC_GETWELL = new EditSessionDescriptorBuilder()
-                    .withGym(VALID_GYM_GETWELL)
-                    .withExerciseType(VALID_EXERCISE_TYPE_GETWELL)
-                    .withInterval(VALID_START_TIME_GETWELL, VALID_DURATION_GETWELL)
-                    .build();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        try {
-            DESC_MACHOMAN = new EditSessionDescriptorBuilder()
-                    .withGym(VALID_GYM_MACHOMAN)
-                    .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-                    .withInterval(VALID_START_TIME_MACHOMAN, VALID_DURATION_MACHOMAN)
-                    .build();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
+    public static final EditSessionDescriptor DESC_GETWELL = new EditSessionDescriptorBuilder()
+            .withGym(VALID_GYM_GETWELL)
+            .withExerciseType(VALID_EXERCISE_TYPE_GETWELL)
+            .withInterval(VALID_START_TIME_GETWELL, VALID_DURATION_GETWELL)
+            .build();;
+    public static final EditSessionDescriptor DESC_MACHOMAN = new EditSessionDescriptorBuilder()
+            .withGym(VALID_GYM_MACHOMAN)
+            .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
+            .withInterval(VALID_START_TIME_MACHOMAN, VALID_DURATION_MACHOMAN)
+            .build();;
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -132,5 +123,5 @@ public class SessionCommandTestUtil {
 //        model.updateFilteredSessionList(new NameContainsSubstringPredicate(Arrays.asList(splitName[0])));
 //
 //        assertEquals(1, model.getFilteredSessionList().size());
-//  }
+    //  }
 }

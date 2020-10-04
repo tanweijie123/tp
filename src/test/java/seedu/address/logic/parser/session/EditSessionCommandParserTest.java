@@ -89,7 +89,7 @@ public class EditSessionCommandParserTest {
 //      assertParseFailure(parser, "1" + VALID_GYM_GETWELL + INVALID_EXERCISE_TYPE_DESC,
 //      ExerciseType.MESSAGE_CONSTRAINTS);
 
-//              multiple invalid values, but only the first invalid value is captured
+        //      multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1"
                         + INVALID_GYM_DESC + INVALID_EXERCISE_TYPE_DESC
                         + VALID_START_TIME_MACHOMAN + VALID_DURATION_GETWELL ,
