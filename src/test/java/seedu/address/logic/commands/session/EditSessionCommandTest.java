@@ -49,7 +49,8 @@ public class EditSessionCommandTest {
     //        Session lastSession = model.getFilteredSessionList().get(indexLastSession.getZeroBased());
     //
     //        SessionBuilder SessionInList = new SessionBuilder(lastSession);
-    //        Session editedSession = SessionInList.withGym(VALID_GYM_GETWELL).withExerciseType(VALID_EXERCISE_TYPE_GETWELL)
+    //        Session editedSession = SessionInList.withGym(VALID_GYM_GETWELL)
+    //        .withExerciseType(VALID_EXERCISE_TYPE_GETWELL)
     //                .withInterval(VALID_START_TIME_GETWELL, VALID_DURATION_GETWELL).build();
     //
     //        EditSessionDescriptor descriptor = new EditSessionDescriptorBuilder()

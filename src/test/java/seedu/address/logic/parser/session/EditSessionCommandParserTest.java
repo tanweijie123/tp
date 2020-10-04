@@ -2,7 +2,24 @@ package seedu.address.logic.parser.session;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.session.EditSessionCommand.MESSAGE_NOT_EDITED;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.*;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.DURATION_DESC_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.DURATION_DESC_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.EXERCISE_TYPE_DESC_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.EXERCISE_TYPE_DESC_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.GYM_DESC_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.GYM_DESC_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.INVALID_EXERCISE_TYPE_DESC;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.INVALID_GYM_DESC;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.START_TIME_DESC_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.START_TIME_DESC_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_DURATION_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_DURATION_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_EXERCISE_TYPE_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_EXERCISE_TYPE_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_GETWELL;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
@@ -69,7 +86,8 @@ public class EditSessionCommandParserTest {
         //      assertParseFailure(parser, "1" + INVALID_GYM_DESC + VALID_EXERCISE_TYPE_MACHOMAN,
         //      Gym.MESSAGE_CONSTRAINTS);
         //
-        //      // valid gym followed by invalid exercise type. The test case for invalid gym followed by valid exercise type
+        //      // valid gym followed by invalid exercise type. The test case for invalid gym followed
+        //      by valid exercise type
         //      // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         //      assertParseFailure(parser, "1" + VALID_GYM_GETWELL + INVALID_EXERCISE_TYPE_DESC,
         //      ExerciseType.MESSAGE_CONSTRAINTS);
