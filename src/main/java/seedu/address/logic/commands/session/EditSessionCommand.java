@@ -1,5 +1,12 @@
 package seedu.address.logic.commands.session;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
+import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
+import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -7,20 +14,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.session.Session;
-import seedu.address.model.session.Gym;
 import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
+import seedu.address.model.session.Session;
 
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 public class EditSessionCommand extends Command {
 
@@ -87,7 +87,8 @@ public class EditSessionCommand extends Command {
         assert sessionToEdit != null;
 
         Gym updatedGym = editSessionDescriptor.getGym().orElse(sessionToEdit.getGym());
-        ExerciseType updatedExerciseType = editSessionDescriptor.getExerciseType().orElse(sessionToEdit.getExerciseType());
+        ExerciseType updatedExerciseType = editSessionDescriptor
+                .getExerciseType().orElse(sessionToEdit.getExerciseType());
         Interval updatedInterval = editSessionDescriptor.getInterval().orElse(sessionToEdit.getInterval());
 
         return new Session(sessionToEdit.getId(), updatedGym, updatedExerciseType, updatedInterval);
