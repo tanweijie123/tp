@@ -1,11 +1,11 @@
 package seedu.address.logic.parser.session;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
-import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.session.EditSessionCommand;
