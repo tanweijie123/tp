@@ -5,27 +5,28 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.model.CheckExisting;
-import seedu.address.model.client.Email;
+import seedu.address.model.client.Client;
+import seedu.address.model.session.Session;
 
 public class Schedule implements CheckExisting<Schedule> {
-    private Email clientId;
-    private int sessionId;
+    private Client client;
+    private Session session;
 
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Email clientId, int sessionId) {
-        requireAllNonNull(clientId, sessionId);
-        this.clientId = clientId;
-        this.sessionId = sessionId;
+    public Schedule(Client client, Session session) {
+        requireAllNonNull(client, session);
+        this.client = client;
+        this.session = session;
     }
 
-    public Email getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public int getSessionId() {
-        return sessionId;
+    public Session getSession() {
+        return session;
     }
 
     /**
@@ -41,7 +42,7 @@ public class Schedule implements CheckExisting<Schedule> {
             return false;
         }
 
-        return otherSchedule.clientId.equals(this.clientId) && otherSchedule.sessionId == this.sessionId;
+        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session);
     }
 
     /**
@@ -58,20 +59,21 @@ public class Schedule implements CheckExisting<Schedule> {
         }
 
         Schedule otherSchedule = (Schedule) other;
-        return otherSchedule.clientId.equals(this.clientId) && otherSchedule.sessionId == this.sessionId;
+        return otherSchedule.client.equals(this.client) && otherSchedule.session == this.session;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(clientId, sessionId);
+        return Objects.hash(client, session);
     }
 
     @Override
     public String toString() {
         return "Client "
-                + clientId
+                + client
+                + "\n"
                 + " with session "
-                + sessionId;
+                + session;
     }
 }
