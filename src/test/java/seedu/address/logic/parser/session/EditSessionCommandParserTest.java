@@ -26,6 +26,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SESSION;
 
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -34,6 +35,7 @@ import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescri
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
+import seedu.address.model.session.Interval;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
 
 public class EditSessionCommandParserTest {
@@ -97,7 +99,7 @@ public class EditSessionCommandParserTest {
     }
 
     @Test
-    public void parse_allFieldsSpecified_success() throws ParseException {
+    public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_SESSION;
         String userInput = targetIndex.getOneBased() + GYM_DESC_GETWELL + EXERCISE_TYPE_DESC_GETWELL
                 + START_TIME_DESC_GETWELL + DURATION_DESC_GETWELL;
@@ -105,7 +107,8 @@ public class EditSessionCommandParserTest {
         EditSessionDescriptor descriptor = new EditSessionDescriptorBuilder()
                 .withGym(VALID_GYM_GETWELL)
                 .withExerciseType(VALID_EXERCISE_TYPE_GETWELL)
-                .withInterval(VALID_START_TIME_GETWELL, VALID_DURATION_GETWELL)
+                .withInterval(LocalDateTime.parse(VALID_START_TIME_GETWELL, Interval.DATE_TIME_FORMATTER)
+                        , Integer.parseInt(VALID_DURATION_GETWELL))
                 .build();
         EditSessionCommand expectedCommand = new EditSessionCommand(targetIndex, descriptor);
 
@@ -126,7 +129,7 @@ public class EditSessionCommandParserTest {
     }
 
     @Test
-    public void parse_oneFieldSpecified_success() throws ParseException {
+    public void parse_oneFieldSpecified_success() {
         // gym
         Index targetIndex = INDEX_THIRD_SESSION;
         String userInput = targetIndex.getOneBased() + GYM_DESC_GETWELL;
@@ -143,14 +146,15 @@ public class EditSessionCommandParserTest {
         // interval
         userInput = targetIndex.getOneBased() + START_TIME_DESC_GETWELL + DURATION_DESC_GETWELL;
         descriptor = new EditSessionDescriptorBuilder()
-                .withInterval(VALID_START_TIME_GETWELL, VALID_DURATION_GETWELL).build();
+                .withInterval(LocalDateTime.parse(VALID_START_TIME_GETWELL, Interval.DATE_TIME_FORMATTER),
+                        Integer.parseInt(VALID_DURATION_GETWELL)).build();
         expectedCommand = new EditSessionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() throws ParseException {
+    public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_SESSION;
         String userInput = targetIndex.getOneBased() + GYM_DESC_GETWELL + EXERCISE_TYPE_DESC_GETWELL
                 + START_TIME_DESC_GETWELL + DURATION_DESC_GETWELL + GYM_DESC_MACHOMAN
@@ -159,7 +163,8 @@ public class EditSessionCommandParserTest {
         EditSessionDescriptor descriptor = new EditSessionDescriptorBuilder()
                 .withGym(VALID_GYM_MACHOMAN)
                 .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-                .withInterval(VALID_START_TIME_MACHOMAN, VALID_DURATION_MACHOMAN)
+                .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER)
+                        , Integer.parseInt(VALID_DURATION_MACHOMAN))
                 .build();
         EditSessionCommand expectedCommand = new EditSessionCommand(targetIndex, descriptor);
 
@@ -167,7 +172,7 @@ public class EditSessionCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValueFollowedByValidValue_success() throws ParseException {
+    public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_SESSION;
         String userInput = targetIndex.getOneBased() + INVALID_GYM_DESC + GYM_DESC_MACHOMAN;
@@ -182,7 +187,8 @@ public class EditSessionCommandParserTest {
         descriptor = new EditSessionDescriptorBuilder()
                 .withGym(VALID_GYM_MACHOMAN)
                 .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-                .withInterval(VALID_START_TIME_MACHOMAN, VALID_DURATION_MACHOMAN)
+                .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER)
+                        , Integer.parseInt(VALID_DURATION_MACHOMAN))
                 .build();
         expectedCommand = new EditSessionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
