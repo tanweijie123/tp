@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,11 +32,44 @@ import seedu.address.logic.parser.session.AddSessionCommandParser;
  * Parses user input.
  */
 public class AddressBookParser {
+    /**
+     * Creates a Function that can throw ParseException
+     */
+    private interface ParseFunction<T, U> {
+        U apply(T args) throws ParseException;
+    }
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    /**
+     * Used a hashmap to get related function.
+     */
+    private static final HashMap<String, ParseFunction<String, Command>> commandMapper;
+    static {
+        commandMapper = new HashMap<>();
+
+        //Client-Related Commands
+        commandMapper.put(AddClientCommand.COMMAND_WORD, (args) -> new AddClientCommandParser().parse(args));
+        commandMapper.put(EditClientCommand.COMMAND_WORD, (args) -> new EditClientCommandParser().parse(args));
+        commandMapper.put(DeleteClientCommand.COMMAND_WORD, (args) -> new DeleteClientCommandParser().parse(args));
+        commandMapper.put(FindClientCommand.COMMAND_WORD, (args) -> new FindClientCommandParser().parse(args));
+        commandMapper.put(ViewClientCommand.COMMAND_WORD, (args) -> new ViewClientCommandParser().parse(args));
+        commandMapper.put(ListClientCommand.COMMAND_WORD, (args) -> new ListClientCommand());
+
+        //Session-Related Commands
+        commandMapper.put(AddSessionCommand.COMMAND_WORD, (args) -> new AddSessionCommandParser().parse(args));
+
+        //Schedule-Related Commands
+        commandMapper.put(AddScheduleCommand.COMMAND_WORD, (args) -> new AddScheduleCommandParser().parse(args));
+
+        //Common-Application Commands
+        commandMapper.put(ClearCommand.COMMAND_WORD, (args) -> new ClearCommand());
+        commandMapper.put(ExitCommand.COMMAND_WORD, (args) -> new ExitCommand());
+        commandMapper.put(HelpCommand.COMMAND_WORD, (args) -> new HelpCommand());
+    }
 
     /**
      * Parses user input into command for execution.
@@ -52,60 +86,11 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
 
-        /*
-          Client commands
-         */
-
-        case AddClientCommand.COMMAND_WORD:
-            return new AddClientCommandParser().parse(arguments);
-
-        case EditClientCommand.COMMAND_WORD:
-            return new EditClientCommandParser().parse(arguments);
-
-        case DeleteClientCommand.COMMAND_WORD:
-            return new DeleteClientCommandParser().parse(arguments);
-
-        case FindClientCommand.COMMAND_WORD:
-            return new FindClientCommandParser().parse(arguments);
-
-        case ViewClientCommand.COMMAND_WORD:
-            return new ViewClientCommandParser().parse(arguments);
-
-        case ListClientCommand.COMMAND_WORD:
-            return new ListClientCommand();
-
-        /*
-         * Session commands
-         */
-
-        case AddSessionCommand.COMMAND_WORD:
-            return new AddSessionCommandParser().parse(arguments);
-
-        /*
-         * Schedule commands
-         */
-
-        case AddScheduleCommand.COMMAND_WORD:
-            return new AddScheduleCommandParser().parse(arguments);
-
-        /*
-         * General commands
-         */
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        default:
+        if (commandMapper.containsKey(commandWord)) {
+            return commandMapper.get(commandWord).apply(arguments);
+        } else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
