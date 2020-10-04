@@ -26,14 +26,14 @@ public class TypicalSessions {
     public static final Session GETWELL = new SessionBuilder()
             .withGym(VALID_GYM_GETWELL)
             .withExerciseType(VALID_EXERCISE_TYPE_GETWELL)
-            .withInterval(LocalDateTime.parse(VALID_START_TIME_GETWELL, Interval.DATE_TIME_FORMATTER)
-                    , Integer.parseInt(VALID_DURATION_GETWELL))
+            .withInterval(LocalDateTime.parse(VALID_START_TIME_GETWELL, Interval.DATE_TIME_FORMATTER),
+                    Integer.parseInt(VALID_DURATION_GETWELL))
             .build();
     public static final Session MACHOMAN = new SessionBuilder()
             .withGym(VALID_GYM_MACHOMAN)
             .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-            .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER)
-                    , Integer.parseInt(VALID_DURATION_MACHOMAN))
+            .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER),
+                    Integer.parseInt(VALID_DURATION_MACHOMAN))
             .build();
 
     private TypicalSessions() {

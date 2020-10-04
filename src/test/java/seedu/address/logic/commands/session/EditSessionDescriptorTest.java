@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
 
 import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
@@ -49,8 +50,8 @@ public class EditSessionDescriptorTest {
 
         // different interval -> returns false
         editedGetwell = new EditSessionDescriptorBuilder(DESC_GETWELL)
-                .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER)
-                        , Integer.parseInt(VALID_DURATION_MACHOMAN)).build();
+                .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER),
+                        Integer.parseInt(VALID_DURATION_MACHOMAN)).build();
         assertFalse(DESC_GETWELL.equals(editedGetwell));
     }
 }

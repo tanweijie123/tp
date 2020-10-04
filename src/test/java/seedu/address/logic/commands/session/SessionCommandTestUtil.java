@@ -57,14 +57,14 @@ public class SessionCommandTestUtil {
     public static final EditSessionDescriptor DESC_GETWELL = new EditSessionDescriptorBuilder()
             .withGym(VALID_GYM_GETWELL)
             .withExerciseType(VALID_EXERCISE_TYPE_GETWELL)
-            .withInterval(LocalDateTime.parse(VALID_START_TIME_GETWELL, Interval.DATE_TIME_FORMATTER)
-                    , Integer.parseInt(VALID_DURATION_GETWELL))
+            .withInterval(LocalDateTime.parse(VALID_START_TIME_GETWELL, Interval.DATE_TIME_FORMATTER),
+                    Integer.parseInt(VALID_DURATION_GETWELL))
             .build();
     public static final EditSessionDescriptor DESC_MACHOMAN = new EditSessionDescriptorBuilder()
             .withGym(VALID_GYM_MACHOMAN)
             .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-            .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER)
-                    , Integer.parseInt(VALID_DURATION_MACHOMAN))
+            .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER),
+                    Integer.parseInt(VALID_DURATION_MACHOMAN))
             .build();
 
     /**
@@ -110,17 +110,17 @@ public class SessionCommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredSessionList());
     }
 
-//    /**
-//     * Updates {@code model}'s filtered list to show only the Session at the given {@code targetIndex} in the
-//     * {@code model}'s address book.
-//    */
-//    public static void showSessionAtIndex(Model model, Index targetIndex) {
-//        assertTrue(targetIndex.getZeroBased() < model.getFilteredSessionList().size());
-//
-//        Session session = model.getFilteredSessionList().get(targetIndex.getZeroBased());
-//        final String[] splitName = session.getName().fullName.split("\\s+");
-//        model.updateFilteredSessionList(new NameContainsSubstringPredicate(Arrays.asList(splitName[0])));
-//
-//        assertEquals(1, model.getFilteredSessionList().size());
+    //    /**
+    //     * Updates {@code model}'s filtered list to show only the Session at the given {@code targetIndex} in the
+    //     * {@code model}'s address book.
+    //    */
+    //    public static void showSessionAtIndex(Model model, Index targetIndex) {
+    //        assertTrue(targetIndex.getZeroBased() < model.getFilteredSessionList().size());
+    //
+    //        Session session = model.getFilteredSessionList().get(targetIndex.getZeroBased());
+    //        final String[] splitName = session.getName().fullName.split("\\s+");
+    //        model.updateFilteredSessionList(new NameContainsSubstringPredicate(Arrays.asList(splitName[0])));
+    //
+    //        assertEquals(1, model.getFilteredSessionList().size());
     //  }
 }
