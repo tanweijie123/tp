@@ -24,9 +24,9 @@ import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_PH
 import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_TAG_ALLERGY;
 import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_TAG_INJURY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.client.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
@@ -36,6 +36,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.client.EditClientCommand;
 import seedu.address.logic.commands.client.EditClientCommand.EditClientDescriptor;
+import seedu.address.logic.parser.client.EditClientCommandParser;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;

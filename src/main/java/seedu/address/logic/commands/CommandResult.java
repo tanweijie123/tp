@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.function.Supplier;
+
+import javafx.scene.layout.Pane;
 
 /**
  * Represents the result of a command execution.
@@ -17,8 +20,8 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** A Runnable function for CommandResult to run in MainWindow */
-    private Runnable func;
+    /** A Scene to display on the Main GUI. (if required) */
+    private Supplier<? extends Pane> pane;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -27,17 +30,17 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.func = null;
+        this.pane = null;
     }
 
     /**
      * Constructs a {@code CommandResult} with a stored Runnable function to run during execution
      * @param feedbackToUser
-     * @param func a Consumer that runs and returns void
+     * @param pane a Pane to display on the MAIN GUI.
      */
-    public CommandResult(String feedbackToUser, Runnable func) {
+    public CommandResult(String feedbackToUser, Supplier<? extends Pane> pane) {
         this(feedbackToUser);
-        this.func = func;
+        this.pane = pane;
     }
 
     /**
@@ -57,11 +60,11 @@ public class CommandResult {
     }
 
     public boolean hasFunctionToRun() {
-        return !(func == null);
+        return !(pane == null);
     }
 
-    public Runnable getFunction() {
-        return this.func;
+    public Supplier<? extends Pane> getPane() {
+        return this.pane;
     }
 
     public boolean isExit() {
