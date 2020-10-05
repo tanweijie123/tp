@@ -63,6 +63,7 @@ public class AddressBookParser {
 
         //Session-Related Commands
         commandMapper.put(AddSessionCommand.COMMAND_WORD, (args) -> new AddSessionCommandParser().parse(args));
+        commandMapper.put(EditSessionCommand.COMMAND_WORD, (args) -> new EditSessionCommandParser().parse(args));
 
         //Schedule-Related Commands
         commandMapper.put(AddScheduleCommand.COMMAND_WORD, (args) -> new AddScheduleCommandParser().parse(args));
@@ -89,39 +90,6 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        case FindClientCommand.COMMAND_WORD:
-            return new FindClientCommandParser().parse(arguments);
-
-        case ViewClientCommand.COMMAND_WORD:
-            return new ViewClientCommandParser().parse(arguments);
-
-        case ListClientCommand.COMMAND_WORD:
-            return new ListClientCommand();
-
-        /*
-         * Session commands
-         */
-
-        case AddSessionCommand.COMMAND_WORD:
-            return new AddSessionCommandParser().parse(arguments);
-
-        case EditSessionCommand.COMMAND_WORD:
-            return new EditSessionCommandParser().parse(arguments);
-
-        /*
-         * General commands
-         */
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        default:
         if (commandMapper.containsKey(commandWord)) {
             return commandMapper.get(commandWord).apply(arguments);
         } else {
