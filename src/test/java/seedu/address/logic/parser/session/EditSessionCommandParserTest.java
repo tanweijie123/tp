@@ -76,22 +76,17 @@ public class EditSessionCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_GYM_DESC, Gym.MESSAGE_CONSTRAINTS); // invalid gym
+        // invalid gym
+        assertParseFailure(parser, "1" + INVALID_GYM_DESC, Gym.MESSAGE_CONSTRAINTS);
+
+        // invalid exercise type
         assertParseFailure(parser,
                 "1" + INVALID_EXERCISE_TYPE_DESC,
-                ExerciseType.MESSAGE_CONSTRAINTS); // invalid exercise type
-        assertParseFailure(parser,
-          "1" + INVALID_START_TIME_DESC + INVALID_DURATION_DESC,
-                Interval.MESSAGE_DATE_TIME_CONSTRAINTS); // invalid interval
-
-        // invalid gym followed
-        assertParseFailure(parser, "1" + INVALID_GYM_DESC,
-                Gym.MESSAGE_CONSTRAINTS);
-
-        // invalid exercise type. The test case for invalid gym followed by valid exercise type
-        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + INVALID_EXERCISE_TYPE_DESC,
                 ExerciseType.MESSAGE_CONSTRAINTS);
+
+        // invalid interval
+        assertParseFailure(parser, "1" + INVALID_START_TIME_DESC + INVALID_DURATION_DESC,
+                Interval.MESSAGE_DATE_TIME_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1"
