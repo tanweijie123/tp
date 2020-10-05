@@ -30,7 +30,7 @@ public class Interval {
      */
     public Interval(LocalDateTime start, int duration) {
         requireNonNull(start);
-        checkArgument(isValidInterval(duration), MESSAGE_DATE_TIME_CONSTRAINTS);
+        checkArgument(isValidInterval(duration), MESSAGE_CONSTRAINTS);
         this.start = start;
         this.durationInMinutes = duration;
     }
