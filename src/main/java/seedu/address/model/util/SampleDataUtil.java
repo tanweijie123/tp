@@ -63,10 +63,25 @@ public class SampleDataUtil {
     }
 
     public static Schedule[] getSampleSchedule() {
-        return new Schedule[]{
-            new Schedule(new Email("alexyeoh@example.com"), 1),
-            new Schedule(new Email("lidavid@example.com"), 2)
-        };
+        try {
+            return new Schedule[]{
+                new Schedule(new Client(new Name("Bernice Yu"), new Phone("99272758"),
+                        new Email("berniceyu@example.com"),
+                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                        getTagSet("allergy-nuts", "injured-thigh")),
+                    new Session(1, "Getwell gym", "Endurance",
+                        SessionParserUtil.parseStringToDateTime("29/09/2020 1300"), 120)),
+                new Schedule(new Client(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                        new Address("Blk 30 Geylang Street 29, #06-40"),
+                        getTagSet("injured-thigh")),
+                    new Session(2, "Machoman gym", "Bodybuilder",
+                        SessionParserUtil.parseStringToDateTime("29/09/2020 1600"), 150))
+            };
+        } catch (ParseException e) {
+            //INFO: if you reach here, it means the date input above is wrong.
+            System.err.println("Default data not initialised. ");
+            throw new UnsupportedOperationException(); //cannot return null
+        }
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {

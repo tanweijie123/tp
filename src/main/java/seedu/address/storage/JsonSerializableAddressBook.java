@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
@@ -77,7 +80,14 @@ class JsonSerializableAddressBook {
         }
 
         for (JsonAdaptedSchedule jsonAdaptedSchedule : this.schedules) {
-            Schedule schedule = jsonAdaptedSchedule.toModelType();
+            Email clientEmail = jsonAdaptedSchedule.getClientEmail();
+            int sessionId = jsonAdaptedSchedule.getSessionId();
+
+            Client client = getClientWithEmail(clientEmail, addressBook);
+            Session session = getSessionWithId(sessionId, addressBook);
+            requireAllNonNull(client, session);
+
+            Schedule schedule = new Schedule(client, session);
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }
@@ -85,6 +95,30 @@ class JsonSerializableAddressBook {
         }
 
         return addressBook;
+    }
+
+    /**
+     * Returns the {@code Client} with the same {@code Email} from {@code addressBook} or null if not found.
+     */
+    private Client getClientWithEmail(Email email, AddressBook addressBook) {
+        for (Client client : addressBook.getClientList()) {
+            if (client.getEmail().equals(email)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the {@code Session} with the same {@code id} from {@code addressBook} or null if not found.
+     */
+    private Session getSessionWithId(int id, AddressBook addressBook) {
+        for (Session session : addressBook.getSessionList()) {
+            if (session.getId() == id) {
+                return session;
+            }
+        }
+        return null;
     }
 
 }

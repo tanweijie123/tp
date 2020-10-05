@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.session.SessionParserUtil;
-import seedu.address.model.session.ExerciseType;
-import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
@@ -60,17 +58,15 @@ public class JsonAdaptedSession {
             throw new IllegalValueException("Id is blank");
         }
 
+        final int modelId = Integer.parseInt(id);
+
         if (gym.isBlank()) {
             throw new IllegalValueException("Gym is blank");
         }
 
-        final Gym modelGym = new Gym(gym);
-
         if (exerciseType.isBlank()) {
             throw new IllegalValueException("ExerciseType is blank");
         }
-
-        final ExerciseType modelExerciseType = new ExerciseType(exerciseType);
 
         if (start.isBlank() || SessionParserUtil.isInvalidDateTime(start)) {
             throw new IllegalValueException("Start time is blank or invalid");
@@ -87,8 +83,7 @@ public class JsonAdaptedSession {
         if (!Interval.isValidInterval(duration)) {
             throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
         }
-        final Interval modelInterval = new Interval(startDateTime, duration);
 
-        return new Session(modelGym, modelExerciseType, modelInterval);
+        return new Session(modelId, gym, exerciseType, startDateTime, duration);
     }
 }
