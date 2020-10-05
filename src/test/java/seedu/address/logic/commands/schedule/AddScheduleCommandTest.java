@@ -1,57 +1,93 @@
-package seedu.address.logic.commands.session;
+package seedu.address.logic.commands.schedule;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalClients.ALICE;
+import static seedu.address.testutil.TypicalClients.BENSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
+import static seedu.address.testutil.TypicalSessions.GETWELL;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.session.AddSessionCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
+import seedu.address.testutil.ScheduleBuilder;
 import seedu.address.testutil.SessionBuilder;
 
-public class AddSessionCommandTest {
+public class AddScheduleCommandTest {
 
-    @Test
-    public void constructor_nullSession_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddSessionCommand(null));
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    /**
+     * Returns an {@code AddressBook} with all the typical Clients and Sessions.
+     */
+    private static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Client client : getTypicalClients()) {
+            ab.addClient(client);
+        }
+        for (Session session : getTypicalSessions()) {
+            ab.addSession(session);
+        }
+        return ab;
+    }
+
+    public static List<Client> getTypicalClients() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON));
+    }
+
+    public static List<Session> getTypicalSessions() {
+        return new ArrayList<>(Arrays.asList(GETWELL));
     }
 
     @Test
-    public void execute_sessionAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
-        Session validSession = new SessionBuilder().build();
-
-        CommandResult commandResult = new AddSessionCommand(validSession).execute(modelStub);
-
-        assertEquals(String.format(AddSessionCommand.MESSAGE_SUCCESS, validSession), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validSession), modelStub.sessionsAdded);
+    public void constructor_nullClientAndSessionIndex_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddScheduleCommand(null, null));
     }
 
     @Test
-    public void execute_duplicateSession_throwsCommandException() {
-        Session validSession = new SessionBuilder().build();
-        AddSessionCommand addSessionCommand = new AddSessionCommand(validSession);
-        ModelStub modelStub = new ModelStubWithSession(validSession);
+    public void execute_scheduleAcceptedByModel_addSuccessful() throws Exception {
+        Schedule validSchedule = new ScheduleBuilder().build();
 
-        assertThrows(CommandException.class,
-                AddSessionCommand.MESSAGE_DUPLICATE_SESSION, () -> addSessionCommand.execute(modelStub));
+        AddScheduleCommand command = new AddScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION);
+        command.execute(model);
+
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.addSchedule(validSchedule);
+
+        assertEquals(model, expectedModel);
+    }
+
+    @Test
+    public void execute_duplicateSchedule_throwsCommandException() {
+        Schedule validSchedule = new ScheduleBuilder().build();
+
+        AddScheduleCommand command = new AddScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION);
+
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addSchedule(validSchedule);
+        assertThrows(CommandException.class, AddScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE, (
+            )-> command.execute(model));
     }
 
     @Test
@@ -214,46 +250,5 @@ public class AddSessionCommandTest {
         }
     }
 
-    /**
-     * A Model stub that contains a single Session.
-     */
-    private class ModelStubWithSession extends ModelStub {
-        private final Session session;
-
-        ModelStubWithSession(Session session) {
-            requireNonNull(session);
-            this.session = session;
-        }
-
-        @Override
-        public boolean hasSession(Session session) {
-            requireNonNull(session);
-            return this.session.isExisting(session);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the Session being added.
-     */
-    private class ModelStubAcceptingSessionAdded extends ModelStub {
-        final ArrayList<Session> sessionsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasSession(Session session) {
-            requireNonNull(session);
-            return sessionsAdded.stream().anyMatch(session::isExisting);
-        }
-
-        @Override
-        public void addSession(Session session) {
-            requireNonNull(session);
-            sessionsAdded.add(session);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }
+
