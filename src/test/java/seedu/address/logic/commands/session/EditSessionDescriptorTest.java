@@ -14,14 +14,13 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.session.Interval;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
 
 public class EditSessionDescriptorTest {
 
     @Test
-    public void equals() throws ParseException {
+    public void equals() {
         // same values -> returns true
         EditSessionDescriptor descriptorWithSameValues = new EditSessionDescriptor(DESC_GETWELL);
         assertTrue(DESC_GETWELL.equals(descriptorWithSameValues));

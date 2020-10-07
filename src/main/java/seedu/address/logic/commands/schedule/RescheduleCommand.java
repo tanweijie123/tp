@@ -35,19 +35,20 @@ public class RescheduleCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
 
-    private final Index index;
+    private final Index scheduleIndex;
     private final Index sessionIndex;
     private final RescheduleDescriptor editRescheduleDescriptor;
 
     /**
-     * @param index of the Schedule in the filtered schedule list to edit
+     * @param scheduleIndex of the Schedule in the filtered schedule list to edit
+     * @param sessionIndex of the Session in the filtered session list to edit
      * @param editRescheduleDescriptor details to edit the schedule with
      */
-    public RescheduleCommand(Index index, Index sessionIndex, RescheduleDescriptor editRescheduleDescriptor) {
-        requireNonNull(index);
+    public RescheduleCommand(Index scheduleIndex, Index sessionIndex, RescheduleDescriptor editRescheduleDescriptor) {
+        requireNonNull(scheduleIndex);
         requireNonNull(editRescheduleDescriptor);
 
-        this.index = index;
+        this.scheduleIndex = scheduleIndex;
         this.sessionIndex = sessionIndex;
         this.editRescheduleDescriptor = new RescheduleDescriptor(editRescheduleDescriptor);
     }
@@ -59,7 +60,7 @@ public class RescheduleCommand extends Command {
         List<Schedule> lastShownList = model.getFilteredScheduleList();
         List<Session> lastShownSessionList = model.getFilteredSessionList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (scheduleIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
         }
 
@@ -67,7 +68,7 @@ public class RescheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
 
-        Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
+        Schedule scheduleToEdit = lastShownList.get(scheduleIndex.getZeroBased());
         Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editRescheduleDescriptor,
                 lastShownSessionList);
 
@@ -110,7 +111,7 @@ public class RescheduleCommand extends Command {
 
         // state check
         RescheduleCommand e = (RescheduleCommand) other;
-        return index.equals(e.index)
+        return scheduleIndex.equals(e.scheduleIndex)
                 && editRescheduleDescriptor.equals(e.editRescheduleDescriptor);
     }
 
