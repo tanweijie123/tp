@@ -1,9 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.schedule.Schedule;
-import seedu.address.model.session.ExerciseType;
-import seedu.address.model.session.Gym;
 
 import seedu.address.logic.commands.schedule.RescheduleCommand.RescheduleDescriptor;
 
@@ -22,14 +19,14 @@ public class RescheduleDescriptorBuilder {
         this.descriptor = new RescheduleDescriptor(descriptor);
     }
 
-//    /**
-//     * Returns an {@code RescheduleDescriptorBuilder} with fields containing {@code Schedule}'s details
-//     */
-//    public RescheduleDescriptorBuilder(Schedule schedule) {
-//        descriptor = new RescheduleDescriptor();
-//        descriptor.setClientIndex(schedule.getClient());
-//        descriptor.setSessionIndex(schedule.getSession());
-//    }
+    //    /**
+    //     * Returns an {@code RescheduleDescriptorBuilder} with fields containing {@code Schedule}'s details
+    //     */
+    //    public RescheduleDescriptorBuilder(Schedule schedule) {
+    //        descriptor = new RescheduleDescriptor();
+    //        descriptor.setClientIndex(schedule.getClient());
+    //        descriptor.setSessionIndex(schedule.getSession());
+    //    }
 
     /**
      * Sets the {@code Index} of the {@code RescheduleDescriptorBuilder} that we are building.

@@ -40,11 +40,6 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
                     RescheduleCommand.MESSAGE_USAGE), pe);
         }
 
-//        if (ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get()
-//                >= lastShownSessionList.size())) {
-//            throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
-//        }
-
         RescheduleDescriptor editScheduleDescriptor = new RescheduleDescriptor();
 
         if (argMultimap.getValue(PREFIX_SESSION_INDEX).isPresent()) {
@@ -56,7 +51,8 @@ public class RescheduleCommandParser implements Parser<RescheduleCommand> {
             throw new ParseException(RescheduleCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new RescheduleCommand(index, editScheduleDescriptor);
+        return new RescheduleCommand(index, ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get()),
+                editScheduleDescriptor);
     }
 
 }

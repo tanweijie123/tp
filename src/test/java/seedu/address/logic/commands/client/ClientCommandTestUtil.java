@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsSubstringPredicate;
 import seedu.address.testutil.EditClientDescriptorBuilder;
+import seedu.address.logic.commands.client.EditClientCommand.EditClientDescriptor;
 
 /**
  * Contains helper methods for testing commands.
@@ -59,8 +60,8 @@ public class ClientCommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditClientCommand.EditClientDescriptor DESC_AMY;
-    public static final EditClientCommand.EditClientDescriptor DESC_BOB;
+    public static final EditClientDescriptor DESC_AMY;
+    public static final EditClientDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)

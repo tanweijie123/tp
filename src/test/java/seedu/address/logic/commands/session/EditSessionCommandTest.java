@@ -29,19 +29,19 @@ public class EditSessionCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    //    @Test
-    //    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-    //        Session editedSession = new SessionBuilder().build();
-    //        EditSessionDescriptor descriptor = new EditSessionDescriptorBuilder(editedSession).build();
-    //        EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_FIRST_SESSION, descriptor);
+    //        @Test
+    //        public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    //            Session editedSession = new SessionBuilder().build();
+    //            EditSessionDescriptor descriptor = new EditSessionDescriptorBuilder(editedSession).build();
+    //            EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_FIRST_SESSION, descriptor);
     //
-    //        String expectedMessage = String.format(EditSessionCommand.MESSAGE_EDIT_SESSION_SUCCESS, editedSession);
+    //            String expectedMessage = String.format(EditSessionCommand.MESSAGE_EDIT_SESSION_SUCCESS, editedSession);
     //
-    //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-    //        expectedModel.setSession(model.getFilteredSessionList().get(0), editedSession);
+    //            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+    //            expectedModel.setSession(model.getFilteredSessionList().get(0), editedSession);
     //
-    //        assertCommandSuccess(editSessionCommand, model, expectedMessage, expectedModel);
-    //    }
+    //            assertCommandSuccess(editSessionCommand, model, expectedMessage, expectedModel);
+    //        }
 
     //    @Test
     //    public void execute_someFieldsSpecifiedUnfilteredList_success() throws ParseException {
@@ -97,14 +97,14 @@ public class EditSessionCommandTest {
     //        assertCommandSuccess(editSessionCommand, model, expectedMessage, expectedModel);
     //    }
 
-    //    @Test
-    //    public void execute_duplicateSessionUnfilteredList_failure() {
-    //        Session firstSession = model.getFilteredSessionList().get(INDEX_FIRST_SESSION.getZeroBased());
-    //        EditSessionDescriptor descriptor = new EditSessionDescriptorBuilder(firstSession).build();
-    //        EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_SECOND_SESSION, descriptor);
+    //        @Test
+    //        public void execute_duplicateSessionUnfilteredList_failure() {
+    //            Session firstSession = model.getFilteredSessionList().get(INDEX_FIRST_SESSION.getZeroBased());
+    //            EditSessionDescriptor descriptor = new EditSessionDescriptorBuilder(firstSession).build();
+    //            EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_SECOND_SESSION, descriptor);
     //
-    //        assertCommandFailure(editSessionCommand, model, EditSessionCommand.MESSAGE_DUPLICATE_SESSION);
-    //    }
+    //            assertCommandFailure(editSessionCommand, model, EditSessionCommand.MESSAGE_DUPLICATE_SESSION);
+    //        }
 
     //    @Test
     //    public void execute_duplicateSessionFilteredList_failure() {

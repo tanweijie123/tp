@@ -2,36 +2,25 @@ package seedu.address.logic.commands.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.client.ClientCommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.client.ClientCommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.client.ClientCommandTestUtil.VALID_TAG_INJURY;
 import static seedu.address.logic.commands.client.ClientCommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.client.ClientCommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.client.ClientCommandTestUtil.showClientAtIndex;
+import static seedu.address.logic.commands.schedule.RescheduleTestUtil.DESC_SCHA;
+import static seedu.address.logic.commands.schedule.RescheduleTestUtil.DESC_SCHB;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SCHEDULE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 
-import javax.management.Descriptor;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.client.EditClientCommand;
-import seedu.address.logic.commands.client.EditClientCommand.EditClientDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.logic.commands.schedule.RescheduleCommand.RescheduleDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.Client;
-import seedu.address.model.schedule.Schedule;
-import seedu.address.testutil.ClientBuilder;
-import seedu.address.testutil.EditClientDescriptorBuilder;
 import seedu.address.testutil.RescheduleDescriptorBuilder;
-import seedu.address.testutil.ScheduleBuilder;
-import seedu.address.logic.commands.schedule.RescheduleCommand.RescheduleDescriptor;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -130,35 +119,38 @@ public class RescheduleCommandTest {
     public void execute_invalidScheduleIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredScheduleList().size() + 1);
         RescheduleDescriptor descriptor = new RescheduleDescriptorBuilder().withSessionIndex(INDEX_FIRST_SCHEDULE).build();
-        RescheduleCommand rescheduleCommand = new RescheduleCommand(outOfBoundIndex, descriptor);
+        RescheduleCommand rescheduleCommand = new RescheduleCommand(outOfBoundIndex, INDEX_FIRST_SESSION, descriptor);
 
         assertCommandFailure(rescheduleCommand, model, Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
     }
 
-//    @Test
-//    public void equals() {
-//        final RescheduleCommand standardCommand = new RescheduleCommand(INDEX_FIRST_SCHEDULE,
-//                new RescheduleDescriptor());
-//
-//        // same values -> returns true
-//        RescheduleDescriptor copyDescriptor = new RescheduleDescriptor(DESC_AMY);
-//        RescheduleCommand commandWithSameValues = new RescheduleCommand(INDEX_FIRST_SCHEDULE, copyDescriptor);
-//        assertTrue(standardCommand.equals(commandWithSameValues));
-//
-//        // same object -> returns true
-//        assertTrue(standardCommand.equals(standardCommand));
-//
-//        // null -> returns false
-//        assertFalse(standardCommand.equals(null));
-//
-//        // different types -> returns false
-//        assertFalse(standardCommand.equals(new ClearCommand()));
-//
-//        // different index -> returns false
-//        assertFalse(standardCommand.equals(new RescheduleCommand(INDEX_SECOND_SCHEDULE, DESC_AMY)));
-//
-//        // different descriptor -> returns false
-//        assertFalse(standardCommand.equals(new RescheduleCommand(INDEX_FIRST_SCHEDULE, DESC_BOB)));
-//    }
+    @Test
+    public void equals() {
+        final RescheduleCommand standardCommand = new RescheduleCommand(INDEX_FIRST_SCHEDULE, INDEX_FIRST_SESSION,
+                DESC_SCHA);
+
+        // same values -> returns true
+        RescheduleDescriptor copyDescriptor = new RescheduleDescriptor(DESC_SCHA);
+        RescheduleCommand commandWithSameValues = new RescheduleCommand(INDEX_FIRST_SCHEDULE, INDEX_FIRST_SESSION,
+                copyDescriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(new RescheduleCommand(INDEX_SECOND_SCHEDULE,
+                INDEX_SECOND_SESSION ,DESC_SCHA)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new RescheduleCommand(INDEX_FIRST_SCHEDULE,
+                INDEX_FIRST_SESSION, DESC_SCHB)));
+    }
 
 }

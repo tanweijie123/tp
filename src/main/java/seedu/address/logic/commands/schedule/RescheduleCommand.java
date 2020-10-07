@@ -38,28 +38,35 @@ public class RescheduleCommand extends Command {
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
 
     private final Index index;
+    private final Index sessionIndex;
     private final RescheduleDescriptor editRescheduleDescriptor;
 
     /**
      * @param index of the Schedule in the filtered schedule list to edit
      * @param editRescheduleDescriptor details to edit the schedule with
      */
-    public RescheduleCommand(Index index, RescheduleDescriptor editRescheduleDescriptor) {
+    public RescheduleCommand(Index index, Index sessionIndex, RescheduleDescriptor editRescheduleDescriptor) {
         requireNonNull(index);
         requireNonNull(editRescheduleDescriptor);
 
         this.index = index;
+        this.sessionIndex = sessionIndex;
         this.editRescheduleDescriptor = new RescheduleDescriptor(editRescheduleDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Schedule> lastShownList = model.getFilteredScheduleList();
         List<Session> lastShownSessionList = model.getFilteredSessionList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
+        }
+
+        if (sessionIndex.getZeroBased() >= lastShownSessionList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
 
         Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
