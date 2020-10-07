@@ -36,7 +36,8 @@ public class RescheduleCommandTest {
     //        RescheduleDescriptor descriptor = new RescheduleDescriptorBuilder(editedSchedule).build();
     //        RescheduleCommand rescheduleCommand = new RescheduleCommand(INDEX_FIRST_SCHEDULE, descriptor);
     //
-    //        String expectedMessage = String.format(RescheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, rescheduleCommand);
+    //        String expectedMessage = String.format(RescheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS
+    //        , rescheduleCommand);
     //
     //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
     //        expectedModel.setSchedule(model.getFilteredScheduleList().get(0), editedSchedule);
@@ -67,7 +68,8 @@ public class RescheduleCommandTest {
     //
     //    @Test
     //    public void execute_noFieldSpecifiedUnfilteredList_success() {
-    //        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_CLIENT, new EditClientDescriptor());
+    //        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_CLIENT,
+    //        new EditClientDescriptor());
     //        Client editedClient = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
     //
     //        String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
@@ -118,7 +120,8 @@ public class RescheduleCommandTest {
     @Test
     public void execute_invalidScheduleIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredScheduleList().size() + 1);
-        RescheduleDescriptor descriptor = new RescheduleDescriptorBuilder().withSessionIndex(INDEX_FIRST_SCHEDULE).build();
+        RescheduleDescriptor descriptor = new RescheduleDescriptorBuilder()
+                .withSessionIndex(INDEX_FIRST_SCHEDULE).build();
         RescheduleCommand rescheduleCommand = new RescheduleCommand(outOfBoundIndex, INDEX_FIRST_SESSION, descriptor);
 
         assertCommandFailure(rescheduleCommand, model, Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
@@ -146,7 +149,7 @@ public class RescheduleCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new RescheduleCommand(INDEX_SECOND_SCHEDULE,
-                INDEX_SECOND_SESSION ,DESC_SCHA)));
+                INDEX_SECOND_SESSION , DESC_SCHA)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new RescheduleCommand(INDEX_FIRST_SCHEDULE,

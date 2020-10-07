@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
@@ -14,7 +13,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;

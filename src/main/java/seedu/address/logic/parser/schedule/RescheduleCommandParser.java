@@ -2,21 +2,15 @@ package seedu.address.logic.parser.schedule;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 
-import java.util.stream.Stream;
-
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.schedule.RescheduleCommand;
 import seedu.address.logic.commands.schedule.RescheduleCommand.RescheduleDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class RescheduleCommandParser implements Parser<RescheduleCommand> {

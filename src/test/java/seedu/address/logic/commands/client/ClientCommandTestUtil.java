@@ -16,13 +16,13 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.client.EditClientCommand.EditClientDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsSubstringPredicate;
 import seedu.address.testutil.EditClientDescriptorBuilder;
-import seedu.address.logic.commands.client.EditClientCommand.EditClientDescriptor;
 
 /**
  * Contains helper methods for testing commands.

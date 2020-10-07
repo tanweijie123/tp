@@ -35,7 +35,8 @@ public class EditSessionCommandTest {
     //            EditSessionDescriptor descriptor = new EditSessionDescriptorBuilder(editedSession).build();
     //            EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_FIRST_SESSION, descriptor);
     //
-    //            String expectedMessage = String.format(EditSessionCommand.MESSAGE_EDIT_SESSION_SUCCESS, editedSession);
+    //            String expectedMessage = String.format(EditSessionCommand.MESSAGE_EDIT_SESSION_SUCCESS
+    //            , editedSession);
     //
     //            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
     //            expectedModel.setSession(model.getFilteredSessionList().get(0), editedSession);
