@@ -2,8 +2,6 @@ package seedu.address.testutil;
 
 import java.time.LocalDateTime;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
@@ -61,13 +59,9 @@ public class SessionBuilder {
     /**
      * Sets the {@code Interval} of the {@code Session} that we are building.
      */
-    public SessionBuilder withInterval(String start, String duration) {
-        try {
-            this.interval = new Interval(SessionParserUtil.parseStringToDateTime(start), Integer.parseInt(duration));
-            return this;
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public SessionBuilder withInterval(LocalDateTime start, int duration) {
+        this.interval = new Interval(start, duration);
+        return this;
     }
 
     /**

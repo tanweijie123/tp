@@ -16,6 +16,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.client.EditClientCommand.EditClientDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -59,8 +60,8 @@ public class ClientCommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditClientCommand.EditClientDescriptor DESC_AMY;
-    public static final EditClientCommand.EditClientDescriptor DESC_BOB;
+    public static final EditClientDescriptor DESC_AMY;
+    public static final EditClientDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -127,5 +128,4 @@ public class ClientCommandTestUtil {
 
         assertEquals(1, model.getFilteredClientList().size());
     }
-
 }

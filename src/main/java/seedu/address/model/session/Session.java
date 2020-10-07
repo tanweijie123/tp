@@ -35,6 +35,18 @@ public class Session implements CheckExisting<Session> {
     }
 
     /**
+     * Every field must be present and not null. To update a session's details
+     * after editing.
+     */
+    public Session(int id, Gym gym, ExerciseType exerciseType, Interval interval) {
+        requireAllNonNull(id, gym, exerciseType, interval);
+        this.id = id;
+        this.exerciseType = exerciseType;
+        this.interval = interval;
+        this.gym = gym;
+    }
+
+    /**
      * Creates a new Session object.
      * NOTE: DO NOT USE THIS FOR CLIENT INPUT; this is only for loading from database.
      */
