@@ -12,7 +12,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Interval {
     private static final String DATE_TIME_PATTERN = "dd/MM/yyyy HHmm";
+    private static final String DAY_OF_WEEK_PATTERN = "EE";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+    public static final DateTimeFormatter DAY_OF_WEEK_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(DAY_OF_WEEK_PATTERN);
 
     public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must follow "
             + DATE_TIME_PATTERN + " pattern";
@@ -44,6 +46,10 @@ public class Interval {
 
     public LocalDateTime getStart() {
         return this.start;
+    }
+
+    public String getStartDay() {
+        return this.start.format(DAY_OF_WEEK_PATTERN_FORMATTER);
     }
 
     public LocalDateTime getEnd() {
