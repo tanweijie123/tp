@@ -9,6 +9,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 public class Homepage extends UiPart<AnchorPane> {
     private static final String FXML = "Homepage.fxml";
     private static Homepage homepage;
+    private ReadOnlyAddressBook addressBook;
 
     @FXML
     private GridPane gridpane;
@@ -24,6 +25,7 @@ public class Homepage extends UiPart<AnchorPane> {
 
     private Homepage() {
         super(FXML);
+        this.addressBook = null;
         updateStatistics(null);
         setContent();
         setQotd();
@@ -41,11 +43,20 @@ public class Homepage extends UiPart<AnchorPane> {
     }
 
     /**
-     * Initialise the Statistics shown in Homepage
+     * Uses the last known Address Book and update the statistics.
+     * If last known Address Book is null, it will display empty string.
+     */
+    public void updateStatistics() {
+        updateStatistics(this.addressBook);
+    }
+
+    /**
+     * Initialises the Statistics shown in Homepage
      */
     public void updateStatistics(ReadOnlyAddressBook addressBook) {
         String display = "";
         if (addressBook != null) {
+            this.addressBook = addressBook;
             int clients = addressBook.getClientList().size();
             int sessions = addressBook.getSessionList().size();
             int schedule = addressBook.getScheduleList().size();
