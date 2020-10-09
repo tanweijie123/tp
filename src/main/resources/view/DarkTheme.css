@@ -120,6 +120,25 @@
     -fx-text-fill: white;
 }
 
+.homepage .qotd {
+    -fx-font-style: italic;
+    -fx-label-padding: 10px;
+}
+.homepage .labelContent {
+    -fx-font-size: 15px;
+    -fx-border-style: dashed;
+    -fx-border-radius: 5px;
+    -fx-border-color: lime;
+    -fx-label-padding: 10px;
+}
+
+.centre-anchor-pane .heading {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+    -fx-text-fill: white;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
