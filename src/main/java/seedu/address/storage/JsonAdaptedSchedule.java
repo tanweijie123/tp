@@ -10,22 +10,28 @@ import seedu.address.model.client.Email;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Interval;
 
+import java.time.LocalDateTime;
+
 public class JsonAdaptedSchedule {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";
     public static final String MISSING_CLIENT_EMAIL_MESSAGE_FORMAT = "Schedule's %s client email is missing!";
-    public static final String MISSING_SESSION_INTERVAL_MESSAGE_FORMAT = "Schedule's %s session Interval is missing!";
+    public static final String MISSING_SESSION_START_MESSAGE_FORMAT = "Schedule's %s session start time is missing!";
+    public static final String MISSING_SESSION_END_MESSAGE_FORMAT = "Schedule's %s session end time is missing!";
 
     private final String clientEmail;
-    private final String sessionInterval;
+    private final String sessionStart;
+    private final String sessionEnd;
 
     /**
      * Constructs a {@code JsonAdaptedSchedule} with the given Schedule details.
      */
     @JsonCreator
     public JsonAdaptedSchedule(@JsonProperty("clientEmail") String clientEmail,
-                               @JsonProperty("sessionInterval") String sessionInterval) {
+                               @JsonProperty("sessionStart") String sessionStart,
+                               @JsonProperty("sessionEnd") String sessionEnd) {
         this.clientEmail = clientEmail;
-        this.sessionInterval = sessionInterval;
+        this.sessionStart = sessionStart;
+        this.sessionEnd = sessionEnd;
     }
 
     /**
@@ -33,7 +39,8 @@ public class JsonAdaptedSchedule {
      */
     public JsonAdaptedSchedule(Schedule source) {
         clientEmail = source.getClient().getEmail().toString();
-        sessionInterval = source.getSession().getInterval().toString();
+        sessionStart = source.getSession().getInterval().getStart().toString();
+        sessionEnd = source.getSession().getInterval().getEnd().toString();
     }
 
     /**
@@ -62,13 +69,16 @@ public class JsonAdaptedSchedule {
      * @throws IllegalValueException if there were any data constraints violated in the adapted id.
      */
     public Interval getSessionInterval() throws IllegalValueException {
-        if (sessionInterval == null) {
-            throw new IllegalValueException(String.format(MISSING_SESSION_INTERVAL_MESSAGE_FORMAT,
-                    Interval.class.getSimpleName()));
+        if (sessionStart == null) {
+            throw new IllegalValueException(String.format(MISSING_SESSION_START_MESSAGE_FORMAT,
+                    LocalDateTime.class.getSimpleName()));
+        }
+        if (sessionEnd == null) {
+            throw new IllegalValueException(String.format(MISSING_SESSION_END_MESSAGE_FORMAT,
+                    LocalDateTime.class.getSimpleName()));
         }
 
-        String[] components = sessionInterval.split(" - ");
-        final Interval modelSessionInterval = SessionParserUtil.parseInterval(components[0], components[1]);
+        final Interval modelSessionInterval = SessionParserUtil.parseInterval(sessionStart, sessionEnd);
 
         return modelSessionInterval;
     }
