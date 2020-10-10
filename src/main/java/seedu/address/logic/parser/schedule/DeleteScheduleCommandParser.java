@@ -25,7 +25,7 @@ public class DeleteScheduleCommandParser implements Parser<DeleteScheduleCommand
             return new DeleteScheduleCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClientCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteScheduleCommand.MESSAGE_USAGE), pe);
         }
     }
 

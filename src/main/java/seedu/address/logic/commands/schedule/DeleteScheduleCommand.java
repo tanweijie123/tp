@@ -18,7 +18,7 @@ public class DeleteScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deschedule a client from a session. "
             + "Parameters: "
-            + "INDEX (must be a positive integer)"
+            + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Schedule deleted: \n%1$s";
