@@ -56,9 +56,14 @@ public class Session implements CheckExisting<Session> {
     }
 
     /**
-     * Returns true if both Sessions overlap with each other
+     * Returns true if both Sessions have overlapping sessions
+     *
+     * Two sessions are defined as duplicate if and only if at least one time boundary lies strictly inside
+     * the other session's interval
+     * This defines a different notion of equality between two Sessions compared to {@code equals}
      */
-    public boolean isOverlappingSession(Session otherSession) {
+    @Override
+    public boolean isExisting(Session otherSession) {
         if (otherSession == this) {
             return true;
         }
@@ -68,26 +73,14 @@ public class Session implements CheckExisting<Session> {
         }
 
         if (otherSession.getInterval().getStart().isAfter(getInterval().getStart())) {
-            return otherSession.getInterval().getStart().isBefore(getInterval().getEnd());
+            // other session start time is > this session start time
+            // this session: 2 - 4pm, other session: 4 - 6pm -> do not overlap
+            // this session: 2 - 4.01pm, other session: 4 - 6pm -> overlap
+            return getInterval().getEnd().isAfter(otherSession.getInterval().getStart());
         } else {
-            return getInterval().getStart().isBefore(otherSession.getInterval().getEnd());
+            // other session start time is <= this session start time
+            return otherSession.getInterval().getEnd().isAfter(getInterval().getStart());
         }
-    }
-
-    /**
-     * Returns true if both Sessions have the same id
-     * This defines a weaker notion of equality between two Sessions.
-     */
-    @Override
-    public boolean isExisting(Session otherSession) {
-        if (otherSession == this) {
-            return true;
-        }
-
-        return otherSession != null
-                && otherSession.getGym().equals(getGym())
-                && otherSession.getInterval().equals(getInterval())
-                && otherSession.getExerciseType().equals(getExerciseType());
     }
 
     /**
