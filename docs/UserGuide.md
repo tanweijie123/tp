@@ -185,7 +185,7 @@ _Allow the creation of sessions and tagging of its associated client_
 |View a Client's Full Profile | `cview INDEX` | `cview 1`|
 |Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 |Adding Gym Session |`sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME` | `sadd Upper Body dt/this Thursday 4pm dur/2hr g/UTown Gym`|
-|Assign a Client to Gym Session  |`sched add c/CLIENT_INDEX s/SESSION_INDEX`| `sched add c/1 s/3`|
-|Unassign a Client to Gym Session |`sched rm c/CLIENT_INDEX s/SESSION_INDEX`  | `sched rm c/2 s/3` |
-|Updating Session Info |`sedit INDEX [s/SESSIONTYPE] [dt/DATETIME] [dur/DURATION] [g/GYM_NAME]`| `sedit 1 dt/this Friday 6pm`|
+|Assign a Client to Gym Session  |`schedule c/CLIENT_INDEX s/SESSION_INDEX`| `schedule c/1 s/3`|
+|Unassign a Client to Gym Session |`deschedule c/CLIENT_INDEX s/SESSION_INDEX`  | `deschedule c/2 s/3` |
+|Edit a Client to Gym Session |`reschedule c/CLIENT_INDEX s/SESSION_INDEX`  | `reschedule c/2 s/3` |Updating Session Info |`sedit INDEX [g/GYM] [ex/EXERCISE_TYPE] [at/START_TIME] [t/DURATION]`| `sedit 1 g/Machoman at/29/09/2020 1600 t/120`
 |Deleting a Session |`sdel INDEX` | `sdel 1`|

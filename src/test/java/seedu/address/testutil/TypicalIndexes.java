@@ -13,4 +13,8 @@ public class TypicalIndexes {
     public static final Index INDEX_FIRST_SESSION = Index.fromOneBased(1);
     public static final Index INDEX_SECOND_SESSION = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_SESSION = Index.fromOneBased(3);
+
+    public static final Index INDEX_FIRST_SCHEDULE = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_SCHEDULE = Index.fromOneBased(2);
+    public static final Index INDEX_THIRD_SCHEDULE = Index.fromOneBased(3);
 }
