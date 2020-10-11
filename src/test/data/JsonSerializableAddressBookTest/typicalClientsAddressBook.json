@@ -53,9 +53,11 @@
   }],
   "schedules": [{
     "clientEmail" : "alice@example.com",
-    "sessionId" : "1"
+    "start" : "29/09/2020 1300",
+    "end" : "29/09/2020 1500"
   }, {
     "clientEmail" : "johnd@example.com",
-    "sessionId" : "1"
+    "start" : "29/09/2020 1300",
+    "end" : "29/09/2020 1500"
   } ]
 }

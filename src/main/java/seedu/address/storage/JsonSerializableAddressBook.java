@@ -16,6 +16,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
 /**
@@ -81,10 +82,10 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedSchedule jsonAdaptedSchedule : this.schedules) {
             Email clientEmail = jsonAdaptedSchedule.getClientEmail();
-            int sessionId = jsonAdaptedSchedule.getSessionId();
+            Interval sessionInterval = jsonAdaptedSchedule.getSessionInterval();
 
             Client client = getClientWithEmail(clientEmail, addressBook);
-            Session session = getSessionWithId(sessionId, addressBook);
+            Session session = getSessionWithInterval(sessionInterval, addressBook);
             requireAllNonNull(client, session);
 
             Schedule schedule = new Schedule(client, session);
@@ -112,9 +113,9 @@ class JsonSerializableAddressBook {
     /**
      * Returns the {@code Session} with the same {@code id} from {@code addressBook} or null if not found.
      */
-    private Session getSessionWithId(int id, AddressBook addressBook) {
+    private Session getSessionWithInterval(Interval interval, AddressBook addressBook) {
         for (Session session : addressBook.getSessionList()) {
-            if (session.getId() == id) {
+            if (session.getInterval().equals(interval)) {
                 return session;
             }
         }

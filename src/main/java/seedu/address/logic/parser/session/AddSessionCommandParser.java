@@ -48,7 +48,7 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
         }
 
         Gym gym = SessionParserUtil.parseGym(argMultimap.getValue(PREFIX_GYM).get());
-        Interval interval = SessionParserUtil.parseInterval(
+        Interval interval = SessionParserUtil.parseIntervalFromStartAndDuration(
                 argMultimap.getValue(PREFIX_START_TIME).get(),
                 argMultimap.getValue(PREFIX_DURATION).get()
         );

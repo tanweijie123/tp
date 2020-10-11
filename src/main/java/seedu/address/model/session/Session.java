@@ -13,10 +13,7 @@ import seedu.address.model.CheckExisting;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Session implements CheckExisting<Session> {
-    private static int idCounter = 0; //this also double as the number of sessions already created.
-
     // Identity fields
-    private final int id;
     private final Gym gym;
     private final Interval interval;
 
@@ -28,19 +25,6 @@ public class Session implements CheckExisting<Session> {
      */
     public Session(Gym gym, ExerciseType exerciseType, Interval interval) {
         requireAllNonNull(gym, exerciseType, interval);
-        this.id = ++idCounter; // TODO: This will create same ID on shutdown.
-        this.exerciseType = exerciseType;
-        this.interval = interval;
-        this.gym = gym;
-    }
-
-    /**
-     * Every field must be present and not null. To update a session's details
-     * after editing.
-     */
-    public Session(int id, Gym gym, ExerciseType exerciseType, Interval interval) {
-        requireAllNonNull(id, gym, exerciseType, interval);
-        this.id = id;
         this.exerciseType = exerciseType;
         this.interval = interval;
         this.gym = gym;
@@ -50,23 +34,14 @@ public class Session implements CheckExisting<Session> {
      * Creates a new Session object.
      * NOTE: DO NOT USE THIS FOR CLIENT INPUT; this is only for loading from database.
      */
-    public Session(int id, String gym, String exerciseType, LocalDateTime start, int duration) {
-        requireAllNonNull(id, gym, exerciseType, start, duration);
-        this.id = id;
+    public Session(String gym, String exerciseType, LocalDateTime start, int duration) {
+        requireAllNonNull(gym, exerciseType, start, duration);
         this.gym = new Gym(gym);
         this.exerciseType = new ExerciseType(exerciseType);
         this.interval = new Interval(start, duration);
-
-        //check if current counter is below assigned id
-        if (id > idCounter) {
-            idCounter = id;
-        }
     }
 
     //Getters / Setters
-    public int getId() {
-        return id;
-    }
 
     public Gym getGym() {
         return gym;
@@ -131,14 +106,13 @@ public class Session implements CheckExisting<Session> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, gym, interval, exerciseType);
+        return Objects.hash(gym, interval, exerciseType);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("[" + id + "]")
-                .append(" Start: ")
+        builder.append(" Start: ")
                 .append(SessionParserUtil.parseDateTimeToString(getInterval().getStart()))
                 .append(" End: ")
                 .append(SessionParserUtil.parseDateTimeToString(getInterval().getEnd()))
