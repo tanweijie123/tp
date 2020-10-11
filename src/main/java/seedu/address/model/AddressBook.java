@@ -108,6 +108,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setSessions(List<Session> sessions) {
         this.sessions.setAll(sessions);
+        this.sessions.sort();
     }
 
     //// Client-level operations
@@ -145,6 +146,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeSession(Session key) {
         sessions.remove(key);
+    }
+
+    /**
+     * Sorts {@code session} from this {@code SessionList} by its natural order.
+     */
+    public void sortSession() {
+        sessions.sort();
     }
 
     //=============================== SCHEDULE-RELATED ===========================================

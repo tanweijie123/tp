@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.exceptions.DuplicateEntityException;
 import seedu.address.model.exceptions.EntityNotFoundException;
 
-public class UniqueTList<T extends CheckExisting<T>> implements Iterable<T> {
+public class UniqueTList<T extends CheckExisting<T> & Comparable<T>> implements Iterable<T> {
 
     private final ObservableList<T> internalList = FXCollections.observableArrayList();
     private final ObservableList<T> internalUnmodifiableList =
@@ -108,6 +108,13 @@ public class UniqueTList<T extends CheckExisting<T>> implements Iterable<T> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    /**
+     * Sorts elements in the list by natural order.
+     */
+    public void sort() {
+        internalList.sort(Comparable::compareTo);
     }
 
     /**

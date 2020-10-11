@@ -41,6 +41,8 @@ public class ModelManager implements Model {
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
         filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
         filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
+
+        sortSession();
     }
 
     public ModelManager() {
@@ -152,12 +154,19 @@ public class ModelManager implements Model {
     public void addSession(Session session) {
         addressBook.addSession(session);
         updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
+        sortSession();
     }
 
     @Override
     public void setSession(Session target, Session editedSession) {
         requireAllNonNull(target, editedSession);
         addressBook.setSession(target, editedSession);
+        sortSession();
+    }
+
+    @Override
+    public void sortSession() {
+        addressBook.sortSession();
     }
 
     //=========== Filtered Session List Accessors =============================================================

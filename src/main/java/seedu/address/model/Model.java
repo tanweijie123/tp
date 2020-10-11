@@ -122,6 +122,11 @@ public interface Model {
      */
     void setSession(Session target, Session editedSession);
 
+    /**
+     * Sort the Session List by session's natural order.
+     */
+    void sortSession();
+
     /** Returns an unmodifiable view of the filtered Session list */
     ObservableList<Session> getFilteredSessionList();
 

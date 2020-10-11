@@ -8,7 +8,8 @@ import seedu.address.model.CheckExisting;
 import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
 
-public class Schedule implements CheckExisting<Schedule> {
+@SuppressWarnings("checkstyle:Regexp")
+public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     private Client client;
     private Session session;
 
@@ -66,6 +67,11 @@ public class Schedule implements CheckExisting<Schedule> {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(client, session);
+    }
+
+    @Override
+    public int compareTo(Schedule other) {
+        return this.getSession().compareTo(other.getSession());
     }
 
     @Override
