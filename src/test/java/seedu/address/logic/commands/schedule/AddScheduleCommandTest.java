@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BENSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalSessions.GETWELL;
 
 import java.nio.file.Path;
@@ -21,7 +23,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.session.AddSessionCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -32,7 +33,6 @@ import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.ScheduleBuilder;
-import seedu.address.testutil.SessionBuilder;
 
 public class AddScheduleCommandTest {
 
@@ -92,26 +92,24 @@ public class AddScheduleCommandTest {
 
     @Test
     public void equals() {
-        Session getwell = new SessionBuilder().withGym("Getwell gym").build();
-        Session machoman = new SessionBuilder().withGym("Machoman gym").build();
-        AddSessionCommand addGetwellCommand = new AddSessionCommand(getwell);
-        AddSessionCommand addMachomanCommand = new AddSessionCommand(machoman);
+        AddScheduleCommand firstAddCommand = new AddScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION);
+        AddScheduleCommand secondAddCommand = new AddScheduleCommand(INDEX_SECOND_CLIENT, INDEX_SECOND_SESSION);
 
         // same object -> returns true
-        assertTrue(addGetwellCommand.equals(addGetwellCommand));
+        assertTrue(firstAddCommand.equals(firstAddCommand));
 
         // same values -> returns true
-        AddSessionCommand addGetwellCommandCopy = new AddSessionCommand(getwell);
-        assertTrue(addGetwellCommand.equals(addGetwellCommandCopy));
+        AddScheduleCommand thirdAddCommand = new AddScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION);
+        assertTrue(firstAddCommand.equals(thirdAddCommand));
 
         // different types -> returns false
-        assertFalse(addGetwellCommand.equals(1));
+        assertFalse(firstAddCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addGetwellCommand.equals(null));
+        assertFalse(firstAddCommand.equals(null));
 
         // different Session -> returns false
-        assertFalse(addGetwellCommand.equals(addMachomanCommand));
+        assertFalse(firstAddCommand.equals(secondAddCommand));
     }
 
     /**
