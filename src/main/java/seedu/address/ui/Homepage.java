@@ -10,7 +10,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 
 public class Homepage extends UiPart<AnchorPane> {
@@ -79,7 +78,8 @@ public class Homepage extends UiPart<AnchorPane> {
      */
     public void updateContent() {
         assert(Homepage.homepage != null);
-        this.lblContent.setText("Today's Schedule - " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE dd MMMM")));
+        this.lblContent.setText("Today's Schedule - "
+                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE dd MMMM")));
         todaySchedule.setItems(this.addressBook.getScheduleList());
         todaySchedule.setCellFactory(listView -> new Homepage.ScheduleListViewCell());
     }
@@ -101,8 +101,8 @@ public class Homepage extends UiPart<AnchorPane> {
                 setText(null);
             } else {
                 Label lbl = new Label();
-                lbl.setText(schedule.getClient().getName() + "\n" + schedule.getSession().getGym() + "\n" +
-                        schedule.getSession().getInterval().toString());
+                lbl.setText(schedule.getClient().getName() + "\n" + schedule.getSession().getGym() + "\n"
+                        + schedule.getSession().getInterval().toString());
                 setGraphic(lbl);
             }
         }
