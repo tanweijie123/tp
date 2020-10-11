@@ -5,15 +5,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.client.Client;
-import seedu.address.model.schedule.Schedule;
-
-import java.util.Comparator;
+import seedu.address.model.session.Session;
 
 /**
  * An UI component that displays information of a {@code Client}.
  */
-public class ScheduleCard extends UiPart<Region> {
+public class SessionCard extends UiPart<Region> {
 
     private static final String FXML = "ScheduleListCard.fxml";
 
@@ -28,7 +25,7 @@ public class ScheduleCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Schedule schedule;
+    private Session session;
     @FXML
     private Label dayOfWeek;
     @FXML
@@ -42,15 +39,12 @@ public class ScheduleCard extends UiPart<Region> {
     /**
      * Creates a {@code ScheduleCard} with the given {@code Schedule}.
      */
-    public ScheduleCard(Schedule schedule) {
+    public SessionCard(Session session) {
         super(FXML);
-        this.schedule = schedule;
-        sessionTime.setText(schedule.getSession().getInterval().toString());
-        gymName.setText(schedule.getSession().getGym().toString());
-        dayOfWeek.setText(schedule.getSession().getInterval().getStartDay());
-        // schedule.getClients().stream()
-        // .sorted(Comparator.comparing(tag -> tag.tagName))
-        // .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        this.session = session;
+        sessionTime.setText(session.getInterval().toString());
+        gymName.setText(session.getGym().toString());
+        dayOfWeek.setText(session.getInterval().getStartDay());
     }
 
     @Override
@@ -61,12 +55,12 @@ public class ScheduleCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ScheduleCard)) {
+        if (!(other instanceof SessionCard)) {
             return false;
         }
 
         // state check
-        ScheduleCard card = (ScheduleCard) other;
-        return schedule.equals(card.schedule);
+        SessionCard card = (SessionCard) other;
+        return session.equals(card.session);
     }
 }
