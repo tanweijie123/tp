@@ -9,6 +9,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private Homepage homepage;
     private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -135,6 +137,10 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(this, logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
+        homepage = Homepage.getHomePage();
+        homepage.updateStatistics(this.logic.getAddressBook());
+        setMainDisplay(homepage.getRoot());
+
         rightSideBar = new RightSideBar(this, logic.getFilteredClientList()); //TODO: change this to sess.
         rightDisplay.getChildren().add(rightSideBar.getRoot());
 
@@ -224,8 +230,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Sets the main gui.
+     * Note: Only use this to set main display, so that it can bind to the entire screen.
+     *
+     * @param display The Pane to display
+     */
     public void setMainDisplay(Pane display) {
         mainDisplay.getChildren().clear();
+        AnchorPane.setTopAnchor(display, 0.0);
+        AnchorPane.setBottomAnchor(display, 0.0);
+        AnchorPane.setLeftAnchor(display, 0.0);
+        AnchorPane.setRightAnchor(display, 0.0);
         mainDisplay.getChildren().add(display);
     }
 
