@@ -6,6 +6,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import org.controlsfx.control.HyperlinkLabel;
 
 import javafx.fxml.FXML;
@@ -19,7 +21,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2021s1-cs2103t-t13-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: ";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -36,17 +38,22 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE + "[" + USERGUIDE_URL + "]");
-        root.addEventHandler(KeyEvent.KEY_RELEASED, k -> {
+
+        //Create event that on click / ENTER, it will open the browser to the UG.
+        helpMessage.setOnAction(event -> {
+            try {
+                Desktop.getDesktop().browse(new URL(USERGUIDE_URL).toURI());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
+
+        //Create an event on ESC click, it will close this window
+        root.addEventHandler(KeyEvent.KEY_PRESSED, k -> {
             if (k.getCode() == KeyCode.ESCAPE) {
                 root.close();
-            } else if (k.getCode() == KeyCode.ENTER) {
-                try {
-                    Desktop.getDesktop().browse(new URL(USERGUIDE_URL).toURI());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
             }
         });
     }
