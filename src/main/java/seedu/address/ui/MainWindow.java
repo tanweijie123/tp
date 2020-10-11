@@ -137,8 +137,7 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(this, logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
-        homepage = Homepage.getHomePage();
-        homepage.updateStatistics(this.logic.getAddressBook());
+        homepage = Homepage.getHomePage(this.logic.getAddressBook());
         setMainDisplay(homepage.getRoot());
 
         rightSideBar = new RightSideBar(this, logic.getFilteredClientList()); //TODO: change this to sess.

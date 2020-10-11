@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,8 +19,8 @@
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="55.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="60.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
             <RowConstraints />
             </rowConstraints>
@@ -32,7 +33,8 @@
                 </AnchorPane>
                 <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
                     <children>
-                        <Label fx:id="lblSampleCommands" layoutX="14.0" layoutY="31.0" styleClass="cell_small_label, labelContent" text="placeholder:Command" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <Label fx:id="lblContent" layoutX="14.0" layoutY="31.0" styleClass="cell_small_label, labelContent" text="placeholder:Command" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0" />
+                  <ListView fx:id="todaySchedule" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
