@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="5.0" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="65.0" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                    <children>
+                        <Label layoutX="21.0" layoutY="14.0" styleClass="heading" text="Currently you have: " AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <Label fx:id="lblCurrentlyDetails" layoutX="14.0" layoutY="51.0" styleClass="cell_small_label, labelContent" text="placeholder:Details" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                    <children>
+                        <Label fx:id="lblSampleCommands" layoutX="14.0" layoutY="31.0" styleClass="cell_small_label, labelContent" text="placeholder:Command" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                    </children>
+                </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                   <Label styleClass="cell_small_label" text="If you need help, type &quot;help&quot;. We will open the User Guide for you! " visible="false"/>
+               </children>
+            </AnchorPane>
+                <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="NEVER">
+                    <children>
+                        <Label fx:id="lblQotd" styleClass="heading, cell_small_label, qotd" text="QOTD:placeholder" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="4">
+                    <children>
+                        <ImageView fitHeight="400.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                            <image>
+                                <!-- Image (No attribution) from https://www.pngkey.com/detail/u2t4i1u2u2r5w7q8_2-3-3-4-4-5-5-6/ -->
+                                <Image url="@../images/fitness_mascot.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </GridPane>
+    </children>
+   <styleClass>
+      <String fx:value="homepage" />
+      <String fx:value="centre-anchor-pane" />
+   </styleClass>
+</AnchorPane>
