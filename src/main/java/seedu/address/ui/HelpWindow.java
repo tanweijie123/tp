@@ -6,8 +6,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import org.controlsfx.control.HyperlinkLabel;
 
 import javafx.fxml.FXML;
