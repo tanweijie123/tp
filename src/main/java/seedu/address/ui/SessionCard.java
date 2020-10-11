@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.session.Session;
@@ -12,7 +11,7 @@ import seedu.address.model.session.Session;
  */
 public class SessionCard extends UiPart<Region> {
 
-    private static final String FXML = "ScheduleListCard.fxml";
+    private static final String FXML = "SessionListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -25,6 +24,8 @@ public class SessionCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Session session;
     @FXML
     private Label dayOfWeek;
@@ -32,17 +33,17 @@ public class SessionCard extends UiPart<Region> {
     private Label sessionTime;
     @FXML
     private Label gymName;
-    @FXML
-    private FlowPane clientNames;
 
 
     /**
      * Creates a {@code ScheduleCard} with the given {@code Schedule}.
      */
-    public SessionCard(Session session) {
+    public SessionCard(Session session, int displayedIndex) {
         super(FXML);
         this.session = session;
-        sessionTime.setText(session.getInterval().toString());
+        id.setText(displayedIndex + ". ");
+        sessionTime.setText(session.getInterval().getTime12hrPattern());
+        //sessionTime.setText(session.getInterval().toString());
         gymName.setText(session.getGym().toString());
         dayOfWeek.setText(session.getInterval().getStartDay());
     }

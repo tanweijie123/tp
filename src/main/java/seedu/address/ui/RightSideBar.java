@@ -39,7 +39,7 @@ public class RightSideBar extends UiPart<AnchorPane> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new SessionCard(session).getRoot());
+                setGraphic(new SessionCard(session, getIndex() + 1).getRoot());
             }
         }
     }

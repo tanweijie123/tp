@@ -1,6 +1,9 @@
 package seedu.address.model;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -17,6 +20,11 @@ public interface Model {
     Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
     Predicate<Session> PREDICATE_SHOW_ALL_SESSIONS = unused -> true;
     Predicate<Schedule> PREDICATE_SHOW_ALL_SCHEDULES = unused -> true;
+
+    Predicate<Session> PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS = (session) -> session.getInterval().getStart()
+            .isBefore(LocalDateTime.now().truncatedTo(DAYS).plusDays(7))
+            && session.getInterval().getStart().isAfter(LocalDateTime.now().truncatedTo(DAYS));
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
