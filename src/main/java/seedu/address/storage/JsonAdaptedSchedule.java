@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import static seedu.address.model.session.Interval.DATE_TIME_FORMATTER;
-
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
