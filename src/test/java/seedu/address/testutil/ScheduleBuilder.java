@@ -140,6 +140,28 @@ public class ScheduleBuilder {
     }
 
     /**
+     * Sets the {@code Session}-related attributes of the {@code Schedule} that we are building.
+     */
+    public ScheduleBuilder withSession(Session session) {
+        this.gym = session.getGym();
+        this.exerciseType = session.getExerciseType();
+        this.interval = session.getInterval();
+        return this;
+    }
+
+    /**
+     * Sets the {@code Client}-related attributes of the {@code Schedule} that we are building.
+     */
+    public ScheduleBuilder withClient(Client client) {
+        this.clientName = client.getName();
+        this.clientEmail = client.getEmail();
+        this.clientPhone = client.getPhone();
+        this.clientAddress = client.getAddress();
+        this.clientTags = client.getTags();
+        return this;
+    }
+
+    /**
      * Returns the {@code Schedule} based on this properties.
      */
     public Schedule build() {
