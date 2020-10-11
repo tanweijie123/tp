@@ -72,7 +72,7 @@ public class RescheduleCommand extends Command {
         Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editRescheduleDescriptor,
                 lastShownSessionList);
 
-        if (!scheduleToEdit.isExisting(editedSchedule) && model.hasSchedule(editedSchedule)) {
+        if (!scheduleToEdit.isUnique(editedSchedule) && model.hasSchedule(editedSchedule)) {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }
 
