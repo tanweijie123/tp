@@ -3,7 +3,6 @@ package seedu.address.logic.parser.schedule;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.client.DeleteClientCommand;
 import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
