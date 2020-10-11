@@ -8,10 +8,6 @@
    <children>
       <ListView fx:id="sessionListView" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane fx:id="paneNextSession" maxHeight="20.0" maxWidth="50.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-         <children>
-            <Label layoutY="22.0" styleClass="cell_big_label" text="Upcoming Session:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="12.0" />
-            <Label fx:id="lblNextClient" layoutY="40.0" text="\$lblNextClient" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0" />
-         </children>
       </AnchorPane>
    </children>
 </AnchorPane>
