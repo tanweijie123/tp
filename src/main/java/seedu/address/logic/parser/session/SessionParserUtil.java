@@ -2,6 +2,7 @@ package seedu.address.logic.parser.session;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -51,7 +52,7 @@ public class SessionParserUtil extends ParserUtil {
      *
      * @throws ParseException if the given {@code interval} is invalid.
      */
-    public static Interval parseInterval(String startTime, String duration) throws ParseException {
+    public static Interval parseIntervalFromStartAndDuration(String startTime, String duration) throws ParseException {
         requireNonNull(startTime, duration);
         if (isInvalidDateTime(startTime)) {
             throw new ParseException(Interval.MESSAGE_DATE_TIME_CONSTRAINTS);
@@ -64,6 +65,31 @@ public class SessionParserUtil extends ParserUtil {
         LocalDateTime start = parseStringToDateTime(startTime);
         int dur = Integer.parseInt(duration);
 
+        if (!Interval.isValidInterval(dur)) {
+            throw new ParseException(Interval.MESSAGE_CONSTRAINTS);
+        }
+        return new Interval(start, dur);
+    }
+
+    /**
+     * Parses a {@code String startTime, @code String duration} into an {@code Interval}.
+     *
+     * @throws ParseException if the given {@code interval} is invalid.
+     */
+    public static Interval parseIntervalFromStartAndEnd(String startTime, String endTime) throws ParseException {
+        requireNonNull(startTime, endTime);
+        if (isInvalidDateTime(startTime)) {
+            throw new ParseException(Interval.MESSAGE_DATE_TIME_CONSTRAINTS);
+        }
+
+        if (isInvalidDateTime(endTime)) {
+            throw new ParseException(Interval.MESSAGE_DATE_TIME_CONSTRAINTS);
+        }
+
+        LocalDateTime start = parseStringToDateTime(startTime);
+        LocalDateTime end = parseStringToDateTime(endTime);
+
+        int dur = (int) Duration.between(start, end).toMinutes();
         if (!Interval.isValidInterval(dur)) {
             throw new ParseException(Interval.MESSAGE_CONSTRAINTS);
         }

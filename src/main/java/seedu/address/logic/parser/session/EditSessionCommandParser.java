@@ -46,7 +46,9 @@ public class EditSessionCommandParser implements Parser<EditSessionCommand> {
         }
         if (argMultimap.getValue(PREFIX_START_TIME).isPresent() && argMultimap.getValue(PREFIX_DURATION).isPresent()) {
             editSessionDescriptor
-                    .setInterval(SessionParserUtil.parseInterval(argMultimap.getValue(PREFIX_START_TIME).get(),
+                    .setInterval(
+                            SessionParserUtil.parseIntervalFromStartAndDuration(argMultimap
+                                            .getValue(PREFIX_START_TIME).get(),
                                     argMultimap.getValue(PREFIX_DURATION).get()));
         }
 
