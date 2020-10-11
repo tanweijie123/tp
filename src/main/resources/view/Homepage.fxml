@@ -18,10 +18,10 @@
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="55.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints />
             </rowConstraints>
             <children>
                 <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
@@ -35,17 +35,12 @@
                         <Label fx:id="lblSampleCommands" layoutX="14.0" layoutY="31.0" styleClass="cell_small_label, labelContent" text="placeholder:Command" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
                     </children>
                 </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                   <Label styleClass="cell_small_label" text="If you need help, type &quot;help&quot;. We will open the User Guide for you! " visible="false"/>
-               </children>
-            </AnchorPane>
-                <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="NEVER">
+                <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
                     <children>
                         <Label fx:id="lblQotd" styleClass="heading, cell_small_label, qotd" text="QOTD:placeholder" />
                     </children>
                 </AnchorPane>
-                <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="4">
+                <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="3">
                     <children>
                         <ImageView fitHeight="400.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                             <image>
