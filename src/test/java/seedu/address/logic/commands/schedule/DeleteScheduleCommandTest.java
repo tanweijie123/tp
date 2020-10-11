@@ -1,9 +1,12 @@
 package seedu.address.logic.commands.schedule;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.*;
-import static seedu.address.testutil.TypicalClients.*;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.showScheduleAtIndex;
+import static seedu.address.testutil.TypicalClients.ALICE;
+import static seedu.address.testutil.TypicalClients.BENSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SCHEDULE;
 import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
@@ -90,41 +93,41 @@ public class DeleteScheduleCommandTest {
         assertCommandSuccess(deleteScheduleCommand, model, expectedMessage, expectedModel);
     }
 
-//    @Test
-//    public void execute_invalidIndexFilteredList_throwsCommandException() {
-//        showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
-//
-//        Index outOfBoundIndex = INDEX_SECOND_SCHEDULE;
-//        // ensures that outOfBoundIndex is still in bounds of address book list
-//        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getScheduleList().size());
-//
-//        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(outOfBoundIndex);
-//
-//        assertCommandFailure(deleteSessionCommand, model, Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
-//    }
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
 
-//    @Test
-//    public void equals() {
-//        DeleteSessionCommand deleteFirstCommand = new DeleteSessionCommand(INDEX_FIRST_SESSION);
-//        DeleteSessionCommand deleteSecondCommand = new DeleteSessionCommand(INDEX_SECOND_SESSION);
-//
-//        // same object -> returns true
-//        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
-//
-//        // same values -> returns true
-//        DeleteSessionCommand deleteFirstCommandCopy = new DeleteSessionCommand(INDEX_FIRST_SESSION);
-//        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
-//
-//        // different types -> returns false
-//        assertFalse(deleteFirstCommand.equals(1));
-//
-//        // null -> returns false
-//        assertFalse(deleteFirstCommand.equals(null));
-//
-//        // different Session -> returns false
-//        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-//    }
-//
+        Index outOfBoundIndex = INDEX_SECOND_SCHEDULE;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getScheduleList().size());
+
+        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        DeleteScheduleCommand deleteFirstCommand = new DeleteScheduleCommand(INDEX_FIRST_SCHEDULE);
+        DeleteScheduleCommand deleteSecondCommand = new DeleteScheduleCommand(INDEX_SECOND_SCHEDULE);
+
+        // same object -> returns true
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+
+        // same values -> returns true
+        DeleteScheduleCommand deleteFirstCommandCopy = new DeleteScheduleCommand(INDEX_FIRST_SCHEDULE);
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstCommand.equals(null));
+
+        // different Session -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+    }
+
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
