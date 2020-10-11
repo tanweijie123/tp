@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
@@ -51,6 +52,6 @@ public class TypicalSessions {
     }
 
     public static List<Session> getTypicalSessions() {
-        return new ArrayList<>();
+        return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN));
     }
 }
