@@ -7,11 +7,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HomeCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.client.AddClientCommand;
 import seedu.address.logic.commands.client.DeleteClientCommand;
 import seedu.address.logic.commands.client.EditClientCommand;
@@ -77,6 +73,8 @@ public class AddressBookParser {
         commandMapper.put(ExitCommand.COMMAND_WORD, (args) -> new ExitCommand());
         commandMapper.put(HelpCommand.COMMAND_WORD, (args) -> new HelpCommand());
         commandMapper.put(HomeCommand.COMMAND_WORD, (args) -> new HomeCommand());
+        commandMapper.put(ViewWeekCommand.COMMAND_WORD, (args) -> new ViewWeekCommand());
+        commandMapper.put(ViewAllCommand.COMMAND_WORD, (args) -> new ViewAllCommand());
     }
 
     /**

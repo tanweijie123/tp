@@ -153,7 +153,6 @@ public class ModelManager implements Model {
     @Override
     public void addSession(Session session) {
         addressBook.addSession(session);
-        updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
         sortSession();
     }
 
@@ -180,6 +179,7 @@ public class ModelManager implements Model {
     public void updateFilteredSessionList(Predicate<Session> predicate) {
         requireNonNull(predicate);
         filteredSessions.setPredicate(predicate);
+        sortSession();
     }
 
     //=========== Schedule List ===============================================================================
@@ -236,7 +236,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredClients.equals(other.filteredClients);
+                && filteredClients.equals(other.filteredClients)
+                && filteredSessions.equals(other.filteredSessions)
+                && filteredSchedules.equals(other.filteredSchedules);
     }
-
 }

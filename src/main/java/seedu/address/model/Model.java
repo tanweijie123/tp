@@ -21,10 +21,6 @@ public interface Model {
     Predicate<Session> PREDICATE_SHOW_ALL_SESSIONS = unused -> true;
     Predicate<Schedule> PREDICATE_SHOW_ALL_SCHEDULES = unused -> true;
 
-    Predicate<Session> PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS = (session) -> session.getInterval().getStart()
-            .isBefore(LocalDateTime.now().truncatedTo(DAYS).plusDays(7))
-            && session.getInterval().getStart().isAfter(LocalDateTime.now().truncatedTo(DAYS));
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

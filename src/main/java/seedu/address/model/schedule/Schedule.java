@@ -8,7 +8,6 @@ import seedu.address.model.CheckExisting;
 import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
 
-@SuppressWarnings("checkstyle:Regexp")
 public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     private Client client;
     private Session session;
