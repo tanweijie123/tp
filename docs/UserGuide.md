@@ -189,3 +189,6 @@ _Allow the creation of sessions and tagging of its associated client_
 |Unassign a Client to Gym Session |`deschedule c/CLIENT_INDEX s/SESSION_INDEX`  | `deschedule c/2 s/3` |
 |Edit a Client to Gym Session |`reschedule c/CLIENT_INDEX s/SESSION_INDEX`  | `reschedule c/2 s/3` |Updating Session Info |`sedit INDEX [g/GYM] [ex/EXERCISE_TYPE] [at/START_TIME] [t/DURATION]`| `sedit 1 g/Machoman at/29/09/2020 1600 t/120`
 |Deleting a Session |`sdel INDEX` | `sdel 1`|
+
+### Acknowledgement
+Icon made by Freepik from www.flaticon.com
