@@ -66,7 +66,7 @@ public class Client implements CheckExisting<Client> {
      * This defines a weaker notion of equality between two Clients.
      */
     @Override
-    public boolean isExisting(Client otherClient) {
+    public boolean isUnique(Client otherClient) {
         if (otherClient == this) {
             return true;
         }

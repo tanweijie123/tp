@@ -63,7 +63,7 @@ public class Session implements CheckExisting<Session> {
      * This defines a different notion of equality between two Sessions compared to {@code equals}
      */
     @Override
-    public boolean isExisting(Session otherSession) {
+    public boolean isUnique(Session otherSession) {
         if (otherSession == this) {
             return true;
         }

@@ -24,6 +24,10 @@
     -fx-opacity: 1;
 }
 
+.persistent-prompt:focused {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
+}
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -97,14 +101,15 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-text-fill: white;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #3c3e3f !important;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #515658 !important;
 }
 
 .list-cell:filled:selected {

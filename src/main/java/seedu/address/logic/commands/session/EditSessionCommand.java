@@ -70,7 +70,7 @@ public class EditSessionCommand extends Command {
         Session sessionToEdit = lastShownList.get(index.getZeroBased());
         Session editedSession = createEditedSession(sessionToEdit, editSessionDescriptor);
 
-        if (!sessionToEdit.isExisting(editedSession) && model.hasSession(editedSession)) {
+        if (!sessionToEdit.isUnique(editedSession) && model.hasSession(editedSession)) {
             throw new CommandException(MESSAGE_DUPLICATE_SESSION);
         }
 
