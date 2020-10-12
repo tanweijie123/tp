@@ -9,8 +9,10 @@ import java.util.logging.Logger;
 import org.controlsfx.control.HyperlinkLabel;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -85,6 +87,7 @@ public class HelpWindow extends UiPart<Stage> {
         logger.fine("Showing help page about the application.");
         getRoot().show();
         getRoot().centerOnScreen();
+        setFocusOnLink();
     }
 
     /**
@@ -106,5 +109,18 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Focuses on the link. Enables the user to click enter to visit the link.
+     */
+    public void setFocusOnLink() {
+        try {
+            TextFlow text = (TextFlow) helpMessage.getChildrenUnmodifiable().get(0);
+            Hyperlink link = (Hyperlink) text.getChildren().get(1);
+            link.requestFocus();
+        } catch (ClassCastException e) {
+            System.err.println("Unable to focus on link"); // do nothing if un-castable
+        }
     }
 }

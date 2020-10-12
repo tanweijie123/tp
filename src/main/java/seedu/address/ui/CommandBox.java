@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.controlsfx.control.textfield.TextFields;
@@ -33,15 +34,41 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        TextFields.bindAutoCompletion(commandTextField,
-            t -> AddressBookParser.getCommandList()
-                .stream()
-                .filter(x -> x.startsWith(t.getUserText()))
-                .sorted()
-                .collect(Collectors.toList()));
+        bindAutoComplete();
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+    }
+
+    /**
+     * Binds Autocomplete to Command Text Field.
+     * Autocomplete will not appear in the following scenario
+     *    1. When TextField is blank
+     *    2. When the list.size() = 1 & TextField is exactly list.get(0)
+     * The reason for point 2 is that the AutoComplete will "consume" the enter, thus the instruction is not executed,
+     *    or, it will take the focus off "help" window.
+     * It is also recommended not to have command that are substring of another command.
+     *    Eg. "help" and "helptask"
+     */
+    private void bindAutoComplete() {
+        TextFields.bindAutoCompletion(commandTextField,
+            t -> {
+                if (t.getUserText().isBlank()) {
+                    return null;
+                }
+
+                List<String> list = AddressBookParser.getCommandList()
+                        .stream()
+                        .filter(x -> x.startsWith(t.getUserText()))
+                        .sorted()
+                        .collect(Collectors.toList());
+
+                if (list.size() == 1 && list.get(0).equalsIgnoreCase(t.getUserText())) {
+                    return null;
+                } else {
+                    return list;
+                }
+            });
     }
 
     /**
