@@ -13,7 +13,8 @@ public class ViewAllSessionsCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        SessionCommandTestUtil.assertCommandSuccess(new ViewAllSessionsCommand(), model, Messages.MESSAGE_ALL_SESSIONS_OVERVIEW,
+        SessionCommandTestUtil.assertCommandSuccess(new ViewAllSessionsCommand(), model,
+                Messages.MESSAGE_ALL_SESSIONS_OVERVIEW,
                 expectedModel);
     }
 }
