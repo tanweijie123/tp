@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.session;
 
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.MACHOMAN_TOMORROW;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.assertCommandSuccess;
@@ -13,14 +13,15 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 
-public class ViewWeekCommandTest {
+public class ViewWeekSessionsCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ViewWeekCommand(), model, Messages.MESSAGE_UPCOMING_WEEK_SESSIONS_OVERVIEW,
+        SessionCommandTestUtil.assertCommandSuccess(new ViewWeekSessionsCommand(), model,
+                Messages.MESSAGE_UPCOMING_WEEK_SESSIONS_OVERVIEW,
                 expectedModel);
     }
 
@@ -30,7 +31,7 @@ public class ViewWeekCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ViewWeekCommand(), model, Messages.MESSAGE_UPCOMING_WEEK_SESSIONS_OVERVIEW,
+        assertCommandSuccess(new ViewWeekSessionsCommand(), model, Messages.MESSAGE_UPCOMING_WEEK_SESSIONS_OVERVIEW,
                 expectedModel);
     }
 
@@ -44,7 +45,7 @@ public class ViewWeekCommandTest {
         Model model = new ModelManager(ab, new UserPrefs());
         Model expectedModel = new ModelManager(testAb, new UserPrefs());
 
-        assertCommandSuccess(new ViewWeekCommand(), model, Messages.MESSAGE_UPCOMING_WEEK_SESSIONS_OVERVIEW,
+        assertCommandSuccess(new ViewWeekSessionsCommand(), model, Messages.MESSAGE_UPCOMING_WEEK_SESSIONS_OVERVIEW,
                 expectedModel);
     }
 }
