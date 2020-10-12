@@ -20,7 +20,7 @@ import seedu.address.model.session.Session;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteClientCommand}.
+ * {@code DeleteSessionCommand}.
  */
 public class DeleteSessionCommandTest {
 
