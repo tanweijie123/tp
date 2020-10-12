@@ -200,7 +200,7 @@ public class ModelManager implements Model {
         return addressBook.getScheduleList()
                 .stream()
                 .map(Schedule::getClient)
-                .anyMatch(clientToEdit::isExisting);
+                .anyMatch(clientToEdit::isUnique);
     }
 
     /**
@@ -211,7 +211,7 @@ public class ModelManager implements Model {
 
         List<Schedule> associatedSchedules = addressBook.getScheduleList()
                 .stream()
-                .filter(schedule -> clientToEdit.isExisting(schedule.getClient()))
+                .filter(schedule -> clientToEdit.isUnique(schedule.getClient()))
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
@@ -227,7 +227,7 @@ public class ModelManager implements Model {
         return addressBook.getScheduleList()
                 .stream()
                 .map(Schedule::getSession)
-                .anyMatch(session::isExisting);
+                .anyMatch(session::isUnique);
     }
 
     /**
@@ -238,7 +238,7 @@ public class ModelManager implements Model {
 
         List<Schedule> associatedSchedules = addressBook.getScheduleList()
                 .stream()
-                .filter(schedule -> sessionToEdit.isExisting(schedule.getSession()))
+                .filter(schedule -> sessionToEdit.isUnique(schedule.getSession()))
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {

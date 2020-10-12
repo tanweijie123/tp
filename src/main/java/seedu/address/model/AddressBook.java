@@ -17,9 +17,9 @@ import seedu.address.model.session.Session;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueTList<Client> clients;
-    private final UniqueTList<Session> sessions;
-    private final UniqueTList<Schedule> schedules;
+    private final UniqueList<Client> clients;
+    private final UniqueList<Session> sessions;
+    private final UniqueList<Schedule> schedules;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,9 +29,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        clients = new UniqueTList<>();
-        sessions = new UniqueTList<>();
-        schedules = new UniqueTList<>();
+        clients = new UniqueList<>();
+        sessions = new UniqueList<>();
+        schedules = new UniqueList<>();
     }
 
     public AddressBook() {}

@@ -4,8 +4,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -87,6 +89,15 @@ public class AddressBookParser {
         commandMapper.put(HomeCommand.COMMAND_WORD, (args) -> new HomeCommand());
         commandMapper.put(ViewWeekSessionsCommand.COMMAND_WORD, (args) -> new ViewWeekSessionsCommand());
         commandMapper.put(ViewAllSessionsCommand.COMMAND_WORD, (args) -> new ViewAllSessionsCommand());
+    }
+
+    /**
+     * Gets the full set of commands available in this program
+     *
+     * @return a List of String
+     */
+    public static List<String> getCommandList() {
+        return commandMapper.keySet().stream().collect(Collectors.toList());
     }
 
     /**

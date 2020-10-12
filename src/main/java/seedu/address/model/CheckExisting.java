@@ -8,5 +8,5 @@ public interface CheckExisting<T> {
      * Returns true if 2 elements has the same unique identifier.
      * This defines a weaker notion of equality between two elements.
      */
-    public boolean isExisting(T other);
+    public boolean isUnique(T other);
 }
