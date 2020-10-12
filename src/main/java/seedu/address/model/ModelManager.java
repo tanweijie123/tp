@@ -151,7 +151,7 @@ public class ModelManager implements Model {
         return addressBook.getScheduleList()
                 .stream()
                 .map(Schedule::getSession)
-                .anyMatch(session::isExisting);
+                .anyMatch(session::isUnique);
     }
 
     @Override
@@ -160,7 +160,7 @@ public class ModelManager implements Model {
 
         List<Schedule> associatedSchedules = addressBook.getScheduleList()
                 .stream()
-                .filter(schedule -> session.isExisting(schedule.getSession()))
+                .filter(schedule -> session.isUnique(schedule.getSession()))
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
