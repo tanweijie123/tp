@@ -9,12 +9,9 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_MACHOMAN;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
-import seedu.address.model.session.Interval;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
 
 public class EditSessionDescriptorTest {

@@ -19,7 +19,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.session.Interval;
 import seedu.address.model.session.IntervalContainsDatetimePredicate;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
@@ -39,12 +38,11 @@ public class SessionCommandTestUtil {
 
     public static final String VALID_START_TIME_GETWELL = "29/09/2020 1300";
     public static final String VALID_START_TIME_MACHOMAN = "29/09/2020 1600";
-    public static final String VALID_START_TIME_ULTRAMAN = "29/09/2020 1800";
+    public static final String VALID_START_TIME_ULTRAMAN = "30/09/2020 1800";
 
     public static final String VALID_DURATION_GETWELL = "120";
     public static final String VALID_DURATION_MACHOMAN = "150";
     public static final String VALID_DURATION_ULTRAMAN = "170";
-
 
     public static final String GYM_DESC_GETWELL = " " + PREFIX_GYM + VALID_GYM_GETWELL;
     public static final String GYM_DESC_MACHOMAN = " " + PREFIX_GYM + VALID_GYM_MACHOMAN;

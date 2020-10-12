@@ -1,8 +1,9 @@
 package seedu.address.testutil;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.schedule.RescheduleCommand.RescheduleDescriptor;
-import seedu.address.model.schedule.Schedule;
 
 /**
  * A utility class to help with building RescheduleDescriptorBuilder objects.
@@ -10,10 +11,6 @@ import seedu.address.model.schedule.Schedule;
 public class RescheduleDescriptorBuilder {
 
     private RescheduleDescriptor descriptor;
-
-//    public RescheduleDescriptorBuilder() {
-//        this.descriptor = new RescheduleDescriptor();
-//    }
 
     public RescheduleDescriptorBuilder(RescheduleDescriptor descriptor) {
         this.descriptor = new RescheduleDescriptor(descriptor);
