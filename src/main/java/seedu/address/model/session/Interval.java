@@ -73,6 +73,10 @@ public class Interval {
                 + getEnd().format(TIME_12HR_PATTERN_FORMATTER);
     }
 
+    public String getStartDate() {
+        return getStart().format(DATE_TIME_FORMATTER);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

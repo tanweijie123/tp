@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -14,6 +15,7 @@ import seedu.address.model.session.Session;
 /**
  * API of the Logic component
  */
+@SuppressWarnings("checkstyle:CommentsIndentation")
 public interface Logic {
     /**
      * Executes the command and returns the result.
@@ -36,12 +38,12 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of Sessions */
     ObservableList<Session> getFilteredSessionList();
-    //
-    //    /** Returns an unmodifiable view of the list of Sessions associated to a Session*/
-    //    ObservableList<Client> getAssociatedClientList(Session session);
-    //
-    //    /** Returns an unmodifiable view of the list of Sessions associated to a Client*/
-    //    ObservableList<Session> getAssociatedSessionList(Client client);
+
+    /** Returns the list of Sessions associated to a Session*/
+    List<Client> getAssociatedClientList(Session session);
+
+    /** Returns the list of Sessions associated to a Client*/
+    List<Session> getAssociatedSessionList(Client client);
 
     /**
      * Returns the user prefs' address book file path.

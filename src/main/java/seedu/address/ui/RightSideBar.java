@@ -1,19 +1,22 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Logic;
+import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
 
 public class RightSideBar extends UiPart<AnchorPane> {
     private static final String FXML = "RightSideBar.fxml";
     private final Logger logger = LogsCenter.getLogger(RightSideBar.class);
     private final MainWindow mainWindow;
+    private final Logic logic;
 
 
     @FXML
@@ -22,11 +25,21 @@ public class RightSideBar extends UiPart<AnchorPane> {
     /**
      * Creates a {@code RightSideBar} with the given {@code ObservableList}.
      */
-    public RightSideBar(MainWindow mainWindow, ObservableList<Session> sessionList) {
+    public RightSideBar(MainWindow mainWindow, Logic logic) {
         super(FXML);
         this.mainWindow = mainWindow;
-        sessionListView.setItems(sessionList);
+        this.logic = logic;
+        sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new RightSideBar.SessionListViewCell());
+    }
+
+    /**
+     * Updates the content of the Session ListView
+     */
+    public void update() {
+        sessionListView.setItems(null);
+        sessionListView.setItems(logic.getFilteredSessionList());
+        sessionListView.setCellFactory(listView -> new SessionListViewCell());
     }
 
     /**
@@ -41,7 +54,12 @@ public class RightSideBar extends UiPart<AnchorPane> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new SessionCard(session, getIndex() + 1).getRoot());
+                List<Client> associatedClients = logic.getAssociatedClientList(session);
+                if (associatedClients.size() > 0) {
+                    setGraphic(new SessionCard(session, getIndex() + 1, associatedClients).getRoot());
+                } else {
+                    setGraphic(new SessionCard(session, getIndex() + 1, null).getRoot());
+                }
             }
         }
     }

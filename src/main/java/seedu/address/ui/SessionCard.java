@@ -1,10 +1,15 @@
 package seedu.address.ui;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
+
 
 /**
  * An UI component that displays information of a {@code Client}.
@@ -33,21 +38,23 @@ public class SessionCard extends UiPart<Region> {
     private Label sessionTime;
     @FXML
     private Label gymName;
+    @FXML
+    private FlowPane clientList;
 
 
     /**
      * Creates a {@code ScheduleCard} with the given {@code Schedule}.
      */
-    public SessionCard(Session session, int displayedIndex) {
+    public SessionCard(Session session, int displayedIndex, List<Client> clients) {
         super(FXML);
         this.session = session;
         id.setText(displayedIndex + ". ");
         sessionTime.setText(session.getInterval().getTime12hrPattern());
         gymName.setText(session.getGym().toString());
         dayOfWeek.setText(session.getInterval().getStartDay());
-        //client.getTags().stream()
-        //                .sorted(Comparator.comparing(tag -> tag.tagName))
-        //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (clients != null && clients.size() > 0) {
+            clients.forEach(client -> clientList.getChildren().add(new Label(client.getName().toString())));
+        }
     }
 
     @Override

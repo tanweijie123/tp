@@ -3,11 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
@@ -96,7 +94,6 @@ public class UniqueTList<T extends CheckExisting<T> & Comparable<T>> implements 
     public Stream<T> findAllMatch(Predicate<T> predicate) {
         requireNonNull(predicate);
         return internalUnmodifiableList.stream().filter(predicate);
-        //return ;
     }
 
     /**

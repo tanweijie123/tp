@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.client.Client;
+import seedu.address.model.session.Session;
 
 /**
  * An UI component that displays information of a {@code Client}.
@@ -45,7 +46,7 @@ public class ClientCard extends UiPart<Region> {
     /**
      * Creates a {@code ClientCode} with the given {@code Client} and index to display.
      */
-    public ClientCard(Client client, int displayedIndex) {
+    public ClientCard(Client client, int displayedIndex, Session session) {
         super(FXML);
         this.client = client;
         id.setText(displayedIndex + ". ");
@@ -54,7 +55,11 @@ public class ClientCard extends UiPart<Region> {
         //        client.getTags().stream()
         //                .sorted(Comparator.comparing(tag -> tag.tagName))
         //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        nextSession.setText(nextSessionStart); // placeholder
+        if (session != null) {
+            nextSession.setText(nextSessionStart + session.getInterval().getStartDate()); // placeholder
+        } else {
+            nextSession.setText(nextSessionStart + " - ");
+        }
     }
 
     @Override

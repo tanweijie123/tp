@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -223,13 +223,13 @@ public class ModelManager implements Model {
 
     //=========== Client-Session Association =====================================================================
     @Override
-    public Stream<Client> findClientBySession(Session sessionKey) {
+    public List<Client> findClientBySession(Session sessionKey) {
         requireNonNull(sessionKey);
         return addressBook.findClientBySession(sessionKey);
     }
 
     @Override
-    public Stream<Session> findSessionByClient(Client clientKey) {
+    public List<Session> findSessionByClient(Client clientKey) {
         requireNonNull(clientKey);
         return addressBook.findSessionByClient(clientKey);
     }

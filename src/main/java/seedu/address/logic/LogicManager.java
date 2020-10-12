@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -68,6 +69,16 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Session> getFilteredSessionList() {
         return model.getFilteredSessionList();
+    }
+
+    @Override
+    public List<Client> getAssociatedClientList(Session sessionKey) {
+        return model.findClientBySession(sessionKey);
+    }
+
+    @Override
+    public List<Session> getAssociatedSessionList(Client clientKey) {
+        return model.findSessionByClient(clientKey);
     }
 
     @Override
