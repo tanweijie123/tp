@@ -219,6 +219,33 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Returns true if a Schedule with the same session as {@code session} exists in the Schedule List.
+     */
+    public boolean hasAnyScheduleAssociatedWithSession(Session session) {
+        requireNonNull(session);
+        return addressBook.getScheduleList()
+                .stream()
+                .map(Schedule::getSession)
+                .anyMatch(session::isExisting);
+    }
+
+    /**
+     * Edits every Schedule with the same session as {@code sessionToEdit} into {@code editedSession}.
+     */
+    public void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession) {
+        requireAllNonNull(sessionToEdit, editedSession);
+
+        List<Schedule> associatedSchedules = addressBook.getScheduleList()
+                .stream()
+                .filter(schedule -> sessionToEdit.isExisting(schedule.getSession()))
+                .collect(Collectors.toList());
+
+        for (Schedule schedule : associatedSchedules) {
+            this.setSchedule(schedule, new Schedule(schedule.getClient(), editedSession));
+        }
+    }
+
     @Override
     public void deleteSchedule(Schedule schedule) {
         addressBook.removeSchedule(schedule);

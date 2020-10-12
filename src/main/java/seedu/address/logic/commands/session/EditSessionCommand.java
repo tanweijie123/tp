@@ -75,6 +75,10 @@ public class EditSessionCommand extends Command {
         }
 
         model.setSession(sessionToEdit, editedSession);
+        if (model.hasAnyScheduleAssociatedWithSession(sessionToEdit)) {
+            model.editSchedulesAssociatedWithSession(sessionToEdit, editedSession);
+        }
+
         model.updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
         return new CommandResult(String.format(MESSAGE_EDIT_SESSION_SUCCESS, editedSession));
     }
