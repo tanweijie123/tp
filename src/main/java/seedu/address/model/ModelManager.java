@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -179,6 +181,33 @@ public class ModelManager implements Model {
     public boolean hasSchedule(Schedule schedule) {
         requireNonNull(schedule);
         return addressBook.hasSchedule(schedule);
+    }
+
+    /**
+     * Returns true if a Schedule with the same client as {@code Client} exists in the Schedule List.
+     */
+    public boolean hasAnyScheduleAssociatedWithClient(Client clientToEdit) {
+        requireNonNull(clientToEdit);
+        return addressBook.getScheduleList()
+                .stream()
+                .map(Schedule::getClient)
+                .anyMatch(clientToEdit::isExisting);
+    }
+
+    /**
+     * Edits every Schedule with the same client as {@code client}.
+     */
+    public void editSchedulesAssociatedWithClient(Client clientToEdit, Client editedClient) {
+        requireAllNonNull(clientToEdit, editedClient);
+
+        List<Schedule> associatedSchedules = addressBook.getScheduleList()
+                .stream()
+                .filter(schedule -> clientToEdit.isExisting(schedule.getClient()))
+                .collect(Collectors.toList());
+
+        for (Schedule schedule : associatedSchedules) {
+            this.setSchedule(schedule, new Schedule(editedClient, schedule.getSession()));
+        }
     }
 
     @Override

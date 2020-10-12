@@ -84,6 +84,11 @@ public class EditClientCommand extends Command {
         }
 
         model.setClient(clientToEdit, editedClient);
+
+        if (model.hasAnyScheduleAssociatedWithClient(clientToEdit)) {
+            model.editSchedulesAssociatedWithClient(clientToEdit, editedClient);
+        }
+
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient));
     }

@@ -129,6 +129,16 @@ public interface Model {
     boolean hasSchedule(Schedule schedule);
 
     /**
+     * Returns true if a Schedule with the same client as {@code Client} exists in the Schedule List.
+     */
+    boolean hasAnyScheduleAssociatedWithClient(Client toEdit);
+
+    /**
+     * Edits every Schedule with the same client as {@code client}.
+     */
+    void editSchedulesAssociatedWithClient(Client toEdit, Client editedClient);
+
+    /**
      * Deletes the given Schedule.
      * The Schedule must exist in the Schedule List.
      */
