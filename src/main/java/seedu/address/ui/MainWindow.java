@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -33,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private List<String> pastCommandList;
+    private int pastCommandListCursor;
 
     // Independent Ui parts residing in this Ui container
     private Homepage homepage;
@@ -81,6 +85,8 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.pastCommandList = new ArrayList<>();
+        this.pastCommandListCursor = -1;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -149,7 +155,7 @@ public class MainWindow extends UiPart<Stage> {
         statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this, this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -197,6 +203,18 @@ public class MainWindow extends UiPart<Stage> {
         return clientListPanel;
     }
 
+    public List<String> getPastCommandList() {
+        return this.pastCommandList;
+    }
+
+    public int getPastCommandListCursor() {
+        return this.pastCommandListCursor;
+    }
+
+    public void setPastCommandListCursor(int cursor) {
+        this.pastCommandListCursor = cursor;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -205,6 +223,9 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             statusBarFooter.setDisplayString("Executing: " + commandText);
+            pastCommandList.add(commandText);
+            pastCommandListCursor = pastCommandList.size();
+
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

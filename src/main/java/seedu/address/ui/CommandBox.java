@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.collections.ObservableList;
@@ -23,6 +25,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private final MainWindow mainWindow;
     private final CommandExecutor commandExecutor;
 
     @FXML
@@ -31,10 +34,12 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(MainWindow mainWindow, CommandExecutor commandExecutor) {
         super(FXML);
+        this.mainWindow = mainWindow;
         this.commandExecutor = commandExecutor;
         bindAutoComplete();
+        bindPastCommands();
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -69,6 +74,31 @@ public class CommandBox extends UiPart<Region> {
                     return list;
                 }
             });
+    }
+
+    /**
+     * Scroll Past Commands using Key.UP and Key.DOWN
+     */
+    private void bindPastCommands() {
+        commandTextField.addEventHandler(KeyEvent.KEY_PRESSED, k -> {
+            if (k.getCode() == KeyCode.UP) {
+                List<String> pastCommandList = mainWindow.getPastCommandList();
+                int cursor = mainWindow.getPastCommandListCursor() - 1;
+
+                if (cursor >= 0) { //Allow to scroll up if within range
+                    commandTextField.setText(pastCommandList.get(cursor));
+                    mainWindow.setPastCommandListCursor(cursor);
+                }
+            } else if (k.getCode() == KeyCode.DOWN) {
+                List<String> pastCommandList = mainWindow.getPastCommandList();
+                int cursor = mainWindow.getPastCommandListCursor() + 1;
+
+                if (cursor < (pastCommandList).size()) { //Allow to scroll down if within range
+                    commandTextField.setText(pastCommandList.get(cursor));
+                    mainWindow.setPastCommandListCursor(cursor);
+                }
+            }
+        });
     }
 
     /**
