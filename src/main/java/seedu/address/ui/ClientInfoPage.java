@@ -7,14 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
 import seedu.address.model.client.Client;
 
 public class ClientInfoPage extends UiPart<AnchorPane> {
     private static final String FXML = "ClientInfoPage.fxml";
-    private static ClientInfoPage clientInfoPage;
     private final Client client;
-    private Stage stage;
 
     @FXML
     private ImageView imgProfile;

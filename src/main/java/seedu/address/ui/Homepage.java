@@ -35,9 +35,7 @@ public class Homepage extends UiPart<AnchorPane> {
     private Homepage(ReadOnlyAddressBook addressBook) {
         super(FXML);
         this.addressBook = addressBook;
-        updateStatistics();
-        updateContent();
-        updateQotd();
+        update();
     }
 
     /**
@@ -61,9 +59,18 @@ public class Homepage extends UiPart<AnchorPane> {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public void update() {
+        updateStatistics();
+        updateContent();
+        updateQotd();
+    }
+
+    /**
      * Updates the Statistics shown in Homepage
      */
-    public void updateStatistics() {
+    private void updateStatistics() {
         assert(Homepage.homepage != null);
         this.addressBook = addressBook;
         int clients = addressBook.getClientList().size();
@@ -76,7 +83,7 @@ public class Homepage extends UiPart<AnchorPane> {
     /**
      * Updates the content shown in Homepage
      */
-    public void updateContent() {
+    private void updateContent() {
         assert(Homepage.homepage != null);
         this.lblContent.setText("Today's Schedule - "
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE dd MMMM")));
