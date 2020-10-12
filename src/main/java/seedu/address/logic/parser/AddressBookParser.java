@@ -21,6 +21,7 @@ import seedu.address.logic.commands.client.FindClientCommand;
 import seedu.address.logic.commands.client.ListClientCommand;
 import seedu.address.logic.commands.client.ViewClientCommand;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
 import seedu.address.logic.commands.schedule.RescheduleCommand;
 import seedu.address.logic.commands.session.AddSessionCommand;
 import seedu.address.logic.commands.session.EditSessionCommand;
@@ -31,6 +32,7 @@ import seedu.address.logic.parser.client.FindClientCommandParser;
 import seedu.address.logic.parser.client.ViewClientCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.schedule.AddScheduleCommandParser;
+import seedu.address.logic.parser.schedule.DeleteScheduleCommandParser;
 import seedu.address.logic.parser.schedule.RescheduleCommandParser;
 import seedu.address.logic.parser.session.AddSessionCommandParser;
 import seedu.address.logic.parser.session.EditSessionCommandParser;
@@ -72,6 +74,7 @@ public class AddressBookParser {
 
         //Schedule-Related Commands
         commandMapper.put(AddScheduleCommand.COMMAND_WORD, (args) -> new AddScheduleCommandParser().parse(args));
+        commandMapper.put(DeleteScheduleCommand.COMMAND_WORD, (args) -> new DeleteScheduleCommandParser().parse(args));
         commandMapper.put(RescheduleCommand.COMMAND_WORD, (args) -> new RescheduleCommandParser().parse(args));
 
         //Common-Application Commands
