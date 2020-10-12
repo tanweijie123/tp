@@ -1,29 +1,36 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Email;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.session.Interval;
 
 public class JsonAdaptedSchedule {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";
     public static final String MISSING_CLIENT_EMAIL_MESSAGE_FORMAT = "Schedule's %s client email is missing!";
-    public static final String MISSING_SESSION_ID_MESSAGE_FORMAT = "Schedule's %s session ID is missing!";
+    public static final String MISSING_SESSION_START_MESSAGE_FORMAT = "Schedule's %s session start time is missing!";
+    public static final String MISSING_SESSION_END_MESSAGE_FORMAT = "Schedule's %s session end time is missing!";
 
     private final String clientEmail;
-    private final String sessionId;
+    private final String start;
+    private final String end;
 
     /**
      * Constructs a {@code JsonAdaptedSchedule} with the given Schedule details.
      */
     @JsonCreator
     public JsonAdaptedSchedule(@JsonProperty("clientEmail") String clientEmail,
-                              @JsonProperty("sessionId") String sessionId) {
+                               @JsonProperty("sessionStart") String start,
+                               @JsonProperty("sessionEnd") String end) {
         this.clientEmail = clientEmail;
-        this.sessionId = sessionId;
+        this.start = start;
+        this.end = end;
     }
 
     /**
@@ -31,7 +38,8 @@ public class JsonAdaptedSchedule {
      */
     public JsonAdaptedSchedule(Schedule source) {
         clientEmail = source.getClient().getEmail().toString();
-        sessionId = "" + source.getSession().getId();
+        start = source.getSession().getInterval().getStart().toString();
+        end = source.getSession().getInterval().getEnd().toString();
     }
 
     /**
@@ -55,18 +63,22 @@ public class JsonAdaptedSchedule {
     }
 
     /**
-     * Converts a given {@code Schedule} into this class for Jackson use.
+     * Converts this Jackson-friendly adapted Schedule object to get its model's {@code Interval} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted id.
      */
-    public int getSessionId() throws IllegalValueException {
-        if (sessionId == null || !StringUtil.isNonNegativeInteger(sessionId)) {
-            throw new IllegalValueException(String.format(MISSING_SESSION_ID_MESSAGE_FORMAT,
-                    Integer.class.getSimpleName()));
+    public Interval getSessionInterval() throws IllegalValueException {
+        if (start == null) {
+            throw new IllegalValueException(String.format(MISSING_SESSION_START_MESSAGE_FORMAT,
+                    LocalDateTime.class.getSimpleName()));
+        }
+        if (end == null) {
+            throw new IllegalValueException(String.format(MISSING_SESSION_END_MESSAGE_FORMAT,
+                    LocalDateTime.class.getSimpleName()));
         }
 
-        final int modelSessionId = Integer.parseInt(sessionId);
+        final Interval modelSessionInterval = SessionParserUtil.parseIntervalFromStartAndEnd(start, end);
 
-        return modelSessionId;
+        return modelSessionInterval;
     }
 }

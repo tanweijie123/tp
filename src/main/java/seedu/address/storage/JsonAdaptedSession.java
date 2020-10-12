@@ -14,7 +14,6 @@ import seedu.address.model.session.Session;
 public class JsonAdaptedSession {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Session's %s field is missing!";
 
-    private final String id;
     private final String gym;
     private final String exerciseType;
     private final String start;
@@ -24,11 +23,10 @@ public class JsonAdaptedSession {
      * Constructs a {@code JsonAdaptedSession} with the given Session details.
      */
     @JsonCreator
-    public JsonAdaptedSession(@JsonProperty("id") String id, @JsonProperty("gym") String gym,
+    public JsonAdaptedSession(@JsonProperty("gym") String gym,
                               @JsonProperty("exerciseType") String exerciseType,
                               @JsonProperty("start") String start,
                               @JsonProperty("end") String end) {
-        this.id = id;
         this.gym = gym;
         this.exerciseType = exerciseType;
         this.start = start;
@@ -39,7 +37,6 @@ public class JsonAdaptedSession {
      * Converts a given {@code Session} into this class for Jackson use.
      */
     public JsonAdaptedSession(Session source) {
-        id = "" + source.getId();
         gym = source.getGym().toString();
         exerciseType = source.getExerciseType().toString();
         start = SessionParserUtil.parseDateTimeToString(source.getInterval().getStart());
@@ -53,12 +50,6 @@ public class JsonAdaptedSession {
      */
     public Session toModelType() throws IllegalValueException {
         /* To do the same as Client's toModelType codes, we need to create field-typed classes */
-
-        if (id.isBlank()) {
-            throw new IllegalValueException("Id is blank");
-        }
-
-        final int modelId = Integer.parseInt(id);
 
         if (gym.isBlank()) {
             throw new IllegalValueException("Gym is blank");
@@ -84,6 +75,6 @@ public class JsonAdaptedSession {
             throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
         }
 
-        return new Session(modelId, gym, exerciseType, startDateTime, duration);
+        return new Session(gym, exerciseType, startDateTime, duration);
     }
 }

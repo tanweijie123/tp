@@ -91,7 +91,7 @@ public class EditSessionCommand extends Command {
                 .getExerciseType().orElse(sessionToEdit.getExerciseType());
         Interval updatedInterval = editSessionDescriptor.getInterval().orElse(sessionToEdit.getInterval());
 
-        return new Session(sessionToEdit.getId(), updatedGym, updatedExerciseType, updatedInterval);
+        return new Session(updatedGym, updatedExerciseType, updatedInterval);
     }
 
     @Override
