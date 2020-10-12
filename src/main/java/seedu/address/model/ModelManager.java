@@ -163,7 +163,7 @@ public class ModelManager implements Model {
                 .filter(schedule -> session.isExisting(schedule.getSession()))
                 .collect(Collectors.toList());
 
-        for(Schedule schedule: associatedSchedules) {
+        for (Schedule schedule : associatedSchedules) {
             this.deleteSchedule(schedule);
         }
 

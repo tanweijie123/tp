@@ -35,11 +35,21 @@ public class DeleteSessionCommand extends Command {
     private final Index targetIndex;
     private final boolean isForced;
 
+    /**
+     * Creates a normal mode DeleteSession to delete the Session at {@code targetIndex}
+     * @param targetIndex index of to-be deleted session
+     */
     public DeleteSessionCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.isForced = false;
     }
 
+    /**
+     * Creates a increased privilege mode DeleteSession to force delete the Session at {@code targetIndex}
+     * if {@code isForced} is true
+     * @param targetIndex index of to-be deleted session
+     * @param isForced true if the DeleteSession have increased privilege
+     */
     public DeleteSessionCommand(Index targetIndex, boolean isForced) {
         this.targetIndex = targetIndex;
         this.isForced = isForced;
