@@ -56,8 +56,8 @@ public class Session implements CheckExisting<Session> {
     }
 
     /**
-     * Returns true if both Sessions have overlapping sessions
-     *
+     * Returns true if both Sessions have overlapping intervals
+     * <p>
      * Two sessions are defined as duplicate if and only if at least one time boundary lies strictly inside
      * the other session's interval
      * This defines a different notion of equality between two Sessions compared to {@code equals}
@@ -111,15 +111,13 @@ public class Session implements CheckExisting<Session> {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(" Start: ")
-                .append(SessionParserUtil.parseDateTimeToString(getInterval().getStart()))
-                .append(" End: ")
-                .append(SessionParserUtil.parseDateTimeToString(getInterval().getEnd()))
-                .append(" Gym: ")
-                .append(gym)
-                .append(" Exercise Type: ")
-                .append(exerciseType);
-        return builder.toString();
+        return " Start: "
+                + SessionParserUtil.parseDateTimeToString(getInterval().getStart())
+                + " End: "
+                + SessionParserUtil.parseDateTimeToString(getInterval().getEnd())
+                + " Gym: "
+                + gym
+                + " Exercise Type: "
+                + exerciseType;
     }
 }
