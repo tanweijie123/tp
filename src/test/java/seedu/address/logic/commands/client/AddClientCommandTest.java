@@ -189,6 +189,16 @@ public class AddClientCommandTest {
         }
 
         @Override
+        public boolean hasAnyScheduleAssociatedWithClient(Client toEdit) {
+            return false;
+        }
+
+        @Override
+        public void editSchedulesAssociatedWithClient(Client toEdit, Client editedClient) {
+
+        }
+
+        @Override
         public void deleteSchedule(Schedule schedule) {
             throw new AssertionError("This method should not be called.");
         }

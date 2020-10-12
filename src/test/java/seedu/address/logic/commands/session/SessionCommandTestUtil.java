@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.session;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,6 +21,7 @@ import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescri
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.session.Interval;
+import seedu.address.model.session.IntervalContainsDatetimePredicate;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
 import seedu.address.testutil.SessionBuilder;
@@ -121,17 +124,17 @@ public class SessionCommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredSessionList());
     }
 
-    //    /**
-    //     * Updates {@code model}'s filtered list to show only the Session at the given {@code targetIndex} in the
-    //     * {@code model}'s address book.
-    //    */
-    //    public static void showSessionAtIndex(Model model, Index targetIndex) {
-    //        assertTrue(targetIndex.getZeroBased() < model.getFilteredSessionList().size());
-    //
-    //        Session session = model.getFilteredSessionList().get(targetIndex.getZeroBased());
-    //        final String[] splitName = session.getName().fullName.split("\\s+");
-    //        model.updateFilteredSessionList(new NameContainsSubstringPredicate(Arrays.asList(splitName[0])));
-    //
-    //        assertEquals(1, model.getFilteredSessionList().size());
-    //  }
+    /**
+     * Updates {@code model}'s filtered list to show only the Session at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showSessionAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredSessionList().size());
+
+        Session session = model.getFilteredSessionList().get(targetIndex.getZeroBased());
+        final LocalDateTime start = session.getInterval().getStart();
+        model.updateFilteredSessionList(new IntervalContainsDatetimePredicate(start));
+
+        assertEquals(1, model.getFilteredSessionList().size());
+    }
 }
