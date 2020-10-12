@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
@@ -76,6 +77,10 @@ public class RescheduleCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }
 
+        if (scheduleToEdit.getSession().equals(editedSchedule.getSession())) {
+            throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
+        }
+
         model.setSchedule(scheduleToEdit, editedSchedule);
         model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
         return new CommandResult(String.format(MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule));
@@ -86,14 +91,18 @@ public class RescheduleCommand extends Command {
      * edited with {@code editRescheduleDescriptor}.
      */
     private static Schedule createEditedSchedule(Schedule scheduleToEdit, RescheduleDescriptor rescheduleDescriptor,
-                                                 List<Session> lastShownSessionList) {
+                                                 List<Session> lastShownSessionList) throws CommandException {
         assert scheduleToEdit != null;
 
         Client client = scheduleToEdit.getClient();
-        Session session = rescheduleDescriptor.getSessionIndex() == null
-                ? scheduleToEdit.getSession()
-                : lastShownSessionList.get(rescheduleDescriptor.getSessionIndex().get().getZeroBased());
-
+        Session session;
+        try {
+            session = rescheduleDescriptor.getSessionIndex() == null
+                    ? scheduleToEdit.getSession()
+                    : lastShownSessionList.get(rescheduleDescriptor.getSessionIndex().get().getZeroBased());
+        } catch (NoSuchElementException e) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
         return new Schedule(client, session);
     }
 

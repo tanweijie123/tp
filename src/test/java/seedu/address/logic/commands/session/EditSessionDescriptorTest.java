@@ -49,8 +49,8 @@ public class EditSessionDescriptorTest {
 
         // different interval -> returns false
         editedGetwell = new EditSessionDescriptorBuilder(DESC_GETWELL)
-                .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER),
-                        Integer.parseInt(VALID_DURATION_MACHOMAN)).build();
+                .withInterval(VALID_START_TIME_MACHOMAN,
+                        VALID_DURATION_MACHOMAN).build();
         assertFalse(DESC_GETWELL.equals(editedGetwell));
     }
 }

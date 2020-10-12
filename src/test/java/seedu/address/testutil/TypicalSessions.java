@@ -1,14 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_DURATION_GETWELL;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_DURATION_MACHOMAN;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_EXERCISE_TYPE_GETWELL;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_EXERCISE_TYPE_MACHOMAN;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_GETWELL;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_MACHOMAN;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_GETWELL;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
-
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +25,13 @@ public class TypicalSessions {
             .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
             .withInterval(VALID_START_TIME_MACHOMAN,
                     VALID_DURATION_MACHOMAN)
+            .build();
+
+    public static final Session MULTRAMAN = new SessionBuilder()
+            .withGym(VALID_GYM_ULTRAMAN)
+            .withExerciseType(VALID_EXERCISE_TYPE_ULTRAMAN)
+            .withInterval(VALID_START_TIME_ULTRAMAN,
+                    VALID_DURATION_ULTRAMAN)
             .build();
 
     private TypicalSessions() {
