@@ -1,15 +1,17 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.session;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
  * Finds and lists all Sessions in address book regardless of date and time.
  */
-public class ViewAllCommand extends Command {
+public class ViewAllSessionsCommand extends Command {
 
     public static final String COMMAND_WORD = "vall";
 

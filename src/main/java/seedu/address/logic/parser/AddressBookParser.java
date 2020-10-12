@@ -12,8 +12,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HomeCommand;
-import seedu.address.logic.commands.ViewAllCommand;
-import seedu.address.logic.commands.ViewWeekCommand;
 import seedu.address.logic.commands.client.AddClientCommand;
 import seedu.address.logic.commands.client.DeleteClientCommand;
 import seedu.address.logic.commands.client.EditClientCommand;
@@ -25,6 +23,8 @@ import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
 import seedu.address.logic.commands.schedule.RescheduleCommand;
 import seedu.address.logic.commands.session.AddSessionCommand;
 import seedu.address.logic.commands.session.EditSessionCommand;
+import seedu.address.logic.commands.session.ViewAllSessionsCommand;
+import seedu.address.logic.commands.session.ViewWeekSessionsCommand;
 import seedu.address.logic.parser.client.AddClientCommandParser;
 import seedu.address.logic.parser.client.DeleteClientCommandParser;
 import seedu.address.logic.parser.client.EditClientCommandParser;
@@ -82,8 +82,8 @@ public class AddressBookParser {
         commandMapper.put(ExitCommand.COMMAND_WORD, (args) -> new ExitCommand());
         commandMapper.put(HelpCommand.COMMAND_WORD, (args) -> new HelpCommand());
         commandMapper.put(HomeCommand.COMMAND_WORD, (args) -> new HomeCommand());
-        commandMapper.put(ViewWeekCommand.COMMAND_WORD, (args) -> new ViewWeekCommand());
-        commandMapper.put(ViewAllCommand.COMMAND_WORD, (args) -> new ViewAllCommand());
+        commandMapper.put(ViewWeekSessionsCommand.COMMAND_WORD, (args) -> new ViewWeekSessionsCommand());
+        commandMapper.put(ViewAllSessionsCommand.COMMAND_WORD, (args) -> new ViewAllSessionsCommand());
     }
 
     /**

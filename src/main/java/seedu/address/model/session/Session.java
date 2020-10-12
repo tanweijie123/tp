@@ -13,8 +13,6 @@ import seedu.address.model.CheckExisting;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Session implements CheckExisting<Session>, Comparable<Session> {
-    private static int idCounter = 0; //this also double as the number of sessions already created.
-
     // Identity fields
     private final Gym gym;
     private final Interval interval;

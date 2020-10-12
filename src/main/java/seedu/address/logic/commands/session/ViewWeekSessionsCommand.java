@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.session;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
@@ -7,13 +7,15 @@ import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.session.Session;
 
 /**
  * Finds and lists all Sessions in address book that are within the upcoming week.
  */
-public class ViewWeekCommand extends Command {
+public class ViewWeekSessionsCommand extends Command {
 
     public static final String COMMAND_WORD = "vweek";
 
