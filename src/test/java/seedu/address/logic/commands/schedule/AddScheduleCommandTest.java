@@ -223,6 +223,16 @@ public class AddScheduleCommandTest {
         }
 
         @Override
+        public boolean hasAnyScheduleAssociatedWithSession(Session session) {
+            return false;
+        }
+
+        @Override
+        public void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession) {
+
+        }
+
+        @Override
         public boolean hasAnyScheduleAssociatedWithClient(Client toEdit) {
             return false;
         }
