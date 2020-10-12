@@ -16,7 +16,7 @@ import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 /**
- * Represents the in-memory model of the FitEgo's data (client + session).
+ * Represents the in-memory model of the FitEgo's data (client + session + schedule).
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -144,7 +144,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasCorrespondingSchedulesBySession(Session session) {
+        requireNonNull(session);
+        ObservableList<Schedule> schedules = addressBook.getScheduleList();
+        return schedules.stream()
+                .map(Schedule::getSession)
+                .anyMatch(session::isExisting);
+    }
+
+    @Override
     public void deleteSession(Session session) {
+        requireNonNull(session);
         addressBook.removeSession(session);
     }
 

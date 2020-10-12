@@ -111,13 +111,15 @@ public class Session implements CheckExisting<Session> {
 
     @Override
     public String toString() {
-        return " Start: "
-                + SessionParserUtil.parseDateTimeToString(getInterval().getStart())
-                + " End: "
-                + SessionParserUtil.parseDateTimeToString(getInterval().getEnd())
-                + " Gym: "
-                + gym
-                + " Exercise Type: "
-                + exerciseType;
+        final StringBuilder builder = new StringBuilder();
+        builder.append(" Start: ")
+                .append(SessionParserUtil.parseDateTimeToString(getInterval().getStart()))
+                .append(" End: ")
+                .append(SessionParserUtil.parseDateTimeToString(getInterval().getEnd()))
+                .append(" Gym: ")
+                .append(gym)
+                .append(" Exercise Type: ")
+                .append(exerciseType);
+        return builder.toString();
     }
 }

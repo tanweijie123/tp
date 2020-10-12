@@ -26,10 +26,23 @@ public class DeleteSessionCommand extends Command {
 
     public static final String MESSAGE_DELETE_SESSION_SUCCESS = "Deleted Session: %1$s";
 
+    public static final String MESSAGE_FORCE_DELETE_SESSION_USAGE = COMMAND_WORD
+            + ": Cannot delete the Session identified by the index number because there are schedules tied to it.\n"
+            + "To force delete, pass in f/ true as an option. BEWARE, YOU WILL LOSE ALL RELATED SCHEDULES.\n"
+            + "Parameters: INDEX (must be a positive integer) f/ true\n"
+            + "Example: " + COMMAND_WORD + " 1 f/ true";
+
     private final Index targetIndex;
+    private final boolean isForced;
 
     public DeleteSessionCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.isForced = false;
+    }
+
+    public DeleteSessionCommand(Index targetIndex, boolean isForced) {
+        this.targetIndex = targetIndex;
+        this.isForced = isForced;
     }
 
     @Override
@@ -42,7 +55,14 @@ public class DeleteSessionCommand extends Command {
         }
 
         Session sessionToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        // Do not delete session unless user use the force flag
+        if (model.hasCorrespondingSchedulesBySession(sessionToDelete) && !isForced) {
+            return new CommandResult(MESSAGE_FORCE_DELETE_SESSION_USAGE);
+        }
+
         model.deleteSession(sessionToDelete);
+        // TODO: Add deleting all sessions
         return new CommandResult(String.format(MESSAGE_DELETE_SESSION_SUCCESS, sessionToDelete));
     }
 
