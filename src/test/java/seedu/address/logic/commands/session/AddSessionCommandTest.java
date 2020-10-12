@@ -228,7 +228,7 @@ public class AddSessionCommandTest {
         @Override
         public boolean hasSession(Session session) {
             requireNonNull(session);
-            return this.session.isExisting(session);
+            return this.session.isUnique(session);
         }
     }
 
@@ -241,7 +241,7 @@ public class AddSessionCommandTest {
         @Override
         public boolean hasSession(Session session) {
             requireNonNull(session);
-            return sessionsAdded.stream().anyMatch(session::isExisting);
+            return sessionsAdded.stream().anyMatch(session::isUnique);
         }
 
         @Override

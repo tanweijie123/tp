@@ -21,11 +21,7 @@ public class HomeCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
 
-        Supplier<AnchorPane> run = () -> {
-            Homepage homepage = Homepage.getHomePage();
-            homepage.updateStatistics();
-            return homepage.getRoot();
-        };
+        Supplier<AnchorPane> run = () -> Homepage.getHomePage().getRoot();
 
         return new CommandResult(SHOWING_SUCCESS_MESSAGE, run);
     }

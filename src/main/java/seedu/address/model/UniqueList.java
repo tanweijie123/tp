@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.exceptions.DuplicateEntityException;
 import seedu.address.model.exceptions.EntityNotFoundException;
 
-public class UniqueTList<T extends CheckExisting<T>> implements Iterable<T> {
+public class UniqueList<T extends CheckExisting<T>> implements Iterable<T> {
 
     private final ObservableList<T> internalList = FXCollections.observableArrayList();
     private final ObservableList<T> internalUnmodifiableList =
@@ -22,7 +22,7 @@ public class UniqueTList<T extends CheckExisting<T>> implements Iterable<T> {
      */
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isExisting);
+        return internalList.stream().anyMatch(toCheck::isUnique);
     }
 
     /**
@@ -50,7 +50,7 @@ public class UniqueTList<T extends CheckExisting<T>> implements Iterable<T> {
             throw new EntityNotFoundException();
         }
 
-        if (!target.isExisting(edited) && contains(edited)) {
+        if (!target.isUnique(edited) && contains(edited)) {
             throw new DuplicateEntityException();
         }
 
@@ -68,7 +68,7 @@ public class UniqueTList<T extends CheckExisting<T>> implements Iterable<T> {
         }
     }
 
-    public void setAll(UniqueTList<T> replacement) {
+    public void setAll(UniqueList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -101,8 +101,8 @@ public class UniqueTList<T extends CheckExisting<T>> implements Iterable<T> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueTList<?> // instanceof handles nulls
-                && internalList.equals(((UniqueTList<?>) other).internalList));
+                || (other instanceof UniqueList<?> // instanceof handles nulls
+                && internalList.equals(((UniqueList<?>) other).internalList));
     }
 
     @Override
@@ -117,7 +117,7 @@ public class UniqueTList<T extends CheckExisting<T>> implements Iterable<T> {
     private boolean elementsAreUnique(List<T> elements) {
         for (int i = 0; i < elements.size() - 1; i++) {
             for (int j = i + 1; j < elements.size(); j++) {
-                if (elements.get(i).isExisting(elements.get(j))) {
+                if (elements.get(i).isUnique(elements.get(j))) {
                     return false;
                 }
             }

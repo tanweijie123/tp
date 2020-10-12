@@ -26,32 +26,32 @@ public class ClientTest {
     @Test
     public void isSameClient() {
         // same object -> returns true
-        assertTrue(ALICE.isExisting(ALICE));
+        assertTrue(ALICE.isUnique(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isExisting(null));
+        assertFalse(ALICE.isUnique(null));
 
         // different phone and email -> returns false
         Client editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.isExisting(editedAlice));
+        assertFalse(ALICE.isUnique(editedAlice));
 
         // different name -> returns false
         editedAlice = new ClientBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isExisting(editedAlice));
+        assertFalse(ALICE.isUnique(editedAlice));
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_INJURY).build();
-        assertTrue(ALICE.isExisting(editedAlice));
+        assertTrue(ALICE.isUnique(editedAlice));
 
         // same name, same email, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_INJURY).build();
-        assertTrue(ALICE.isExisting(editedAlice));
+        assertTrue(ALICE.isUnique(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_INJURY).build();
-        assertTrue(ALICE.isExisting(editedAlice));
+        assertTrue(ALICE.isUnique(editedAlice));
     }
 
     @Test
