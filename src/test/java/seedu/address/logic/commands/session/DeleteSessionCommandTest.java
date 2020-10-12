@@ -19,12 +19,13 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.session.Session;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
+ * Contains integration tests (interaction with the Model and Schedule) and unit tests for
  * {@code DeleteSessionCommand}.
  */
 public class DeleteSessionCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
