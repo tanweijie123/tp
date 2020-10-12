@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.client;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.client.ClientCommandTestUtil.ADDRESS_DESC_AMY;
@@ -32,7 +32,6 @@ import static seedu.address.testutil.TypicalClients.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.client.AddClientCommand;
-import seedu.address.logic.parser.client.AddClientCommandParser;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
