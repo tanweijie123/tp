@@ -3,13 +3,13 @@ package seedu.address.ui;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.TextFields;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
