@@ -37,6 +37,12 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of Sessions */
     ObservableList<Session> getFilteredSessionList();
 
+    /** Returns an unmodifiable view of the list of Sessions associated to a Session*/
+    ObservableList<Client> getAssociatedClientList(Session session);
+
+    /** Returns an unmodifiable view of the list of Sessions associated to a Client*/
+    ObservableList<Session> getAssociatedSessionList(Client client);
+
     /**
      * Returns the user prefs' address book file path.
      */

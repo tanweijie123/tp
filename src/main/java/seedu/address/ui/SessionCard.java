@@ -38,14 +38,16 @@ public class SessionCard extends UiPart<Region> {
     /**
      * Creates a {@code ScheduleCard} with the given {@code Schedule}.
      */
-    public SessionCard(Session session, int displayedIndex) {
+    public SessionCard(Session session, int displayedIndex, ) {
         super(FXML);
         this.session = session;
         id.setText(displayedIndex + ". ");
         sessionTime.setText(session.getInterval().getTime12hrPattern());
-        //sessionTime.setText(session.getInterval().toString());
         gymName.setText(session.getGym().toString());
         dayOfWeek.setText(session.getInterval().getStartDay());
+        //client.getTags().stream()
+        //                .sorted(Comparator.comparing(tag -> tag.tagName))
+        //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

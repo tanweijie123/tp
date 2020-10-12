@@ -3,8 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,6 +88,15 @@ public class UniqueTList<T extends CheckExisting<T> & Comparable<T>> implements 
         }
 
         internalList.setAll(elements);
+    }
+
+    /**
+     * Returns all elements T in the internal list that matches {@code predicate}.
+     */
+    public Stream<T> findAllMatch(Predicate<T> predicate) {
+        requireNonNull(predicate);
+        return internalUnmodifiableList.stream().filter(predicate);
+        //return ;
     }
 
     /**

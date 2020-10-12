@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -219,6 +220,23 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredSchedules.setPredicate(predicate);
     }
+
+    //=========== Client-Session Association =====================================================================
+    @Override
+    public Stream<Client> findClientBySession(Session sessionKey) {
+        requireNonNull(sessionKey);
+        return addressBook.findClientBySession(sessionKey);
+    }
+
+    @Override
+    public Stream<Session> findSessionByClient(Client clientKey) {
+        requireNonNull(clientKey);
+        return addressBook.findSessionByClient(clientKey);
+    }
+
+
+
+    //=========== Util-related ===============================================================================
 
     @Override
     public boolean equals(Object obj) {

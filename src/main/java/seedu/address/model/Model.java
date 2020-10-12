@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -162,4 +163,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredScheduleList(Predicate<Schedule> predicate);
+
+    /**
+     * Finds all {@code Clients} in {@code Schedule List} that are associated to {@code sessionKey}.
+     * @throws NullPointerException if {@code sessionKey} is null.
+     */
+    Stream<Client> findClientBySession(Session sessionKey);
+
+    /**
+     * Finds all {@code Sessions} in {@code Schedule List} that are associated to {@code clientKey}.
+     * @throws NullPointerException if {@code clientKey} is null.
+     */
+    Stream<Session> findSessionByClient(Client clientKey);
 }

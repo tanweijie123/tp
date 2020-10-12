@@ -2,7 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
@@ -202,7 +204,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         schedules.remove(key);
     }
 
-
     //// util methods
 
     @Override
@@ -227,6 +228,29 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Schedule> getScheduleList() {
         return schedules.asUnmodifiableObservableList();
+    }
+
+
+    /**
+     * Finds all {@code Schedule} that contains {@code session} from this {@code ScheduleList}.
+     * {@code sessionKey} must exist in the schedule list.
+     * @return A stream of clients that are associated to {@code sessionKey} in the {@code ScheduleList}.
+     */
+    public Stream<Client> findClientBySession(Session sessionKey) {
+        Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(sessionKey::equals);
+        Stream<Client> clientsInSession = schedulesContainingSession.map(Schedule::getClient);
+        return clientsInSession;
+    }
+
+    /**
+     * Finds all {@code Session} that contains {@code session} from this {@code ScheduleList}.
+     * {@code clientKey} must exist in the schedule list.
+     * @return A stream of session that are associated to {@code clientKey} in the {@code ScheduleList}.
+     */
+    public Stream<Session> findSessionByClient(Client clientKey) {
+        Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(clientKey::equals);
+        Stream<Session> sessionsInClient = schedulesContainingSession.map(Schedule::getSession);
+        return sessionsInClient;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -53,10 +51,10 @@ public class ClientCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
         phone.setText(client.getPhone().value);
-        client.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        nextSession.setText(nextSessionStart + "7 Apr 20 (Wed), 3.00pm"); // placeholder
+        //        client.getTags().stream()
+        //                .sorted(Comparator.comparing(tag -> tag.tagName))
+        //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        nextSession.setText(nextSessionStart + ); // placeholder
     }
 
     @Override
