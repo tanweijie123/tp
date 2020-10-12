@@ -54,7 +54,7 @@ public class ClientCard extends UiPart<Region> {
         //        client.getTags().stream()
         //                .sorted(Comparator.comparing(tag -> tag.tagName))
         //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        nextSession.setText(nextSessionStart + ); // placeholder
+        nextSession.setText(nextSessionStart); // placeholder
     }
 
     @Override

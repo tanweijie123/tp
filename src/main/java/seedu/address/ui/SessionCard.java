@@ -38,7 +38,7 @@ public class SessionCard extends UiPart<Region> {
     /**
      * Creates a {@code ScheduleCard} with the given {@code Schedule}.
      */
-    public SessionCard(Session session, int displayedIndex, ) {
+    public SessionCard(Session session, int displayedIndex) {
         super(FXML);
         this.session = session;
         id.setText(displayedIndex + ". ");
