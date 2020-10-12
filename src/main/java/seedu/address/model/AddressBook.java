@@ -149,7 +149,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts {@code session} from this {@code SessionList} by its natural order.
+     * Sorts {@code session} from this {@code SessionList} in ascending startDate order.
      */
     public void sortSession() {
         sessions.sort();

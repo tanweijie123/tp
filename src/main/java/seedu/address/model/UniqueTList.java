@@ -111,7 +111,7 @@ public class UniqueTList<T extends CheckExisting<T> & Comparable<T>> implements 
     }
 
     /**
-     * Sorts elements in the list by natural order.
+     * Sorts elements in the list using T's compareTo method.
      */
     public void sort() {
         internalList.sort(Comparable::compareTo);
@@ -119,7 +119,7 @@ public class UniqueTList<T extends CheckExisting<T> & Comparable<T>> implements 
 
     /**
      * Returns true if {@code elements} contains are unique.
-     * Note that this only compares using CheckExisiting::isExisting
+     * Note that this only compares using CheckExisting::isExisting
      */
     private boolean elementsAreUnique(List<T> elements) {
         for (int i = 0; i < elements.size() - 1; i++) {
