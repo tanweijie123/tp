@@ -15,14 +15,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.UniqueTList;
+import seedu.address.model.UniqueList;
 import seedu.address.model.exceptions.DuplicateEntityException;
 import seedu.address.model.exceptions.EntityNotFoundException;
 import seedu.address.testutil.ClientBuilder;
 
 public class UniqueClientListTest {
 
-    private final UniqueTList<Client> uniqueClientList = new UniqueTList<>();
+    private final UniqueList<Client> uniqueClientList = new UniqueList<>();
 
     @Test
     public void contains_nullClient_throwsNullPointerException() {
@@ -78,7 +78,7 @@ public class UniqueClientListTest {
     public void set_editedClientIsSameClient_success() {
         uniqueClientList.add(ALICE);
         uniqueClientList.set(ALICE, ALICE);
-        UniqueTList<Client> expectedUniqueClientList = new UniqueTList<>();
+        UniqueList<Client> expectedUniqueClientList = new UniqueList<>();
         expectedUniqueClientList.add(ALICE);
         assertEquals(expectedUniqueClientList, uniqueClientList);
     }
@@ -89,7 +89,7 @@ public class UniqueClientListTest {
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_INJURY)
                 .build();
         uniqueClientList.set(ALICE, editedAlice);
-        UniqueTList<Client> expectedUniqueClientList = new UniqueTList<>();
+        UniqueList<Client> expectedUniqueClientList = new UniqueList<>();
         expectedUniqueClientList.add(editedAlice);
         assertEquals(expectedUniqueClientList, uniqueClientList);
     }
@@ -98,7 +98,7 @@ public class UniqueClientListTest {
     public void set_editedClientHasDifferentIdentity_success() {
         uniqueClientList.add(ALICE);
         uniqueClientList.set(ALICE, BOB);
-        UniqueTList<Client> expectedUniqueClientList = new UniqueTList<>();
+        UniqueList<Client> expectedUniqueClientList = new UniqueList<>();
         expectedUniqueClientList.add(BOB);
         assertEquals(expectedUniqueClientList, uniqueClientList);
     }
@@ -124,19 +124,19 @@ public class UniqueClientListTest {
     public void remove_existingClient_removesClient() {
         uniqueClientList.add(ALICE);
         uniqueClientList.remove(ALICE);
-        UniqueTList<Client> expectedUniqueClientList = new UniqueTList<>();
+        UniqueList<Client> expectedUniqueClientList = new UniqueList<>();
         assertEquals(expectedUniqueClientList, uniqueClientList);
     }
 
     @Test
     public void sets_nullUniqueClientList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClientList.setAll((UniqueTList<Client>) null));
+        assertThrows(NullPointerException.class, () -> uniqueClientList.setAll((UniqueList<Client>) null));
     }
 
     @Test
     public void sets_uniqueClientList_replacesOwnListWithProvidedUniqueClientList() {
         uniqueClientList.add(ALICE);
-        UniqueTList<Client> expectedUniqueClientList = new UniqueTList<>();
+        UniqueList<Client> expectedUniqueClientList = new UniqueList<>();
         expectedUniqueClientList.add(BOB);
         uniqueClientList.setAll(expectedUniqueClientList);
         assertEquals(expectedUniqueClientList, uniqueClientList);
@@ -152,7 +152,7 @@ public class UniqueClientListTest {
         uniqueClientList.add(ALICE);
         List<Client> clientList = Collections.singletonList(BOB);
         uniqueClientList.setAll(clientList);
-        UniqueTList<Client> expectedUniqueClientList = new UniqueTList<>();
+        UniqueList<Client> expectedUniqueClientList = new UniqueList<>();
         expectedUniqueClientList.add(BOB);
         assertEquals(expectedUniqueClientList, uniqueClientList);
     }

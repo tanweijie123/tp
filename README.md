@@ -19,4 +19,6 @@ see the **[FitEgo Product Website](https://ay2021s1-cs2103t-t13-3.github.io/tp/)
     than what students usually write in beginner-level SE modules, without being overwhelmingly big.
     * It comes with a **reasonable level of user and developer documentation**.
 
+* This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx) 
 
+* This project uses an icon made by Freepik from www.flaticon.com
