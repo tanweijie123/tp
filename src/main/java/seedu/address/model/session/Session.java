@@ -97,10 +97,10 @@ public class Session implements CheckExisting<Session> {
             return false;
         }
 
-        Session otherClient = (Session) other;
-        return otherClient.getGym().equals(getGym())
-                && otherClient.getInterval().equals(getInterval())
-                && otherClient.getExerciseType().equals(getExerciseType());
+        Session otherSession = (Session) other;
+        return otherSession.getGym().equals(getGym())
+                && otherSession.getInterval().equals(getInterval())
+                && otherSession.getExerciseType().equals(getExerciseType());
     }
 
     @Override
