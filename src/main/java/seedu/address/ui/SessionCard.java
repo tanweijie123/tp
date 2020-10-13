@@ -39,7 +39,7 @@ public class SessionCard extends UiPart<Region> {
     @FXML
     private Label gymName;
     @FXML
-    private FlowPane clientList;
+    private FlowPane associatedClient;
 
 
     /**
@@ -53,7 +53,7 @@ public class SessionCard extends UiPart<Region> {
         gymName.setText(session.getGym().toString());
         dayOfWeek.setText(session.getInterval().getStartDay());
         if (clients != null && clients.size() > 0) {
-            clients.forEach(client -> clientList.getChildren().add(new Label(client.getName().toString())));
+            clients.forEach(client -> associatedClient.getChildren().add(new Label(client.getName().toString())));
         }
     }
 
