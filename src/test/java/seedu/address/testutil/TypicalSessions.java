@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_MACHOMAN;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_GETWELL;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN_TOMORROW;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,8 +18,6 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
-
-
 
 /**
  * A utility class containing a list of {@code Session} objects to be used in tests.
@@ -38,6 +37,12 @@ public class TypicalSessions {
             .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER),
                     Integer.parseInt(VALID_DURATION_MACHOMAN))
             .build();
+    public static final Session MACHOMAN_TOMORROW = new SessionBuilder()
+            .withGym(VALID_GYM_MACHOMAN)
+            .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
+            .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN_TOMORROW, Interval.DATE_TIME_FORMATTER),
+                    Integer.parseInt(VALID_DURATION_MACHOMAN))
+            .build();
 
     private TypicalSessions() {
     } // prevents instantiation
@@ -54,6 +59,6 @@ public class TypicalSessions {
     }
 
     public static List<Session> getTypicalSessions() {
-        return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN));
+        return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN, MACHOMAN_TOMORROW));
     }
 }
