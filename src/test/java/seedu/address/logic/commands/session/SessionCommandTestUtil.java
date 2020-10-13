@@ -20,11 +20,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.session.Interval;
 import seedu.address.model.session.IntervalContainsDatetimePredicate;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
-import seedu.address.testutil.SessionBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -37,7 +35,7 @@ public class SessionCommandTestUtil {
     public static final String VALID_EXERCISE_TYPE_MACHOMAN = "Bodybuilder";
     public static final String VALID_START_TIME_GETWELL = "29/09/2020 1300";
     public static final String VALID_START_TIME_MACHOMAN = "29/09/2020 1600";
-    public static final String VALID_START_TIME_ALWAYS_TOMORROW = LocalDateTime.now().plusDays(1).format(
+    public static final String VALID_START_TIME_MACHOMAN_TOMORROW = LocalDateTime.now().plusDays(1).format(
             DATE_TIME_FORMATTER);
     public static final String VALID_DURATION_GETWELL = "120";
     public static final String VALID_DURATION_MACHOMAN = "150";
@@ -60,13 +58,6 @@ public class SessionCommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final Session MACHOMAN_TOMORROW = new SessionBuilder()
-            .withGym(VALID_GYM_MACHOMAN)
-            .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-            .withInterval(LocalDateTime.parse(VALID_START_TIME_ALWAYS_TOMORROW, Interval.DATE_TIME_FORMATTER),
-                    Integer.parseInt(VALID_DURATION_MACHOMAN))
-            .build();
 
     public static final EditSessionDescriptor DESC_GETWELL = new EditSessionDescriptorBuilder()
             .withGym(VALID_GYM_GETWELL)
