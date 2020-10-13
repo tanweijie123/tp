@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_WEEK
 import static seedu.address.testutil.TypicalSessions.GETWELL;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_TOMORROW;
-import static seedu.address.testutil.TypicalSessions.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalSessions.getTypicalWithDayAfterAddressBook;
 
 import org.junit.jupiter.api.Test;
