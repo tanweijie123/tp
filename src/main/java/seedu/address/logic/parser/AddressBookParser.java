@@ -26,8 +26,7 @@ import seedu.address.logic.commands.schedule.RescheduleCommand;
 import seedu.address.logic.commands.session.AddSessionCommand;
 import seedu.address.logic.commands.session.DeleteSessionCommand;
 import seedu.address.logic.commands.session.EditSessionCommand;
-import seedu.address.logic.commands.session.ViewAllSessionsCommand;
-import seedu.address.logic.commands.session.ViewWeekSessionsCommand;
+import seedu.address.logic.commands.session.ViewSessionCommand;
 import seedu.address.logic.parser.client.AddClientCommandParser;
 import seedu.address.logic.parser.client.DeleteClientCommandParser;
 import seedu.address.logic.parser.client.EditClientCommandParser;
@@ -40,6 +39,7 @@ import seedu.address.logic.parser.schedule.RescheduleCommandParser;
 import seedu.address.logic.parser.session.AddSessionCommandParser;
 import seedu.address.logic.parser.session.DeleteSessionCommandParser;
 import seedu.address.logic.parser.session.EditSessionCommandParser;
+import seedu.address.logic.parser.session.ViewSessionCommandParser;
 
 /**
  * Parses user input.
@@ -76,6 +76,7 @@ public class AddressBookParser {
         commandMapper.put(AddSessionCommand.COMMAND_WORD, (args) -> new AddSessionCommandParser().parse(args));
         commandMapper.put(EditSessionCommand.COMMAND_WORD, (args) -> new EditSessionCommandParser().parse(args));
         commandMapper.put(DeleteSessionCommand.COMMAND_WORD, (args) -> new DeleteSessionCommandParser().parse(args));
+        commandMapper.put(ViewSessionCommand.COMMAND_WORD, (args) -> new ViewSessionCommandParser().parse(args));
 
         //Schedule-Related Commands
         commandMapper.put(AddScheduleCommand.COMMAND_WORD, (args) -> new AddScheduleCommandParser().parse(args));
@@ -87,8 +88,6 @@ public class AddressBookParser {
         commandMapper.put(ExitCommand.COMMAND_WORD, (args) -> new ExitCommand());
         commandMapper.put(HelpCommand.COMMAND_WORD, (args) -> new HelpCommand());
         commandMapper.put(HomeCommand.COMMAND_WORD, (args) -> new HomeCommand());
-        commandMapper.put(ViewWeekSessionsCommand.COMMAND_WORD, (args) -> new ViewWeekSessionsCommand());
-        commandMapper.put(ViewAllSessionsCommand.COMMAND_WORD, (args) -> new ViewAllSessionsCommand());
     }
 
     /**
