@@ -11,29 +11,26 @@ import static seedu.address.testutil.TypicalSessions.GETWELL;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_TOMORROW;
 import static seedu.address.testutil.TypicalSessions.getTypicalAddressBook;
-
-import java.util.List;
+import static seedu.address.testutil.TypicalSessions.getTypicalWithDayAfterAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.session.Session;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ViewSessionCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalWithDayAfterAddressBook(), new UserPrefs());
 
     //TODO: Once the default Session List view has been changed to Week, update test case to verify.
     @Test
     public void execute_defaultSessionListIsAll_success() {
-        List<Session> defaultSessionList = model.getFilteredSessionList();
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_ALL_SESSIONS_PERIOD);
 
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
-        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getTypicalWithDayAfterAddressBook(), new UserPrefs());
 
         assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
     }

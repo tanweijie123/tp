@@ -59,6 +59,22 @@ public class TypicalSessions {
     }
 
     public static List<Session> getTypicalSessions() {
+        return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN));
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical Sessions + a Session with interval start that dynamically
+     * to the day after application is loaded.
+     */
+    public static AddressBook getTypicalWithDayAfterAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Session session : getTypicalWithDayAfterSessions()) {
+            ab.addSession(session);
+        }
+        return ab;
+    }
+
+    public static List<Session> getTypicalWithDayAfterSessions() {
         return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN, MACHOMAN_TOMORROW));
     }
 }
