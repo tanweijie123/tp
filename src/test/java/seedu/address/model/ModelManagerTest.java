@@ -122,19 +122,19 @@ public class ModelManagerTest {
 
     @Test
     public void hasAnySessionAssociatedSchedules_nullSession_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasAnySessionAssociatedSchedules(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasAnyScheduleAssociatedWithSession(null));
     }
 
     @Test
     public void hasAnySessionAssociatedSchedules_sessionNotInAddressBook_returnsFalse() {
         modelManager.addSchedule(ALICE_GETWELL);
-        assertFalse(modelManager.hasAnySessionAssociatedSchedules(MACHOMAN));
+        assertFalse(modelManager.hasAnyScheduleAssociatedWithSession(MACHOMAN));
     }
 
     @Test
     public void hasAnySessionAssociatedSchedules_sessionInAddressBook_returnsTrue() {
         modelManager.addSchedule(ALICE_GETWELL);
-        assertTrue(modelManager.hasAnySessionAssociatedSchedules(GETWELL));
+        assertTrue(modelManager.hasAnyScheduleAssociatedWithSession(GETWELL));
     }
 
     @Test

@@ -159,11 +159,6 @@ public class AddSessionCommandTest {
         }
 
         @Override
-        public boolean hasAnySessionAssociatedSchedules(Session session) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteSessionAssociatedSchedules(Session session) {
             throw new AssertionError("This method should not be called.");
         }
