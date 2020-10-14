@@ -54,12 +54,9 @@ public class ClientCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
         phone.setText(client.getPhone().value);
-        //        client.getTags().stream()
-        //                .sorted(Comparator.comparing(tag -> tag.tagName))
-        //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (session != null) {
             nextSession.setText(nextSessionStart + session.getInterval().getFormattedStartDateTime(
-                    DATE_TIME_FORMATTER)); // placeholder
+                    DATE_TIME_FORMATTER));
         } else {
             nextSession.setText(nextSessionStart + " - ");
         }

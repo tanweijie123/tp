@@ -13,7 +13,7 @@ import seedu.address.model.schedule.Schedule;
 
 public class TypicalSchedules {
 
-    // Manually added - Session's details found in {@code SessionCommandTestUtil}
+    // Manually added - Schedule's details found in {@code ScheduleCommandTestUtil}
     public static final Schedule ALICE_GETWELL = new ScheduleBuilder()
             .withClient(ALICE)
             .withSession(GETWELL)

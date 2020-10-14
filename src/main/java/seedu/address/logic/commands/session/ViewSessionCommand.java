@@ -39,7 +39,7 @@ public class ViewSessionCommand extends Command {
             session.getInterval().getStart().isAfter(LocalDateTime.now().truncatedTo(DAYS));
 
     /**
-     * Used a hashmap to get related function.
+     * Uses a hashmap to get the corresponding predicate for the period specified.
      */
     public static final HashMap<String, Predicate<Session>> PREDICATE_HASH_MAP = new HashMap<>();
     static {

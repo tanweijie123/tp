@@ -122,7 +122,7 @@ public interface Model {
     void setSession(Session target, Session editedSession);
 
     /**
-     * Sort the Session List by session's natural order.
+     * Sorts the Session List by session's natural order.
      */
     void sortSession();
 

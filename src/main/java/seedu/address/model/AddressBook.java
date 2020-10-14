@@ -234,7 +234,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Finds all {@code Schedule} that contains {@code session} from this {@code ScheduleList}.
      * {@code sessionKey} must exist in the schedule list.
-     * @return A stream of clients that are associated to {@code sessionKey} in the {@code ScheduleList}.
+     * @return A list of clients that are associated to {@code sessionKey} in the {@code ScheduleList}.
      */
     public List<Client> findClientBySession(Session sessionKey) {
         Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(s-> s.getSession().equals(sessionKey));
@@ -245,7 +245,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Finds all {@code Session} that contains {@code session} from this {@code ScheduleList}.
      * {@code clientKey} must exist in the schedule list.
-     * @return A stream of session that are associated to {@code clientKey} in the {@code ScheduleList}.
+     * @return A list of session that are associated to {@code clientKey} in the {@code ScheduleList}.
      */
     public List<Session> findSessionByClient(Client clientKey) {
         Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(s-> s.getClient().equals(clientKey));

@@ -38,7 +38,7 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of Sessions */
     ObservableList<Session> getFilteredSessionList();
 
-    /** Returns the list of Sessions associated to a Session*/
+    /** Returns the list of Clients associated to a Session*/
     List<Client> getAssociatedClientList(Session session);
 
     /** Returns the list of Sessions associated to a Client*/
