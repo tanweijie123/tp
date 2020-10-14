@@ -148,15 +148,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAnySessionAssociatedSchedules(Session session) {
-        requireNonNull(session);
-        return addressBook.getScheduleList()
-                .stream()
-                .map(Schedule::getSession)
-                .anyMatch(session::isUnique);
-    }
-
-    @Override
     public void deleteSessionAssociatedSchedules(Session session) {
         requireNonNull(session);
 

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.session.Interval.SIMPLE_DATE_TIME_PATTERN_FORMATTER;
+
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -51,7 +53,7 @@ public class SessionCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         sessionTime.setText(session.getInterval().getTime12hrPattern());
         gymName.setText(session.getGym().toString());
-        dayOfWeek.setText(session.getInterval().getStartDay());
+        dayOfWeek.setText(session.getInterval().getFormattedStartDateTime(SIMPLE_DATE_TIME_PATTERN_FORMATTER));
         if (clients != null && clients.size() > 0) {
             clients.forEach(client -> associatedClient.getChildren().add(new Label(client.getName().toString())));
         }

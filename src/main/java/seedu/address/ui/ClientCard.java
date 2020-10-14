@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.session.Interval.DATE_TIME_FORMATTER;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -56,7 +58,8 @@ public class ClientCard extends UiPart<Region> {
         //                .sorted(Comparator.comparing(tag -> tag.tagName))
         //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (session != null) {
-            nextSession.setText(nextSessionStart + session.getInterval().getStartDate()); // placeholder
+            nextSession.setText(nextSessionStart + session.getInterval().getFormattedStartDateTime(
+                    DATE_TIME_FORMATTER)); // placeholder
         } else {
             nextSession.setText(nextSessionStart + " - ");
         }

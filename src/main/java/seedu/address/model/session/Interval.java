@@ -52,8 +52,8 @@ public class Interval {
         return this.start;
     }
 
-    public String getStartDay() {
-        return this.start.format(SIMPLE_DATE_TIME_PATTERN_FORMATTER);
+    public String getFormattedStartDateTime (DateTimeFormatter formatter) {
+        return this.start.format(formatter);
     }
 
     public LocalDateTime getEnd() {
@@ -71,10 +71,6 @@ public class Interval {
         return getStart().format(TIME_12HR_PATTERN_FORMATTER)
                 + " - "
                 + getEnd().format(TIME_12HR_PATTERN_FORMATTER);
-    }
-
-    public String getStartDate() {
-        return getStart().format(DATE_TIME_FORMATTER);
     }
 
     @Override

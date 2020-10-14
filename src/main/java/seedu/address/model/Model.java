@@ -97,11 +97,6 @@ public interface Model {
     boolean hasSession(Session session);
 
     /**
-     * Returns true if a Schedule with the same session as {@code Session} exists in the Schedule List.
-     */
-    boolean hasAnySessionAssociatedSchedules(Session session);
-
-    /**
      * Deletes every Schedule with the same session as {@code session}.
      */
     void deleteSessionAssociatedSchedules(Session session);
