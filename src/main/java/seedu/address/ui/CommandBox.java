@@ -99,7 +99,6 @@ public class CommandBox extends UiPart<Region> {
                 } else if (cursor == (pastCommandList).size()) {
                     commandTextField.setText("");
                     mainWindow.setPastCommandListCursor(cursor);
-                } else {
                 }
             }
         });

@@ -15,7 +15,6 @@ import seedu.address.model.session.Session;
 /**
  * API of the Logic component
  */
-@SuppressWarnings("checkstyle:CommentsIndentation")
 public interface Logic {
     /**
      * Executes the command and returns the result.
