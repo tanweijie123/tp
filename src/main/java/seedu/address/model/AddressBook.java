@@ -13,7 +13,7 @@ import seedu.address.model.session.Session;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameClient comparison)
+ * Duplicates are not allowed
  */
 public class AddressBook implements ReadOnlyAddressBook {
 

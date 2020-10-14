@@ -56,8 +56,8 @@ public class Session implements CheckExisting<Session>, Comparable<Session> {
     }
 
     /**
-     * Returns true if both Sessions have overlapping sessions
-     *
+     * Returns true if both Sessions have overlapping intervals
+     * <p>
      * Two sessions are defined as duplicate if and only if at least one time boundary lies strictly inside
      * the other session's interval
      * This defines a different notion of equality between two Sessions compared to {@code equals}
