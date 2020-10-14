@@ -52,8 +52,9 @@ public class EditSessionDescriptorBuilder {
     /**
      * Sets the {@code Interval} of the {@code EditSessionDescriptor} that we are building.
      */
-    public EditSessionDescriptorBuilder withInterval(LocalDateTime startTime, int duration) {
-        descriptor.setInterval(new Interval(startTime, duration));
+    public EditSessionDescriptorBuilder withInterval(String startTime, String duration) {
+        descriptor.setInterval(new Interval(LocalDateTime.parse(startTime, Interval.DATE_TIME_FORMATTER),
+                Integer.parseInt(duration)));
         return this;
     }
 

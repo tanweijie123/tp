@@ -19,7 +19,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.session.EditSessionCommand.EditSessionDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.session.Interval;
 import seedu.address.model.session.IntervalContainsDatetimePredicate;
 import seedu.address.model.session.Session;
 import seedu.address.testutil.EditSessionDescriptorBuilder;
@@ -31,12 +30,19 @@ public class SessionCommandTestUtil {
 
     public static final String VALID_GYM_GETWELL = "Getwell gym";
     public static final String VALID_GYM_MACHOMAN = "Machoman gym";
+    public static final String VALID_GYM_ULTRAMAN = "Ultraman gym";
+
     public static final String VALID_EXERCISE_TYPE_GETWELL = "Endurance";
     public static final String VALID_EXERCISE_TYPE_MACHOMAN = "Bodybuilder";
+    public static final String VALID_EXERCISE_TYPE_ULTRAMAN = "Pilates";
+
     public static final String VALID_START_TIME_GETWELL = "29/09/2020 1300";
     public static final String VALID_START_TIME_MACHOMAN = "29/09/2020 1600";
+    public static final String VALID_START_TIME_ULTRAMAN = "30/09/2020 1800";
+
     public static final String VALID_DURATION_GETWELL = "120";
     public static final String VALID_DURATION_MACHOMAN = "150";
+    public static final String VALID_DURATION_ULTRAMAN = "170";
 
     public static final String GYM_DESC_GETWELL = " " + PREFIX_GYM + VALID_GYM_GETWELL;
     public static final String GYM_DESC_MACHOMAN = " " + PREFIX_GYM + VALID_GYM_MACHOMAN;
@@ -60,14 +66,14 @@ public class SessionCommandTestUtil {
     public static final EditSessionDescriptor DESC_GETWELL = new EditSessionDescriptorBuilder()
             .withGym(VALID_GYM_GETWELL)
             .withExerciseType(VALID_EXERCISE_TYPE_GETWELL)
-            .withInterval(LocalDateTime.parse(VALID_START_TIME_GETWELL, Interval.DATE_TIME_FORMATTER),
-                    Integer.parseInt(VALID_DURATION_GETWELL))
+            .withInterval(VALID_START_TIME_GETWELL,
+                    VALID_DURATION_GETWELL)
             .build();
     public static final EditSessionDescriptor DESC_MACHOMAN = new EditSessionDescriptorBuilder()
             .withGym(VALID_GYM_MACHOMAN)
             .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-            .withInterval(LocalDateTime.parse(VALID_START_TIME_MACHOMAN, Interval.DATE_TIME_FORMATTER),
-                    Integer.parseInt(VALID_DURATION_MACHOMAN))
+            .withInterval(VALID_START_TIME_MACHOMAN,
+                    VALID_DURATION_MACHOMAN)
             .build();
 
     /**
