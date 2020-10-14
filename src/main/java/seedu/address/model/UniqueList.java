@@ -112,7 +112,7 @@ public class UniqueList<T extends CheckExisting<T>> implements Iterable<T> {
 
     /**
      * Returns true if {@code elements} contains are unique.
-     * Note that this only compares using CheckExisiting::isExisting
+     * Note that this only compares using CheckExisiting::isUnique
      */
     private boolean elementsAreUnique(List<T> elements) {
         for (int i = 0; i < elements.size() - 1; i++) {

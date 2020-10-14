@@ -12,12 +12,14 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_GETWELL;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_ULTRAMAN;
+import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 
@@ -57,6 +59,17 @@ public class TypicalSessions {
         AddressBook ab = new AddressBook();
         for (Session session : getTypicalSessions()) {
             ab.addSession(session);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical Sessions.
+     */
+    public static AddressBook getIntegrationAddressBook() {
+        AddressBook ab = getTypicalAddressBook();
+        for (Schedule schedule : getTypicalSchedules()) {
+            ab.addSchedule(schedule);
         }
         return ab;
     }

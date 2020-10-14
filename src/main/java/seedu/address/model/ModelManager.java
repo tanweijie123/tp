@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,7 +18,7 @@ import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 /**
- * Represents the in-memory model of the FitEgo's data (client + session).
+ * Represents the in-memory model of the FitEgo's data (client + session + schedule).
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -144,7 +146,35 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasAnySessionAssociatedSchedules(Session session) {
+        requireNonNull(session);
+        return addressBook.getScheduleList()
+                .stream()
+                .map(Schedule::getSession)
+                .anyMatch(session::isUnique);
+    }
+
+    @Override
+    public void deleteSessionAssociatedSchedules(Session session) {
+        requireNonNull(session);
+
+        List<Schedule> associatedSchedules = addressBook.getScheduleList()
+                .stream()
+                .filter(schedule -> session.isUnique(schedule.getSession()))
+                .collect(Collectors.toList());
+
+        for (Schedule schedule : associatedSchedules) {
+            this.deleteSchedule(schedule);
+        }
+
+        logger.fine(String.format("User force delete %s causes %d schedules to be deleted",
+                session.toString(),
+                associatedSchedules.size()));
+    }
+
+    @Override
     public void deleteSession(Session session) {
+        requireNonNull(session);
         addressBook.removeSession(session);
     }
 
@@ -227,7 +257,9 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredClients.equals(other.filteredClients);
+                && filteredClients.equals(other.filteredClients)
+                && filteredSessions.equals(other.filteredSessions)
+                && filteredSchedules.equals(other.filteredSchedules);
     }
 
 }
