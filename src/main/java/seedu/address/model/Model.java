@@ -17,6 +17,7 @@ public interface Model {
     Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
     Predicate<Session> PREDICATE_SHOW_ALL_SESSIONS = unused -> true;
     Predicate<Schedule> PREDICATE_SHOW_ALL_SCHEDULES = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -93,6 +94,16 @@ public interface Model {
      * Returns true if a Session with the same identity as {@code Session} exists in the Session List.
      */
     boolean hasSession(Session session);
+
+    /**
+     * Returns true if a Schedule with the same session as {@code Session} exists in the Schedule List.
+     */
+    boolean hasAnySessionAssociatedSchedules(Session session);
+
+    /**
+     * Deletes every Schedule with the same session as {@code session}.
+     */
+    void deleteSessionAssociatedSchedules(Session session);
 
     /**
      * Deletes the given Session.
