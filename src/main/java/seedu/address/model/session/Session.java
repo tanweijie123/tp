@@ -12,7 +12,7 @@ import seedu.address.model.CheckExisting;
  * Represents a training Session in FitEgo.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Session implements CheckExisting<Session> {
+public class Session implements CheckExisting<Session>, Comparable<Session> {
     // Identity fields
     private final Gym gym;
     private final Interval interval;
@@ -107,6 +107,11 @@ public class Session implements CheckExisting<Session> {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(gym, interval, exerciseType);
+    }
+
+    @Override
+    public int compareTo(Session session) {
+        return this.getInterval().getStart().compareTo(session.getInterval().getStart());
     }
 
     @Override

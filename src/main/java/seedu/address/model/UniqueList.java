@@ -5,13 +5,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.exceptions.DuplicateEntityException;
 import seedu.address.model.exceptions.EntityNotFoundException;
 
-public class UniqueList<T extends CheckExisting<T>> implements Iterable<T> {
+public class UniqueList<T extends CheckExisting<T> & Comparable<T>> implements Iterable<T> {
 
     private final ObservableList<T> internalList = FXCollections.observableArrayList();
     private final ObservableList<T> internalUnmodifiableList =
@@ -87,6 +89,14 @@ public class UniqueList<T extends CheckExisting<T>> implements Iterable<T> {
     }
 
     /**
+     * Returns all elements T in the internal list that matches {@code predicate}.
+     */
+    public Stream<T> findAllMatch(Predicate<T> predicate) {
+        requireNonNull(predicate);
+        return internalUnmodifiableList.stream().filter(predicate);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<T> asUnmodifiableObservableList() {
@@ -108,6 +118,13 @@ public class UniqueList<T extends CheckExisting<T>> implements Iterable<T> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    /**
+     * Sorts elements in the list using T's compareTo method.
+     */
+    public void sort() {
+        internalList.sort(Comparable::compareTo);
     }
 
     /**

@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -75,7 +74,10 @@ public class EditSessionCommand extends Command {
         }
 
         model.setSession(sessionToEdit, editedSession);
-        model.updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
+        if (model.hasAnyScheduleAssociatedWithSession(sessionToEdit)) {
+            model.editSchedulesAssociatedWithSession(sessionToEdit, editedSession);
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_SESSION_SUCCESS, editedSession));
     }
 

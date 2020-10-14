@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -158,11 +159,6 @@ public class AddSessionCommandTest {
         }
 
         @Override
-        public boolean hasAnySessionAssociatedSchedules(Session session) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteSessionAssociatedSchedules(Session session) {
             throw new AssertionError("This method should not be called.");
         }
@@ -199,6 +195,26 @@ public class AddSessionCommandTest {
         }
 
         @Override
+        public boolean hasAnyScheduleAssociatedWithSession(Session session) {
+            return false;
+        }
+
+        @Override
+        public void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession) {
+
+        }
+
+        @Override
+        public boolean hasAnyScheduleAssociatedWithClient(Client toEdit) {
+            return false;
+        }
+
+        @Override
+        public void editSchedulesAssociatedWithClient(Client toEdit, Client editedClient) {
+
+        }
+
+        @Override
         public void deleteSchedule(Schedule schedule) {
             throw new AssertionError("This method should not be called.");
         }
@@ -220,6 +236,21 @@ public class AddSessionCommandTest {
 
         @Override
         public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortSession() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Session> findSessionByClient(Client clientKey) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Client> findClientBySession(Session sessionKey) {
             throw new AssertionError("This method should not be called.");
         }
     }

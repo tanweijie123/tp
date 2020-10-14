@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -96,11 +97,6 @@ public interface Model {
     boolean hasSession(Session session);
 
     /**
-     * Returns true if a Schedule with the same session as {@code Session} exists in the Schedule List.
-     */
-    boolean hasAnySessionAssociatedSchedules(Session session);
-
-    /**
      * Deletes every Schedule with the same session as {@code session}.
      */
     void deleteSessionAssociatedSchedules(Session session);
@@ -125,6 +121,11 @@ public interface Model {
      */
     void setSession(Session target, Session editedSession);
 
+    /**
+     * Sorts the Session List by session's natural order.
+     */
+    void sortSession();
+
     /** Returns an unmodifiable view of the filtered Session list */
     ObservableList<Session> getFilteredSessionList();
 
@@ -138,6 +139,26 @@ public interface Model {
      * Returns true if a Schedule with the same identity as {@code Schedule} exists in the Schedule List.
      */
     boolean hasSchedule(Schedule schedule);
+
+    /**
+     * Returns true if a Schedule with the same session as {@code session} exists in the Schedule List.
+     */
+    boolean hasAnyScheduleAssociatedWithSession(Session session);
+
+    /**
+     * Edits every Schedule with the same session as {@code sessionToEdit} into {@code editedSession}.
+     */
+    void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession);
+
+    /**
+     * Returns true if a Schedule with the same client as {@code Client} exists in the Schedule List.
+     */
+    boolean hasAnyScheduleAssociatedWithClient(Client toEdit);
+
+    /**
+     * Edits every Schedule with the same client as {@code client}.
+     */
+    void editSchedulesAssociatedWithClient(Client toEdit, Client editedClient);
 
     /**
      * Deletes the given Schedule.
@@ -167,4 +188,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredScheduleList(Predicate<Schedule> predicate);
+
+    /**
+     * Finds all {@code Clients} in {@code Schedule List} that are associated to {@code sessionKey}.
+     * @throws NullPointerException if {@code sessionKey} is null.
+     */
+    List<Client> findClientBySession(Session sessionKey);
+
+    /**
+     * Finds all {@code Sessions} in {@code Schedule List} that are associated to {@code clientKey}.
+     * @throws NullPointerException if {@code clientKey} is null.
+     */
+    List<Session> findSessionByClient(Client clientKey);
 }

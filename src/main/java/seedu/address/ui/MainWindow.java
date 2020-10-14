@@ -140,13 +140,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        clientListPanel = new ClientListPanel(this, logic.getFilteredClientList());
+        clientListPanel = new ClientListPanel(this, logic);
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
         homepage = Homepage.getHomePage(this.logic.getAddressBook());
         setMainDisplay(homepage.getRoot());
 
-        rightSideBar = new RightSideBar(this, logic.getFilteredClientList()); //TODO: change this to sess.
+        rightSideBar = new RightSideBar(this, logic);
         rightDisplay.getChildren().add(rightSideBar.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -199,9 +199,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ClientListPanel getClientListPanel() {
-        return clientListPanel;
-    }
 
     public List<String> getPastCommandList() {
         return this.pastCommandList;
@@ -242,6 +239,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            clientListPanel.update();
+            rightSideBar.update();
             homepage.update();
             return commandResult;
         } catch (CommandException | ParseException e) {

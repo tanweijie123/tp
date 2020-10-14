@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Client in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Client implements CheckExisting<Client> {
+public class Client implements CheckExisting<Client>, Comparable<Client> {
 
     // Identity fields
     private final Name name;
@@ -102,6 +102,11 @@ public class Client implements CheckExisting<Client> {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags);
+    }
+
+    @Override
+    public int compareTo(Client client) {
+        return this.getName().compareTo(client.getName());
     }
 
     @Override

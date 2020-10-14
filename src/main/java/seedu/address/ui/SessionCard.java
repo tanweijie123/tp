@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
-import static seedu.address.model.session.Interval.DATE_TIME_FORMATTER;
+import static seedu.address.model.session.Interval.SIMPLE_DATE_TIME_PATTERN_FORMATTER;
+
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,13 +12,13 @@ import javafx.scene.layout.Region;
 import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
 
+
 /**
  * An UI component that displays information of a {@code Client}.
  */
-public class ClientCard extends UiPart<Region> {
+public class SessionCard extends UiPart<Region> {
 
-    private static final String FXML = "ClientListCard.fxml";
-    private static final String nextSessionStart = "Next Session: ";
+    private static final String FXML = "SessionListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -26,39 +28,34 @@ public class ClientCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Client client;
-
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Session session;
     @FXML
-    private Label address;
+    private Label dayOfWeek;
     @FXML
-    private Label email;
+    private Label sessionTime;
     @FXML
-    private Label nextSession;
+    private Label gymName;
     @FXML
-    private FlowPane tags;
+    private FlowPane associatedClient;
+
 
     /**
-     * Creates a {@code ClientCode} with the given {@code Client} and index to display.
+     * Creates a {@code ScheduleCard} with the given {@code Schedule}.
      */
-    public ClientCard(Client client, int displayedIndex, Session session) {
+    public SessionCard(Session session, int displayedIndex, List<Client> clients) {
         super(FXML);
-        this.client = client;
+        this.session = session;
         id.setText(displayedIndex + ". ");
-        name.setText(client.getName().fullName);
-        phone.setText(client.getPhone().value);
-        if (session != null) {
-            nextSession.setText(nextSessionStart + session.getInterval().getFormattedStartDateTime(
-                    DATE_TIME_FORMATTER));
-        } else {
-            nextSession.setText(nextSessionStart + " - ");
+        sessionTime.setText(session.getInterval().getTime12hrPattern());
+        gymName.setText(session.getGym().toString());
+        dayOfWeek.setText(session.getInterval().getFormattedStartDateTime(SIMPLE_DATE_TIME_PATTERN_FORMATTER));
+        if (clients != null && clients.size() > 0) {
+            clients.forEach(client -> associatedClient.getChildren().add(new Label(client.getName().toString())));
         }
     }
 
@@ -70,13 +67,12 @@ public class ClientCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClientCard)) {
+        if (!(other instanceof SessionCard)) {
             return false;
         }
 
         // state check
-        ClientCard card = (ClientCard) other;
-        return id.getText().equals(card.id.getText())
-                && client.equals(card.client);
+        SessionCard card = (SessionCard) other;
+        return session.equals(card.session);
     }
 }

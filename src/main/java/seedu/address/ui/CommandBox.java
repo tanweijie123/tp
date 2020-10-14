@@ -96,6 +96,9 @@ public class CommandBox extends UiPart<Region> {
                 if (cursor < (pastCommandList).size()) { //Allow to scroll down if within range
                     commandTextField.setText(pastCommandList.get(cursor));
                     mainWindow.setPastCommandListCursor(cursor);
+                } else if (cursor == (pastCommandList).size()) {
+                    commandTextField.setText("");
+                    mainWindow.setPastCommandListCursor(cursor);
                 }
             }
         });

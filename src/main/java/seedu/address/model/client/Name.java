@@ -51,9 +51,14 @@ public class Name {
                 && fullName.equals(((Name) other).fullName)); // state check
     }
 
+    public int compareTo(Name other) {
+        return this.fullName.compareTo(other.fullName);
+    }
+
     @Override
     public int hashCode() {
         return fullName.hashCode();
     }
+
 
 }

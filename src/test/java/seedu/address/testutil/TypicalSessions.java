@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_GYM_ULTRAMAN;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_GETWELL;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN_TOMORROW;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_ULTRAMAN;
 import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
 
@@ -48,6 +49,11 @@ public class TypicalSessions {
             .withInterval(VALID_START_TIME_ULTRAMAN,
                     VALID_DURATION_ULTRAMAN)
             .build();
+    public static final Session MACHOMAN_TOMORROW = new SessionBuilder()
+            .withGym(VALID_GYM_MACHOMAN)
+            .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
+            .withInterval(VALID_START_TIME_MACHOMAN_TOMORROW, VALID_DURATION_MACHOMAN)
+            .build();
 
     private TypicalSessions() {
     } // prevents instantiation
@@ -76,5 +82,21 @@ public class TypicalSessions {
 
     public static List<Session> getTypicalSessions() {
         return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN, ULTRAMAN));
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical Sessions + a Session with interval start that dynamically
+     * to the day after application is loaded.
+     */
+    public static AddressBook getTypicalWithDayAfterAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Session session : getTypicalWithDayAfterSessions()) {
+            ab.addSession(session);
+        }
+        return ab;
+    }
+
+    public static List<Session> getTypicalWithDayAfterSessions() {
+        return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN, MACHOMAN_TOMORROW));
     }
 }

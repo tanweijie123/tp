@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
@@ -108,6 +110,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setSessions(List<Session> sessions) {
         this.sessions.setAll(sessions);
+        this.sessions.sort();
     }
 
     //// Client-level operations
@@ -145,6 +148,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeSession(Session key) {
         sessions.remove(key);
+    }
+
+    /**
+     * Sorts {@code session} from this {@code SessionList} in ascending startDate order.
+     */
+    public void sortSession() {
+        sessions.sort();
     }
 
     //=============================== SCHEDULE-RELATED ===========================================
@@ -194,7 +204,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         schedules.remove(key);
     }
 
-
     //// util methods
 
     @Override
@@ -219,6 +228,29 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Schedule> getScheduleList() {
         return schedules.asUnmodifiableObservableList();
+    }
+
+
+    /**
+     * Finds all {@code Schedule} that contains {@code session} from this {@code ScheduleList}.
+     * {@code sessionKey} must exist in the schedule list.
+     * @return A list of clients that are associated to {@code sessionKey} in the {@code ScheduleList}.
+     */
+    public List<Client> findClientBySession(Session sessionKey) {
+        Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(s-> s.getSession().equals(sessionKey));
+        Stream<Client> clientsInSession = schedulesContainingSession.map(Schedule::getClient);
+        return clientsInSession.collect(Collectors.toList());
+    }
+
+    /**
+     * Finds all {@code Session} that contains {@code session} from this {@code ScheduleList}.
+     * {@code clientKey} must exist in the schedule list.
+     * @return A list of session that are associated to {@code clientKey} in the {@code ScheduleList}.
+     */
+    public List<Session> findSessionByClient(Client clientKey) {
+        Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(s-> s.getClient().equals(clientKey));
+        Stream<Session> sessionsInClient = schedulesContainingSession.map(Schedule::getSession);
+        return sessionsInClient.collect(Collectors.toList());
     }
 
     @Override

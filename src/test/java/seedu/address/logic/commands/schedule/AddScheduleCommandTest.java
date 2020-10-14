@@ -191,10 +191,6 @@ public class AddScheduleCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public boolean hasAnySessionAssociatedSchedules(Session session) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public void deleteSessionAssociatedSchedules(Session session) {
@@ -233,6 +229,26 @@ public class AddScheduleCommandTest {
         }
 
         @Override
+        public boolean hasAnyScheduleAssociatedWithSession(Session session) {
+            return false;
+        }
+
+        @Override
+        public void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession) {
+
+        }
+
+        @Override
+        public boolean hasAnyScheduleAssociatedWithClient(Client toEdit) {
+            return false;
+        }
+
+        @Override
+        public void editSchedulesAssociatedWithClient(Client toEdit, Client editedClient) {
+
+        }
+
+        @Override
         public void deleteSchedule(Schedule schedule) {
             throw new AssertionError("This method should not be called.");
         }
@@ -254,6 +270,21 @@ public class AddScheduleCommandTest {
 
         @Override
         public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortSession() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Session> findSessionByClient(Client clientKey) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Client> findClientBySession(Session sessionKey) {
             throw new AssertionError("This method should not be called.");
         }
     }

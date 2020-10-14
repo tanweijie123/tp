@@ -12,7 +12,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class Interval {
     private static final String DATE_TIME_PATTERN = "dd/MM/yyyy HHmm";
+    private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM";
+    private static final String TIME_12HR_PATTERN = "hh:mm a";
+
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+    public static final DateTimeFormatter SIMPLE_DATE_TIME_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(
+            SIMPLE_DATE_TIME_PATTERN);
+    public static final DateTimeFormatter TIME_12HR_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(TIME_12HR_PATTERN);
 
     public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must follow "
             + DATE_TIME_PATTERN + " pattern";
@@ -46,6 +52,10 @@ public class Interval {
         return this.start;
     }
 
+    public String getFormattedStartDateTime (DateTimeFormatter formatter) {
+        return this.start.format(formatter);
+    }
+
     public LocalDateTime getEnd() {
         return this.start.plusMinutes(durationInMinutes);
     }
@@ -55,6 +65,12 @@ public class Interval {
         return getStart().format(DATE_TIME_FORMATTER)
                 + " - "
                 + getEnd().format(DATE_TIME_FORMATTER);
+    }
+
+    public String getTime12hrPattern() {
+        return getStart().format(TIME_12HR_PATTERN_FORMATTER)
+                + " - "
+                + getEnd().format(TIME_12HR_PATTERN_FORMATTER);
     }
 
     @Override

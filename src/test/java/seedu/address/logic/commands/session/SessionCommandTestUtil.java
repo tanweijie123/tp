@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.session.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_EXERCISE_TYPE;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_GYM;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.model.session.Interval.DATE_TIME_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
@@ -38,6 +39,8 @@ public class SessionCommandTestUtil {
 
     public static final String VALID_START_TIME_GETWELL = "29/09/2020 1300";
     public static final String VALID_START_TIME_MACHOMAN = "29/09/2020 1600";
+    public static final String VALID_START_TIME_MACHOMAN_TOMORROW = LocalDateTime.now().plusDays(1).format(
+            DATE_TIME_FORMATTER);
     public static final String VALID_START_TIME_ULTRAMAN = "30/09/2020 1800";
 
     public static final String VALID_DURATION_GETWELL = "120";

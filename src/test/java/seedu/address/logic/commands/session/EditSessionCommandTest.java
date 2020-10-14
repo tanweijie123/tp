@@ -93,8 +93,6 @@ public class EditSessionCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showSessionAtIndex(model, INDEX_FIRST_SESSION);
-
         Session sessionInFilteredList = model.getFilteredSessionList().get(INDEX_FIRST_SESSION.getZeroBased());
         Session editedSession = new SessionBuilder(sessionInFilteredList).withGym(VALID_GYM_GETWELL).build();
         EditSessionCommand editSessionCommand = new EditSessionCommand(INDEX_FIRST_SESSION,

@@ -43,6 +43,8 @@ public class ModelManager implements Model {
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
         filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
         filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
+
+        sortSession();
     }
 
     public ModelManager() {
@@ -146,15 +148,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAnySessionAssociatedSchedules(Session session) {
-        requireNonNull(session);
-        return addressBook.getScheduleList()
-                .stream()
-                .map(Schedule::getSession)
-                .anyMatch(session::isUnique);
-    }
-
-    @Override
     public void deleteSessionAssociatedSchedules(Session session) {
         requireNonNull(session);
 
@@ -181,13 +174,19 @@ public class ModelManager implements Model {
     @Override
     public void addSession(Session session) {
         addressBook.addSession(session);
-        updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
+        sortSession();
     }
 
     @Override
     public void setSession(Session target, Session editedSession) {
         requireAllNonNull(target, editedSession);
         addressBook.setSession(target, editedSession);
+        sortSession();
+    }
+
+    @Override
+    public void sortSession() {
+        addressBook.sortSession();
     }
 
     //=========== Filtered Session List Accessors =============================================================
@@ -201,6 +200,7 @@ public class ModelManager implements Model {
     public void updateFilteredSessionList(Predicate<Session> predicate) {
         requireNonNull(predicate);
         filteredSessions.setPredicate(predicate);
+        sortSession();
     }
 
     //=========== Schedule List ===============================================================================
@@ -209,6 +209,60 @@ public class ModelManager implements Model {
     public boolean hasSchedule(Schedule schedule) {
         requireNonNull(schedule);
         return addressBook.hasSchedule(schedule);
+    }
+
+    /**
+     * Returns true if a Schedule with the same client as {@code Client} exists in the Schedule List.
+     */
+    public boolean hasAnyScheduleAssociatedWithClient(Client clientToEdit) {
+        requireNonNull(clientToEdit);
+        return addressBook.getScheduleList()
+                .stream()
+                .map(Schedule::getClient)
+                .anyMatch(clientToEdit::isUnique);
+    }
+
+    /**
+     * Edits every Schedule with the same client as {@code client}.
+     */
+    public void editSchedulesAssociatedWithClient(Client clientToEdit, Client editedClient) {
+        requireAllNonNull(clientToEdit, editedClient);
+
+        List<Schedule> associatedSchedules = addressBook.getScheduleList()
+                .stream()
+                .filter(schedule -> clientToEdit.isUnique(schedule.getClient()))
+                .collect(Collectors.toList());
+
+        for (Schedule schedule : associatedSchedules) {
+            this.setSchedule(schedule, new Schedule(editedClient, schedule.getSession()));
+        }
+    }
+
+    /**
+     * Returns true if a Schedule with the same session as {@code session} exists in the Schedule List.
+     */
+    public boolean hasAnyScheduleAssociatedWithSession(Session session) {
+        requireNonNull(session);
+        return addressBook.getScheduleList()
+                .stream()
+                .map(Schedule::getSession)
+                .anyMatch(session::isUnique);
+    }
+
+    /**
+     * Edits every Schedule with the same session as {@code sessionToEdit} into {@code editedSession}.
+     */
+    public void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession) {
+        requireAllNonNull(sessionToEdit, editedSession);
+
+        List<Schedule> associatedSchedules = addressBook.getScheduleList()
+                .stream()
+                .filter(schedule -> sessionToEdit.isUnique(schedule.getSession()))
+                .collect(Collectors.toList());
+
+        for (Schedule schedule : associatedSchedules) {
+            this.setSchedule(schedule, new Schedule(schedule.getClient(), editedSession));
+        }
     }
 
     @Override
@@ -241,6 +295,23 @@ public class ModelManager implements Model {
         filteredSchedules.setPredicate(predicate);
     }
 
+    //=========== Client-Session Association =====================================================================
+    @Override
+    public List<Client> findClientBySession(Session sessionKey) {
+        requireNonNull(sessionKey);
+        return addressBook.findClientBySession(sessionKey);
+    }
+
+    @Override
+    public List<Session> findSessionByClient(Client clientKey) {
+        requireNonNull(clientKey);
+        return addressBook.findSessionByClient(clientKey);
+    }
+
+
+
+    //=========== Util-related ===============================================================================
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -261,5 +332,4 @@ public class ModelManager implements Model {
                 && filteredSessions.equals(other.filteredSessions)
                 && filteredSchedules.equals(other.filteredSchedules);
     }
-
 }
