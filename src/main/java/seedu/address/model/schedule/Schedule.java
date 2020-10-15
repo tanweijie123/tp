@@ -23,6 +23,16 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         this.isPaid = isPaid;
     }
 
+    /**
+     * Every field must be present and not null. isPaid is set to {@code false}.
+     */
+    public Schedule(Client client, Session session) {
+        requireAllNonNull(client, session);
+        this.client = client;
+        this.session = session;
+        this.isPaid = false;
+    }
+
     public Client getClient() {
         return client;
     }
