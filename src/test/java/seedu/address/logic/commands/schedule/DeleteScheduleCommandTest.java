@@ -7,8 +7,10 @@ import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.asse
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.showScheduleAtIndex;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BENSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SCHEDULE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
 import static seedu.address.testutil.TypicalSessions.GETWELL;
 
@@ -59,7 +61,8 @@ public class DeleteScheduleCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Schedule scheduleToDelete = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
-        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_SCHEDULE);
+        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_CLIENT,
+                INDEX_FIRST_SESSION);
 
         String expectedMessage = String.format(DeleteScheduleCommand.MESSAGE_SUCCESS, scheduleToDelete);
 
@@ -70,11 +73,19 @@ public class DeleteScheduleCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredScheduleList().size() + 1);
-        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(outOfBoundIndex);
+    public void execute_invalidClientIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
+        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(outOfBoundIndex, INDEX_FIRST_SESSION);
 
-        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
+        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidSessionIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredSessionList().size() + 1);
+        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_CLIENT, outOfBoundIndex);
+
+        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -82,7 +93,8 @@ public class DeleteScheduleCommandTest {
         showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
 
         Schedule scheduleToDelete = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
-        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_SCHEDULE);
+        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_CLIENT,
+                INDEX_FIRST_SESSION);
 
         String expectedMessage = String.format(DeleteScheduleCommand.MESSAGE_SUCCESS, scheduleToDelete);
 
@@ -94,28 +106,16 @@ public class DeleteScheduleCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
-
-        Index outOfBoundIndex = INDEX_SECOND_SCHEDULE;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getScheduleList().size());
-
-        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
-    }
-
-    @Test
     public void equals() {
-        DeleteScheduleCommand deleteFirstCommand = new DeleteScheduleCommand(INDEX_FIRST_SCHEDULE);
-        DeleteScheduleCommand deleteSecondCommand = new DeleteScheduleCommand(INDEX_SECOND_SCHEDULE);
+        DeleteScheduleCommand deleteFirstCommand = new DeleteScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION);
+        DeleteScheduleCommand deleteSecondCommand = new DeleteScheduleCommand(INDEX_FIRST_CLIENT, INDEX_SECOND_SESSION);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteScheduleCommand deleteFirstCommandCopy = new DeleteScheduleCommand(INDEX_FIRST_SCHEDULE);
+        DeleteScheduleCommand deleteFirstCommandCopy = new DeleteScheduleCommand(INDEX_FIRST_SCHEDULE,
+                INDEX_FIRST_SESSION);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
