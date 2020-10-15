@@ -9,32 +9,11 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_
 import static seedu.address.testutil.TypicalSessions.GETWELL;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.testutil.SessionBuilder;
 
 public class SessionTest {
-
-    @Test
-    public void testLoadFromStorageConstructor() {
-        try {
-            LocalDateTime start = SessionParserUtil.parseStringToDateTime(VALID_START_TIME_MACHOMAN);
-            Session machoman = new Session(
-                    VALID_GYM_MACHOMAN,
-                    VALID_EXERCISE_TYPE_MACHOMAN,
-                    start,
-                    Integer.parseInt(VALID_DURATION_MACHOMAN)
-            );
-            assertTrue(MACHOMAN.equals(machoman));
-        } catch (Exception e) {
-            // Should never reach here. If you get here, check the data in SessionCommandTestUtil
-            throw new AssertionError("This should not be called!");
-        }
-
-    }
 
     @Test
     public void isUniqueSession() {

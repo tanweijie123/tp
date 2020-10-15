@@ -30,17 +30,6 @@ public class Session implements CheckExisting<Session>, Comparable<Session> {
         this.gym = gym;
     }
 
-    /**
-     * Creates a new Session object.
-     * NOTE: DO NOT USE THIS FOR CLIENT INPUT; this is only for loading from database.
-     */
-    public Session(String gym, String exerciseType, LocalDateTime start, int duration) {
-        requireAllNonNull(gym, exerciseType, start, duration);
-        this.gym = new Gym(gym);
-        this.exerciseType = new ExerciseType(exerciseType);
-        this.interval = new Interval(start, duration);
-    }
-
     //Getters / Setters
 
     public Gym getGym() {
@@ -57,10 +46,6 @@ public class Session implements CheckExisting<Session>, Comparable<Session> {
 
     public LocalDateTime getEndTime() {
         return interval.getEnd();
-    }
-
-    public int getDuration() {
-        return interval.getDurationInMinutes();
     }
 
     public ExerciseType getExerciseType() {

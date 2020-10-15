@@ -60,10 +60,6 @@ public class Interval {
         return this.start.plusMinutes(durationInMinutes);
     }
 
-    public int getDurationInMinutes() {
-        return this.durationInMinutes;
-    }
-
     @Override
     public String toString() {
         return getStart().format(DATE_TIME_FORMATTER)
