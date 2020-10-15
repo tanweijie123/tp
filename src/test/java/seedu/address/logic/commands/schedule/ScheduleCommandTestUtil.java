@@ -27,7 +27,7 @@ public class ScheduleCommandTestUtil {
         Schedule schedule = model.getFilteredScheduleList().get(targetIndex.getZeroBased());
         model.updateFilteredScheduleList(new SameSchedulePredicate(schedule));
 
-        assertEquals(1, model.getFilteredSessionList().size());
+        assertEquals(1, model.getFilteredScheduleList().size());
     }
 
     /**
