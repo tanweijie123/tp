@@ -76,10 +76,10 @@ public class Session implements CheckExisting<Session>, Comparable<Session> {
             // other session start time is > this session start time
             // this session: 2 - 4pm, other session: 4 - 6pm -> do not overlap
             // this session: 2 - 4.01pm, other session: 4 - 6pm -> overlap
-            return getInterval().getEnd().isAfter(otherSession.getInterval().getStart());
+            return !getInterval().getEnd().isAfter(otherSession.getInterval().getStart());
         } else {
             // other session start time is <= this session start time
-            return otherSession.getInterval().getEnd().isAfter(getInterval().getStart());
+            return !otherSession.getInterval().getEnd().isAfter(getInterval().getStart());
         }
     }
 
