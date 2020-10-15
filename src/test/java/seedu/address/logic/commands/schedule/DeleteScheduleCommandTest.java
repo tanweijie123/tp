@@ -2,21 +2,18 @@ package seedu.address.logic.commands.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.schedule.DeleteScheduleCommand.MESSAGE_SCHEDULE_NOT_FOUND;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.showScheduleAtIndex;
-import static seedu.address.testutil.TypicalClients.ALICE;
-import static seedu.address.testutil.TypicalClients.BENSON;
+import static seedu.address.testutil.TypicalClients.getTypicalClients;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
-import static seedu.address.testutil.TypicalSessions.GETWELL;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import static seedu.address.testutil.TypicalSessions.getTypicalSessions;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,14 +45,6 @@ public class DeleteScheduleCommandTest {
             ab.addSchedule(schedule);
         }
         return ab;
-    }
-
-    public static List<Client> getTypicalClients() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON));
-    }
-
-    public static List<Session> getTypicalSessions() {
-        return new ArrayList<>(Arrays.asList(GETWELL));
     }
 
     @Test
@@ -103,6 +92,19 @@ public class DeleteScheduleCommandTest {
         showNoSchedule(expectedModel);
 
         assertCommandSuccess(deleteScheduleCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_scheduleNotFound_throwsCommandException() {
+        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FOURTH_CLIENT,
+                INDEX_FIRST_SESSION);
+
+        Client associatedClient = model.getFilteredClientList().get(INDEX_FOURTH_CLIENT.getZeroBased());
+        Session associatedSession = model.getFilteredSessionList().get(INDEX_FIRST_SESSION.getZeroBased());
+
+
+        assertCommandFailure(deleteScheduleCommand, model, String.format(MESSAGE_SCHEDULE_NOT_FOUND,
+                associatedClient, associatedSession));
     }
 
     @Test
