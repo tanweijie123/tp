@@ -11,14 +11,16 @@ import seedu.address.model.session.Session;
 public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     private Client client;
     private Session session;
+    private boolean isPaid;
 
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Client client, Session session) {
-        requireAllNonNull(client, session);
+    public Schedule(Client client, Session session, boolean isPaid) {
+        requireAllNonNull(client, session, isPaid);
         this.client = client;
         this.session = session;
+        this.isPaid = isPaid;
     }
 
     public Client getClient() {
@@ -28,6 +30,8 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     public Session getSession() {
         return session;
     }
+
+    public boolean isPaid() { return isPaid; }
 
     /**
      * Returns true if both Schedules have the same identity.
@@ -42,7 +46,8 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
             return false;
         }
 
-        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session);
+        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session)
+                && otherSchedule.isPaid == isPaid;
     }
 
     /**
@@ -59,13 +64,14 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         }
 
         Schedule otherSchedule = (Schedule) other;
-        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session);
+        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session)
+                && otherSchedule.isPaid == isPaid;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(client, session);
+        return Objects.hash(client, session, isPaid);
     }
 
     @Override
