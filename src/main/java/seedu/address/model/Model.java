@@ -208,6 +208,12 @@ public interface Model {
     List<Session> findSessionByClient(Client clientKey);
 
     /**
+     * Finds a {@code Schedule} in {@code Schedule List} that are associated to {@code sessionKey}.
+     * @throws NullPointerException if {@code sessionKey} is null.
+     */
+    List<Schedule> findScheduleBySession(Session sessionKey);
+
+    /**
      * Finds a {@code Schedule} in {@code Schedule List} that are associated to {@code clientKey} and {@code sessionKey}.
      * @throws NullPointerException if {@code clientKey} or {@code sessionKey} is null.
      */

@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 /**
@@ -43,6 +44,9 @@ public interface Logic {
 
     /** Returns the list of Sessions associated to a Client*/
     List<Session> getAssociatedSessionList(Client client);
+
+    /** Returns the list of Schedules associated to a Session*/
+    List<Schedule> getAssociatedScheduleList(Session session);
 
     /**
      * Returns the user prefs' address book file path.
