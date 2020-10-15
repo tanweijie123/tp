@@ -31,7 +31,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         return session;
     }
 
-    public boolean isPaid() { return isPaid; }
+    public boolean getIsPaid() { return isPaid; }
 
     /**
      * Returns true if both Schedules have the same identity.
