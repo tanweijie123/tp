@@ -204,7 +204,7 @@ public class ModelManagerTest {
         modelManager.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
         // different filteredSessionList -> returns false
-        LocalDateTime start = GETWELL.getInterval().getStart();
+        LocalDateTime start = GETWELL.getStartTime();
         modelManager.updateFilteredSessionList(new IntervalContainsDatetimePredicate(start));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

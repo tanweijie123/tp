@@ -52,7 +52,7 @@ public class Interval {
         return this.start;
     }
 
-    public String getFormattedStartDateTime (DateTimeFormatter formatter) {
+    public String getFormattedStartDateTime(DateTimeFormatter formatter) {
         return this.start.format(formatter);
     }
 
