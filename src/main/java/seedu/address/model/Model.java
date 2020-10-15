@@ -161,6 +161,12 @@ public interface Model {
     void editSchedulesAssociatedWithClient(Client toEdit, Client editedClient);
 
     /**
+     * Returns true if a Schedule with the same client as {@code client} and schedule as
+     * {@code schedule} exists in the Schedule List.
+     */
+    boolean hasAnyScheduleAssociatedWithClientAndSession(Client client, Session session);
+
+    /**
      * Deletes the given Schedule.
      * The Schedule must exist in the Schedule List.
      */
@@ -200,4 +206,10 @@ public interface Model {
      * @throws NullPointerException if {@code clientKey} is null.
      */
     List<Session> findSessionByClient(Client clientKey);
+
+    /**
+     * Finds a {@code Schedule} in {@code Schedule List} that are associated to {@code clientKey} and {@code sessionKey}.
+     * @throws NullPointerException if {@code clientKey} or {@code sessionKey} is null.
+     */
+    Schedule findScheduleByClientAndSession(Client clientKey, Session sessionKey);
 }

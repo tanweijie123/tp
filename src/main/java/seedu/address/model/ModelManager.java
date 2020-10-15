@@ -265,6 +265,18 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Returns true if a Schedule with the same client as {@code client} and schedule as
+     * {@code schedule} exists in the Schedule List.
+     */
+    public boolean hasAnyScheduleAssociatedWithClientAndSession(Client client, Session session) {
+        requireAllNonNull(client, session);
+
+        return addressBook.getScheduleList()
+                .stream()
+                .anyMatch(schedule -> schedule.getClient().equals(client) && schedule.getSession().equals(session));
+    }
+
     @Override
     public void deleteSchedule(Schedule schedule) {
         addressBook.removeSchedule(schedule);
@@ -306,6 +318,12 @@ public class ModelManager implements Model {
     public List<Session> findSessionByClient(Client clientKey) {
         requireNonNull(clientKey);
         return addressBook.findSessionByClient(clientKey);
+    }
+
+    @Override
+    public Schedule findScheduleByClientAndSession(Client clientKey, Session sessionKey) {
+        requireAllNonNull(clientKey, sessionKey);
+        return addressBook.findScheduleByClientAndSession(clientKey, sessionKey);
     }
 
 
