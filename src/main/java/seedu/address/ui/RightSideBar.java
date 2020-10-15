@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 public class RightSideBar extends UiPart<AnchorPane> {
@@ -54,9 +55,9 @@ public class RightSideBar extends UiPart<AnchorPane> {
                 setGraphic(null);
                 setText(null);
             } else {
-                List<Client> associatedClients = logic.getAssociatedClientList(session);
-                if (associatedClients.size() > 0) {
-                    setGraphic(new SessionCard(session, getIndex() + 1, associatedClients).getRoot());
+                List<Schedule> associatedSchedules = logic.getAssociatedScheduleList(session);
+                if (associatedSchedules.size() > 0) {
+                    setGraphic(new SessionCard(session, getIndex() + 1, associatedSchedules).getRoot());
                 } else {
                     setGraphic(new SessionCard(session, getIndex() + 1, null).getRoot());
                 }
