@@ -51,6 +51,18 @@ public class Session implements CheckExisting<Session>, Comparable<Session> {
         return interval;
     }
 
+    public LocalDateTime getStartTime() {
+        return interval.getStart();
+    }
+
+    public LocalDateTime getEndTime() {
+        return interval.getEnd();
+    }
+
+    public int getDuration() {
+        return interval.getDurationInMinutes();
+    }
+
     public ExerciseType getExerciseType() {
         return exerciseType;
     }
@@ -72,14 +84,14 @@ public class Session implements CheckExisting<Session>, Comparable<Session> {
             return false;
         }
 
-        if (otherSession.getInterval().getStart().isAfter(getInterval().getStart())) {
+        if (otherSession.getStartTime().isAfter(getStartTime())) {
             // other session start time is > this session start time
             // this session: 2 - 4pm, other session: 4 - 6pm -> do not overlap
             // this session: 2 - 4.01pm, other session: 4 - 6pm -> overlap
-            return !getInterval().getEnd().isAfter(otherSession.getInterval().getStart());
+            return getEndTime().isAfter(otherSession.getStartTime());
         } else {
             // other session start time is <= this session start time
-            return !otherSession.getInterval().getEnd().isAfter(getInterval().getStart());
+            return otherSession.getEndTime().isAfter(getStartTime());
         }
     }
 
@@ -111,16 +123,16 @@ public class Session implements CheckExisting<Session>, Comparable<Session> {
 
     @Override
     public int compareTo(Session session) {
-        return this.getInterval().getStart().compareTo(session.getInterval().getStart());
+        return this.getStartTime().compareTo(session.getStartTime());
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Start: ")
-                .append(SessionParserUtil.parseDateTimeToString(getInterval().getStart()))
+                .append(SessionParserUtil.parseDateTimeToString(getStartTime()))
                 .append(" End: ")
-                .append(SessionParserUtil.parseDateTimeToString(getInterval().getEnd()))
+                .append(SessionParserUtil.parseDateTimeToString(getEndTime()))
                 .append(" Gym: ")
                 .append(gym)
                 .append(" Exercise Type: ")

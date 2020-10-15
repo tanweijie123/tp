@@ -52,12 +52,16 @@ public class Interval {
         return this.start;
     }
 
-    public String getFormattedStartDateTime (DateTimeFormatter formatter) {
+    public String getFormattedStartDateTime(DateTimeFormatter formatter) {
         return this.start.format(formatter);
     }
 
     public LocalDateTime getEnd() {
         return this.start.plusMinutes(durationInMinutes);
+    }
+
+    public int getDurationInMinutes() {
+        return this.durationInMinutes;
     }
 
     @Override

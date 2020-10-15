@@ -44,18 +44,18 @@ public class SessionTest {
         // null -> returns false
         assertFalse(GETWELL.isUnique(null));
 
-        // different exerciseType -> returns false
+        // different exerciseType -> returns true
         Session editedGetwell = new SessionBuilder(GETWELL).withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN).build();
-        assertFalse(GETWELL.isUnique(editedGetwell));
+        assertTrue(GETWELL.isUnique(editedGetwell));
 
-        // different gym -> returns false
+        // different gym -> returns true
         editedGetwell = new SessionBuilder(GETWELL).withGym(VALID_GYM_MACHOMAN).build();
-        assertFalse(GETWELL.isUnique(editedGetwell));
+        assertTrue(GETWELL.isUnique(editedGetwell));
 
-        // non-overlapping interval -> returns true
+        // non-overlapping interval -> returns false
         editedGetwell = new SessionBuilder(GETWELL)
                 .withInterval(VALID_START_TIME_MACHOMAN, VALID_DURATION_MACHOMAN).build();
-        assertTrue(GETWELL.isUnique(editedGetwell));
+        assertFalse(GETWELL.isUnique(editedGetwell));
     }
 
     @Test

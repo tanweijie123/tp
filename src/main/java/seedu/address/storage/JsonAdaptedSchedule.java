@@ -38,8 +38,8 @@ public class JsonAdaptedSchedule {
      */
     public JsonAdaptedSchedule(Schedule source) {
         clientEmail = source.getClient().getEmail().toString();
-        start = SessionParserUtil.parseDateTimeToString(source.getSession().getInterval().getStart());
-        end = SessionParserUtil.parseDateTimeToString(source.getSession().getInterval().getEnd());
+        start = SessionParserUtil.parseDateTimeToString(source.getSession().getStartTime());
+        end = SessionParserUtil.parseDateTimeToString(source.getSession().getEndTime());
     }
 
     /**

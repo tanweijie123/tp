@@ -39,8 +39,8 @@ public class JsonAdaptedSession {
     public JsonAdaptedSession(Session source) {
         gym = source.getGym().toString();
         exerciseType = source.getExerciseType().toString();
-        start = SessionParserUtil.parseDateTimeToString(source.getInterval().getStart());
-        end = SessionParserUtil.parseDateTimeToString(source.getInterval().getEnd());
+        start = SessionParserUtil.parseDateTimeToString(source.getStartTime());
+        end = SessionParserUtil.parseDateTimeToString(source.getEndTime());
     }
 
     /**

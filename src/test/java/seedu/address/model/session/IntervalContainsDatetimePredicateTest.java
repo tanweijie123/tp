@@ -12,13 +12,13 @@ import seedu.address.testutil.SessionBuilder;
 
 public class IntervalContainsDatetimePredicateTest {
 
-    LocalDateTime FIRST;
-    LocalDateTime SECOND;
+    private LocalDateTime firstDateTime;
+    private LocalDateTime secondDateTime;
 
     {
         try {
-            FIRST = SessionParserUtil.parseStringToDateTime("20/09/2020 1300");
-            SECOND = FIRST.plusMinutes(60);
+            firstDateTime = SessionParserUtil.parseStringToDateTime("20/09/2020 1300");
+            secondDateTime = firstDateTime.plusMinutes(60);
         } catch (Exception e) {
             throw new AssertionError("This should not be reached!");
         }
@@ -28,16 +28,16 @@ public class IntervalContainsDatetimePredicateTest {
     @Test
     public void equals() {
         IntervalContainsDatetimePredicate firstPredicate =
-                new IntervalContainsDatetimePredicate(FIRST);
+                new IntervalContainsDatetimePredicate(firstDateTime);
         IntervalContainsDatetimePredicate secondPredicate =
-                new IntervalContainsDatetimePredicate(SECOND);
+                new IntervalContainsDatetimePredicate(secondDateTime);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         IntervalContainsDatetimePredicate firstPredicateCopy =
-                new IntervalContainsDatetimePredicate(FIRST);
+                new IntervalContainsDatetimePredicate(firstDateTime);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -54,27 +54,27 @@ public class IntervalContainsDatetimePredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // Contains interval (start)
         IntervalContainsDatetimePredicate predicate =
-                new IntervalContainsDatetimePredicate(FIRST);
+                new IntervalContainsDatetimePredicate(firstDateTime);
         assertTrue(predicate.test(
                 new SessionBuilder()
-                        .withInterval(SessionParserUtil.parseDateTimeToString(FIRST), "60")
+                        .withInterval(SessionParserUtil.parseDateTimeToString(firstDateTime), "60")
                         .build()));
 
         // Contains interval (end)
-        predicate = new IntervalContainsDatetimePredicate(SECOND);
+        predicate = new IntervalContainsDatetimePredicate(secondDateTime);
         assertTrue(predicate.test(
                 new SessionBuilder()
-                        .withInterval(SessionParserUtil.parseDateTimeToString(FIRST), "60")
+                        .withInterval(SessionParserUtil.parseDateTimeToString(firstDateTime), "60")
                         .build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        IntervalContainsDatetimePredicate predicate = new IntervalContainsDatetimePredicate(SECOND);
+        IntervalContainsDatetimePredicate predicate = new IntervalContainsDatetimePredicate(secondDateTime);
         assertTrue(predicate.test(
                 new SessionBuilder()
-                        .withInterval(SessionParserUtil.parseDateTimeToString(FIRST), "60")
+                        .withInterval(SessionParserUtil.parseDateTimeToString(firstDateTime), "60")
                         .build()));
     }
 }
