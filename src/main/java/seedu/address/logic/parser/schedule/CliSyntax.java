@@ -9,4 +9,5 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_CLIENT_INDEX = new Prefix("c/");
     public static final Prefix PREFIX_SESSION_INDEX = new Prefix("s/");
+    public static final Prefix PREFIX_UPDATED_SESSION_INDEX = new Prefix("us/");
 }
