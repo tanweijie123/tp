@@ -82,72 +82,59 @@ public class EditScheduleCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-    //
+
     //    @Test
     //    public void parse_oneFieldSpecified_success() {
-    //        // gym
-    //        Index targetIndex = INDEX_THIRD_Schedule;
-    //        String userInput = targetIndex.getOneBased() + GYM_DESC_GETWELL;
-    //        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder().withGym(VALID_GYM_GETWELL)
-    //        .build();
-    //        EditScheduleCommand expectedCommand = new EditScheduleCommand(targetIndex, descriptor);
-    //        assertParseSuccess(parser, userInput, expectedCommand);
-    //
-    //        // exercise type
-    //        userInput = targetIndex.getOneBased() + EXERCISE_TYPE_DESC_GETWELL;
-    //        descriptor = new EditScheduleDescriptorBuilder().withExerciseType(VALID_EXERCISE_TYPE_GETWELL).build();
-    //        expectedCommand = new EditScheduleCommand(targetIndex, descriptor);
-    //        assertParseSuccess(parser, userInput, expectedCommand);
-    //
-    //        // interval
-    //        userInput = targetIndex.getOneBased() + START_TIME_DESC_GETWELL + DURATION_DESC_GETWELL;
-    //        descriptor = new EditScheduleDescriptorBuilder()
-    //                .withInterval(VALID_START_TIME_GETWELL,
-    //                        VALID_DURATION_GETWELL).build();
-    //        expectedCommand = new EditScheduleCommand(targetIndex, descriptor);
-    //        assertParseSuccess(parser, userInput, expectedCommand);
-    //
-    //    }
-    //
-    //    @Test
-    //    public void parse_multipleRepeatedFields_acceptsLast() {
-    //        Index targetIndex = INDEX_FIRST_Schedule;
-    //        String userInput = targetIndex.getOneBased() + GYM_DESC_GETWELL + EXERCISE_TYPE_DESC_GETWELL
-    //                + START_TIME_DESC_GETWELL + DURATION_DESC_GETWELL + GYM_DESC_MACHOMAN
-    //                + EXERCISE_TYPE_DESC_MACHOMAN + START_TIME_DESC_MACHOMAN + DURATION_DESC_MACHOMAN;
-    //
+    //        // updated session index
+    //        String userInput = UPDATED_SESSION_INDEX_DESC_A;
     //        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
-    //                .withGym(VALID_GYM_MACHOMAN)
-    //                .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-    //                .withInterval(VALID_START_TIME_MACHOMAN,
-    //                        VALID_DURATION_MACHOMAN)
+    //                .withUpdatedSessionIndex(INDEX_FIRST_SESSION)
     //                .build();
-    //        EditScheduleCommand expectedCommand = new EditScheduleCommand(targetIndex, descriptor);
-    //
+    //        EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+    //                INDEX_SECOND_SESSION, descriptor);
     //        assertParseSuccess(parser, userInput, expectedCommand);
+    //
     //    }
-    //
-    //    @Test
-    //    public void parse_invalidValueFollowedByValidValue_success() {
-    //        // no other valid values specified
-    //        Index targetIndex = INDEX_FIRST_Schedule;
-    //        String userInput = targetIndex.getOneBased() + INVALID_GYM_DESC + GYM_DESC_MACHOMAN;
-    //        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder().withGym(VALID_GYM_MACHOMAN)
-    //        .build();
-    //        EditScheduleCommand expectedCommand = new EditScheduleCommand(targetIndex, descriptor);
-    //        assertParseSuccess(parser, userInput, expectedCommand);
-    //
-    //        // other valid values specified
-    //        userInput = targetIndex.getOneBased() + GYM_DESC_MACHOMAN + EXERCISE_TYPE_DESC_MACHOMAN
-    //                + START_TIME_DESC_MACHOMAN
-    //                + DURATION_DESC_MACHOMAN;
-    //        descriptor = new EditScheduleDescriptorBuilder()
-    //                .withGym(VALID_GYM_MACHOMAN)
-    //                .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-    //                .withInterval(VALID_START_TIME_MACHOMAN,
-    //                        VALID_DURATION_MACHOMAN)
-    //                .build();
-    //        expectedCommand = new EditScheduleCommand(targetIndex, descriptor);
-    //        assertParseSuccess(parser, userInput, expectedCommand);
-    //    }
+
+    @Test
+    public void parse_multipleRepeatedFields_acceptsLast() {
+        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_SESSION_INDEX_DESC_B;
+
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
+                .withClientIndex(INDEX_FIRST_CLIENT)
+                .withSessionIndex(INDEX_FIRST_SESSION)
+                .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
+                .build();
+        EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+                INDEX_SECOND_SESSION, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidValueFollowedByValidValue_success() {
+        // no other valid values specified
+        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_SESSION_INDEX_DESC_B;
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
+                .withClientIndex(INDEX_FIRST_CLIENT)
+                .withSessionIndex(INDEX_FIRST_SESSION)
+                .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
+                .build();
+        EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+                INDEX_SECOND_SESSION, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        //        // other valid values specified
+        //        userInput = targetIndex.getOneBased() + GYM_DESC_MACHOMAN + EXERCISE_TYPE_DESC_MACHOMAN
+        //                + START_TIME_DESC_MACHOMAN
+        //                + DURATION_DESC_MACHOMAN;
+        //        descriptor = new EditScheduleDescriptorBuilder()
+        //                .withGym(VALID_GYM_MACHOMAN)
+        //                .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
+        //                .withInterval(VALID_START_TIME_MACHOMAN,
+        //                        VALID_DURATION_MACHOMAN)
+        //                .build();
+        //        expectedCommand = new EditScheduleCommand(targetIndex, descriptor);
+        //        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }
