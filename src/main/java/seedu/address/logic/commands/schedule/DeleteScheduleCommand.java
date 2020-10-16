@@ -2,6 +2,8 @@ package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 
 import java.util.List;
 
@@ -11,49 +13,73 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.session.Session;
 
 public class DeleteScheduleCommand extends Command {
     public static final String COMMAND_WORD = "deschedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deschedule a client from a session. "
             + "Parameters: "
-            + "INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + PREFIX_CLIENT_INDEX + "CLIENT "
+            + PREFIX_SESSION_INDEX + "SESSION\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_CLIENT_INDEX + "1 "
+            + PREFIX_SESSION_INDEX + "1 ";
 
     public static final String MESSAGE_SUCCESS = "Schedule deleted: \n%1$s";
+    public static final String MESSAGE_SCHEDULE_NOT_FOUND = "No schedule associated with client: \n%1$s "
+            + "and session:\n%2$s";
 
-    private final Index targetIndex;
+    private final Index clientIndex;
+    private final Index sessionIndex;
 
     /**
      * Creates an DeleteScheduleCommand to delete the specified {@code Schedule}
      */
-    public DeleteScheduleCommand(Index targetIndex) {
-        requireAllNonNull(targetIndex);
+    public DeleteScheduleCommand(Index clientIndex, Index sessionIndex) {
+        requireAllNonNull(clientIndex, sessionIndex);
 
-        this.targetIndex = targetIndex;
+        this.clientIndex = clientIndex;
+        this.sessionIndex = sessionIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Schedule> lastShownScheduleList = model.getFilteredScheduleList();
+        List<Client> lastShownClientList = model.getFilteredClientList();
 
-        if (targetIndex.getZeroBased() >= lastShownScheduleList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
+        if (clientIndex.getZeroBased() >= lastShownClientList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Schedule scheduleToDelete = lastShownScheduleList.get(targetIndex.getZeroBased());
+        List<Session> lastShownSessionList = model.getFilteredSessionList();
 
-        model.deleteSchedule(scheduleToDelete);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, scheduleToDelete));
+        if (sessionIndex.getZeroBased() >= lastShownSessionList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
+        }
+
+        Client client = lastShownClientList.get(clientIndex.getZeroBased());
+
+        Session session = lastShownSessionList.get(sessionIndex.getZeroBased());
+
+        Schedule scheduleToDelete = new Schedule(client, session);
+
+        if (model.hasSchedule(scheduleToDelete)) {
+            model.deleteSchedule(scheduleToDelete);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, scheduleToDelete));
+        }
+
+        throw new CommandException(String.format(MESSAGE_SCHEDULE_NOT_FOUND, client, session));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteScheduleCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteScheduleCommand) other).targetIndex));
+                && clientIndex.equals(((DeleteScheduleCommand) other).clientIndex)
+                && sessionIndex.equals(((DeleteScheduleCommand) other).sessionIndex));
     }
 }

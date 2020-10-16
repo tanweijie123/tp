@@ -130,7 +130,7 @@ public class SessionCommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredSessionList().size());
 
         Session session = model.getFilteredSessionList().get(targetIndex.getZeroBased());
-        final LocalDateTime start = session.getInterval().getStart();
+        final LocalDateTime start = session.getStartTime();
         model.updateFilteredSessionList(new IntervalContainsDatetimePredicate(start));
 
         assertEquals(1, model.getFilteredSessionList().size());

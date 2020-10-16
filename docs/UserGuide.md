@@ -151,6 +151,43 @@ Examples:
 <img src="images/cview_sample.png" alt="result for 'cview 1'" height="500" width="500"/></br>
   > This profile window will be updated when more functionalities are available.
 
+### Adding a Session: `sadd`
+
+Adds a client to the clients list.
+
+Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A Client can have any number of tags (including 0). Each tag can only include
+alphanumeric characters or dash (`-`)
+</div>
+
+Examples:
+* `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
+
+### Editing a Session: `sedit`
+
+Edits the details of the Session identified by the index number used in the displayed Session list.
+
+* Edits the Session at the specified `INDEX`. The index refers to the index number shown in the displayed Session list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` Edits the Gym of the 1st Session to be `Machoman`.
+*  `sedit 2 at/29/09/2020 1600 t/120 ` Edits the Start Time and Duration of the 2nd Session to be `29/09/2020 1600 with a duration of 120 minutes`.
+
+### Editing a Schedule: `editschedule`
+
+Edits the details of the Schedule identified by the client index and session index used in each Schedule in the Schedule list.
+
+* Edits the Schedule at the specified `c/CLIENT s/SESSION`. Both indexes **must be positive integers** 1, 2, 3, …​
+* At least one of the optional fields must be provided. (After Dhafin finish doing the payment etc)
+* Existing values will be updated to the input values.
+
+Examples:
+*  `editschedule c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
 
 ### Exiting the program : `exit`
 
@@ -185,9 +222,10 @@ _Allow the creation of sessions and tagging of its associated client_
 |View a Client's Full Profile | `cview INDEX` | `cview 1`|
 |Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 |Adding Gym Session |`sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME` | `sadd Upper Body dt/this Thursday 4pm dur/2hr g/UTown Gym`|
+|Editing Gym Session |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
 |Assign a Client to Gym Session  |`schedule c/CLIENT_INDEX s/SESSION_INDEX`| `schedule c/1 s/3`|
 |Unassign a Client to Gym Session |`deschedule c/CLIENT_INDEX s/SESSION_INDEX`  | `deschedule c/2 s/3` |
-|Edit a Client to Gym Session |`reschedule c/CLIENT_INDEX s/SESSION_INDEX`  | `reschedule c/2 s/3` |Updating Session Info |`sedit INDEX [g/GYM] [ex/EXERCISE_TYPE] [at/START_TIME] [t/DURATION]`| `sedit 1 g/Machoman at/29/09/2020 1600 t/120`
+|Edit a Client to Gym Session |`editSchedule c/CLIENT s/SESSION us/UPDATED SESSION`  | `editschedule c/1 s/1 us/1`|
 |Deleting a Session |`sdel INDEX` | `sdel 1`|
 
 ### Acknowledgement

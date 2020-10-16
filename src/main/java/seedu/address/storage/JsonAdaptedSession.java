@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.session.SessionParserUtil;
+import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
@@ -39,8 +41,8 @@ public class JsonAdaptedSession {
     public JsonAdaptedSession(Session source) {
         gym = source.getGym().toString();
         exerciseType = source.getExerciseType().toString();
-        start = SessionParserUtil.parseDateTimeToString(source.getInterval().getStart());
-        end = SessionParserUtil.parseDateTimeToString(source.getInterval().getEnd());
+        start = SessionParserUtil.parseDateTimeToString(source.getStartTime());
+        end = SessionParserUtil.parseDateTimeToString(source.getEndTime());
     }
 
     /**
@@ -51,20 +53,30 @@ public class JsonAdaptedSession {
     public Session toModelType() throws IllegalValueException {
         /* To do the same as Client's toModelType codes, we need to create field-typed classes */
 
-        if (gym.isBlank()) {
-            throw new IllegalValueException("Gym is blank");
+        if (gym == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gym.class.getSimpleName()));
+        }
+        if (!Gym.isValidGym(gym)) {
+            throw new IllegalValueException(Gym.MESSAGE_CONSTRAINTS);
+        }
+        Gym modelGym = new Gym(gym);
+
+        if (exerciseType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ExerciseType.class.getSimpleName()));
+        }
+        if (!ExerciseType.isValidExerciseType(exerciseType)) {
+            throw new IllegalValueException(ExerciseType.MESSAGE_CONSTRAINTS);
+        }
+        ExerciseType modelExerciseType = new ExerciseType(exerciseType);
+
+
+        if (start == null || SessionParserUtil.isInvalidDateTime(start)) {
+            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
         }
 
-        if (exerciseType.isBlank()) {
-            throw new IllegalValueException("ExerciseType is blank");
-        }
-
-        if (start.isBlank() || SessionParserUtil.isInvalidDateTime(start)) {
-            throw new IllegalValueException("Start time is blank or invalid");
-        }
-
-        if (end.isBlank() || SessionParserUtil.isInvalidDateTime(end)) {
-            throw new IllegalValueException("End time is blank or invalid");
+        if (end == null || SessionParserUtil.isInvalidDateTime(end)) {
+            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
         }
 
         final LocalDateTime startDateTime = SessionParserUtil.parseStringToDateTime(start);
@@ -75,6 +87,8 @@ public class JsonAdaptedSession {
             throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
         }
 
-        return new Session(gym, exerciseType, startDateTime, duration);
+        Interval modelInterval = new Interval(startDateTime, duration);
+
+        return new Session(modelGym, modelExerciseType, modelInterval);
     }
 }

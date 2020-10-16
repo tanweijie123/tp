@@ -2,7 +2,13 @@ package seedu.address.logic.commands.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +17,31 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.schedule.SameSchedulePredicate;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.testutil.EditScheduleDescriptorBuilder;
 
 public class ScheduleCommandTestUtil {
+    public static final String CLIENT_INDEX_DESC_A = " " + PREFIX_CLIENT_INDEX + "1";
+    public static final String CLIENT_INDEX_DESC_B = " " + PREFIX_CLIENT_INDEX + "2";
+    public static final String SESSION_INDEX_DESC_A = " " + PREFIX_SESSION_INDEX + "1";
+    public static final String SESSION_INDEX_DESC_B = " " + PREFIX_SESSION_INDEX + "2";
+    public static final String UPDATED_SESSION_INDEX_DESC_A = " " + PREFIX_UPDATED_SESSION_INDEX + "1";
+    public static final String UPDATED_SESSION_INDEX_DESC_B = " " + PREFIX_UPDATED_SESSION_INDEX + "2";
+
+    public static final EditScheduleDescriptor DESC_SCHA = new EditScheduleDescriptorBuilder()
+            .withClientIndex(INDEX_FIRST_CLIENT)
+            .withSessionIndex(INDEX_FIRST_SESSION)
+            .build();
+
+    public static final EditScheduleDescriptor DESC_SCHB = new EditScheduleDescriptorBuilder()
+            .withClientIndex(INDEX_FIRST_CLIENT)
+            .withSessionIndex(INDEX_SECOND_SESSION)
+            .build();
+
     /**
      * Updates {@code model}'s filtered list to show only the Schedule at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -27,7 +52,7 @@ public class ScheduleCommandTestUtil {
         Schedule schedule = model.getFilteredScheduleList().get(targetIndex.getZeroBased());
         model.updateFilteredScheduleList(new SameSchedulePredicate(schedule));
 
-        assertEquals(1, model.getFilteredSessionList().size());
+        assertEquals(1, model.getFilteredScheduleList().size());
     }
 
     /**

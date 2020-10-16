@@ -33,10 +33,10 @@ public class ViewSessionCommand extends Command {
     public static final String VALID_FUTURE_SESSIONS_PERIOD = "future";
 
     public static final Predicate<Session> PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS = (session) ->
-            session.getInterval().getStart().isBefore(LocalDateTime.now().truncatedTo(DAYS).plusDays(7))
-                    && session.getInterval().getStart().isAfter(LocalDateTime.now().truncatedTo(DAYS));
+            session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS).plusDays(7))
+                    && session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
     public static final Predicate<Session> PREDICATE_SHOW_FUTURE_SESSIONS = (session) ->
-            session.getInterval().getStart().isAfter(LocalDateTime.now().truncatedTo(DAYS));
+            session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
 
     /**
      * Uses a hashmap to get the corresponding predicate for the period specified.
