@@ -69,32 +69,32 @@ public class EditScheduleCommandTest {
         assertCommandFailure(editScheduleCommand, model, expectedMessage);
     }
 
-        @Test
-        public void execute_someFieldsSpecifiedUnfilteredList_success() {
-            Schedule lastSchedule = model.getFilteredScheduleList().get(model.getFilteredScheduleList().size() - 1);
+    @Test
+    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        Schedule lastSchedule = model.getFilteredScheduleList().get(0);
 
-            ScheduleBuilder scheduleInList = new ScheduleBuilder();
-            Client lastClient = model.getFilteredClientList().get(0);
-            Session lastSession = model.getFilteredSessionList().get(2);
-            Schedule editedSchedule = scheduleInList
-                    .withClient(lastClient)
-                    .withSession(lastSession).build();
+        ScheduleBuilder scheduleInList = new ScheduleBuilder();
+        Client lastClient = model.getFilteredClientList().get(0);
+        Session lastSession = model.getFilteredSessionList().get(2);
+        Schedule editedSchedule = scheduleInList
+                .withClient(lastClient)
+                .withSession(lastSession).build();
 
-            Index indexLastClient = Index.fromOneBased(model.getFilteredClientList().size());
-            Index indexFirstSession = Index.fromOneBased(model.getFilteredSessionList().size());
-            Index indexUpdatedLastSession = Index.fromOneBased(model.getFilteredSessionList().size());
-            EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
-                    .withClientIndex(INDEX_FIRST_CLIENT)
-                    .withSessionIndex(INDEX_FIRST_SESSION).build();
-            EditScheduleCommand editScheduleCommand = new EditScheduleCommand(indexLastClient, indexFirstSession,
-                    indexUpdatedLastSession, descriptor);
-            String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
+        Index indexFirstClient = Index.fromOneBased(1);
+        Index indexFirstSession = Index.fromOneBased(1);
+        Index indexUpdatedLastSession = Index.fromOneBased(model.getFilteredSessionList().size() - 1);
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
+                .withClientIndex(INDEX_FIRST_CLIENT)
+                .withSessionIndex(INDEX_THIRD_SESSION).build();
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(indexFirstClient, indexFirstSession,
+                indexUpdatedLastSession, descriptor);
+        String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
 
-            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-            expectedModel.setSchedule(lastSchedule, editedSchedule);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setSchedule(lastSchedule, editedSchedule);
 
-            assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
-        }
+        assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_failure() {
