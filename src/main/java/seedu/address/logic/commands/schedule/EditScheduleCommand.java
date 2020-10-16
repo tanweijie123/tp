@@ -1,7 +1,9 @@
 package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
 import java.util.List;
@@ -22,55 +24,71 @@ import seedu.address.model.session.Session;
 /**
  * Edits the details of an existing Client in the address book.
  */
-public class RescheduleCommand extends Command {
+public class EditScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "reschedule";
+    public static final String COMMAND_WORD = "editschedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reschedule a client with another session. "
-            + "Parameters: INDEX (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": schedules a client with another session. \n"
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: "
+            + PREFIX_CLIENT_INDEX + "CLIENT "
             + PREFIX_SESSION_INDEX + "SESSION "
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_SESSION_INDEX + "1 ";
+            + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_CLIENT_INDEX + "1 "
+            + PREFIX_SESSION_INDEX + "1 "
+            + PREFIX_UPDATED_SESSION_INDEX + "1 ";
 
-    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Rescheduled : \n%1$s";
+    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Editschedule : \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
 
-    private final Index scheduleIndex;
     private final Index sessionIndex;
-    private final RescheduleDescriptor editRescheduleDescriptor;
+    private final Index clientIndex;
+    private final Index updatedSessionIndex;
+
+    private final EditScheduleDescriptor editScheduleDescriptor;
 
     /**
-     * @param scheduleIndex of the Schedule in the filtered schedule list to edit
+     * @param clientIndex of the Client in the filtered client list to edit
      * @param sessionIndex of the Session in the filtered session list to edit
-     * @param editRescheduleDescriptor details to edit the schedule with
+     * @param updatedSessionIndex to update the Session in the filtered session list
+     * @param editScheduleDescriptor details to edit the schedule with
      */
-    public RescheduleCommand(Index scheduleIndex, Index sessionIndex, RescheduleDescriptor editRescheduleDescriptor) {
-        requireNonNull(scheduleIndex);
-        requireNonNull(editRescheduleDescriptor);
+    public EditScheduleCommand(Index clientIndex, Index sessionIndex, Index updatedSessionIndex,
+                               EditScheduleDescriptor editScheduleDescriptor) {
+        requireNonNull(clientIndex);
+        requireNonNull(sessionIndex);
+        requireNonNull(editScheduleDescriptor);
 
-        this.scheduleIndex = scheduleIndex;
+        this.clientIndex = clientIndex;
         this.sessionIndex = sessionIndex;
-        this.editRescheduleDescriptor = new RescheduleDescriptor(editRescheduleDescriptor);
+        this.updatedSessionIndex = updatedSessionIndex;
+        this.editScheduleDescriptor = new EditScheduleDescriptor(editScheduleDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Schedule> lastShownList = model.getFilteredScheduleList();
         List<Session> lastShownSessionList = model.getFilteredSessionList();
+        List<Client> lastShownClientList = model.getFilteredClientList();
 
-        if (scheduleIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
+        if (clientIndex.getZeroBased() >= lastShownClientList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        if (sessionIndex.getZeroBased() >= lastShownSessionList.size()) {
+        if (sessionIndex.getZeroBased() >= lastShownSessionList.size()
+                && updatedSessionIndex.getZeroBased() >= lastShownSessionList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
 
-        Schedule scheduleToEdit = lastShownList.get(scheduleIndex.getZeroBased());
-        Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editRescheduleDescriptor,
+        Client client = lastShownClientList.get(clientIndex.getZeroBased());
+        Session session = lastShownSessionList.get(sessionIndex.getZeroBased());
+        Schedule scheduleToEdit = new Schedule(client, session);
+
+        Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor,
                 lastShownSessionList);
 
         if (!scheduleToEdit.isUnique(editedSchedule) && model.hasSchedule(editedSchedule)) {
@@ -81,6 +99,7 @@ public class RescheduleCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }
 
+        //target, edited
         model.setSchedule(scheduleToEdit, editedSchedule);
         model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
         return new CommandResult(String.format(MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule));
@@ -88,18 +107,18 @@ public class RescheduleCommand extends Command {
 
     /**
      * Creates and returns a {@code Schedule} with the details of {@code scheduleToEdit}
-     * edited with {@code editRescheduleDescriptor}.
+     * edited with {@code editScheduleDescriptor}.
      */
-    private static Schedule createEditedSchedule(Schedule scheduleToEdit, RescheduleDescriptor rescheduleDescriptor,
+    private static Schedule createEditedSchedule(Schedule scheduleToEdit, EditScheduleDescriptor editScheduleDescriptor,
                                                  List<Session> lastShownSessionList) throws CommandException {
         assert scheduleToEdit != null;
 
         Client client = scheduleToEdit.getClient();
         Session session;
         try {
-            session = rescheduleDescriptor.getSessionIndex() == null
+            session = editScheduleDescriptor.getUpdatedSessionIndex() == null
                     ? scheduleToEdit.getSession()
-                    : lastShownSessionList.get(rescheduleDescriptor.getSessionIndex().get().getZeroBased());
+                    : lastShownSessionList.get(editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased());
         } catch (NoSuchElementException e) {
             throw new CommandException(MESSAGE_NOT_EDITED);
         }
@@ -114,40 +133,43 @@ public class RescheduleCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RescheduleCommand)) {
+        if (!(other instanceof EditScheduleCommand)) {
             return false;
         }
 
         // state check
-        RescheduleCommand e = (RescheduleCommand) other;
-        return scheduleIndex.equals(e.scheduleIndex)
-                && editRescheduleDescriptor.equals(e.editRescheduleDescriptor);
+        EditScheduleCommand e = (EditScheduleCommand) other;
+        return clientIndex.equals(e.clientIndex)
+                && sessionIndex.equals(e.sessionIndex)
+                && editScheduleDescriptor.equals(e.editScheduleDescriptor);
     }
 
     /**
      * Stores the details to edit the Schedule with. Each non-empty field value will replace the
      * corresponding field value of the Schedule.
      */
-    public static class RescheduleDescriptor {
+    public static class EditScheduleDescriptor {
         private Index clientIndex;
         private Index sessionIndex;
+        private Index updateSessionIndex;
 
-        public RescheduleDescriptor() {}
+        public EditScheduleDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public RescheduleDescriptor(RescheduleDescriptor toCopy) {
+        public EditScheduleDescriptor(EditScheduleDescriptor toCopy) {
             setClientIndex(toCopy.clientIndex);
             setSessionIndex(toCopy.sessionIndex);
+            setUpdatedSessionIndex(toCopy.updateSessionIndex);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(clientIndex, sessionIndex);
+            return CollectionUtil.isAnyNonNull(clientIndex, sessionIndex, updateSessionIndex);
         }
 
         public void setClientIndex(Index clientIndex) {
@@ -166,6 +188,14 @@ public class RescheduleCommand extends Command {
             return Optional.ofNullable(sessionIndex);
         }
 
+        public void setUpdatedSessionIndex(Index updateSessionIndex) {
+            this.updateSessionIndex = updateSessionIndex;
+        }
+
+        public Optional<Index> getUpdatedSessionIndex() {
+            return Optional.ofNullable(updateSessionIndex);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -174,15 +204,16 @@ public class RescheduleCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof RescheduleDescriptor)) {
+            if (!(other instanceof EditScheduleDescriptor)) {
                 return false;
             }
 
             // state check
-            RescheduleDescriptor e = (RescheduleDescriptor) other;
+            EditScheduleDescriptor e = (EditScheduleDescriptor) other;
 
             return getClientIndex().equals(e.getClientIndex())
-                    && getSessionIndex().equals(e.getSessionIndex());
+                    && getSessionIndex().equals(e.getSessionIndex())
+                    && getUpdatedSessionIndex().equals(e.getUpdatedSessionIndex());
         }
     }
 }

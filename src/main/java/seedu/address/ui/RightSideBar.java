@@ -9,7 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 

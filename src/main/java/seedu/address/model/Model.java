@@ -214,7 +214,8 @@ public interface Model {
     List<Schedule> findScheduleBySession(Session sessionKey);
 
     /**
-     * Finds a {@code Schedule} in {@code Schedule List} that are associated to {@code clientKey} and {@code sessionKey}.
+     * Finds a {@code Schedule} in {@code Schedule List} that are associated
+     * to {@code clientKey} and {@code sessionKey}.
      * @throws NullPointerException if {@code clientKey} or {@code sessionKey} is null.
      */
     Schedule findScheduleByClientAndSession(Client clientKey, Session sessionKey);

@@ -215,6 +215,11 @@ public class AddSessionCommandTest {
         }
 
         @Override
+        public boolean hasAnyScheduleAssociatedWithClientAndSession(Client client, Session session) {
+            return false;
+        }
+
+        @Override
         public void deleteSchedule(Schedule schedule) {
             throw new AssertionError("This method should not be called.");
         }
@@ -247,6 +252,16 @@ public class AddSessionCommandTest {
         @Override
         public List<Session> findSessionByClient(Client clientKey) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Schedule> findScheduleBySession(Session sessionKey) {
+            return null;
+        }
+
+        @Override
+        public Schedule findScheduleByClientAndSession(Client clientKey, Session sessionKey) {
+            return null;
         }
 
         @Override
