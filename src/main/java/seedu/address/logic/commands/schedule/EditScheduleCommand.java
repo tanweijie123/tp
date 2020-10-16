@@ -28,7 +28,9 @@ public class EditScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "editschedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": schedules a client with another session. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": schedules a client with another session. \n"
+            + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + PREFIX_CLIENT_INDEX + "CLIENT "
             + PREFIX_SESSION_INDEX + "SESSION "
@@ -51,6 +53,7 @@ public class EditScheduleCommand extends Command {
     /**
      * @param clientIndex of the Client in the filtered client list to edit
      * @param sessionIndex of the Session in the filtered session list to edit
+     * @param updatedSessionIndex to update the Session in the filtered session list
      * @param editScheduleDescriptor details to edit the schedule with
      */
     public EditScheduleCommand(Index clientIndex, Index sessionIndex, Index updatedSessionIndex,
