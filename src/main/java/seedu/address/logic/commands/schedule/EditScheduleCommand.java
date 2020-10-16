@@ -116,9 +116,9 @@ public class EditScheduleCommand extends Command {
         Client client = scheduleToEdit.getClient();
         Session session;
         try {
-            session = editScheduleDescriptor.getSessionIndex() == null
+            session = editScheduleDescriptor.getUpdatedSessionIndex() == null
                     ? scheduleToEdit.getSession()
-                    : lastShownSessionList.get(editScheduleDescriptor.getSessionIndex().get().getZeroBased());
+                    : lastShownSessionList.get(editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased());
         } catch (NoSuchElementException e) {
             throw new CommandException(MESSAGE_NOT_EDITED);
         }
@@ -150,6 +150,7 @@ public class EditScheduleCommand extends Command {
      */
     public static class EditScheduleDescriptor {
         private Index clientIndex;
+        private Index sessionIndex;
         private Index updateSessionIndex;
 
         public EditScheduleDescriptor() {}
@@ -160,14 +161,15 @@ public class EditScheduleCommand extends Command {
          */
         public EditScheduleDescriptor(EditScheduleDescriptor toCopy) {
             setClientIndex(toCopy.clientIndex);
-            setSessionIndex(toCopy.updateSessionIndex);
+            setSessionIndex(toCopy.sessionIndex);
+            setUpdatedSessionIndex(toCopy.updateSessionIndex);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(clientIndex, updateSessionIndex);
+            return CollectionUtil.isAnyNonNull(clientIndex, sessionIndex, updateSessionIndex);
         }
 
         public void setClientIndex(Index clientIndex) {
@@ -178,11 +180,19 @@ public class EditScheduleCommand extends Command {
             return Optional.ofNullable(clientIndex);
         }
 
-        public void setSessionIndex(Index updateSessionIndex) {
-            this.updateSessionIndex = updateSessionIndex;
+        public void setSessionIndex(Index sessionIndex) {
+            this.sessionIndex = sessionIndex;
         }
 
         public Optional<Index> getSessionIndex() {
+            return Optional.ofNullable(sessionIndex);
+        }
+
+        public void setUpdatedSessionIndex(Index updateSessionIndex) {
+            this.updateSessionIndex = updateSessionIndex;
+        }
+
+        public Optional<Index> getUpdatedSessionIndex() {
             return Optional.ofNullable(updateSessionIndex);
         }
 
@@ -202,7 +212,8 @@ public class EditScheduleCommand extends Command {
             EditScheduleDescriptor e = (EditScheduleDescriptor) other;
 
             return getClientIndex().equals(e.getClientIndex())
-                    && getSessionIndex().equals(e.getSessionIndex());
+                    && getSessionIndex().equals(e.getSessionIndex())
+                    && getUpdatedSessionIndex().equals(e.getUpdatedSessionIndex());
         }
     }
 }

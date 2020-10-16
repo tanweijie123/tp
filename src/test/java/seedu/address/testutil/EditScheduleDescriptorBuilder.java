@@ -23,6 +23,7 @@ public class EditScheduleDescriptorBuilder {
         descriptor = new EditScheduleDescriptor();
         descriptor.setClientIndex(INDEX_FIRST_CLIENT);
         descriptor.setSessionIndex(INDEX_FIRST_SESSION);
+        descriptor.setUpdatedSessionIndex(INDEX_FIRST_SESSION);
     }
 
     /**
@@ -30,6 +31,14 @@ public class EditScheduleDescriptorBuilder {
      */
     public EditScheduleDescriptorBuilder withClientIndex(Index clientIndex) {
         descriptor.setClientIndex(clientIndex);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Index} of the {@code EditScheduleDescriptorBuilder} that we are building.
+     */
+    public EditScheduleDescriptorBuilder withUpdatedSessionIndex(Index sessionIndex) {
+        descriptor.setUpdatedSessionIndex(sessionIndex);
         return this;
     }
 

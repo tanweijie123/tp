@@ -51,9 +51,21 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
 
+        if (argMultimap.getValue(PREFIX_SESSION_INDEX).isPresent()) {
+            editScheduleDescriptor
+                    .setSessionIndex(ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_CLIENT_INDEX).isPresent()) {
+            editScheduleDescriptor
+                    .setClientIndex(ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX)
+                            .get()));
+        }
+
         if (argMultimap.getValue(PREFIX_UPDATED_SESSION_INDEX).isPresent()) {
             editScheduleDescriptor
-                    .setSessionIndex(ParserUtil.parseIndex(argMultimap.getValue(PREFIX_UPDATED_SESSION_INDEX).get()));
+                    .setUpdatedSessionIndex(ParserUtil.parseIndex(argMultimap.getValue(PREFIX_UPDATED_SESSION_INDEX)
+                            .get()));
         }
 
         if (!editScheduleDescriptor.isAnyFieldEdited()) {

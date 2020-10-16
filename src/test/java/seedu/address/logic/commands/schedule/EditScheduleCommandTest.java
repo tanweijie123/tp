@@ -78,14 +78,17 @@ public class EditScheduleCommandTest {
         Session lastSession = model.getFilteredSessionList().get(2);
         Schedule editedSchedule = scheduleInList
                 .withClient(lastClient)
-                .withSession(lastSession).build();
+                .withSession(lastSession)
+                .build();
 
         Index indexFirstClient = Index.fromOneBased(1);
         Index indexFirstSession = Index.fromOneBased(1);
         Index indexUpdatedLastSession = Index.fromOneBased(model.getFilteredSessionList().size() - 1);
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withClientIndex(INDEX_FIRST_CLIENT)
-                .withSessionIndex(INDEX_THIRD_SESSION).build();
+                .withSessionIndex(INDEX_FIRST_SESSION)
+                .withUpdatedSessionIndex(INDEX_THIRD_SESSION)
+                .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(indexFirstClient, indexFirstSession,
                 indexUpdatedLastSession, descriptor);
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
@@ -121,7 +124,8 @@ public class EditScheduleCommandTest {
                 INDEX_SECOND_SESSION,
                 new EditScheduleDescriptorBuilder()
                         .withClientIndex(INDEX_SECOND_CLIENT)
-                        .withSessionIndex(INDEX_THIRD_SESSION)
+                        .withSessionIndex(INDEX_FIRST_SESSION)
+                        .withUpdatedSessionIndex(INDEX_THIRD_SESSION)
                         .build());
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
