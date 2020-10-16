@@ -49,13 +49,7 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         Index sessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get());
         Index updateSessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_UPDATED_SESSION_INDEX).get());
 
-
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
-
-        if (argMultimap.getValue(PREFIX_SESSION_INDEX).isPresent()) {
-            editScheduleDescriptor
-                    .setSessionIndex(ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get()));
-        }
 
         if (argMultimap.getValue(PREFIX_UPDATED_SESSION_INDEX).isPresent()) {
             editScheduleDescriptor
