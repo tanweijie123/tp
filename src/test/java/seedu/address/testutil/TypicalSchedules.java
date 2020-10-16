@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BENSON;
 import static seedu.address.testutil.TypicalSessions.GETWELL;
+import static seedu.address.testutil.TypicalSessions.MACHOMAN;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +25,11 @@ public class TypicalSchedules {
             .withSession(GETWELL)
             .build();
 
+    public static final Schedule ALICE_MACHOMAN = new ScheduleBuilder()
+            .withClient(ALICE)
+            .withSession(MACHOMAN)
+            .build();
+
     private TypicalSchedules() {
     } // prevents instantiation
 
@@ -39,6 +45,6 @@ public class TypicalSchedules {
     }
 
     public static List<Schedule> getTypicalSchedules() {
-        return new ArrayList<>(Arrays.asList(ALICE_GETWELL, BENSON_GETWELL));
+        return new ArrayList<>(Arrays.asList(ALICE_GETWELL, BENSON_GETWELL, ALICE_MACHOMAN));
     }
 }

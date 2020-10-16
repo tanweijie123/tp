@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.session;
 
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SESSION;
 import static seedu.address.testutil.TypicalSessions.getIntegrationAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -39,8 +39,8 @@ public class DeleteSessionCommandIntegrationTest {
 
     @Test
     public void execute_unfilteredListWithForce_success() {
-        Session sessionToDelete = model.getFilteredSessionList().get(INDEX_SECOND_SESSION.getZeroBased());
-        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(INDEX_SECOND_SESSION, true);
+        Session sessionToDelete = model.getFilteredSessionList().get(INDEX_THIRD_SESSION.getZeroBased());
+        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(INDEX_THIRD_SESSION, true);
 
         String expectedMessage = String.format(DeleteSessionCommand.MESSAGE_DELETE_SESSION_SUCCESS, sessionToDelete);
 

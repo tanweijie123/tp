@@ -2,23 +2,23 @@ package seedu.address.logic.commands.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.schedule.RescheduleTestUtil.DESC_SCHA;
-import static seedu.address.logic.commands.schedule.RescheduleTestUtil.DESC_SCHB;
-import static seedu.address.logic.commands.schedule.RescheduleTestUtil.VALID_CLIENT_INDEX_SCHB;
-import static seedu.address.logic.commands.schedule.RescheduleTestUtil.VALID_SESSION_INDEX_SCHB;
+import static seedu.address.logic.commands.schedule.EditScheduleTestUtil.DESC_SCHA;
+import static seedu.address.logic.commands.schedule.EditScheduleTestUtil.DESC_SCHB;
+import static seedu.address.logic.commands.schedule.EditScheduleTestUtil.VALID_CLIENT_INDEX_SCHB;
+import static seedu.address.logic.commands.schedule.EditScheduleTestUtil.VALID_SESSION_INDEX_SCHB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.schedule.RescheduleCommand.RescheduleDescriptor;
-import seedu.address.testutil.RescheduleDescriptorBuilder;
+import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
+import seedu.address.testutil.EditScheduleDescriptorBuilder;
 
-public class RescheduleDescriptorTest {
+public class EditScheduleDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        RescheduleDescriptor descriptorWithSameValues = new RescheduleDescriptor(DESC_SCHA);
+        EditScheduleDescriptor descriptorWithSameValues = new EditScheduleDescriptor(DESC_SCHA);
         assertTrue(DESC_SCHA.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -34,12 +34,12 @@ public class RescheduleDescriptorTest {
         assertFalse(DESC_SCHA.equals(DESC_SCHB));
 
         // different client index -> returns false
-        RescheduleDescriptor editedAmy = new RescheduleDescriptorBuilder(DESC_SCHA)
+        EditScheduleDescriptor editedAmy = new EditScheduleDescriptorBuilder(DESC_SCHA)
                 .withClientIndex(Index.fromOneBased(Integer.parseInt(VALID_CLIENT_INDEX_SCHB))).build();
         assertFalse(DESC_SCHA.equals(editedAmy));
 
         // different session index -> returns false
-        editedAmy = new RescheduleDescriptorBuilder(DESC_SCHA)
+        editedAmy = new EditScheduleDescriptorBuilder(DESC_SCHA)
                 .withSessionIndex(Index.fromOneBased(Integer.parseInt(VALID_SESSION_INDEX_SCHB))).build();
         assertFalse(DESC_SCHA.equals(editedAmy));
 
