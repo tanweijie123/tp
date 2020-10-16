@@ -56,8 +56,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
             return false;
         }
 
-        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session)
-                && otherSchedule.isPaid == isPaid;
+        return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session);
     }
 
     /**
