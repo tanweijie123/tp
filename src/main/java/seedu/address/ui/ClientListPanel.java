@@ -57,6 +57,7 @@ public class ClientListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 List<Session> associatedSessions = logic.getAssociatedSessionList(client);
+                associatedSessions.sort(Session::compareTo);
                 if (associatedSessions.size() > 0) {
                     setGraphic(new ClientCard(client, getIndex() + 1, associatedSessions.get(0)).getRoot());
                 } else {
