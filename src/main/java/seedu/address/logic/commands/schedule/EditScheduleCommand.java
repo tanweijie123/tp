@@ -27,7 +27,7 @@ import seedu.address.model.session.Session;
  */
 public class EditScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "editschedule";
+    public static final String COMMAND_WORD = "schedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": schedules a client with another session. \n"

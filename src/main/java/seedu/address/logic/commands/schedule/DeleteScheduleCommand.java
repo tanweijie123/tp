@@ -18,7 +18,7 @@ import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 public class DeleteScheduleCommand extends Command {
-    public static final String COMMAND_WORD = "deschedule";
+    public static final String COMMAND_WORD = "schdel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deschedule a client from a session. "
             + "Parameters: "
