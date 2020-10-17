@@ -3,6 +3,7 @@ package seedu.address.logic.parser.schedule;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_IS_PAID;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
 
@@ -17,6 +18,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.schedule.Schedule;
 
 public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
@@ -37,17 +39,23 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX,
-                        PREFIX_UPDATED_SESSION_INDEX);
+                        PREFIX_UPDATED_SESSION_INDEX, PREFIX_IS_PAID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX, PREFIX_UPDATED_SESSION_INDEX)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditScheduleCommand.MESSAGE_USAGE));
         }
 
-        Index clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
-        Index sessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get());
-        Index updateSessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_UPDATED_SESSION_INDEX).get());
+        Index clientIndex;
+        Index sessionIndex;
+        try {
+            clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+            sessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditScheduleCommand.MESSAGE_USAGE), pe);
+        }
 
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
 
@@ -68,11 +76,16 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
                             .get()));
         }
 
+        if (argMultimap.getValue(PREFIX_IS_PAID).isPresent()) {
+            editScheduleDescriptor
+                    .setUpdatedIsPaid(ScheduleParserUtil.parseIsPaid(argMultimap.getValue(PREFIX_IS_PAID).get()));
+        }
+
         if (!editScheduleDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditScheduleCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditScheduleCommand(clientIndex, sessionIndex, updateSessionIndex, editScheduleDescriptor);
+        return new EditScheduleCommand(clientIndex, sessionIndex, editScheduleDescriptor);
     }
 
 }
