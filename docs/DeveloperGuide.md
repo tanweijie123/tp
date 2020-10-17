@@ -413,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: Edit a Schedule**
 
 **MSS**
@@ -518,16 +518,16 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
 
    1. Test case: `sedit 1 g/Machoman`<br>
-      Expected: First Session's gym location is edited. 
+      Expected: First Session's gym location is edited.
       Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `sedit 1 at/29/09/2020 1600 t/120`<br>
-      Expected: First Session timing is edited. 
+      Expected: First Session timing is edited.
       Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
 
    1. Other incorrect edit commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-      
+
 ### Editing a Schedule
 
 1. Editing a Schedule while all Schedules are being shown
@@ -535,16 +535,26 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple Schedules in the list can be viewed on the main panel of the GUI.
 
    1. Test case: `editschedule c/1 s/1 us/2`<br>
-      Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2. 
+      Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `editschedule c/2 s/1 us/2`<br>
-      Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2. 
+      Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+      
+   1. Test case: `editschedule c/1 s/1 pd/true`<br>
+         Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
+         In the right panel, the client's name in the related session will be indicated as green. 
+         Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+         
+   1. Test case: `editschedule c/1 s/1 pd/false`<br>
+            Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
+            In the right panel, the client's name in the related session will be indicated as red. 
+            Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
 
    1. Other incorrect edit commands to try: `editschedule c/1`, `editschedule c/1 s/2`, `editschedule c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
       Expected: Similar to previous.
-      
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files

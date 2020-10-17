@@ -86,9 +86,10 @@ class JsonSerializableAddressBook {
 
             Client client = getClientWithEmail(clientEmail, addressBook);
             Session session = getSessionWithInterval(sessionInterval, addressBook);
+            boolean isPaid = jsonAdaptedSchedule.getIsPaid();
             requireAllNonNull(client, session);
 
-            Schedule schedule = new Schedule(client, session);
+            Schedule schedule = new Schedule(client, session, isPaid);
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }

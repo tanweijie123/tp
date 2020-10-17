@@ -13,11 +13,14 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SESSION;
+import static seedu.address.testutil.TypicalSchedules.IS_PAID_FALSE;
+import static seedu.address.testutil.TypicalSchedules.IS_PAID_TRUE;
 import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
 import static seedu.address.testutil.TypicalSessions.getTypicalSessions;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
@@ -57,9 +60,12 @@ public class EditScheduleCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_failure() {
         Schedule editedSchedule = new ScheduleBuilder().build();
-        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder().build();
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
+                .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
+                .withUpdatedIsPaid(IS_PAID_FALSE)
+                .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, descriptor);
+                descriptor);
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE, editScheduleCommand);
 
@@ -83,14 +89,13 @@ public class EditScheduleCommandTest {
 
         Index indexFirstClient = Index.fromOneBased(1);
         Index indexFirstSession = Index.fromOneBased(1);
-        Index indexUpdatedLastSession = Index.fromOneBased(model.getFilteredSessionList().size() - 1);
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withClientIndex(INDEX_FIRST_CLIENT)
                 .withSessionIndex(INDEX_FIRST_SESSION)
                 .withUpdatedSessionIndex(INDEX_THIRD_SESSION)
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(indexFirstClient, indexFirstSession,
-                indexUpdatedLastSession, descriptor);
+                descriptor);
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -100,32 +105,37 @@ public class EditScheduleCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_failure() {
+    public void execute_noFieldSpecifiedUnfilteredList_success() {
+        EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, new EditScheduleDescriptor());
+                editScheduleDescriptor);
         Schedule editedSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
 
-        String expectedMessage = String.format(EditScheduleCommand.MESSAGE_NOT_EDITED, editedSchedule);
+        String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
 
-        assertCommandFailure(editScheduleCommand, model, expectedMessage);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_filteredList_success() {
         Client lastClient = model.getFilteredClientList().get(0);
         Session lastSession = model.getFilteredSessionList().get(2);
+        boolean isPaidTrue = true;
 
         Schedule scheduleInFilteredList = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
         Schedule editedSchedule = new ScheduleBuilder(scheduleInFilteredList)
                 .withClient(lastClient)
                 .withSession(lastSession)
+                .withIsPaid(isPaidTrue)
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION,
                 new EditScheduleDescriptorBuilder()
                         .withClientIndex(INDEX_SECOND_CLIENT)
                         .withSessionIndex(INDEX_FIRST_SESSION)
                         .withUpdatedSessionIndex(INDEX_THIRD_SESSION)
+                        .withUpdatedIsPaid(IS_PAID_TRUE)
                         .build());
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
@@ -138,9 +148,12 @@ public class EditScheduleCommandTest {
 
     @Test
     public void execute_duplicateScheduleUnfilteredList_failure() {
-        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder().build();
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
+                .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
+                .withUpdatedIsPaid(IS_PAID_FALSE)
+                .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, descriptor);
+                descriptor);
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
     }
@@ -150,31 +163,32 @@ public class EditScheduleCommandTest {
 
         // edit Schedule in filtered list into a duplicate in address book
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, new EditScheduleDescriptorBuilder().build());
+                new EditScheduleDescriptorBuilder().withUpdatedSessionIndex(INDEX_SECOND_SESSION)
+                        .withUpdatedIsPaid(IS_PAID_TRUE).build());
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
     }
 
     @Test
-    public void execute_invalidScheduleIndexUnfilteredList_failure() {
+    public void execute_invalidUpdatedSessionIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredScheduleList().size() + 1);
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
-                .withSessionIndex(INDEX_FIRST_SESSION).build();
+                .withSessionIndex(INDEX_FIRST_SESSION).withUpdatedSessionIndex(outOfBoundIndex).build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                outOfBoundIndex, descriptor);
+                descriptor);
 
-        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
+        assertCommandFailure(editScheduleCommand, model, Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
         final EditScheduleCommand standardCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, DESC_SCHA);
+                DESC_SCHA);
 
         // same values -> returns true
         EditScheduleDescriptor copyDescriptor = new EditScheduleDescriptor(DESC_SCHA);
         EditScheduleCommand commandWithSameValues = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, copyDescriptor);
+                copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -188,11 +202,11 @@ public class EditScheduleCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_THIRD_SESSION,
-                INDEX_SECOND_SESSION , DESC_SCHA)));
+                 DESC_SCHA)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, DESC_SCHB)));
+                DESC_SCHB)));
     }
 
 }

@@ -3,12 +3,15 @@ package seedu.address.logic.commands.schedule;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_IS_PAID;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
+import static seedu.address.testutil.TypicalSchedules.IS_PAID_FALSE;
+import static seedu.address.testutil.TypicalSchedules.IS_PAID_TRUE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,8 @@ public class ScheduleCommandTestUtil {
     public static final String SESSION_INDEX_DESC_B = " " + PREFIX_SESSION_INDEX + "2";
     public static final String UPDATED_SESSION_INDEX_DESC_A = " " + PREFIX_UPDATED_SESSION_INDEX + "1";
     public static final String UPDATED_SESSION_INDEX_DESC_B = " " + PREFIX_UPDATED_SESSION_INDEX + "2";
+    public static final String UPDATED_IS_PAID_FALSE = " " + PREFIX_IS_PAID + IS_PAID_FALSE;
+    public static final String UPDATED_IS_PAID_TRUE = " " + PREFIX_IS_PAID + IS_PAID_TRUE;
 
     public static final EditScheduleDescriptor DESC_SCHA = new EditScheduleDescriptorBuilder()
             .withClientIndex(INDEX_FIRST_CLIENT)

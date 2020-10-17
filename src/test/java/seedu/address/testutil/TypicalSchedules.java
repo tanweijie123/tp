@@ -30,6 +30,10 @@ public class TypicalSchedules {
             .withSession(MACHOMAN)
             .build();
 
+    public static final boolean IS_PAID_FALSE = false;
+
+    public static final boolean IS_PAID_TRUE = true;
+
     private TypicalSchedules() {
     } // prevents instantiation
 

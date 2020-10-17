@@ -8,11 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javax.swing.text.View;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.session.ViewSessionCommand;
-import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 public class RightSideBar extends UiPart<AnchorPane> {
@@ -59,21 +57,18 @@ public class RightSideBar extends UiPart<AnchorPane> {
      * Filters and returns the requiredPeriod according to the commandText
      */
     private String requiredPeriod(String commandText) {
-        String firstWord = commandText.split(" ")[0];
-        if (firstWord.equals(ViewSessionCommand.COMMAND_WORD)) {
-            if (commandText.contains("all")) {
-                this.previousCommand = all;
-                return all;
-            } else if (commandText.contains("week")) {
-                this.previousCommand = week;
-                return week;
-            } else if (commandText.contains("future")) {
-                this.previousCommand = future;
-                return future;
-            }
+        if (commandText.contains("all")) {
+            this.previousCommand = all;
+            return all;
+        } else if (commandText.contains("week")) {
+            this.previousCommand = week;
+            return week;
+        } else if (commandText.contains("future")) {
+            this.previousCommand = future;
+            return future;
+        } else {
+            return this.previousCommand;
         }
-
-        return this.previousCommand;
     }
 
     /**
@@ -88,9 +83,9 @@ public class RightSideBar extends UiPart<AnchorPane> {
                 setGraphic(null);
                 setText(null);
             } else {
-                List<Client> associatedClients = logic.getAssociatedClientList(session);
-                if (associatedClients.size() > 0) {
-                    setGraphic(new SessionCard(session, getIndex() + 1, associatedClients).getRoot());
+                List<Schedule> associatedSchedules = logic.getAssociatedScheduleList(session);
+                if (associatedSchedules.size() > 0) {
+                    setGraphic(new SessionCard(session, getIndex() + 1, associatedSchedules).getRoot());
                 } else {
                     setGraphic(new SessionCard(session, getIndex() + 1, null).getRoot());
                 }

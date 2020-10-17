@@ -1,6 +1,4 @@
 package seedu.address.testutil;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
@@ -21,9 +19,6 @@ public class EditScheduleDescriptorBuilder {
      */
     public EditScheduleDescriptorBuilder() {
         descriptor = new EditScheduleDescriptor();
-        descriptor.setClientIndex(INDEX_FIRST_CLIENT);
-        descriptor.setSessionIndex(INDEX_FIRST_SESSION);
-        descriptor.setUpdatedSessionIndex(INDEX_FIRST_SESSION);
     }
 
     /**
@@ -35,7 +30,7 @@ public class EditScheduleDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Index} of the {@code EditScheduleDescriptorBuilder} that we are building.
+     * Sets the {@code session Index} of the {@code EditScheduleDescriptorBuilder} that we are building.
      */
     public EditScheduleDescriptorBuilder withUpdatedSessionIndex(Index sessionIndex) {
         descriptor.setUpdatedSessionIndex(sessionIndex);
@@ -43,7 +38,15 @@ public class EditScheduleDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Index} of the {@code EditScheduleDescriptorBuilder} that we are building.
+     * Sets the {@code isPaid} of the {@code EditScheduleDescriptorBuilder} that we are building.
+     */
+    public EditScheduleDescriptorBuilder withUpdatedIsPaid(boolean isPaid) {
+        descriptor.setUpdatedIsPaid(isPaid);
+        return this;
+    }
+
+    /**
+     * Sets the {@code updated session Index} of the {@code EditScheduleDescriptorBuilder} that we are building.
      */
     public EditScheduleDescriptorBuilder withSessionIndex(Index sessionIndex) {
         descriptor.setSessionIndex(sessionIndex);

@@ -8,8 +8,8 @@ title: FitEgo
 
 ![Ui](images/Ui.png)
 
-**FitEgo is a desktop application for fitness instructors to keep track of his/her customers easily, so that he can 
-spend more time on his clients / his routine rather than manually tracking administrative matters using alternative software like Excel.** 
+**FitEgo is a desktop application for fitness instructors to keep track of his/her customers easily, so that he can
+spend more time on his clients / his routine rather than manually tracking administrative matters using alternative software like Excel.**
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using FitEgo, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
