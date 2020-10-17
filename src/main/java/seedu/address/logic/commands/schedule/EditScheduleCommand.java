@@ -2,6 +2,7 @@ package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_IS_PAID;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
@@ -34,13 +35,15 @@ public class EditScheduleCommand extends Command {
             + "Parameters: "
             + PREFIX_CLIENT_INDEX + "CLIENT "
             + PREFIX_SESSION_INDEX + "SESSION "
-            + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION "
+            + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION] "
+            + "[" + PREFIX_IS_PAID + "IS PAID]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 "
-            + PREFIX_UPDATED_SESSION_INDEX + "1 ";
+            + PREFIX_UPDATED_SESSION_INDEX + "1 "
+            + PREFIX_IS_PAID + "true ";
 
-    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Editschedule : \n%1$s";
+    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Schedule Edited: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
     public static final String MESSAGE_SCHEDULE_NOT_FOUND = "No schedule is associated with this client and session";
