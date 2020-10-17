@@ -240,7 +240,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             clientListPanel.update();
-            rightSideBar.update();
+            rightSideBar.update(commandText);
             homepage.update();
             return commandResult;
         } catch (CommandException | ParseException e) {
