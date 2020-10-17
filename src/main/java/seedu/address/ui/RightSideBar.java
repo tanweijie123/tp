@@ -8,8 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javax.swing.text.View;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.session.ViewSessionCommand;
 import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
 
@@ -57,18 +59,21 @@ public class RightSideBar extends UiPart<AnchorPane> {
      * Filters and returns the requiredPeriod according to the commandText
      */
     private String requiredPeriod(String commandText) {
-        if (commandText.contains("all")) {
-            this.previousCommand = all;
-            return all;
-        } else if (commandText.contains("week")) {
-            this.previousCommand = week;
-            return week;
-        } else if (commandText.contains("future")) {
-            this.previousCommand = future;
-            return future;
-        } else {
-            return this.previousCommand;
+        String firstWord = commandText.split(" ")[0];
+        if (firstWord.equals(ViewSessionCommand.COMMAND_WORD)) {
+            if (commandText.contains("all")) {
+                this.previousCommand = all;
+                return all;
+            } else if (commandText.contains("week")) {
+                this.previousCommand = week;
+                return week;
+            } else if (commandText.contains("future")) {
+                this.previousCommand = future;
+                return future;
+            }
         }
+
+        return this.previousCommand;
     }
 
     /**
