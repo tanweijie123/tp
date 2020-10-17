@@ -59,14 +59,15 @@ Each session can have more than 1 clients, to simulate a trainer instructing a f
 FitEgo don't allow user to create overlapping sessions. This is to protect users from scheduling overlapping sessions
 at different gyms. 
 
-All session's command have prefix `ses`.
+All session's commands have prefix `s`.
 
 ### Schedules
 
 Schedules are what defines a user-client interaction. Each schedule contains information about the client and the 
 session they attended. 
 
-- User can add in details about the client's progress, specific exercises done as remark in schedules.
+- User can add in details about the client's weight progress
+- User can add exercises done during the session as remark in schedules.
 - User can track whether client has paid for the session attended
 
 All schedules' commands have prefix `sch`.
@@ -203,6 +204,7 @@ Creates a session.
 Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 
 * Start time should be of format "dd/MM/yyyy HHmm"
+* Duration is in minutes
 * Duration should be a positive integer (larger than 0)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -233,8 +235,8 @@ the specified session
 
 Format: `sdel INDEX [f/ true]`
 
-* Deletes the Client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Client list.
+* Deletes the Session at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Session list.
 * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
