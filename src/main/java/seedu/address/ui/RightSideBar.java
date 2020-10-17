@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.parser.session.CliSyntax.PREFIX_PERIOD;
-
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,6 +18,11 @@ public class RightSideBar extends UiPart<AnchorPane> {
     private final Logger logger = LogsCenter.getLogger(RightSideBar.class);
     private final MainWindow mainWindow;
     private final Logic logic;
+    private final String all = "ALL";
+    private final String week = "WEEK";
+    private final String future = "FUTURE";
+    private String previousCommand = "ALL";
+
 
     @FXML
     private ListView<Session> sessionListView;
@@ -54,11 +57,18 @@ public class RightSideBar extends UiPart<AnchorPane> {
      * Filters and returns the requiredPeriod according to the commandText
      */
     private String requiredPeriod(String commandText) {
-        if (commandText.contains(PREFIX_PERIOD.toString())) {
-            int startOfPeriod = commandText.indexOf(PREFIX_PERIOD.toString());
-            return commandText.substring(startOfPeriod + 2).toUpperCase();
+        if (commandText.contains("all")) {
+            this.previousCommand = all;
+            return all;
+        } else if (commandText.contains("week")) {
+            this.previousCommand = week;
+            return week;
+        } else if (commandText.contains("future")) {
+            this.previousCommand = future;
+            return future;
+        } else {
+            return this.previousCommand;
         }
-        return "";
     }
 
     /**
