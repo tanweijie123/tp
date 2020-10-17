@@ -43,10 +43,10 @@ public class EditScheduleCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, " c/-5 s/-1 us/-3 p/false", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " c/-5 s/-1 us/-3 pd/false", MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, " c/0 s/1 us/1 p/true" , MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " c/0 s/1 us/1 pd/true" , MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, " 1 some random string", MESSAGE_INVALID_FORMAT);
