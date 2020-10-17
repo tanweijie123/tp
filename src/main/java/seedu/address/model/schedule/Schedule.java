@@ -92,10 +92,14 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
 
     @Override
     public String toString() {
+        String paymentStatus = isPaid ? "PAID" : "NOT PAID";
         return "Client "
                 + client
                 + "\n"
                 + " with session "
-                + session;
+                + session
+                + "\n"
+                + "Status: "
+                + paymentStatus;
     }
 }
