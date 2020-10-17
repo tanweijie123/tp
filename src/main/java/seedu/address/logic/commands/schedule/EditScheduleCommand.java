@@ -178,7 +178,7 @@ public class EditScheduleCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(clientIndex, sessionIndex, updateSessionIndex, updatedIsPaid);
+            return CollectionUtil.isAnyNonNull(updateSessionIndex, updatedIsPaid);
         }
 
         public void setClientIndex(Index clientIndex) {
