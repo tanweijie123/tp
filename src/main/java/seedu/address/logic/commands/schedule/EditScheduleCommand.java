@@ -117,6 +117,10 @@ public class EditScheduleCommand extends Command {
         Session session = scheduleToEdit.getSession();
         try {
             if (editScheduleDescriptor.getUpdatedSessionIndex().isPresent()) {
+                if (editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased()
+                        >= lastShownSessionList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
+                }
                 session = lastShownSessionList
                         .get(editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased());
             }

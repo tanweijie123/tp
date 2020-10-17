@@ -62,7 +62,7 @@ public class EditScheduleCommandParserTest {
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, descriptor);
+                descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -78,7 +78,7 @@ public class EditScheduleCommandParserTest {
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, descriptor);
+                descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -106,7 +106,7 @@ public class EditScheduleCommandParserTest {
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, descriptor);
+                descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -121,7 +121,7 @@ public class EditScheduleCommandParserTest {
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                INDEX_SECOND_SESSION, descriptor);
+                descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         //        // other valid values specified
