@@ -32,9 +32,54 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Read [How to use](#how-to-use-fitego) for a quick understanding of commands in FitEgo
+
+1. Refer to the [Features](#features) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## How to use FitEgo
+
+There are 3 major entities in FitEgo: Clients, Sessions, and Schedules.
+There are 5 major verbs in FitEgo: add, edit, delete, view, list
+
+### Clients
+
+Clients are customers that is trained by the user (fitness instructor).
+
+All client's commands using the prefix `c`. 
+ 
+### Sessions
+
+Sessions are a timeslot that is scheduled for a training session. It contains information about the gym, the session's 
+main exercise type, start time and the duration of sessions. 
+
+Each session can have more than 1 clients, to simulate a trainer instructing a fitness class.
+
+FitEgo don't allow user to create overlapping sessions. This is to protect users from scheduling overlapping sessions
+at different gyms. 
+
+All session's command have prefix `ses`.
+
+### Schedules
+
+Schedules are what defines a user-client interaction. Each schedule contains information about the client and the 
+session they attended. 
+
+- User can add in details about the client's progress, specific exercises done as remark in schedules.
+- User can track whether client has paid for the session attended
+
+All schedules' commands have prefix `sch`.
+
+Once you learn the entity, you can now combine it with the verb. For example:
+- `cadd`: Add a client, `sadd`: Creates a session, `schadd`: Creates a schedule
+- `cedit`: Edit a client's details, `sedit`: Edit a session's details, `schedit`: Edit a schedule's details
+- `cdel`: Edit a client's details, `sdel`: Edit a session's details, `schdel`: Edit a schedule's details
+
+Although there are a lot of commands, once you learn the verb and entities, it is so easy to use FitEgo!
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Features
 
@@ -153,18 +198,20 @@ Examples:
 
 ### Adding a Session: `sadd`
 
-Adds a client to the clients list.
+Creates a session.
 
-Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
+Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
+
+* Start time should be of format "dd/MM/yyyy HHmm"
+* Duration should be a positive integer (larger than 0)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A Client can have any number of tags (including 0). Each tag can only include
-alphanumeric characters or dash (`-`)
+    Session should not overlap with previously created session.
 </div>
 
 Examples:
-* `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
-* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
+* `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120`
+
 
 ### Editing a Session: `sedit`
 
@@ -178,6 +225,34 @@ Examples:
 *  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` Edits the Gym of the 1st Session to be `Machoman`.
 *  `sedit 2 at/29/09/2020 1600 t/120 ` Edits the Start Time and Duration of the 2nd Session to be `29/09/2020 1600 with a duration of 120 minutes`.
 
+
+### Deleting a Session: `sdel`
+
+Deletes the specified session by the index number used in the displayed Session list and all schedules associated with
+the specified session
+
+Format: `sdel INDEX [f/ true]`
+
+* Deletes the Client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Client list.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+* If there are no schedules with the 2nd session in the session List, `list` followed by `sdel 2` will delete the session
+* If there are one or more associated schedules associated with the 2nd session in the Session List, 
+`list` followed by `sdel 2` will return an error message 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    To force deletion of session (and all associated schedules), pass in the optional force flag followed by
+    any non empty string.
+</div>
+
+Examples:
+* If there are one or more associated schedules associated with the 2nd session in the Session List, 
+  `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
+  itself
+  
+  
 ### Editing a Schedule: `editschedule`
 
 Edits the details of the Schedule identified by the client index and session index used in each Schedule in the Schedule list.
