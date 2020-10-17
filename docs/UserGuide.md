@@ -212,9 +212,9 @@ _Allow the creation of sessions and tagging of its associated client_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary 
-| Action | Format | Example | 
-| -------| -------| --------| 
+## Command Summary
+| Action | Format | Example |
+| -------| -------| --------|
 |Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
 |Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
 |Deleting Client Info |`cdel INDEX` |`cdel 1`|
