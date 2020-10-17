@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_IS_PAID;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
 
@@ -18,6 +19,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.schedule.Remark;
 
 public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
@@ -38,7 +40,7 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX,
-                        PREFIX_UPDATED_SESSION_INDEX, PREFIX_IS_PAID);
+                        PREFIX_UPDATED_SESSION_INDEX, PREFIX_IS_PAID, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -78,6 +80,11 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         if (argMultimap.getValue(PREFIX_IS_PAID).isPresent()) {
             editScheduleDescriptor
                     .setUpdatedIsPaid(ScheduleParserUtil.parseIsPaid(argMultimap.getValue(PREFIX_IS_PAID).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            editScheduleDescriptor
+                    .setRemark(new Remark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
 
         if (!editScheduleDescriptor.isAnyFieldEdited()) {

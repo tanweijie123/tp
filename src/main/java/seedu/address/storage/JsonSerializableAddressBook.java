@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,6 +16,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
+import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
@@ -87,9 +89,10 @@ class JsonSerializableAddressBook {
             Client client = getClientWithEmail(clientEmail, addressBook);
             Session session = getSessionWithInterval(sessionInterval, addressBook);
             boolean isPaid = jsonAdaptedSchedule.getIsPaid();
+            Optional<Remark> remark = Optional.ofNullable(jsonAdaptedSchedule.getRemark());
             requireAllNonNull(client, session);
 
-            Schedule schedule = new Schedule(client, session, isPaid);
+            Schedule schedule = new Schedule(client, session, isPaid, remark);
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }

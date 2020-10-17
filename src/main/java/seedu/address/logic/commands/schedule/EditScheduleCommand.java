@@ -3,6 +3,7 @@ package seedu.address.logic.commands.schedule;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_IS_PAID;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
@@ -36,12 +38,14 @@ public class EditScheduleCommand extends Command {
             + PREFIX_CLIENT_INDEX + "CLIENT (must be a positive integer) "
             + PREFIX_SESSION_INDEX + "SESSION (must be a positive integer) "
             + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION] "
-            + "[" + PREFIX_IS_PAID + "IS PAID]\n"
+            + "[" + PREFIX_IS_PAID + "IS PAID] "
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 "
             + PREFIX_UPDATED_SESSION_INDEX + "1 "
-            + PREFIX_IS_PAID + "true ";
+            + PREFIX_IS_PAID + "true "
+            + PREFIX_REMARK + "Did 5 pushups";
 
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Schedule Edited: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -130,7 +134,11 @@ public class EditScheduleCommand extends Command {
         }
         boolean updatedIsPaid = editScheduleDescriptor
                 .getUpdatedIsPaid().orElse(scheduleToEdit.getIsPaid());
-        return new Schedule(client, session, updatedIsPaid);
+
+        // get new remark else return previous remark
+        Optional<Remark> remark = editScheduleDescriptor.getRemark().or(scheduleToEdit::getRemark);
+
+        return new Schedule(client, session, updatedIsPaid, remark);
     }
 
     @Override
@@ -161,6 +169,7 @@ public class EditScheduleCommand extends Command {
         private Index sessionIndex;
         private Index updateSessionIndex;
         private Boolean updatedIsPaid;
+        private Remark remark;
 
         public EditScheduleDescriptor() {}
 
@@ -173,13 +182,14 @@ public class EditScheduleCommand extends Command {
             setSessionIndex(toCopy.sessionIndex);
             setUpdatedSessionIndex(toCopy.updateSessionIndex);
             setUpdatedIsPaid(toCopy.updatedIsPaid);
+            setRemark(toCopy.remark);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(updateSessionIndex, updatedIsPaid);
+            return CollectionUtil.isAnyNonNull(updateSessionIndex, updatedIsPaid, remark);
         }
 
         public void setClientIndex(Index clientIndex) {
@@ -214,6 +224,14 @@ public class EditScheduleCommand extends Command {
             this.updatedIsPaid = updatedIsPaid;
         }
 
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -232,7 +250,8 @@ public class EditScheduleCommand extends Command {
             return getClientIndex().equals(e.getClientIndex())
                     && getSessionIndex().equals(e.getSessionIndex())
                     && getUpdatedSessionIndex().equals(e.getUpdatedSessionIndex())
-                    && getUpdatedIsPaid().equals(e.getUpdatedIsPaid());
+                    && getUpdatedIsPaid().equals(e.getUpdatedIsPaid())
+                    && getRemark().equals(e.getRemark());
         }
     }
 }
