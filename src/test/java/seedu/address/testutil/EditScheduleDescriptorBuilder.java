@@ -1,7 +1,4 @@
 package seedu.address.testutil;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
-import static seedu.address.testutil.TypicalSchedules.IS_PAID_FALSE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;

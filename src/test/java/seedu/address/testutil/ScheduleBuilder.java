@@ -34,6 +34,8 @@ public class ScheduleBuilder {
     public static final LocalDateTime DEFAULT_START_TIME =
             LocalDateTime.of(2020, 9, 29, 13, 0);
 
+    public static final Boolean DEFAULT_IS_PAID = false;
+
     private Name clientName;
     private Phone clientPhone;
     private Email clientEmail;
@@ -43,6 +45,8 @@ public class ScheduleBuilder {
     private Gym gym;
     private ExerciseType exerciseType;
     private Interval interval;
+
+    private Boolean isPaid;
 
     /**
      * Creates a {@code ScheduleBuilder} with the default details.
@@ -58,6 +62,8 @@ public class ScheduleBuilder {
         gym = new Gym(DEFAULT_GYM);
         exerciseType = new ExerciseType(DEFAULT_EXERCISE_TYPE);
         interval = new Interval(DEFAULT_START_TIME, DEFAULT_DURATION);
+
+        isPaid = DEFAULT_IS_PAID;
     }
 
     /**
@@ -73,6 +79,8 @@ public class ScheduleBuilder {
         gym = scheduleToCopy.getSession().getGym();
         exerciseType = scheduleToCopy.getSession().getExerciseType();
         interval = scheduleToCopy.getSession().getInterval();
+
+        isPaid = scheduleToCopy.getIsPaid();
     }
 
     /**
@@ -162,12 +170,20 @@ public class ScheduleBuilder {
     }
 
     /**
+     * Sets the {@code isPaid} of the {@code Schedule} that we are building.
+     */
+    public ScheduleBuilder withIsPaid(boolean isPaid) {
+        this.isPaid = isPaid;
+        return this;
+    }
+
+    /**
      * Returns the {@code Schedule} based on this properties.
      */
     public Schedule build() {
         Client client = new Client(clientName, clientPhone, clientEmail, clientAddress, clientTags);
         Session session = new Session(gym, exerciseType, interval);
-        return new Schedule(client, session);
+        return new Schedule(client, session, isPaid);
     }
 
 }

@@ -88,19 +88,19 @@ public class EditScheduleCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-        @Test
-        public void parse_oneFieldSpecified_success() {
-             // updated is paid
-             String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_IS_PAID_TRUE;
-             EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
-                    .withClientIndex(INDEX_FIRST_CLIENT)
-                    .withSessionIndex(INDEX_FIRST_SESSION)
-                    .withUpdatedIsPaid(IS_PAID_TRUE)
-                    .build();
-             EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                    descriptor);
-            assertParseSuccess(parser, userInput, expectedCommand);
-        }
+    @Test
+    public void parse_oneFieldSpecified_success() {
+        // updated isPaid
+        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_IS_PAID_TRUE;
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
+                .withClientIndex(INDEX_FIRST_CLIENT)
+                .withSessionIndex(INDEX_FIRST_SESSION)
+                .withUpdatedIsPaid(IS_PAID_TRUE)
+                .build();
+        EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+                descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
