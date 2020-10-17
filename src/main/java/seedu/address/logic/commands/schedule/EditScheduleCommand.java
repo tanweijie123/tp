@@ -2,6 +2,7 @@ package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_IS_PAID;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
@@ -32,39 +33,38 @@ public class EditScheduleCommand extends Command {
             + ": schedules a client with another session. \n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + PREFIX_CLIENT_INDEX + "CLIENT "
-            + PREFIX_SESSION_INDEX + "SESSION "
-            + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION "
+            + PREFIX_CLIENT_INDEX + "CLIENT (must be a positive integer) "
+            + PREFIX_SESSION_INDEX + "SESSION (must be a positive integer) "
+            + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION] "
+            + "[" + PREFIX_IS_PAID + "IS PAID]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 "
-            + PREFIX_UPDATED_SESSION_INDEX + "1 ";
+            + PREFIX_UPDATED_SESSION_INDEX + "1 "
+            + PREFIX_IS_PAID + "true ";
 
-    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Editschedule : \n%1$s";
+    public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Schedule Edited: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
+    public static final String MESSAGE_SCHEDULE_NOT_FOUND = "No schedule is associated with this client and session";
 
     private final Index sessionIndex;
     private final Index clientIndex;
-    private final Index updatedSessionIndex;
 
     private final EditScheduleDescriptor editScheduleDescriptor;
 
     /**
      * @param clientIndex of the Client in the filtered client list to edit
      * @param sessionIndex of the Session in the filtered session list to edit
-     * @param updatedSessionIndex to update the Session in the filtered session list
      * @param editScheduleDescriptor details to edit the schedule with
      */
-    public EditScheduleCommand(Index clientIndex, Index sessionIndex, Index updatedSessionIndex,
-                               EditScheduleDescriptor editScheduleDescriptor) {
+    public EditScheduleCommand(Index clientIndex, Index sessionIndex, EditScheduleDescriptor editScheduleDescriptor) {
         requireNonNull(clientIndex);
         requireNonNull(sessionIndex);
         requireNonNull(editScheduleDescriptor);
 
         this.clientIndex = clientIndex;
         this.sessionIndex = sessionIndex;
-        this.updatedSessionIndex = updatedSessionIndex;
         this.editScheduleDescriptor = new EditScheduleDescriptor(editScheduleDescriptor);
     }
 
@@ -79,23 +79,23 @@ public class EditScheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        if (sessionIndex.getZeroBased() >= lastShownSessionList.size()
-                && updatedSessionIndex.getZeroBased() >= lastShownSessionList.size()) {
+        if (sessionIndex.getZeroBased() >= lastShownSessionList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
 
         Client client = lastShownClientList.get(clientIndex.getZeroBased());
         Session session = lastShownSessionList.get(sessionIndex.getZeroBased());
-        Schedule scheduleToEdit = new Schedule(client, session);
+        Schedule scheduleToEdit;
+        if (model.hasAnyScheduleAssociatedWithClientAndSession(client, session)) {
+            scheduleToEdit = model.findScheduleByClientAndSession(client, session);
+        } else {
+            throw new CommandException(MESSAGE_SCHEDULE_NOT_FOUND);
+        }
 
         Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor,
                 lastShownSessionList);
 
         if (!scheduleToEdit.isUnique(editedSchedule) && model.hasSchedule(editedSchedule)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
-        }
-
-        if (scheduleToEdit.getSession().equals(editedSchedule.getSession())) {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }
 
@@ -112,17 +112,25 @@ public class EditScheduleCommand extends Command {
     private static Schedule createEditedSchedule(Schedule scheduleToEdit, EditScheduleDescriptor editScheduleDescriptor,
                                                  List<Session> lastShownSessionList) throws CommandException {
         assert scheduleToEdit != null;
+        assert lastShownSessionList != null;
 
         Client client = scheduleToEdit.getClient();
-        Session session;
+        Session session = scheduleToEdit.getSession();
         try {
-            session = editScheduleDescriptor.getUpdatedSessionIndex() == null
-                    ? scheduleToEdit.getSession()
-                    : lastShownSessionList.get(editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased());
+            if (editScheduleDescriptor.getUpdatedSessionIndex().isPresent()) {
+                if (editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased()
+                        >= lastShownSessionList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
+                }
+                session = lastShownSessionList
+                        .get(editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased());
+            }
         } catch (NoSuchElementException e) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
+            throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
-        return new Schedule(client, session);
+        boolean updatedIsPaid = editScheduleDescriptor
+                .getUpdatedIsPaid().orElse(scheduleToEdit.getIsPaid());
+        return new Schedule(client, session, updatedIsPaid);
     }
 
     @Override
@@ -152,6 +160,7 @@ public class EditScheduleCommand extends Command {
         private Index clientIndex;
         private Index sessionIndex;
         private Index updateSessionIndex;
+        private Boolean updatedIsPaid;
 
         public EditScheduleDescriptor() {}
 
@@ -163,13 +172,14 @@ public class EditScheduleCommand extends Command {
             setClientIndex(toCopy.clientIndex);
             setSessionIndex(toCopy.sessionIndex);
             setUpdatedSessionIndex(toCopy.updateSessionIndex);
+            setUpdatedIsPaid(toCopy.updatedIsPaid);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(clientIndex, sessionIndex, updateSessionIndex);
+            return CollectionUtil.isAnyNonNull(updateSessionIndex, updatedIsPaid);
         }
 
         public void setClientIndex(Index clientIndex) {
@@ -196,6 +206,14 @@ public class EditScheduleCommand extends Command {
             return Optional.ofNullable(updateSessionIndex);
         }
 
+        public Optional<Boolean> getUpdatedIsPaid() {
+            return Optional.ofNullable(updatedIsPaid);
+        }
+
+        public void setUpdatedIsPaid(Boolean updatedIsPaid) {
+            this.updatedIsPaid = updatedIsPaid;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -213,7 +231,8 @@ public class EditScheduleCommand extends Command {
 
             return getClientIndex().equals(e.getClientIndex())
                     && getSessionIndex().equals(e.getSessionIndex())
-                    && getUpdatedSessionIndex().equals(e.getUpdatedSessionIndex());
+                    && getUpdatedSessionIndex().equals(e.getUpdatedSessionIndex())
+                    && getUpdatedIsPaid().equals(e.getUpdatedIsPaid());
         }
     }
 }
