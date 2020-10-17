@@ -10,6 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS = "";
+    public static final Remark EMPTY_REMARK = new Remark("");
 
     /*
      * Remark can be any string.
@@ -30,7 +31,7 @@ public class Remark {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid remark.
      */
     public static boolean isValidRemark(String test) {
         return test.matches(VALIDATION_REGEX);

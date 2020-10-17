@@ -52,7 +52,7 @@ public class JsonAdaptedSchedule {
         start = SessionParserUtil.parseDateTimeToString(source.getSession().getStartTime());
         end = SessionParserUtil.parseDateTimeToString(source.getSession().getEndTime());
         isPaid = parseIsPaidToString(source.getIsPaid());
-        remark = source.getRemark().orElse(new Remark("")).value;
+        remark = source.getRemark().value;
     }
 
     /**

@@ -13,12 +13,12 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     private Client client;
     private Session session;
     private boolean isPaid;
-    private Optional<Remark> remark;
+    private Remark remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Client client, Session session, boolean isPaid, Optional<Remark> remark) {
+    public Schedule(Client client, Session session, boolean isPaid, Remark remark) {
         requireAllNonNull(client, session, isPaid);
         this.client = client;
         this.session = session;
@@ -34,7 +34,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         this.client = client;
         this.session = session;
         this.isPaid = false;
-        this.remark = Optional.empty();
+        this.remark = Remark.EMPTY_REMARK;
     }
 
     public Client getClient() {
@@ -49,7 +49,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         return isPaid;
     }
 
-    public Optional<Remark> getRemark() {
+    public Remark getRemark() {
         return remark;
     }
 
@@ -101,7 +101,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     @Override
     public String toString() {
         String paymentStatus = isPaid ? "PAID" : "NOT PAID";
-        String remarkPresent = remark.map(value -> "Remark: " + value).orElse("");
+        String remarkPresent = !remark.equals(Remark.EMPTY_REMARK) ? "Remark: " + remark : "";
         return "Client "
                 + client
                 + "\n"

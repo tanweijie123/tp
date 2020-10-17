@@ -136,7 +136,7 @@ public class EditScheduleCommand extends Command {
                 .getUpdatedIsPaid().orElse(scheduleToEdit.getIsPaid());
 
         // get new remark else return previous remark
-        Optional<Remark> remark = editScheduleDescriptor.getRemark().or(scheduleToEdit::getRemark);
+        Remark remark = editScheduleDescriptor.getRemark().orElse(scheduleToEdit.getRemark());
 
         return new Schedule(client, session, updatedIsPaid, remark);
     }

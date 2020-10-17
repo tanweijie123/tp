@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -34,6 +33,7 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
     private final List<JsonAdaptedSession> sessions = new ArrayList<>();
     private final List<JsonAdaptedSchedule> schedules = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given Clients.
      */
@@ -89,7 +89,7 @@ class JsonSerializableAddressBook {
             Client client = getClientWithEmail(clientEmail, addressBook);
             Session session = getSessionWithInterval(sessionInterval, addressBook);
             boolean isPaid = jsonAdaptedSchedule.getIsPaid();
-            Optional<Remark> remark = Optional.ofNullable(jsonAdaptedSchedule.getRemark());
+            Remark remark = jsonAdaptedSchedule.getRemark();
             requireAllNonNull(client, session);
 
             Schedule schedule = new Schedule(client, session, isPaid, remark);
