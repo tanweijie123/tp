@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
 
@@ -47,15 +47,25 @@ public class SessionCard extends UiPart<Region> {
     /**
      * Creates a {@code ScheduleCard} with the given {@code Schedule}.
      */
-    public SessionCard(Session session, int displayedIndex, List<Client> clients) {
+    public SessionCard(Session session, int displayedIndex, List<Schedule> schedules) {
         super(FXML);
         this.session = session;
         id.setText(displayedIndex + ". ");
         sessionTime.setText(session.getInterval().getTime12hrPattern());
         gymName.setText(session.getGym().toString());
         dayOfWeek.setText(session.getInterval().getFormattedStartDateTime(SIMPLE_DATE_TIME_PATTERN_FORMATTER));
-        if (clients != null && clients.size() > 0) {
-            clients.forEach(client -> associatedClient.getChildren().add(new Label(client.getName().toString())));
+        if (schedules != null && schedules.size() > 0) {
+            schedules.forEach(schedule -> {
+                Label clientLabel = new Label(schedule.getClient().getName().toString());
+                if (schedule.getIsPaid()) {
+                    clientLabel.setId("paidClient");
+                } else {
+                    clientLabel.setId("notPaidClient");
+                }
+                associatedClient.getChildren().add(
+                        clientLabel);
+                }
+            );
         }
     }
 

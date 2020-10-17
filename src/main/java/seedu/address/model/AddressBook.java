@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -251,6 +252,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(s-> s.getClient().equals(clientKey));
         Stream<Session> sessionsInClient = schedulesContainingSession.map(Schedule::getSession);
         return sessionsInClient.collect(Collectors.toList());
+    }
+
+    /**
+     * Finds all {@code Schedule} that contains {@code session} from this {@code ScheduleList}.
+     * {@code sessionKey} must exist in the schedule list.
+     * @return A list of schedules that are associated to {@code sessionKey} in the {@code ScheduleList}.
+     */
+    public List<Schedule> findScheduleBySession(Session sessionKey) {
+        Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(s-> s.getSession().equals(sessionKey));
+        return schedulesContainingSession.collect(Collectors.toList());
+    }
+
+    /**
+     * Finds the {@code Schedule} that contains {@code client} and {@code session} from this {@code ScheduleList}.
+     * {@code clientKey} and {@code sessionKey} must exist in the schedule list.
+     * @return A list of schedules that are associated to {@code clientKey} and
+     * {@code sessionKey} in the {@code ScheduleList}.
+     */
+    public Schedule findScheduleByClientAndSession(Client clientKey, Session sessionKey) {
+        Optional<Schedule> schedulesContainingClientAndSession = schedules.findAnyMatch(s->
+                s.getClient().equals(clientKey) && s.getSession().equals(sessionKey));
+        return schedulesContainingClientAndSession.get();
     }
 
     @Override

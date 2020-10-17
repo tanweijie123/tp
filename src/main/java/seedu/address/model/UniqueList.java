@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -94,6 +95,14 @@ public class UniqueList<T extends CheckExisting<T> & Comparable<T>> implements I
     public Stream<T> findAllMatch(Predicate<T> predicate) {
         requireNonNull(predicate);
         return internalUnmodifiableList.stream().filter(predicate);
+    }
+
+    /**
+     * Returns an element T in the internal list that matches {@code predicate}.
+     */
+    public Optional<T> findAnyMatch(Predicate<T> predicate) {
+        requireNonNull(predicate);
+        return internalUnmodifiableList.stream().filter(predicate).findAny();
     }
 
     /**
