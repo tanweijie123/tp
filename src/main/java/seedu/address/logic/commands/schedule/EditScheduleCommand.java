@@ -112,6 +112,7 @@ public class EditScheduleCommand extends Command {
     private static Schedule createEditedSchedule(Schedule scheduleToEdit, EditScheduleDescriptor editScheduleDescriptor,
                                                  List<Session> lastShownSessionList) throws CommandException {
         assert scheduleToEdit != null;
+        assert lastShownSessionList != null;
 
         Client client = scheduleToEdit.getClient();
         Session session = scheduleToEdit.getSession();
