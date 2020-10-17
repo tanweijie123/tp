@@ -32,9 +32,55 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Read [How to use](#how-to-use-fitego) for a quick understanding of commands in FitEgo
+
+1. Refer to the [Features](#features) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## How to use FitEgo
+
+There are 3 major entities in FitEgo: Clients, Sessions, and Schedules.
+There are 5 major verbs in FitEgo: add, edit, delete, view, list
+
+### Clients
+
+Clients are customers that is trained by the user (fitness instructor).
+
+All client's commands using the prefix `c`. 
+ 
+### Sessions
+
+Sessions are a timeslot that is scheduled for a training session. It contains information about the gym, the session's 
+main exercise type, start time and the duration of sessions. 
+
+Each session can have more than 1 clients, to simulate a trainer instructing a fitness class.
+
+FitEgo don't allow user to create overlapping sessions. This is to protect users from scheduling overlapping sessions
+at different gyms. 
+
+All session's commands have prefix `s`.
+
+### Schedules
+
+Schedules are what defines a user-client interaction. Each schedule contains information about the client and the 
+session they attended. 
+
+- User can add in details about the client's weight progress
+- User can add exercises done during the session as remark in schedules.
+- User can track whether client has paid for the session attended
+
+All schedules' commands have prefix `sch`.
+
+Once you learn the entity, you can now combine it with the verb. For example:
+- `cadd`: Add a client, `sadd`: Creates a session, `schadd`: Creates a schedule
+- `cedit`: Edit a client's details, `sedit`: Edit a session's details, `schedit`: Edit a schedule's details
+- `cdel`: Edit a client's details, `sdel`: Edit a session's details, `schdel`: Edit a schedule's details
+
+Although there are a lot of commands, once you learn the verb and entities, it is so easy to use FitEgo!
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Features
 
@@ -153,18 +199,21 @@ Examples:
 
 ### Adding a Session: `sadd`
 
-Adds a client to the clients list.
+Creates a session.
 
-Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
+Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
+
+* Start time should be of format "dd/MM/yyyy HHmm"
+* Duration is in minutes
+* Duration should be a positive integer (larger than 0)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A Client can have any number of tags (including 0). Each tag can only include
-alphanumeric characters or dash (`-`)
+    Session should not overlap with previously created session.
 </div>
 
 Examples:
-* `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
-* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
+* `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120`
+
 
 ### Editing a Session: `sedit`
 
@@ -178,19 +227,47 @@ Examples:
 *  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` Edits the Gym of the 1st Session to be `Machoman`.
 *  `sedit 2 at/29/09/2020 1600 t/120 ` Edits the Start Time and Duration of the 2nd Session to be `29/09/2020 1600 with a duration of 120 minutes`.
 
-### Editing a Schedule: `editschedule`
+
+### Deleting a Session: `sdel`
+
+Deletes the specified session by the index number used in the displayed Session list and all schedules associated with
+the specified session
+
+Format: `sdel INDEX [f/ true]`
+
+* Deletes the Session at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Session list.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+* If there are no schedules with the 2nd session in the session List, `list` followed by `sdel 2` will delete the session
+* If there are one or more associated schedules associated with the 2nd session in the Session List, 
+`list` followed by `sdel 2` will return an error message 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    To force deletion of session (and all associated schedules), pass in the optional force flag followed by
+    any non empty string.
+</div>
+
+Examples:
+* If there are one or more associated schedules associated with the 2nd session in the Session List, 
+  `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
+  itself
+  
+  
+### Editing a Schedule: `schedit`
 
 Edits the details of the Schedule identified by the client index and session index used in each Schedule in the Schedule list.
 
-Format: `editschedule c/CLIENT s/SESSION [us/UPDATED INDEX] [pd/IS PAID]`
+Format: `schedit c/CLIENT s/SESSION [us/UPDATED INDEX] [pd/IS PAID]`
 
 * Edits the Schedule at the specified `c/CLIENT s/SESSION`. Both indexes **must be positive integers** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `editschedule c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
-*  `editschedule c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be be paid.
+*  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
+*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be be paid.
 
 ### Exiting the program : `exit`
 
@@ -202,34 +279,36 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Adding and deleting gym sessions `[coming in v1.2]`
-
-_Allow the creation of sessions and tagging of its associated client_
 
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## Command Summary
+
 | Action | Format | Example |
-| -------| -------| --------|
-|Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
-|Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
-|Deleting Client Info |`cdel INDEX` |`cdel 1`|
-|List All Clients | `clist`  |  `clist`  |
-|View a Client's Full Profile | `cview INDEX` | `cview 1`|
-|Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
-|Adding Gym Session |`sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME` | `sadd Upper Body dt/this Thursday 4pm dur/2hr g/UTown Gym`|
-|Editing Gym Session |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
-|Assign a Client to Gym Session  |`schedule c/CLIENT_INDEX s/SESSION_INDEX`| `schedule c/1 s/3`|
-|Unassign a Client to Gym Session |`deschedule c/CLIENT_INDEX s/SESSION_INDEX`  | `deschedule c/2 s/3` |
-|Edit a Client to Gym Session |`editSchedule c/CLIENT s/SESSION [us/UPDATED SESSION] [pd/IS PAID]`  | `editschedule c/1 s/1 us/1 pd/true`|
-|Deleting a Session |`sdel INDEX` | `sdel 1`|
+| -------- | -------- | --------- |
+| Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
+| Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
+| Deleting Client Info |`cdel INDEX` |`cdel 1`|
+| List All Clients | `clist`  |  `clist`  |
+| View a Client's Full Profile | `cview INDEX` | `cview 1`|
+| Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
+| Adding a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
+| Update Sessions Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
+| Deleting a Session |`sdel INDEX [f/ true]` | `sdel 1` |
+| Assign a Client to Gym Session  |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
+| Unassign a Client to Gym Session |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
+| Edit a Client to Gym Session |`schedit c/CLIENT s/SESSION [us/UPDATED SESSION] [pd/IS PAID]`  | `schedit c/1 s/1 us/1 pd/true`|
+
 
 ### Acknowledgement
-Icon made by Freepik from www.flaticon.com
+Icon made by Freepik from <www.flaticon.com>
