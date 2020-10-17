@@ -22,9 +22,6 @@ public class EditScheduleDescriptorBuilder {
      */
     public EditScheduleDescriptorBuilder() {
         descriptor = new EditScheduleDescriptor();
-        descriptor.setClientIndex(INDEX_FIRST_CLIENT);
-        descriptor.setSessionIndex(INDEX_FIRST_SESSION);
-        descriptor.setUpdatedSessionIndex(INDEX_FIRST_SESSION);
     }
 
     /**
