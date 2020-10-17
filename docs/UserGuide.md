@@ -253,19 +253,19 @@ Examples:
   itself
   
   
-### Editing a Schedule: `editschedule`
+### Editing a Schedule: `schedit`
 
 Edits the details of the Schedule identified by the client index and session index used in each Schedule in the Schedule list.
 
-Format: `editschedule c/CLIENT s/SESSION [us/UPDATED INDEX] [pd/IS PAID]`
+Format: `schedit c/CLIENT s/SESSION [us/UPDATED INDEX] [pd/IS PAID]`
 
 * Edits the Schedule at the specified `c/CLIENT s/SESSION`. Both indexes **must be positive integers** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `editschedule c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
-*  `editschedule c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be be paid.
+*  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
+*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be be paid.
 
 ### Exiting the program : `exit`
 
@@ -277,34 +277,36 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Adding and deleting gym sessions `[coming in v1.2]`
-
-_Allow the creation of sessions and tagging of its associated client_
 
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## Command Summary
+
 | Action | Format | Example |
-| -------| -------| --------|
-|Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
-|Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
-|Deleting Client Info |`cdel INDEX` |`cdel 1`|
-|List All Clients | `clist`  |  `clist`  |
-|View a Client's Full Profile | `cview INDEX` | `cview 1`|
-|Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
-|Adding Gym Session |`sadd s/SESSIONTYPE dt/DATETIME dur/DURATION g/GYM_NAME` | `sadd Upper Body dt/this Thursday 4pm dur/2hr g/UTown Gym`|
-|Editing Gym Session |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
-|Assign a Client to Gym Session  |`schedule c/CLIENT_INDEX s/SESSION_INDEX`| `schedule c/1 s/3`|
-|Unassign a Client to Gym Session |`deschedule c/CLIENT_INDEX s/SESSION_INDEX`  | `deschedule c/2 s/3` |
-|Edit a Client to Gym Session |`editSchedule c/CLIENT s/SESSION [us/UPDATED SESSION] [pd/IS PAID]`  | `editschedule c/1 s/1 us/1 pd/true`|
-|Deleting a Session |`sdel INDEX` | `sdel 1`|
+| -------- | -------- | --------- |
+| Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
+| Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
+| Deleting Client Info |`cdel INDEX` |`cdel 1`|
+| List All Clients | `clist`  |  `clist`  |
+| View a Client's Full Profile | `cview INDEX` | `cview 1`|
+| Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
+| Adding a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
+| Update Sessions Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
+| Deleting a Session |`sdel INDEX [f/ true]` | `sdel 1` |
+| Assign a Client to Gym Session  |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
+| Unassign a Client to Gym Session |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
+| Edit a Client to Gym Session |`schedit c/CLIENT s/SESSION [us/UPDATED SESSION] [pd/IS PAID]`  | `schedit c/1 s/1 us/1 pd/true`|
+
 
 ### Acknowledgement
-Icon made by Freepik from www.flaticon.com
+Icon made by Freepik from <www.flaticon.com>
