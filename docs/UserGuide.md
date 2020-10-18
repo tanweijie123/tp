@@ -259,15 +259,18 @@ Examples:
 
 Edits the details of the Schedule identified by the client index and session index used in each Schedule in the Schedule list.
 
-Format: `schedit c/CLIENT s/SESSION [us/UPDATED INDEX] [pd/IS PAID]`
+Format: `schedit c/CLIENT s/SESSION [us/UPDATED INDEX] [pd/IS PAID] [r/REMARK]`
 
 * Edits the Schedule at the specified `c/CLIENT s/SESSION`. Both indexes **must be positive integers** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Existing values will be updated to the input values. 
 
 Examples:
 *  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
-*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be be paid.
+*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be paid.
+*  `schedit c/1 s/1 r/ did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
+of doing 5 pushups.
+* `schedit c/1 s/1 r/` Clear the Schedule containing client index 1 and session index 1 remarks.
 
 ### Exiting the program : `exit`
 
@@ -277,7 +280,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -307,7 +310,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 | Deleting a Session |`sdel INDEX [f/ true]` | `sdel 1` |
 | Assign a Client to Gym Session  |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
 | Unassign a Client to Gym Session |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
-| Edit a Client to Gym Session |`schedit c/CLIENT s/SESSION [us/UPDATED SESSION] [pd/IS PAID]`  | `schedit c/1 s/1 us/1 pd/true`|
+| Edit a Client to Gym Session |`schedit c/CLIENT s/SESSION [us/UPDATED SESSION] [pd/IS PAID]`  | `schedit c/1 s/1 us/1 pd/true r/ did 5 pushups`|
 
 
 ### Acknowledgement
