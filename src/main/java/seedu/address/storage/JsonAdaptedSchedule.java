@@ -20,7 +20,7 @@ public class JsonAdaptedSchedule {
     public static final String MISSING_SESSION_START_MESSAGE_FORMAT = "Schedule's %s session start time is missing!";
     public static final String MISSING_SESSION_END_MESSAGE_FORMAT = "Schedule's %s session end time is missing!";
     public static final String MISSING_IS_PAID_MESSAGE_FORMAT = "Schedule's %s isPaid is missing!";
-    public static final String MISSING_REMARK_MESSAGE_FORMAT = "Schedule's %s remark is missing!";
+    public static final String MISSING_REMARK_MESSAGE_FORMAT = "Schedule's %s is missing!";
 
     private final String clientEmail;
     private final String start;
@@ -36,7 +36,7 @@ public class JsonAdaptedSchedule {
                                @JsonProperty("sessionStart") String start,
                                @JsonProperty("sessionEnd") String end,
                                @JsonProperty("isPaid") String isPaid,
-                               @JsonProperty("remark") String remark ) {
+                               @JsonProperty("remark") String remark) {
         this.clientEmail = clientEmail;
         this.start = start;
         this.end = end;
@@ -111,7 +111,7 @@ public class JsonAdaptedSchedule {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted remark value.
      */
-    public Remark getRemark() throws IllegalValueException  {
+    public Remark getRemark() throws IllegalValueException {
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_REMARK_MESSAGE_FORMAT,
                     Remark.class.getSimpleName()));

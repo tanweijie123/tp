@@ -84,7 +84,7 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editScheduleDescriptor
-                    .setRemark(new Remark(argMultimap.getValue(PREFIX_REMARK).get()));
+                    .setUpdatedRemark(new Remark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
 
         if (!editScheduleDescriptor.isAnyFieldEdited()) {

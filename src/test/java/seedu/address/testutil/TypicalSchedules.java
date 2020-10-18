@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 
 public class TypicalSchedules {
@@ -31,8 +32,10 @@ public class TypicalSchedules {
             .build();
 
     public static final boolean IS_PAID_FALSE = false;
-
     public static final boolean IS_PAID_TRUE = true;
+
+    public static final Remark EMPTY_REMARK = Remark.EMPTY_REMARK;
+    public static final Remark TEST_REMARK = new Remark("Did 5 pushups");
 
     private TypicalSchedules() {
     } // prevents instantiation

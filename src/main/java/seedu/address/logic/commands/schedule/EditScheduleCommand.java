@@ -182,7 +182,7 @@ public class EditScheduleCommand extends Command {
             setSessionIndex(toCopy.sessionIndex);
             setUpdatedSessionIndex(toCopy.updateSessionIndex);
             setUpdatedIsPaid(toCopy.updatedIsPaid);
-            setRemark(toCopy.remark);
+            setUpdatedRemark(toCopy.remark);
         }
 
         /**
@@ -228,7 +228,7 @@ public class EditScheduleCommand extends Command {
             return Optional.ofNullable(remark);
         }
 
-        public void setRemark(Remark remark) {
+        public void setUpdatedRemark(Remark remark) {
             this.remark = remark;
         }
 
