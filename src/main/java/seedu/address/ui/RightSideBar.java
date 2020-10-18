@@ -12,6 +12,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.session.ViewSessionCommand;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
 
@@ -42,8 +44,8 @@ public class RightSideBar extends UiPart<AnchorPane> {
     /**
      * Updates the content of the Session ListView
      */
-    public void update(String commandText) {
-        String requiredPeriod = requiredPeriod(commandText);
+    public void update(CommandResult commandResult, String commandText) {
+        String requiredPeriod = requiredPeriod(commandResult, commandText);
         title.setText(requiredPeriod);
 
         sessionListView.setItems(null);
@@ -54,8 +56,9 @@ public class RightSideBar extends UiPart<AnchorPane> {
     /**
      * Filters and returns the requiredPeriod according to the commandText
      */
-    private String requiredPeriod(String commandText) {
-        if (commandText.contains(PREFIX_PERIOD.toString())) {
+    private String requiredPeriod(CommandResult commandResult, String commandText) {
+        if (commandResult.equals(ViewSessionCommand.MESSAGE_SHOW_SESSIONS_SUCCESS)
+                && commandText.contains(PREFIX_PERIOD.toString())) {
             int startOfPeriod = commandText.indexOf(PREFIX_PERIOD.toString());
             String period = commandText.substring(startOfPeriod + 2).toUpperCase();
             this.previousCommand = period;
