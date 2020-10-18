@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.CLIE
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.SESSION_INDEX_DESC_A;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_IS_PAID_FALSE;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_IS_PAID_TRUE;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_REMARK_EMPTY;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_REMARK_NONEMPTY;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_SESSION_INDEX_DESC_B;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -13,11 +15,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalSchedules.IS_PAID_FALSE;
 import static seedu.address.testutil.TypicalSchedules.IS_PAID_TRUE;
+import static seedu.address.testutil.TypicalSchedules.TEST_REMARK;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.schedule.EditScheduleCommand;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
+import seedu.address.model.schedule.Remark;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
 
 public class EditScheduleCommandParserTest {
@@ -58,13 +62,14 @@ public class EditScheduleCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A
-                + UPDATED_SESSION_INDEX_DESC_B + UPDATED_IS_PAID_FALSE;
+                + UPDATED_SESSION_INDEX_DESC_B + UPDATED_IS_PAID_FALSE + UPDATED_REMARK_NONEMPTY;
 
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withClientIndex(INDEX_FIRST_CLIENT)
                 .withSessionIndex(INDEX_FIRST_SESSION)
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
                 .withUpdatedIsPaid(IS_PAID_FALSE)
+                .withUpdatedRemark(TEST_REMARK)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
@@ -100,6 +105,17 @@ public class EditScheduleCommandParserTest {
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // updated remark
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_REMARK_NONEMPTY;
+        descriptor = new EditScheduleDescriptorBuilder()
+                .withClientIndex(INDEX_FIRST_CLIENT)
+                .withSessionIndex(INDEX_FIRST_SESSION)
+                .withUpdatedRemark(TEST_REMARK)
+                .build();
+        expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+                descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -115,6 +131,20 @@ public class EditScheduleCommandParserTest {
                 .withUpdatedIsPaid(IS_PAID_FALSE)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+                descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // update remark twice, takes last
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_REMARK_NONEMPTY
+                + UPDATED_REMARK_EMPTY;
+
+        descriptor = new EditScheduleDescriptorBuilder()
+                .withClientIndex(INDEX_FIRST_CLIENT)
+                .withSessionIndex(INDEX_FIRST_SESSION)
+                .withUpdatedRemark(Remark.EMPTY_REMARK)
+                .build();
+        expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

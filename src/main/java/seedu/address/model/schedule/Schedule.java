@@ -26,7 +26,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     }
 
     /**
-     * Every field must be present and not null. isPaid is set to {@code false}. remark is set to an empty strin
+     * Every field must be present and not null. isPaid is set to {@code false}. remark is set to an empty string
      */
     public Schedule(Client client, Session session) {
         requireAllNonNull(client, session);
