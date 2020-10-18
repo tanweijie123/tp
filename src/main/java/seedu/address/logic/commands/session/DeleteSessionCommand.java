@@ -71,6 +71,8 @@ public class DeleteSessionCommand extends Command {
             return new CommandResult(MESSAGE_FORCE_DELETE_SESSION_USAGE);
         }
 
+        assert isForced || !model.hasAnyScheduleAssociatedWithSession(sessionToDelete);
+
         model.deleteSessionAssociatedSchedules(sessionToDelete);
         model.deleteSession(sessionToDelete);
 

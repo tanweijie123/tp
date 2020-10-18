@@ -14,7 +14,7 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `fitego.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/releases).
+1. Download the latest `fitego.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -41,14 +41,14 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 ## How to use FitEgo
 
 There are 3 major entities in FitEgo: Clients, Sessions, and Schedules.
-There are 5 major verbs in FitEgo: add, edit, delete, view, list
+There are 5 major verbs in FitEgo: add, edit, delete, view, list.
 
 ### Clients
 
 Clients are customers that is trained by the user (fitness instructor).
 
 All client's commands using the prefix `c`. 
- 
+
 ### Sessions
 
 Sessions are a timeslot that is scheduled for a training session. It contains information about the gym, the session's 
@@ -56,26 +56,33 @@ main exercise type, start time and the duration of sessions.
 
 Each session can have more than 1 clients, to simulate a trainer instructing a fitness class.
 
-FitEgo don't allow user to create overlapping sessions. This is to protect users from scheduling overlapping sessions
+FitEgo doesn't allow user to create overlapping sessions. This is to protect users from scheduling overlapping sessions
 at different gyms. 
 
 All session's commands have prefix `s`.
 
 ### Schedules
 
-Schedules are what defines a user-client interaction. Each schedule contains information about the client and the 
-session they attended. 
+Schedules are what defines a you and your client's interaction. Each schedule contains information about the Client and the 
+attended Session. 
 
-- User can add in details about the client's weight progress
-- User can add exercises done during the session as remark in schedules.
-- User can track whether client has paid for the session attended
+- You can add in details about your Client's weight progress
+- You can add exercises done during the Session as remark in Schedule
+- You can track whether your Client has paid for the Session attended
+
+Example of a Schedule:
+
+| Client   | Session                                                      | Weight | Remark                                                       | Has been Paid |
+| -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | ------------- |
+| John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | Yes           |
+| Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | Yes           |
 
 All schedules' commands have prefix `sch`.
 
 Once you learn the entity, you can now combine it with the verb. For example:
 - `cadd`: Add a client, `sadd`: Creates a session, `schadd`: Creates a schedule
 - `cedit`: Edit a client's details, `sedit`: Edit a session's details, `schedit`: Edit a schedule's details
-- `cdel`: Edit a client's details, `sdel`: Edit a session's details, `schdel`: Edit a schedule's details
+- `cdel`: Remove a client, `sdel`: Delete a session, `schdel`: Delete a schedule
 
 Although there are a lot of commands, once you learn the verb and entities, it is so easy to use FitEgo!
 
@@ -141,12 +148,13 @@ Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 * Edits the Client at the specified `INDEX`. The index refers to the index number shown in the displayed Client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the Client will be removed i.e adding of tags is not cumulative.
-* You can remove all the Client’s tags by typing `t/` without
+* When editing tags, the existing tags of the Client will be removed, i.e. adding of tags is not cumulative
+* You can remove all of the Client’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `cedit 1 n/Janie Doe` Edits the name of the 1st Client to be `Janie Doe`.
+*  `cedit 1 n/Janie Doe` Edits the name of the 1st Client to be `Janie Doe`
+*  `cedit 1 t/`Removes all of the tags of the 1st Client
 
 ### Locating clients by name: `cfind`
 
@@ -154,9 +162,9 @@ Finds clients whose names contain any of the given keywords.
 
 Format: `cfind KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name is searched
 * Partial names will be matched e.g. `Han` will match `Hans`
 * Clients matching any substring will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -253,21 +261,66 @@ Examples:
 * If there are one or more associated schedules associated with the 2nd session in the Session List, 
   `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
   itself
-  
-  
+### Adding a Schedule: `schadd`
+
+You can schedule your Client to a Session.
+
+Format: `schadd c/CLIENT_INDEX s/SESSION_INDEX`
+
+* This will create a Schedule associated with the specified Client and Session.
+* The Client is specified by `CLIENT_INDEX`, and the Session is specified by `SESSION_INDEX`.
+* You can see that on the Session List, the Client's name will be displayed under the specified Session's detail.
+* On the Client List, you might also see a change in the Client's "Next Session" depending on the date and time of the Session.
+* `CLIENT_INDEX` refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, … .
+* `SESSION_INDEX` refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, … .
+
+Examples:
+
+* `schadd c/1 s/1` Schedules the first Client in the Client List with the first Session in the Session List
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    A Schedule should not overlap with a previously created Schedule.
+</div>
+
+
+Examples:
+
+* You cannot invoke `schadd c/1 s/1` right after invoking `schadd c/1 s/1`  since the two Schedules are overlapping.
+* It is possible to have multiple Schedules of the same Session time as long as those Schedules are not associated with the same Client. This simply means that there are multiple Clients attending the Session.
+
 ### Editing a Schedule: `schedit`
 
-Edits the details of the Schedule identified by the client index and session index used in each Schedule in the Schedule list.
+Edits the details of the Schedule identified by the client index and session index.
 
-Format: `schedit c/CLIENT s/SESSION [us/UPDATED INDEX] [pd/IS PAID]`
+Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`
 
-* Edits the Schedule at the specified `c/CLIENT s/SESSION`. Both indexes **must be positive integers** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Edits the Schedule that consists of the client and session indicated by `CLIENT_INDEX` and `SESSION_INDEX`
+* `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
+* `SESSION_INDEX` refers to the index number shown in the displayed session list. The index **must be a positive integer** 1, 2, 3, …
+* At least one of the optional fields must be provided
+* Existing values will be updated to the input values
 
 Examples:
 *  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
-*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be be paid.
+*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be paid.
+*  `schedit c/1 s/1 r/ did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
+of doing 5 pushups.
+* `schedit c/1 s/1 r/` Clear the Schedule containing client index 1 and session index 1 remarks.
+
+### Deleting a Schedule: `schdel`
+
+You can unschedule a Client from a Session.
+
+Format: `schdel c/CLIENT_INDEX s/SESSION_INDEX`
+
+* This will delete the Schedule associated with the specified Client and Session.
+* The Client is identified by `CLIENT_INDEX`, and the Session is identified by `SCHEDULE_INDEX`.
+* `CLIENT_INDEX` refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, … .
+* `SESSION_INDEX` refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, … .
+
+Examples:
+
+* `schdel c/1 s/1` will delete the Schedule associated with the first Client in the Client List and first Session in the Session List.
 
 ### Exiting the program : `exit`
 
@@ -277,7 +330,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FitEgo data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -296,18 +349,18 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 | Action | Format | Example |
 | -------- | -------- | --------- |
-| Adding Clients  Info| `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
-| Update Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
-| Deleting Client Info |`cdel INDEX` |`cdel 1`|
+| Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
+| Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
+| Delete Client Info |`cdel INDEX` |`cdel 1`|
 | List All Clients | `clist`  |  `clist`  |
 | View a Client's Full Profile | `cview INDEX` | `cview 1`|
 | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
-| Adding a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
-| Update Sessions Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
-| Deleting a Session |`sdel INDEX [f/ true]` | `sdel 1` |
-| Assign a Client to Gym Session  |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-| Unassign a Client to Gym Session |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
-| Edit a Client to Gym Session |`schedit c/CLIENT s/SESSION [us/UPDATED SESSION] [pd/IS PAID]`  | `schedit c/1 s/1 us/1 pd/true`|
+| Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
+| Update Session Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
+| Delete a Session |`sdel INDEX [f/ true]` | `sdel 1` |
+| Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
+| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`| `schedit c/1 s/1 us/1 pd/true` |
+| Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
 
 ### Acknowledgement
