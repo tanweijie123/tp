@@ -63,12 +63,12 @@ All session's commands have prefix `s`.
 
 ### Schedules
 
-Schedules are what defines a user-client interaction. Each schedule contains information about the Client and the 
+Schedules are what defines a you and your client's interaction. Each schedule contains information about the Client and the 
 attended Session. 
 
-- User can add in details about the Client's weight progress
-- User can add exercises done during the Session as remark in Schedule
-- User can track whether Client has paid for the Session attended
+- You can add in details about your Client's weight progress
+- You can add exercises done during the Session as remark in Schedule
+- You can track whether your Client has paid for the Session attended
 
 Example of a Schedule:
 
@@ -146,11 +146,11 @@ Edits an existing Client in the clients list.
 Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
 * Edits the Client at the specified `INDEX`. The index refers to the index number shown in the displayed Client list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided
-* Existing values will be updated to the input values
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
 * When editing tags, the existing tags of the Client will be removed, i.e. adding of tags is not cumulative
 * You can remove all of the Client’s tags by typing `t/` without
-    specifying any tags after it
+    specifying any tags after it.
 
 Examples:
 *  `cedit 1 n/Janie Doe` Edits the name of the 1st Client to be `Janie Doe`
@@ -263,13 +263,16 @@ Examples:
   itself
 ### Adding a Schedule: `schadd`
 
-Creates a Schedule associated with the specified Client and Session, i.e. scheduling a Client to a Session.
+You can schedule your Client to a Session.
 
 Format: `schadd c/CLIENT_INDEX s/SESSION_INDEX`
 
-* Creates a Schedule of the Client specified by `CLIENT_INDEX` with the Session specified by `SESSION_INDEX`
-* `CLIENT_INDEX` refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, …
-* `SESSION_INDEX` refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, …
+* This will create a Schedule associated with the specified Client and Session.
+* The Client is specified by `CLIENT_INDEX`, and the Session is specified by `SESSION_INDEX`.
+* You can see that on the Session List, the Client's name will be displayed under the specified Session's detail.
+* On the Client List, you might also see a change in the Client's "Next Session" depending on the date and time of the Session.
+* `CLIENT_INDEX` refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, … .
+* `SESSION_INDEX` refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, … .
 
 Examples:
 
@@ -282,8 +285,8 @@ Examples:
 
 Examples:
 
-* Invoking `schadd c/1 s/1` after `schadd c/1 s/1` would not be allowed since the two Schedules are overlapping
-* It is possible to have multiple Schedules of the same Session time as long as those Schedules are not associated with the same Client. This simply means there are multiple Clients attending the Session.
+* You cannot invoke `schadd c/1 s/1` right after invoking `schadd c/1 s/1`  since the two Schedules are overlapping.
+* It is possible to have multiple Schedules of the same Session time as long as those Schedules are not associated with the same Client. This simply means that there are multiple Clients attending the Session.
 
 ### Editing a Schedule: `schedit`
 
@@ -303,17 +306,18 @@ Examples:
 
 ### Deleting a Schedule: `schdel`
 
-Deletes the Schedule associated with the specified Client and Session. In other words, it means unscheduling a Client from a Session.
+You can unschedule a Client from a Session.
 
 Format: `schdel c/CLIENT_INDEX s/SESSION_INDEX`
 
-* Deletes the Schedule associated with the Client identified by `CLIENT_INDEX` and the Session identified by `SCHEDULE_INDEX`
-* `CLIENT_INDEX` refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, …
-* `SESSION_INDEX` refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, …
+* This will delete the Schedule associated with the specified Client and Session.
+* The Client is identified by `CLIENT_INDEX`, and the Session is identified by `SCHEDULE_INDEX`.
+* `CLIENT_INDEX` refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, … .
+* `SESSION_INDEX` refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, … .
 
 Examples:
 
-* `schdel c/1 s/1` will delete the Schedule associated with the first Client in the Client List and first Session in the Session List
+* `schdel c/1 s/1` will delete the Schedule associated with the first Client in the Client List and first Session in the Session List.
 
 ### Exiting the program : `exit`
 
@@ -342,8 +346,8 @@ FitEgo data are saved in the hard disk automatically after any command that chan
 
 | Action | Format | Example |
 | -------- | -------- | --------- |
-| Add Clients Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
-| Edit Clients Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
+| Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
+| Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
 | Delete Client Info |`cdel INDEX` |`cdel 1`|
 | List All Clients | `clist`  |  `clist`  |
 | View a Client's Full Profile | `cview INDEX` | `cview 1`|
@@ -352,7 +356,7 @@ FitEgo data are saved in the hard disk automatically after any command that chan
 | Update Session Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
 | Delete a Session |`sdel INDEX [f/ true]` | `sdel 1` |
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-| Update a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`| `schedit c/1 s/1 us/1 pd/true` |
+| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`| `schedit c/1 s/1 us/1 pd/true` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
 
