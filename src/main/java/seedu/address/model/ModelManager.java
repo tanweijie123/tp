@@ -160,7 +160,7 @@ public class ModelManager implements Model {
             this.deleteSchedule(schedule);
         }
 
-        logger.fine(String.format("User force delete %s causes %d schedules to be deleted",
+        logger.info(String.format("User force delete Session %s\n causing %d schedules to be deleted",
                 session.toString(),
                 associatedSchedules.size()));
     }

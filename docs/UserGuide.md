@@ -302,7 +302,10 @@ Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/I
 
 Examples:
 *  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
-*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be be paid.
+*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be paid.
+*  `schedit c/1 s/1 r/ did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
+of doing 5 pushups.
+* `schedit c/1 s/1 r/` Clear the Schedule containing client index 1 and session index 1 remarks.
 
 ### Deleting a Schedule: `schdel`
 
