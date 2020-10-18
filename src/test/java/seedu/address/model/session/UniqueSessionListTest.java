@@ -170,8 +170,8 @@ public class UniqueSessionListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueSessionList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> uniqueSessionList
+                .asUnmodifiableObservableList().remove(0));
     }
 }
 
