@@ -59,7 +59,6 @@ public class RightSideBar extends UiPart<AnchorPane> {
     private String requiredPeriod(CommandResult commandResult, String commandText) {
         if (commandResult.getFeedbackToUser().equals(ViewSessionCommand.MESSAGE_SHOW_SESSIONS_SUCCESS)
                 && commandText.contains(PREFIX_PERIOD.toString())) {
-            System.out.println(commandResult.getFeedbackToUser());
             int startOfPeriod = commandText.indexOf(PREFIX_PERIOD.toString());
             String period = commandText.substring(startOfPeriod + 2).toUpperCase();
             this.previousCommand = period;
