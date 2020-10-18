@@ -414,6 +414,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Filter Session List**
+
+**MSS**
+
+1.  FitEgo shows a list of Sessions
+2.  User requests to filter the Session List by a period
+3.  FitEgo filters the Session List according to the specified period and updates its title.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given period is invalid.
+
+    * 2a1. FitEgo shows an error message.
+
+      Use case resumes at step 2.     
+
 **Use case: Edit a Schedule**
 
 **MSS**

@@ -254,6 +254,23 @@ Examples:
   `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
   itself
   
+### Filtering Sessions by time: `sview`
+You can filter the Session List by time period to manage your sessions.
+
+Format: `sview p/PERIOD`
+ * Filters the Session List to only display those within the specified period.
+ * Right above the Session List, you can see the filter currently being applied.
+ * The recognized periods are as follows:
+ 
+ | Period | Sessions displayed |
+ | -------- | -------- |
+ | all| All sessions (including past ones)|
+ | week | Sessions within the upcoming week|
+ | future | Sessions that start from today onwards|
+  
+Examples:
+*  `sview /week` Filters the Session List to only dispplay those within the upcoming week.
+
   
 ### Editing a Schedule: `schedit`
 
@@ -304,6 +321,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 | Adding a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
 | Update Sessions Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
+| Filter Sessions |`sview p/PERIOD ` | `sview p/all`|
 | Deleting a Session |`sdel INDEX [f/ true]` | `sdel 1` |
 | Assign a Client to Gym Session  |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
 | Unassign a Client to Gym Session |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
