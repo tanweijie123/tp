@@ -23,7 +23,7 @@ import seedu.address.model.session.Session;
  * Adds a schedule
  */
 public class AddScheduleCommand extends Command {
-    public static final String COMMAND_WORD = "schedule";
+    public static final String COMMAND_WORD = "schadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule a client with a session. "
             + "Parameters: "
