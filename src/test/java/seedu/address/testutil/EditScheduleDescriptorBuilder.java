@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
+import seedu.address.model.schedule.Remark;
 
 /**
  * A utility class to help with building EditScheduleDescriptorBuilder objects.
@@ -42,6 +43,14 @@ public class EditScheduleDescriptorBuilder {
      */
     public EditScheduleDescriptorBuilder withUpdatedIsPaid(boolean isPaid) {
         descriptor.setUpdatedIsPaid(isPaid);
+        return this;
+    }
+
+    /**
+     * Sets the {@code remark} of the {@code EditScheduleDescriptorBuilder} that we are building.
+     */
+    public EditScheduleDescriptorBuilder withUpdatedRemark(Remark remark) {
+        descriptor.setUpdatedRemark(remark);
         return this;
     }
 
