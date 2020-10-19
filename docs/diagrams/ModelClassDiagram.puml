@@ -3,25 +3,54 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam Class {
+    FontColor #FFFFFF
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #5F0000
+    FontName Arial
+}
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
+Interface CheckExisting <<Interface>>
+
 Class AddressBook
 Class ReadOnlyAddressBook
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+class "UniqueList<T extends CheckExisting<T>>" as UniqueList_t
+
+Class "UniqueList<Client>" as UniqueList_client
+Class "UniqueList<Session>" as UniqueList_session
+Class "UniqueList<Schedule>" as UniqueList_schedule
+UniqueList_t <|-- UniqueList_client
+UniqueList_t <|-- UniqueList_session
+UniqueList_t <|-- UniqueList_schedule
 
 Package Client {
-Class Client
+class Client implements CheckExisting
 Class Address
 Class Email
 Class Name
 Class Phone
-Class UniqueClientList
+}
+
+Package Session {
+Class Session implements CheckExisting
+Class Gym
+Class ExerciseType
+Class Interval
+}
+
+Package Schedule {
+Class Schedule implements CheckExisting
+Class Remark
+Class Weight
 }
 
 Package Tag {
@@ -29,7 +58,7 @@ Class Tag
 }
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside #FFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
@@ -40,8 +69,8 @@ ModelManager o--> "1" AddressBook
 ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueClientList
-UniqueClientList o--> "*" Client
+AddressBook *--> "1" UniqueList_client
+UniqueList_client o--> "*" Client
 Client *--> Name
 Client *--> Phone
 Client *--> Email
@@ -52,5 +81,22 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
+AddressBook *--> "1" UniqueList_session
+UniqueList_session o--> "*" Session
+Session *--> Gym
+Session *--> ExerciseType
+Session *--> Interval
+
+Gym -[hidden]right-> ExerciseType
+ExerciseType -[hidden]right-> Interval
+
+AddressBook *--> "1" UniqueList_schedule
+UniqueList_schedule o--> "*" Schedule
+Schedule *--> Remark
+Schedule *--> Weight
+
+
 ModelManager -->"1" Client : filtered list
+ModelManager -->"1" Schedule : filtered list
+ModelManager -->"1" Session : filtered list
 @enduml

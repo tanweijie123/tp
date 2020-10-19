@@ -575,7 +575,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `sadd g/machoman` <br>
        Expected: No Session is added. Error details shown in the status message.
        
-    1. Other incorrect session add commands to try: 
+    1. Other incorrect AddSession commands to try: 
         `sadd g/machoman ex/endurance at/29/09/2020 t/120` (wrong date format),
         `sadd g/machoman ex/endurance at/29/09/2020 1600 t/0` (invalid duration) <br>
        Expected: Similar to previous.
@@ -607,7 +607,7 @@ testers are expected to do more *exploratory* testing.
        Expected: If there are no schedules associated to the session in index 1 (as shown in the Session List), similar to
        previous. Else, it will not delete the session and error message will be shown in the status message
        
-   1. Other incorrect session delete commands to try: `sdel`, `sdel x` (where x is larger than the list size)<br>
+   1. Other incorrect DeleteSession commands to try: `sdel`, `sdel x` (where x is larger than the list size)<br>
        Expected: It will not delete the session and error message will be shown in the status message.
 
 ### Editing a Schedule
