@@ -270,7 +270,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `FitEgo` and the **Actor** is the `user`, unless specified otherwise)
 
-
 **Use case: Add a Client**
 
 **MSS**
@@ -414,6 +413,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a Schedule**
+
+**MSS**
+
+1. FitEgo shows a list of Clients and list of Sessions
+
+2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List
+
+3. FitEgo adds the Schedule
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The Schedule to be added is overlapping with another Schedule
+
+  - 2a1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+
 **Use case: Edit a Schedule**
 
 **MSS**
@@ -435,6 +454,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Delete a Schedule**
+
+**MSS**
+
+1. FitEgo shows a list of Clients and list of Sessions
+
+2. User requests to delete a Schedule asssociated with a specified Client from the Client List and Session from the Session List
+
+3. FitEgo deletes the Schedule
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. There is no Schedule associated with the specified Client and Session
+
+  - 2a1. FitEgo shows an error message
+
+    Use case resumes at step 2.
 
 *{More to be added}*
 
@@ -516,44 +555,64 @@ testers are expected to do more *exploratory* testing.
 1. Editing a Session while all Sessions are being shown
 
    1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
-
-   1. Test case: `sedit 1 g/Machoman`<br>
+1. Test case: `sedit 1 g/Machoman`<br>
       Expected: First Session's gym location is edited.
       Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
-
    1. Test case: `sedit 1 at/29/09/2020 1600 t/120`<br>
-      Expected: First Session timing is edited.
+   Expected: First Session timing is edited.
       Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
-
    1. Other incorrect edit commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### Adding a Schedule
+
+1. Adding a Schedule while all Clients and Sessions are being shown
+
+   1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   1. Test case: `schadd c/1 s/1`<br>
+      Expected: Add a Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `schadd s/1 c/2`<br>
+      Expected: Add a Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message. Timestamp in the status bar is updated.
+   1. Other incorrect edit commands to try: `schadd c/1`, `schadd c/0 s/2`, `schadd c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
+      Expected: No Schedule is added. Error details shown in the status message.
 
 ### Editing a Schedule
 
 1. Editing a Schedule while all Schedules are being shown
 
    1. Prerequisites: Multiple Schedules in the list can be viewed on the main panel of the GUI.
-
-   1. Test case: `editschedule c/1 s/1 us/2`<br>
+1. Test case: `editschedule c/1 s/1 us/2`<br>
       Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-
    1. Test case: `editschedule c/2 s/1 us/2`<br>
-      Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
+   Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-      
    1. Test case: `editschedule c/1 s/1 pd/true`<br>
          Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
          In the right panel, the client's name in the related session will be indicated as green. 
          Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-         
    1. Test case: `editschedule c/1 s/1 pd/false`<br>
             Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
             In the right panel, the client's name in the related session will be indicated as red. 
             Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-
    1. Other incorrect edit commands to try: `editschedule c/1`, `editschedule c/1 s/2`, `editschedule c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
       Expected: Similar to previous.
+
+### Deleting a Schedule
+
+1. Deleting a Schedule while all Clients and Sessions are being shown
+
+   1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   1. Test case: `schdel c/1 s/1`<br>
+      Expected: Delete the Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
+      Details of the deleted Schedule is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `schdel s/1 c/2`<br>
+      Expected: Delete the Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message. Timestamp in the status bar is updated.
+   1. Other incorrect edit commands to try: `schdel c/1`, `schdel c/0 s/2`, `schdel c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
+      Expected: No Schedule is deleted. Error details shown in the status message.
 
 ### Saving data
 
