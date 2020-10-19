@@ -288,11 +288,11 @@ Format: `sview p/PERIOD`
 *case insensitive
  
 Examples:
-*  `sview /all` Displays all sessions.
-*  `sview /+0D` Display all sessions today.
-*  `sview /-1D` Display sessions within the past 2 days (yesterday and today).
-*  `sview /+2w` Display sessions within the next 2 weeks 
-(e.g. If today is Friday, display from today til the Thursday that falls 2 weeks later).
+*  `sview p/all` Displays all sessions.
+*  `sview p/+0D` Display all sessions today.
+*  `sview p/-1d` Display sessions within the past 2 days (yesterday and today).
+*  `sview p/+2w` Display sessions within the next 2 weeks.
+(e.g. If today is Friday, display from today till the Friday that falls 2 weeks later).
 
 ### Adding a Schedule: `schadd`
 
