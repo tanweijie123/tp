@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +27,8 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate Client(s).";
     public static final String MESSAGE_DUPLICATE_SESSION = "Session list contains duplicate Session(s).";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "Schedule list contains duplicate Schedule(s).";
+    public static final String CLIENT_NOT_FOUND = "Clients list is missing the expected client for Schedule(s).";
+    public static final String SESSION_NOT_FOUND = "Sessions list is missing the expected session for Schedule(s).";
 
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
     private final List<JsonAdaptedSession> sessions = new ArrayList<>();
@@ -88,9 +88,13 @@ class JsonSerializableAddressBook {
 
             Client client = getClientWithEmail(clientEmail, addressBook);
             Session session = getSessionWithInterval(sessionInterval, addressBook);
+            if (client == null) {
+                throw new IllegalValueException(CLIENT_NOT_FOUND);
+            } else if (session == null) {
+                throw new IllegalValueException(SESSION_NOT_FOUND);
+            }
             boolean isPaid = jsonAdaptedSchedule.getIsPaid();
             Remark remark = jsonAdaptedSchedule.getRemark();
-            requireAllNonNull(client, session);
 
             Schedule schedule = new Schedule(client, session, isPaid, remark);
             if (addressBook.hasSchedule(schedule)) {
