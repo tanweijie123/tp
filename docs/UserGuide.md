@@ -265,11 +265,26 @@ Format: `sview p/PERIOD`
  | Period | Sessions displayed |
  | -------- | -------- |
  | all| All sessions (including past ones)|
- | week | Sessions within the upcoming week|
- | future | Sessions that start from today onwards|
-  
+ | future | All sessions that start from current date onwards|
+ | `+[x][unit]` | Sessions within next x time units (inclusive of current date)|
+ | `-[x][unit]` | Sessions within past x time units (inclusive of current date)|
+ 
+ * The recognised units are as follows:
+
+ | Unit | Time unit parsed |
+ | -------- | -------- |
+ | d | day |
+ | w | week|
+ | m | month|
+ | y | year|
+*case insensitive
+ 
 Examples:
-*  `sview /week` Filters the Session List to only dispplay those within the upcoming week.
+*  `sview /all` Displays all sessions.
+*  `sview /+0D` Display all sessions today.
+*  `sview /-1D` Display sessions within the past 2 days (yesterday and today).
+*  `sview /+2w` Display sessions within the next 2 weeks 
+(e.g. If today is Friday, display from today til the Thursday that falls 2 weeks later).
 
   
 ### Editing a Schedule: `schedit`
