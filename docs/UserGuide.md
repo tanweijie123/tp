@@ -273,7 +273,8 @@ Format: `sview p/PERIOD`
  | Period | Sessions displayed |
  | -------- | -------- |
  | all| All sessions (including past ones)|
- | future | All sessions that start from current date onwards|
+ | future | All sessions that have not started|
+ | past | All sessions that have already ended|
  | `+[x][unit]` | Sessions within next x time units (inclusive of current date)|
  | `-[x][unit]` | Sessions within past x time units (inclusive of current date)|
  
