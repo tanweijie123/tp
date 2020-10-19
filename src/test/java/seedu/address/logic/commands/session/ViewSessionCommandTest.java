@@ -13,7 +13,7 @@ import static seedu.address.testutil.TypicalSessions.MACHOMAN_MINUS1WEEK;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_PLUS2MONTHS;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_TODAY;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_TOMORROW;
-import static seedu.address.testutil.TypicalSessions.getTypicalWithDayAfterAddressBook;
+import static seedu.address.testutil.TypicalSessions.getDynamicTimeAddressBook;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import seedu.address.testutil.AddressBookBuilder;
 
 public class ViewSessionCommandTest {
 
-    private Model model = new ModelManager(getTypicalWithDayAfterAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getDynamicTimeAddressBook(), new UserPrefs());
 
     //TODO: Once the default Session List view has been changed to Week, update test case to verify.
     @Test
@@ -33,7 +33,7 @@ public class ViewSessionCommandTest {
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_ALL_SESSIONS_PERIOD);
 
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
-        ModelManager expectedModel = new ModelManager(getTypicalWithDayAfterAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getDynamicTimeAddressBook(), new UserPrefs());
 
         assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
     }

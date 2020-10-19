@@ -106,15 +106,15 @@ public class TypicalSessions {
      * Returns an {@code AddressBook} with all the typical Sessions + a Session with interval start that dynamically
      * to the day after application is loaded.
      */
-    public static AddressBook getTypicalWithDayAfterAddressBook() {
+    public static AddressBook getDynamicTimeAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Session session : getTypicalWithDayAfterSessions()) {
+        for (Session session : getDynamicTimeSessions()) {
             ab.addSession(session);
         }
         return ab;
     }
 
-    public static List<Session> getTypicalWithDayAfterSessions() {
+    public static List<Session> getDynamicTimeSessions() {
         return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN, MACHOMAN_TODAY, MACHOMAN_TOMORROW,
                 MACHOMAN_PLUS2MONTHS, MACHOMAN_MINUS1WEEK));
     }
