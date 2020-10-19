@@ -70,6 +70,19 @@ public class ViewSessionCommandTest {
     }
 
     @Test
+    public void execute_viewUpcomingWeekSessions_success() {
+        ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_WEEK_SESSIONS_PERIOD);
+
+        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        AddressBookBuilder addressBookStub = new AddressBookBuilder();
+        addressBookStub.withSession(MACHOMAN_TOMORROW);
+        addressBookStub.withSession(MACHOMAN_NOW);
+        ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
+
+        assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_viewAllSessions_success() {
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_ALL_SESSIONS_PERIOD);
 

@@ -40,7 +40,7 @@ public class ViewSessionCommand extends Command {
     public static final String VALID_PAST_SESSIONS_PERIOD = "past";
 
     public static final Predicate<Session> PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS = (session) ->
-            session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS).plusDays(7))
+            session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS).plusDays(8).minusMinutes(1))
                     && session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
     public static final Predicate<Session> PREDICATE_SHOW_FUTURE_SESSIONS = (session) ->
             session.getStartTime().isAfter(LocalDateTime.now());
