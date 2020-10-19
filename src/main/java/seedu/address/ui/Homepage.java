@@ -71,7 +71,7 @@ public class Homepage extends UiPart<AnchorPane> {
      * Updates the Statistics shown in Homepage
      */
     private void updateStatistics() {
-//        assert(Homepage.homepage != null);
+        assert(Homepage.homepage != null);
         this.addressBook = addressBook;
         int clients = addressBook.getClientList().size();
         int sessions = addressBook.getSessionList().size();
@@ -84,7 +84,7 @@ public class Homepage extends UiPart<AnchorPane> {
      * Updates the content shown in Homepage
      */
     private void updateContent() {
-//        assert(Homepage.homepage != null);
+        assert(Homepage.homepage != null);
         this.lblContent.setText("Today's Schedule - "
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE dd MMMM")));
         todaySchedule.setItems(this.addressBook.getScheduleList());
