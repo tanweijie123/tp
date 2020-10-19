@@ -11,4 +11,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_SESSION_INDEX = new Prefix("s/");
     public static final Prefix PREFIX_IS_PAID = new Prefix("pd/");
     public static final Prefix PREFIX_UPDATED_SESSION_INDEX = new Prefix("us/");
+    public static final Prefix PREFIX_REMARK = new Prefix("r/");
 }

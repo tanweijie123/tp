@@ -51,6 +51,8 @@ public class AddSessionCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SESSION);
         }
 
+        assert !model.hasSession(toAdd) : "Should not re-add existing session";
+
         model.addSession(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
