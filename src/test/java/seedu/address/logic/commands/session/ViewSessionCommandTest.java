@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_WEEK
 import static seedu.address.testutil.TypicalSessions.GETWELL;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_MINUS1WEEK;
-import static seedu.address.testutil.TypicalSessions.MACHOMAN_PLUS2MONTHS;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_NOW;
+import static seedu.address.testutil.TypicalSessions.MACHOMAN_PLUS2MONTHS;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_TOMORROW;
 import static seedu.address.testutil.TypicalSessions.ULTRAMAN;
 import static seedu.address.testutil.TypicalSessions.getDynamicTimeAddressBook;
