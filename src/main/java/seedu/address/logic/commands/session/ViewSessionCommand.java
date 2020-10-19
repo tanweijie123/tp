@@ -69,6 +69,7 @@ public class ViewSessionCommand extends Command {
             boolean before = (this.period.charAt(0) == '-') ? true : false;
             int amountOfUnit = Integer.parseInt(this.period.substring(1, this.period.length() - 1));
             ChronoUnit unit = getUnitOfTime(this.period.charAt(this.period.length() - 1));
+            assert(unit != null);
             Predicate<Session> pred = null;
 
             //truncatedTo will make all time period to <Date> 0000H. In order to retrieve that terminating day,
@@ -104,7 +105,7 @@ public class ViewSessionCommand extends Command {
         case 'w':
             return ChronoUnit.WEEKS;
         default:
-            return null;
+            return null; //It should never reach here, because it matches the pattern
         }
     }
 

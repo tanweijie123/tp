@@ -2,6 +2,7 @@ package seedu.address.logic.commands.session;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.session.ViewSessionCommand.MESSAGE_SHOW_SESSIONS_SUCCESS;
 import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_ALL_SESSIONS_PERIOD;
@@ -15,8 +16,10 @@ import static seedu.address.testutil.TypicalSessions.MACHOMAN_TODAY;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_TOMORROW;
 import static seedu.address.testutil.TypicalSessions.getTypicalWithDayAfterAddressBook;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -130,6 +133,17 @@ public class ViewSessionCommandTest {
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
 
         assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_viewInvalidUnit_thrownAssertionError() {
+        try {
+            ViewSessionCommand viewSessionCommand = new ViewSessionCommand("+2s");
+            viewSessionCommand.execute(model);
+            Assertions.fail();
+        } catch (AssertionError e) {
+            Assertions.assertEquals(new AssertionError().getMessage(), e.getMessage());
+        }
     }
 
     @Test
