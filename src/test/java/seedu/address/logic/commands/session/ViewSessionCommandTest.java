@@ -6,13 +6,15 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.assert
 import static seedu.address.logic.commands.session.ViewSessionCommand.MESSAGE_SHOW_SESSIONS_SUCCESS;
 import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_ALL_SESSIONS_PERIOD;
 import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_FUTURE_SESSIONS_PERIOD;
+import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_PAST_SESSIONS_PERIOD;
 import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_WEEK_SESSIONS_PERIOD;
 import static seedu.address.testutil.TypicalSessions.GETWELL;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_MINUS1WEEK;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_PLUS2MONTHS;
-import static seedu.address.testutil.TypicalSessions.MACHOMAN_TODAY;
+import static seedu.address.testutil.TypicalSessions.MACHOMAN_NOW;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN_TOMORROW;
+import static seedu.address.testutil.TypicalSessions.ULTRAMAN;
 import static seedu.address.testutil.TypicalSessions.getDynamicTimeAddressBook;
 
 import org.junit.jupiter.api.Assertions;
@@ -39,12 +41,27 @@ public class ViewSessionCommandTest {
     }
 
     @Test
+    public void execute_viewPastSessions_success() {
+        ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_PAST_SESSIONS_PERIOD);
+
+        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        AddressBookBuilder addressBookStub = new AddressBookBuilder();
+        addressBookStub.withSession(MACHOMAN);
+        addressBookStub.withSession(ULTRAMAN);
+        addressBookStub.withSession(GETWELL);
+        addressBookStub.withSession(MACHOMAN_MINUS1WEEK);
+
+        ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
+
+        assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_viewFutureSessions_success() {
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_FUTURE_SESSIONS_PERIOD);
 
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
-        addressBookStub.withSession(MACHOMAN_TODAY);
         addressBookStub.withSession(MACHOMAN_TOMORROW);
         addressBookStub.withSession(MACHOMAN_PLUS2MONTHS);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
@@ -58,10 +75,11 @@ public class ViewSessionCommandTest {
 
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
-        addressBookStub.withSession(MACHOMAN_TODAY);
+        addressBookStub.withSession(MACHOMAN_NOW);
         addressBookStub.withSession(MACHOMAN_TOMORROW);
         addressBookStub.withSession(MACHOMAN_PLUS2MONTHS);
         addressBookStub.withSession(MACHOMAN_MINUS1WEEK);
+        addressBookStub.withSession(ULTRAMAN);
         addressBookStub.withSession(MACHOMAN);
         addressBookStub.withSession(GETWELL);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
@@ -75,7 +93,7 @@ public class ViewSessionCommandTest {
 
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
-        addressBookStub.withSession(MACHOMAN_TODAY);
+        addressBookStub.withSession(MACHOMAN_NOW);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
 
         assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
@@ -87,7 +105,7 @@ public class ViewSessionCommandTest {
 
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
-        addressBookStub.withSession(MACHOMAN_TODAY);
+        addressBookStub.withSession(MACHOMAN_NOW);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
 
         assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
@@ -99,7 +117,7 @@ public class ViewSessionCommandTest {
 
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
-        addressBookStub.withSession(MACHOMAN_TODAY);
+        addressBookStub.withSession(MACHOMAN_NOW);
         addressBookStub.withSession(MACHOMAN_TOMORROW);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
 
@@ -113,7 +131,7 @@ public class ViewSessionCommandTest {
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_MINUS1WEEK);
-        addressBookStub.withSession(MACHOMAN_TODAY);
+        addressBookStub.withSession(MACHOMAN_NOW);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
 
         assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
@@ -125,7 +143,7 @@ public class ViewSessionCommandTest {
 
         String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
-        addressBookStub.withSession(MACHOMAN_TODAY);
+        addressBookStub.withSession(MACHOMAN_NOW);
         addressBookStub.withSession(MACHOMAN_TOMORROW);
         addressBookStub.withSession(MACHOMAN_PLUS2MONTHS);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
