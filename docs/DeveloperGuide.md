@@ -391,7 +391,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a2. The current client's profile will be displayed.
 
       Use case ends
+      
+      
+**Use case: Create a Session**
 
+**MSS**
+1.  User requests to add a specific Session in the list
+2.  FitEgo adds the Session.
+
+    Use case ends.
+    
+**Extensions**
+
+* 1a. The session overlaps with an existing Session.
+    
+    * 1a1. FitEgo shows an error message.
+
+      Use case ends.
+      
+* 1b. The Session is missing some required details.
+
+    * 1b1. FitEgo shows an error message.
+    
+       Use case ends.
+      
+      
 **Use case: Edit a Session**
 
 **MSS**
@@ -413,6 +437,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+      
+      
+**Use case: Deleting a Session**
+
+**MSS**
+
+1.  User requests to list Sessions
+2.  FitEgo shows a list of Sessions
+3.  User requests to delete a specific Session in the list
+4.  FitEgo deletes the Session
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FitEgo shows an error message.
+
+      Use case resumes at step 2.
+
+*  3b. The Session has schedules associated to it.
+    
+    * 3b1. FitEgo shows a help message.
+    
+       Use case resumes at step 2.     
+      
 
 **Use case: Edit a Schedule**
 
@@ -490,7 +545,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a Client while all Clients are being shown
 
-   1. Test case: `cadd n/David …​` <br>
+   1. Test case: `cadd n/David …` <br>
       Expected: First contact is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
 
 
@@ -506,10 +561,24 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `cdel 0`<br>
       Expected: No Client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `cdel`, `cdel x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect client delete commands to try: `cdel`, `cdel x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a Session
+
+1. Adding a Session while all Clients are being shown.
+
+    1. Test case: `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` <br>
+       Expected: Session is added to the list, and it is shown in order. Details of the added session shown in the
+       status message.
+    
+    1. Test case: `sadd g/machoman` <br>
+       Expected: No Session is added. Error details shown in the status message.
+       
+    1. Other incorrect session add commands to try: 
+        `sadd g/machoman ex/endurance at/29/09/2020 t/120` (wrong date format),
+        `sadd g/machoman ex/endurance at/29/09/2020 1600 t/0` (invalid duration) <br>
+       Expected: Similar to previous.
 
 ### Editing a Session
 
@@ -527,6 +596,19 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect edit commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+      
+### Deleting a Session
+
+   1. Test case: `sdel 1 f/ true` <br>
+       Expected: The session in index 1 (as shown in the Session List) will be deleted alongside all schedules associated
+       to the session. Details of the deleted session is shown in the status message.
+    
+   1. Test case: `sdel 1` <br>
+       Expected: If there are no schedules associated to the session in index 1 (as shown in the Session List), similar to
+       previous. Else, it will not delete the session and error message will be shown in the status message
+       
+   1. Other incorrect session delete commands to try: `sdel`, `sdel x` (where x is larger than the list size)<br>
+       Expected: It will not delete the session and error message will be shown in the status message.
 
 ### Editing a Schedule
 
