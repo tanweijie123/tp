@@ -43,6 +43,7 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessage.setOnAction(event -> {
             try {
                 Desktop.getDesktop().browse(new URL(USERGUIDE_URL).toURI());
+                event.consume();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {

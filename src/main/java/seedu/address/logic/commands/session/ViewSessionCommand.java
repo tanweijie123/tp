@@ -6,8 +6,10 @@ import static seedu.address.logic.parser.session.CliSyntax.PREFIX_PERIOD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -23,10 +25,14 @@ public class ViewSessionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the sessions shown in the Session List "
             + "to the period specified. "
-            + "Possible periods -> 'week', 'all', 'future'.\n"
-            + "Parameters: " + PREFIX_PERIOD + "PERIOD "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PERIOD + "week ";
+            + "Possible periods -> 'week', 'all', 'future'. "
+            + "Variable periods are also possble with this format: (+/-)#(D/W/M/Y). "
+            + "Parameters: " + PREFIX_PERIOD + "PERIOD \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PERIOD + "week "
+            + "or " + COMMAND_WORD + " " + PREFIX_PERIOD + "+1W";
     public static final String MESSAGE_SHOW_SESSIONS_SUCCESS = "Session List updated with requested period!";
+
+    public static final Pattern VALID_PATTERN = Pattern.compile("^(\\+|-)\\d+[DdWwMmYy]$");
 
     public static final String VALID_WEEK_SESSIONS_PERIOD = "week";
     public static final String VALID_ALL_SESSIONS_PERIOD = "all";
@@ -56,10 +62,51 @@ public class ViewSessionCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        Predicate<Session> predToUse = PREDICATE_HASH_MAP.get(period);
-        assert(predToUse != null);
-        model.updateFilteredSessionList(predToUse);
+        if (PREDICATE_HASH_MAP.get(period) != null) {
+            model.updateFilteredSessionList(PREDICATE_HASH_MAP.get(period));
+        } else {
+            //Matches the pattern
+            boolean before = (this.period.charAt(0) == '-') ? true : false;
+            int amountOfUnit = Integer.parseInt(this.period.substring(1, this.period.length() - 1));
+            ChronoUnit unit = getUnitOfTime(this.period.charAt(this.period.length() - 1));
+            assert(unit != null);
+            Predicate<Session> pred = null;
+
+            //truncatedTo will make all time period to <Date> 0000H. In order to retrieve that terminating day,
+            // need to add 1 day. Eg +0d = today ==> Gets Today's 0000H to Today's 2359
+
+            if (before) {
+                pred = (session) -> session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS)
+                        .minus(amountOfUnit, unit))
+                        && session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS)
+                        .plusDays(1).minusMinutes(1));
+            } else {
+                pred = (session) -> session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS)
+                        .plus(amountOfUnit, unit).plusDays(1).minusMinutes(1))
+                        && session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
+            }
+            model.updateFilteredSessionList(pred);
+        }
         return new CommandResult(MESSAGE_SHOW_SESSIONS_SUCCESS);
+    }
+
+    private ChronoUnit getUnitOfTime(char c) {
+        switch (c) {
+        case 'D':
+        case 'd':
+            return ChronoUnit.DAYS;
+        case 'M':
+        case 'm':
+            return ChronoUnit.MONTHS;
+        case 'Y':
+        case 'y':
+            return ChronoUnit.YEARS;
+        case 'W':
+        case 'w':
+            return ChronoUnit.WEEKS;
+        default:
+            return null; //It should never reach here, because it matches the pattern
+        }
     }
 
     @Override
