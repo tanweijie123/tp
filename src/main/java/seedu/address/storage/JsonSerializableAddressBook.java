@@ -15,6 +15,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
+import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
@@ -32,6 +33,7 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
     private final List<JsonAdaptedSession> sessions = new ArrayList<>();
     private final List<JsonAdaptedSchedule> schedules = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given Clients.
      */
@@ -87,9 +89,10 @@ class JsonSerializableAddressBook {
             Client client = getClientWithEmail(clientEmail, addressBook);
             Session session = getSessionWithInterval(sessionInterval, addressBook);
             boolean isPaid = jsonAdaptedSchedule.getIsPaid();
+            Remark remark = jsonAdaptedSchedule.getRemark();
             requireAllNonNull(client, session);
 
-            Schedule schedule = new Schedule(client, session, isPaid);
+            Schedule schedule = new Schedule(client, session, isPaid, remark);
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }

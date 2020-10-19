@@ -9,6 +9,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
@@ -35,6 +36,7 @@ public class ScheduleBuilder {
             LocalDateTime.of(2020, 9, 29, 13, 0);
 
     public static final Boolean DEFAULT_IS_PAID = false;
+    public static final Remark DEFAULT_REMARK = Remark.EMPTY_REMARK;
 
     private Name clientName;
     private Phone clientPhone;
@@ -47,6 +49,7 @@ public class ScheduleBuilder {
     private Interval interval;
 
     private Boolean isPaid;
+    private Remark remark;
 
     /**
      * Creates a {@code ScheduleBuilder} with the default details.
@@ -56,7 +59,7 @@ public class ScheduleBuilder {
         clientPhone = new Phone(DEFAULT_CLIENT_PHONE);
         clientEmail = new Email(DEFAULT_CLIENT_EMAIL);
         clientAddress = new Address(DEFAULT_CLIENT_ADDRESS);
-        clientTags = new HashSet<Tag>();
+        clientTags = new HashSet<>();
         clientTags.add(new Tag(DEFAULT_CLIENT_TAGS));
 
         gym = new Gym(DEFAULT_GYM);
@@ -64,6 +67,7 @@ public class ScheduleBuilder {
         interval = new Interval(DEFAULT_START_TIME, DEFAULT_DURATION);
 
         isPaid = DEFAULT_IS_PAID;
+        remark = DEFAULT_REMARK;
     }
 
     /**
@@ -81,6 +85,7 @@ public class ScheduleBuilder {
         interval = scheduleToCopy.getSession().getInterval();
 
         isPaid = scheduleToCopy.getIsPaid();
+        remark = scheduleToCopy.getRemark();
     }
 
     /**
@@ -178,12 +183,20 @@ public class ScheduleBuilder {
     }
 
     /**
+     * Sets the {@code remark} of the {@code Schedule} that we are building.
+     */
+    public ScheduleBuilder withRemark(Remark remark) {
+        this.remark = remark;
+        return this;
+    }
+
+    /**
      * Returns the {@code Schedule} based on this properties.
      */
     public Schedule build() {
         Client client = new Client(clientName, clientPhone, clientEmail, clientAddress, clientTags);
         Session session = new Session(gym, exerciseType, interval);
-        return new Schedule(client, session, isPaid);
+        return new Schedule(client, session, isPaid, remark);
     }
 
 }
