@@ -25,7 +25,7 @@ public class ViewSessionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the sessions shown in the Session List "
             + "to the period specified. "
-            + "Possible periods -> 'week', 'all', 'future'. "
+            + "Possible periods -> 'week', 'all', 'future', 'past'. "
             + "Variable periods are also possble with this format: (+/-)#(D/W/M/Y). "
             + "Parameters: " + PREFIX_PERIOD + "PERIOD \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PERIOD + "week "
@@ -37,12 +37,15 @@ public class ViewSessionCommand extends Command {
     public static final String VALID_WEEK_SESSIONS_PERIOD = "week";
     public static final String VALID_ALL_SESSIONS_PERIOD = "all";
     public static final String VALID_FUTURE_SESSIONS_PERIOD = "future";
+    public static final String VALID_PAST_SESSIONS_PERIOD = "past";
 
     public static final Predicate<Session> PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS = (session) ->
             session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS).plusDays(7))
                     && session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
     public static final Predicate<Session> PREDICATE_SHOW_FUTURE_SESSIONS = (session) ->
-            session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
+            session.getStartTime().isAfter(LocalDateTime.now());
+    public static final Predicate<Session> PREDICATE_SHOW_PAST_SESSIONS = (session) ->
+            session.getEndTime().isBefore(LocalDateTime.now());
 
     /**
      * Uses a hashmap to get the corresponding predicate for the period specified.
@@ -51,6 +54,7 @@ public class ViewSessionCommand extends Command {
     static {
         PREDICATE_HASH_MAP.put(VALID_WEEK_SESSIONS_PERIOD, PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS);
         PREDICATE_HASH_MAP.put(VALID_FUTURE_SESSIONS_PERIOD, PREDICATE_SHOW_FUTURE_SESSIONS);
+        PREDICATE_HASH_MAP.put(VALID_PAST_SESSIONS_PERIOD, PREDICATE_SHOW_PAST_SESSIONS);
         PREDICATE_HASH_MAP.put(VALID_ALL_SESSIONS_PERIOD, PREDICATE_SHOW_ALL_SESSIONS);
     }
     private String period;
@@ -62,15 +66,15 @@ public class ViewSessionCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (PREDICATE_HASH_MAP.get(period) != null) {
-            model.updateFilteredSessionList(PREDICATE_HASH_MAP.get(period));
-        } else {
+        Predicate<Session> pred = PREDICATE_HASH_MAP.get(period);
+
+        if (pred == null) {
             //Matches the pattern
+            assert(VALID_PATTERN.matcher(period).matches());
             boolean before = (this.period.charAt(0) == '-') ? true : false;
             int amountOfUnit = Integer.parseInt(this.period.substring(1, this.period.length() - 1));
             ChronoUnit unit = getUnitOfTime(this.period.charAt(this.period.length() - 1));
             assert(unit != null);
-            Predicate<Session> pred = null;
 
             //truncatedTo will make all time period to <Date> 0000H. In order to retrieve that terminating day,
             // need to add 1 day. Eg +0d = today ==> Gets Today's 0000H to Today's 2359
@@ -85,8 +89,8 @@ public class ViewSessionCommand extends Command {
                         .plus(amountOfUnit, unit).plusDays(1).minusMinutes(1))
                         && session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
             }
-            model.updateFilteredSessionList(pred);
         }
+        model.updateFilteredSessionList(pred);
         return new CommandResult(MESSAGE_SHOW_SESSIONS_SUCCESS);
     }
 
