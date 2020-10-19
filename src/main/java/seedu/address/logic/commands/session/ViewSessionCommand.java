@@ -56,7 +56,9 @@ public class ViewSessionCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredSessionList(PREDICATE_HASH_MAP.get(period));
+        Predicate<Session> predToUse = PREDICATE_HASH_MAP.get(period);
+        assert(predToUse != null);
+        model.updateFilteredSessionList(predToUse);
         return new CommandResult(MESSAGE_SHOW_SESSIONS_SUCCESS);
     }
 
