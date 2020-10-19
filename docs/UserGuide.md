@@ -290,9 +290,9 @@ Format: `sview p/PERIOD`
 Examples:
 *  `sview p/all` Displays all sessions.
 *  `sview p/+0D` Display all sessions today.
-*  `sview p/-1d` Display sessions within the past 2 days (yesterday and today).
-*  `sview p/+2w` Display sessions within the next 2 weeks.
-(e.g. If today is Friday, display from today till the Friday that falls 2 weeks later).
+*  `sview p/-1d` Display sessions from the past 1 day to today (yesterday and today).
+*  `sview p/+2w` Display sessions from today to 2 weeks later.
+(e.g. If today is Friday, display from today to the Friday that falls 2 weeks later).
 
 ### Adding a Schedule: `schadd`
 
