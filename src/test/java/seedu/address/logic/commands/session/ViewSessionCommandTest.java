@@ -2,7 +2,6 @@ package seedu.address.logic.commands.session;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.session.ViewSessionCommand.MESSAGE_SHOW_SESSIONS_SUCCESS;
 import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_ALL_SESSIONS_PERIOD;
@@ -19,7 +18,6 @@ import static seedu.address.testutil.TypicalSessions.getTypicalWithDayAfterAddre
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
