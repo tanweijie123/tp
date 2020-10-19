@@ -2,6 +2,7 @@ package seedu.address.logic.parser.session;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.session.ViewSessionCommand.PREDICATE_HASH_MAP;
+import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_PATTERN;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_PERIOD;
 
 import seedu.address.logic.commands.session.ViewSessionCommand;
@@ -22,7 +23,7 @@ public class ViewSessionCommandParser implements Parser<ViewSessionCommand> {
      * @return true if period is valid, false otherwise.
      */
     public static boolean isValidPeriod(String period) {
-        return PREDICATE_HASH_MAP.containsKey(period);
+        return PREDICATE_HASH_MAP.containsKey(period) || VALID_PATTERN.matcher(period).matches();
     }
 
     /**
