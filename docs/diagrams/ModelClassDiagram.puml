@@ -58,7 +58,7 @@ Class Tag
 }
 }
 
-Class HiddenOutside #FFFFF
+Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
