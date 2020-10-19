@@ -29,6 +29,18 @@ public class ViewSessionCommandParserTest {
     public static final String INVALID_EMPTY_SESSION_PREFIX = " " + PREFIX_PERIOD + "";
     public static final String EMPTY_PREAMBLE = " ";
 
+    //Variable SVIEW ARGS
+    public static final String VAR_PREFIX_PERIOD = " " + PREFIX_PERIOD + " ";
+    public static final String VALID_PLUS_DAY_CAP_PERIOD = "+5D";
+    public static final String VALID_MINUS_DAY_SMALL_PERIOD = "-2d";
+    public static final String VALID_PLUS_MONTH_CAP_PERIOD = "+1M";
+    public static final String VALID_MINUS_WEEK_CAP_PERIOD = "-10W";
+    public static final String VALID_PLUS_YEAR_CAP_PERIOD = "+0Y";
+    public static final String INVALID_NO_SYMBOL_PERIOD = "10m";
+    public static final String INVALID_NO_AMOUNT_PERIOD = "-w";
+    public static final String INVALID_NO_UNIT_PERIOD = "+5";
+    public static final String INVALID_WRONG_UNIT_PERIOD = "+9s";
+
     private ViewSessionCommandParser parser = new ViewSessionCommandParser();
 
     @Test
@@ -44,6 +56,60 @@ public class ViewSessionCommandParserTest {
     @Test
     public void parse_futureSessionArgs_returnsViewCommand() {
         assertParseSuccess(parser, VALID_FUTURE_SESSION_PREFIX, new ViewSessionCommand(VALID_FUTURE_SESSIONS_PERIOD));
+    }
+
+    @Test
+    public void parse_variablePlusDayCapsArgs_returnViewCommand() {
+        assertParseSuccess(parser, VAR_PREFIX_PERIOD + VALID_PLUS_DAY_CAP_PERIOD,
+                new ViewSessionCommand(VALID_PLUS_DAY_CAP_PERIOD));
+    }
+
+    @Test
+    public void parse_variableMinusDaySmallsArgs_returnViewCommand() {
+        assertParseSuccess(parser, VAR_PREFIX_PERIOD + VALID_MINUS_DAY_SMALL_PERIOD,
+                new ViewSessionCommand(VALID_MINUS_DAY_SMALL_PERIOD));
+    }
+
+    @Test
+    public void parse_variablePlusMonthArgs_returnViewCommand() {
+        assertParseSuccess(parser, VAR_PREFIX_PERIOD + VALID_PLUS_MONTH_CAP_PERIOD,
+                new ViewSessionCommand(VALID_PLUS_MONTH_CAP_PERIOD));
+    }
+
+    @Test
+    public void parse_variableMinusWeekArgs_returnViewCommand() {
+        assertParseSuccess(parser, VAR_PREFIX_PERIOD + VALID_MINUS_WEEK_CAP_PERIOD,
+                new ViewSessionCommand(VALID_MINUS_WEEK_CAP_PERIOD));
+    }
+
+    @Test
+    public void parse_variablePlusZeroYearArgs_returnViewCommand() {
+        assertParseSuccess(parser, VAR_PREFIX_PERIOD + VALID_PLUS_YEAR_CAP_PERIOD,
+                new ViewSessionCommand(VALID_PLUS_YEAR_CAP_PERIOD));
+    }
+
+    @Test
+    public void parse_variableNoSymbolArgs_throwParseException() {
+        assertParseFailure(parser, VAR_PREFIX_PERIOD + INVALID_NO_SYMBOL_PERIOD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewSessionCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_variableNoAmountArgs_throwParseException() {
+        assertParseFailure(parser, VAR_PREFIX_PERIOD + INVALID_NO_AMOUNT_PERIOD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewSessionCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_variableNoUnitArgs_throwParseException() {
+        assertParseFailure(parser, VAR_PREFIX_PERIOD + INVALID_NO_UNIT_PERIOD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewSessionCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_variableInvalidUnitArgs_throwParseException() {
+        assertParseFailure(parser, VAR_PREFIX_PERIOD + INVALID_WRONG_UNIT_PERIOD,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewSessionCommand.MESSAGE_USAGE));
     }
 
     @Test
