@@ -1,0 +1,72 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "a:AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("schadd c/1 s/1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("schadd c/1 s/1")
+activate AddressBookParser
+
+ref over AddressBookParser, AddScheduleCommand : parse command arguments
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddScheduleCommand : execute(model)
+activate AddScheduleCommand
+
+AddScheduleCommand -> Model : getFilteredClientList()
+activate Model
+
+Model --> AddScheduleCommand : lastShownClientList
+deactivate Model
+
+AddScheduleCommand -> Model : getFilteredSessionList()
+activate Model
+
+Model --> AddScheduleCommand : lastShownSessionList
+deactivate Model
+
+AddScheduleCommand -> Model: hasAnyScheduleAssociatedWithSession(Session)
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+AddScheduleCommand -> Model: deleteSessionAssociatedSchedules(Session)
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+AddScheduleCommand -> Model: deleteSession(Session)
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+create CommandResult
+AddScheduleCommand -> CommandResult: CommandResult(String)
+activate CommandResult
+
+CommandResult --> AddScheduleCommand : result
+deactivate CommandResult
+
+AddScheduleCommand --> LogicManager : result
+deactivate AddScheduleCommand
+AddScheduleCommand -[hidden]-> LogicManager : result
+destroy AddScheduleCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SESSIONS;
 
 import java.util.List;
 
@@ -61,8 +59,6 @@ public class AddScheduleCommand extends Command {
 
         Client clientToSchedule = lastShownClientList.get(clientIndex.getZeroBased());
 
-        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-
         List<Session> lastShownSessionList = model.getFilteredSessionList();
 
         if (sessionIndex.getZeroBased() >= lastShownSessionList.size()) {
@@ -70,8 +66,6 @@ public class AddScheduleCommand extends Command {
         }
 
         Session sessionToSchedule = lastShownSessionList.get(sessionIndex.getZeroBased());
-
-        model.updateFilteredSessionList(PREDICATE_SHOW_ALL_SESSIONS);
 
         Schedule scheduleToAdd = new Schedule(clientToSchedule, sessionToSchedule);
         if (model.hasSchedule(scheduleToAdd)) {
