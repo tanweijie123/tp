@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
+import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 
 /**
@@ -39,10 +40,10 @@ public class EditScheduleDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code isPaid} of the {@code EditScheduleDescriptorBuilder} that we are building.
+     * Sets the {@code paymentStatus} of the {@code EditScheduleDescriptorBuilder} that we are building.
      */
-    public EditScheduleDescriptorBuilder withUpdatedIsPaid(boolean isPaid) {
-        descriptor.setUpdatedIsPaid(isPaid);
+    public EditScheduleDescriptorBuilder withUpdatedPaymentStatus(PaymentStatus paymentStatus) {
+        descriptor.setUpdatedPayment(paymentStatus);
         return this;
     }
 

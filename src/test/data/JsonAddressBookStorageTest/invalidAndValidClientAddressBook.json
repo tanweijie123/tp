@@ -21,11 +21,11 @@
     "clientEmail" : "alexyeoh@example.com",
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
-    "isPaid": "false"
+    "paymentStatus": "unpaid"
   }, {
     "clientEmail" : "lidavid@example.com",
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
-    "isPaid": "false"
+    "paymentStatus": "unpaid"
   } ]
 }

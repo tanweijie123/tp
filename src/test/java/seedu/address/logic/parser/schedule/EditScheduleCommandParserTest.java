@@ -3,8 +3,8 @@ package seedu.address.logic.parser.schedule;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.CLIENT_INDEX_DESC_A;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.SESSION_INDEX_DESC_A;
-import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_IS_PAID_FALSE;
-import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_IS_PAID_TRUE;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_PAYMENT_PAID;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_PAYMENT_UNPAID;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_REMARK_EMPTY;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_REMARK_NONEMPTY;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_SESSION_INDEX_DESC_B;
@@ -13,8 +13,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
-import static seedu.address.testutil.TypicalSchedules.IS_PAID_FALSE;
-import static seedu.address.testutil.TypicalSchedules.IS_PAID_TRUE;
+import static seedu.address.testutil.TypicalSchedules.PAYMENT_PAID;
+import static seedu.address.testutil.TypicalSchedules.PAYMENT_UNPAID;
 import static seedu.address.testutil.TypicalSchedules.TEST_REMARK;
 
 import org.junit.jupiter.api.Test;
@@ -62,13 +62,13 @@ public class EditScheduleCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A
-                + UPDATED_SESSION_INDEX_DESC_B + UPDATED_IS_PAID_FALSE + UPDATED_REMARK_NONEMPTY;
+                + UPDATED_SESSION_INDEX_DESC_B + UPDATED_PAYMENT_UNPAID + UPDATED_REMARK_NONEMPTY;
 
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withClientIndex(INDEX_FIRST_CLIENT)
                 .withSessionIndex(INDEX_FIRST_SESSION)
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
-                .withUpdatedIsPaid(IS_PAID_FALSE)
+                .withUpdatedPaymentStatus(PAYMENT_UNPAID)
                 .withUpdatedRemark(TEST_REMARK)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
@@ -95,12 +95,12 @@ public class EditScheduleCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        // updated isPaid
-        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_IS_PAID_TRUE;
+        // updated paymentStatus
+        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_PAYMENT_PAID;
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withClientIndex(INDEX_FIRST_CLIENT)
                 .withSessionIndex(INDEX_FIRST_SESSION)
-                .withUpdatedIsPaid(IS_PAID_TRUE)
+                .withUpdatedPaymentStatus(PAYMENT_PAID)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
@@ -121,14 +121,14 @@ public class EditScheduleCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         // is paid and then updated session index
-        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_IS_PAID_FALSE
+        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_PAYMENT_UNPAID
                 + UPDATED_SESSION_INDEX_DESC_B;
 
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withClientIndex(INDEX_FIRST_CLIENT)
                 .withSessionIndex(INDEX_FIRST_SESSION)
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
-                .withUpdatedIsPaid(IS_PAID_FALSE)
+                .withUpdatedPaymentStatus(PAYMENT_UNPAID)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
