@@ -168,7 +168,7 @@ The delete feature allows user to cancel a session, and delete all schedules ass
 The delete session mechanism is facilitated by `DeleteSessionCommand` which extends `Command`. The format of the 
 command is given by: 
 
-```sdel INDEX [f/ true]```
+```sdel INDEX [f/]```
 
 When using this command, the `INDEX` should refer to the index shown in the SessionList on the right panel.
 The user can follow up with an optional force parameters to delete all schedules associated to the session.
@@ -176,7 +176,7 @@ The user can follow up with an optional force parameters to delete all schedules
 **Example Commands**
 
 1. `sdel 1` : This command deletes the first session if no schedules are associated to it
-1. `sdel 1 f/ true` : This command deletes the first session, and all schedules associated to it
+1. `sdel 1 f/` : This command deletes the first session, and all schedules associated to it
 
 The following activity diagram summarizes what happens when a user executes a new `DeleteSession` command
 
@@ -207,15 +207,27 @@ message back to the UI and return control back to `LogicManager`
 
 In designing this feature, we had to consider the alternative ways in which we can choose to handle Session deletion
 
-- **Alternative 1 (current choice):** 
+- **Alternative 1 (current choice):** Delete session only after all associated schedules are deleted.
     
-    - Pros: Easier to maintain data integrity
-    - Cons: May have performance issues in terms of response time if there are a lot of Schedules or Sessions
+    - Pros: 
+        1. Easier to maintain data integrity
+    - Cons:
+        1. Extra logic inside the method implementation 
+        2. May have performance issues in terms of response time if there are a lot of Schedules or Sessions
     
-- **Alternative 2:** Allow schedules to exist with deleted session
+- **Alternative 2:** Mark session as deleted and treat schedules with deleted session as invalid
     
-    - Pros: Easier to implement.
-    - Cons: We must keep track of deleted sessions, which might make the application bloat up over time
+    - Pros: 
+        1. Easier to implement the method. 
+        2. No need to handle additional force flag option
+    - Cons: 
+        1. We must keep track of deleted sessions, which might make the application bloat up over time.
+        2. Harder to maintain data integrity over time
+        
+- **Alternative 3:** Delete the session without checking for associated schedules
+
+    - Pros: Easy to implement
+    - Cons: A schedule might have invalid session, breaking data integrity
 
 
 ### \[Proposed\] Undo/redo feature

@@ -241,7 +241,7 @@ Examples:
 Deletes the specified session by the index number used in the displayed Session list and all schedules associated with
 the specified session
 
-Format: `sdel INDEX [f/ true]`
+Format: `sdel INDEX [f/]`
 
 * Deletes the Session at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Session list.
@@ -253,14 +253,14 @@ Examples:
 `list` followed by `sdel 2` will return an error message 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    To force deletion of session (and all associated schedules), pass in the optional force flag followed by
-    any non empty string.
+    To force deletion of session (and all associated schedules), pass in the optional force flag after the `INDEX`. 
+    Any string after the force flag (`f/`) will be ignored.
 </div>
 
-Examples:
 * If there are one or more associated schedules associated with the 2nd session in the Session List, 
-  `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
+  `list` followed by `sdel 2 f/` will delete all schedules associated with the 2nd session, then delete the session 
   itself
+  
 ### Adding a Schedule: `schadd`
 
 You can schedule your Client to a Session.
@@ -357,7 +357,7 @@ FitEgo data are saved in the hard disk automatically after any command that chan
 | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
 | Update Session Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
-| Delete a Session |`sdel INDEX [f/ true]` | `sdel 1` |
+| Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
 | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`| `schedit c/1 s/1 us/1 pd/true` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
