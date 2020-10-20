@@ -79,10 +79,19 @@ Once you learn the entity, you can now combine it with the verb. For example:
 
 Although there are a lot of commands, once you learn the verb and entities, it is so easy to use FitEgo!
 
+
+## Common Notations
+
+| Emoji | Meaning | text
+| -------- | --------- | --------- |
+| :information_source: | Notes | `:information_source:` |
+| :bulb: | Tip | `:bulb:` |
+| :star: | Feature | `:star:` |
+
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Features
+## Features :star:
 
 <div markdown="block" class="alert alert-info">
 
@@ -127,7 +136,7 @@ Examples:
 * `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
 
 ### Listing all clients : `clist`
-
+ƒhow
 Shows a list of all clients in the clients list.
 
 Format: `clist`
@@ -266,7 +275,7 @@ Format: `schedit c/CLIENT s/SESSION [us/UPDATED INDEX] [pd/IS PAID]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
+*  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be session 2.
 *  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be be paid.
 
 ### Exiting the program : `exit`

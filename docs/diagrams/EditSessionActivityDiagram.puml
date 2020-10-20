@@ -1,0 +1,15 @@
+@startuml
+(*) --> "Execute EditSessionCommand"
+"Execute EditSessionCommand" --> ===B1===
+===B1=== --> if [isUpdatingGym]
+--> "Gym"
+--> ===B2===
+
+===B1=== --> if [isUpdatingStartTime]
+--> "StartTime"
+--> "Duration"
+--> ===B2===
+
+
+--> (*)
+@enduml

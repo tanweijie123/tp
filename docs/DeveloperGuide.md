@@ -213,6 +213,75 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Edit Session feature
+
+#### Proposed Implementation
+
+The proposed edit session mechanism is facilitated by `AddressBook`.
+
+These operation is exposed in the `Model` interface as `Model#setSession()`.
+
+Given below is an example usage scenario and how the edit session mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+The `AddressBook` will be initialized with the initial client, session and schedule list.
+
+Step 2. The user executes `sedit 1 g/coolgym` command to edit the 1st Session in the address book. 
+The `sedit` command calls `Model#setSession()`, causing changes to be made in the address book after the `sedit 1 g/coolgym` command executes.
+
+The following sequence diagram shows how the edit session operation works:
+
+![EditSessionSequenceDiagram](images/EditSessionSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditSessionCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the edit session command:
+
+![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
+
+### Edit Schedule feature
+
+#### Proposed Implementation
+
+The proposed edit schedule mechanism is facilitated by `AddressBook`.
+
+These operation is exposed in the `Model` interface as `Model#setSchedule()`.
+
+Given below is an example usage scenario and how the edit schedule mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+The `AddressBook` will be initialized with the initial client, session and schedule list.
+
+Step 2. The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with Session 1 and Client 1 in the address book. 
+The `schedit` command calls `Model#setSchedule()`, causing changes to be made in the address book after the `schedit c/1 s/1 us/2` command executes.
+
+The following sequence diagram shows how the edit schedule operation works:
+
+![EditScheduleSequenceDiagram](images/EditScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the edit schedule command:
+
+![EditScheduleActivityDiagram](images/EditScheduleActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: How edit schedule executes
+
+* **Alternative 1 (current choice):** Retrieve Schedule using Client and Session Index.
+  * Pros: More troublesome to implement. Clearer to retrieve.
+  * Cons: Require user to know the Client and Session Index separately.
+
+* **Alternative 2:** Retrieve Schedule using Schedule Index
+  itself.
+  * Pros: Easier to retrieve.
+  * Cons: Implementation is more confusing as User there's a conflict between Index and user-typed String index.
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -413,6 +482,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+    
+* 2b. User edits session information (i.e. gym, exercise type, start time and duration).
+
+    Use case resumes at step 2.
 
 **Use case: Edit a Schedule**
 
@@ -426,16 +499,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. FitEgo shows an error message.
+    * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+      
+* 2b. User edits schedule information (i.e. updated session index, update payment, update weight).
 
+    Use case resumes at step 2.
+    
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -534,25 +611,25 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Multiple Schedules in the list can be viewed on the main panel of the GUI.
 
-   1. Test case: `editschedule c/1 s/1 us/2`<br>
+   1. Test case: `schedit c/1 s/1 us/2`<br>
       Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `editschedule c/2 s/1 us/2`<br>
+   1. Test case: `schedit c/2 s/1 us/2`<br>
       Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
       
-   1. Test case: `editschedule c/1 s/1 pd/true`<br>
+   1. Test case: `schedit c/1 s/1 pd/true`<br>
          Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
          In the right panel, the client's name in the related session will be indicated as green. 
          Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
          
-   1. Test case: `editschedule c/1 s/1 pd/false`<br>
+   1. Test case: `schedit c/1 s/1 pd/false`<br>
             Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
             In the right panel, the client's name in the related session will be indicated as red. 
             Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Other incorrect edit commands to try: `editschedule c/1`, `editschedule c/1 s/2`, `editschedule c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
+   1. Other incorrect edit commands to try: `schedit c/1`, `schedit c/1 s/2`, `schedit c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
       Expected: Similar to previous.
 
 ### Saving data

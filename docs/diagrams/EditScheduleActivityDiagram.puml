@@ -1,0 +1,17 @@
+@startuml
+(*) --> "Execute EditScheduleCommand"
+"Execute EditScheduleCommand" --> ===B1===
+===B1=== --> if [isUpdatingSessionIndex]
+--> "UpdatedSessionIndex"
+--> ===B2===
+
+===B1=== --> if [isPaid]
+--> "Paid"
+--> ===B2===
+
+===B1=== --> if [isUpdatingRemark]
+--> "Remark"
+--> ===B2===
+
+--> (*)
+@enduml
