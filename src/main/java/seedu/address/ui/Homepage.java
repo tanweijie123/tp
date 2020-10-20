@@ -35,7 +35,6 @@ public class Homepage extends UiPart<AnchorPane> {
     private Homepage(ReadOnlyAddressBook addressBook) {
         super(FXML);
         this.addressBook = addressBook;
-        update();
     }
 
     /**
@@ -55,6 +54,7 @@ public class Homepage extends UiPart<AnchorPane> {
      *     first with an addressbook
      */
     public static Homepage getHomePage() {
+        homepage.update();
         return homepage;
     }
 
