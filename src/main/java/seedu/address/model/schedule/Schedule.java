@@ -11,17 +11,17 @@ import seedu.address.model.session.Session;
 public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     private Client client;
     private Session session;
-    private Payment payment;
+    private PaymentStatus paymentStatus;
     private Remark remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Client client, Session session, Payment payment, Remark remark) {
+    public Schedule(Client client, Session session, PaymentStatus paymentStatus, Remark remark) {
         requireAllNonNull(client, session);
         this.client = client;
         this.session = session;
-        this.payment = payment;
+        this.paymentStatus = paymentStatus;
         this.remark = remark;
     }
 
@@ -32,7 +32,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         requireAllNonNull(client, session);
         this.client = client;
         this.session = session;
-        this.payment = Payment.UNPAID_PAYMENT;
+        this.paymentStatus = PaymentStatus.UNPAID_PAYMENT;
         this.remark = Remark.EMPTY_REMARK;
     }
 
@@ -44,12 +44,12 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         return session;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
     }
 
-    public boolean getIsPaid() {
-        return payment.getIsPaid();
+    public boolean isPaid() {
+        return paymentStatus.isPaid();
     }
 
     public Remark getRemark() {
@@ -87,7 +87,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
 
         Schedule otherSchedule = (Schedule) other;
         return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session)
-                && otherSchedule.payment.equals(payment) && otherSchedule.remark.equals(this.remark);
+                && otherSchedule.paymentStatus.equals(paymentStatus) && otherSchedule.remark.equals(this.remark);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
 
     @Override
     public String toString() {
-        String paymentStatus = payment.toString();
+        String paymentStatusString = "Payment status: " + paymentStatus;
         String remarkPresent = !remark.equals(Remark.EMPTY_REMARK) ? "Remark: " + remark : "";
         return "Client "
                 + client
@@ -111,7 +111,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
                 + " with session "
                 + session
                 + "\n"
-                + paymentStatus
+                + paymentStatusString
                 + "\n"
                 + remarkPresent;
     }
