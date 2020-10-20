@@ -133,6 +133,35 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Schedule feature --- Dhafin Razaq Oktoyuzan
+
+The add schedule feature allows user to create a Schedule associated with a Client and a Session. 
+In other words, it allows user to schedule a Client to a Session.
+
+#### Implementation
+
+The add Schedule mechanism is facilitated by `AddScheduleCommand` which extends `Command`. The format of the 
+command is given by: 
+
+```schadd c/CLIENT_INDEX s/SESSION_INDEX```
+When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
+**Example Command**
+
+Assume the current state of Client, Session, and Schedule is as illustrated on the following simplified object diagram:
+
+![OverlappingScheduleObjectDiagram0](images/OverlappingScheduleObjectDiagram0.png)
+
+The following activity diagram summarizes what happens when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
+![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
+
+Invoking `schadd c/2 s/1` will add a Schedule associated with the Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List). The result would be as illustrated in the following diagram:  
+
+
+
+![OverlappingScheduleObjectDiagram1](images/OverlappingScheduleObjectDiagram1.png)
+
+On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as there is an overlapping Schedule (John is already scheduled to endurance training from 12/12/2020 1400 - 1600).
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -216,7 +245,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
