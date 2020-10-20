@@ -1,10 +1,11 @@
 package seedu.address.logic.commands.schedule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.client.ClientCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.schedule.EditScheduleTestUtil.DESC_SCHA;
 import static seedu.address.logic.commands.schedule.EditScheduleTestUtil.DESC_SCHB;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalClients;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
@@ -13,9 +14,12 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SESSION;
+import static seedu.address.testutil.TypicalSchedules.BENSON_GETWELL;
 import static seedu.address.testutil.TypicalSchedules.IS_PAID_FALSE;
 import static seedu.address.testutil.TypicalSchedules.IS_PAID_TRUE;
+import static seedu.address.testutil.TypicalSchedules.TEST_REMARK;
 import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
+import static seedu.address.testutil.TypicalSessions.MACHOMAN;
 import static seedu.address.testutil.TypicalSessions.getTypicalSessions;
 
 import org.junit.jupiter.api.Test;
@@ -57,22 +61,32 @@ public class EditScheduleCommandTest {
         return ab;
     }
 
+    /**
+     * Updating BENSON-GETWELL -> BENSON-MACHOMAN should succeed because no BENSON-MACHOMAN exists in typicalAddressBook
+     */
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_failure() {
-        Schedule editedSchedule = new ScheduleBuilder().build();
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Schedule editedSchedule = new ScheduleBuilder(BENSON_GETWELL)
+                .withSession(MACHOMAN)
+                .withIsPaid(IS_PAID_FALSE)
+                .withRemark(TEST_REMARK)
+                .build();
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
                 .withUpdatedIsPaid(IS_PAID_FALSE)
+                .withUpdatedRemark(TEST_REMARK)
                 .build();
-        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
 
-        String expectedMessage = String.format(EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE, editScheduleCommand);
+        String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setSchedule(model.getFilteredScheduleList().get(0), editedSchedule);
+        expectedModel.setSchedule(model.getFilteredScheduleList().get(1), editedSchedule);
 
-        assertCommandFailure(editScheduleCommand, model, expectedMessage);
+        assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
+        assertEquals(model.getFilteredScheduleList().get(1).getRemark(), TEST_REMARK);
+        assertEquals(model.getFilteredScheduleList().get(1).getIsPaid(), IS_PAID_FALSE);
     }
 
     @Test
@@ -129,6 +143,7 @@ public class EditScheduleCommandTest {
                 .withClient(lastClient)
                 .withSession(lastSession)
                 .withIsPaid(isPaidTrue)
+                .withRemark(TEST_REMARK)
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 new EditScheduleDescriptorBuilder()
@@ -136,6 +151,7 @@ public class EditScheduleCommandTest {
                         .withSessionIndex(INDEX_FIRST_SESSION)
                         .withUpdatedSessionIndex(INDEX_THIRD_SESSION)
                         .withUpdatedIsPaid(IS_PAID_TRUE)
+                        .withUpdatedRemark(TEST_REMARK)
                         .build());
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
@@ -146,27 +162,22 @@ public class EditScheduleCommandTest {
         assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Updating ALICE-GETWELL -> ALICE-MACHOMAN should fail because ALICE-MACHOMAN exists in typicalAddressBook
+     */
     @Test
     public void execute_duplicateScheduleUnfilteredList_failure() {
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
                 .withUpdatedIsPaid(IS_PAID_FALSE)
+                .withUpdatedRemark(TEST_REMARK)
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
 
-        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
-    }
+        String expectedMessage = String.format(EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE, editScheduleCommand);
 
-    @Test
-    public void execute_duplicateScheduleFilteredList_failure() {
-
-        // edit Schedule in filtered list into a duplicate in address book
-        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
-                new EditScheduleDescriptorBuilder().withUpdatedSessionIndex(INDEX_SECOND_SESSION)
-                        .withUpdatedIsPaid(IS_PAID_TRUE).build());
-
-        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
+        ScheduleCommandTestUtil.assertCommandFailure(editScheduleCommand, model, expectedMessage);
     }
 
     @Test
