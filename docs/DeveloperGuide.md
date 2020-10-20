@@ -64,14 +64,14 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter`, `ClientInfoPage` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of several parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter`, `Homepage` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx and ControlsFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component interacts with these external API: 
 
-* Executes user commands using the `Logic` component.
-* Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* `Logic` : Performs the Execution of user's commands.
+* `Model` : Listens for changes to data so that the UI can be updated with the modified data.
 
 ### Logic component
 
@@ -261,8 +261,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | trainer                                       | delete a client                | remove entries that I no longer need                                   |
 | `* * *`  | trainer                                       | find a client by name          | locate details of clients without having to go through the entire list |
 | `* * *`  | trainer                                       | tag my client         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
-| `* *`    | trainer                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* * *`  | trainer                                       | add a new session              |                                                                        |
+| `* * *`  | trainer                                       | edit a session                 | change the details of a session                                        |
+| `* * *`  | trainer                                       | view a session's detail        | view at all of the session's details at a glance                       |
+| `* * *`  | busy fitness trainer                          | filter sessions by time        | view only the upcoming or other important sessions                             |
+| `* * *`  | trainer                                       | delete a session               | remove session that are cancelled                                      |
+| `* * *`  | trainer                                       | add a new schedule             |                                                                        |
+| `* * *`  | trainer                                       | edit a schedule                | change the details of a schedule                                       |
+| `* * *`  | trainer                                       | view a schedule's detail       | view at all of the schedule's details at a glance                      |
+| `* * *`  | trainer                                       | delete a schedule              | remove schedule that are cancelled or completed                        |
+| `* *`    | forgetful fitness trainer                     | track clients' payments        | remind those who have not paid up                                      |
+| `* *`    | busy fitness trainer                          | query if a particular time slot is open     | add new clients to that time slot                         |
+| `* *`    | fitness trainer                               | track clients' weight over time| keep track of my clients progress over time                            |
+| `* *`    | fitness trainer                               | store clients' session feedback| utilise previous sessions and plan exercises for upcoming sessions     |
 | `*`      | trainer with many clients in the address book | sort clients by name           | locate a client easily                                                 |
+| `*`      | user                                          | change software background between light and dark mode | customise my experience                        |
+| `*`      | trainer focused on coaching pre-NS teen       | track client's date of birth   | adjust the fitness intensity depending on IPPT period                  |
+
 
 *{More to be added}*
 
@@ -428,7 +443,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Filter Session List**
+**Use case: View Session within time period**
 
 **MSS**
 
@@ -472,6 +487,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Open User Guide in Browser**
+
+**MSS**
+1.  User requests to view Help window. 
+2.  FitEgo displays help window with the User Guide link.
+3.  User selects the link to access the User Guide. 
+4.  FitEgo opens the User Guide. 
+
+    Use case ends.
+
+**Extensions**
+* 3a. User closes the help window. 
+    * 3a1. FitEgo closes the help window
+	
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -492,6 +523,7 @@ from your previous machine to your new machine.
 
 ### Glossary
 
+* **API**: Application Programming Interface
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
 --------------------------------------------------------------------------------------------------------------------
@@ -564,6 +596,24 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect edit commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+
+### Viewing Sessions within Period
+
+1. Viewing Sessions within Period while the Session List is non-empty
+
+   1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
+
+   1. Test case: `sview p/+1d`<br>
+      Expected: The right panel only displays Sessions with start time from 0000hrs today to 2359hrs the next day.
+      Indication that Session List has been successfully updated is shown in the status message.
+
+   1. Test case: `sview p/past`<br>
+      Expected: The right panel only displays Sessions that have already ended before time of execution.
+      Indication that Session List has been successfully updated is shown in the status message.
+
+   1. Other incorrect edit commands to try: `sview`, `sview p/+2s` (where unit of time is not d/m/y), `...` <br>
+      Expected: Similar to previous.
+
 ### Editing a Schedule
 
 1. Editing a Schedule while all Schedules are being shown
@@ -589,23 +639,6 @@ testers are expected to do more *exploratory* testing.
             Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
 
    1. Other incorrect edit commands to try: `editschedule c/1`, `editschedule c/1 s/2`, `editschedule c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
-      Expected: Similar to previous.
-
-### Viewing Sessions within Period
-
-1. Viewing Sessions within Period while the Session List is non-empty
-
-   1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
-
-   1. Test case: `sview p/+1d`<br>
-      Expected: The right panel only displays Sessions with start time from 0000hrs today to 2359hrs the next day.
-      Indication that Session List has been successfully updated is shown in the status message.
-
-   1. Test case: `sview p/past`<br>
-      Expected: The right panel only displays Sessions that have already ended before time of execution.
-      Indication that Session List has been successfully updated is shown in the status message.
-
-   1. Other incorrect edit commands to try: `sview`, `sview p/+2s` (where unit of time is not d/m/y), `...` <br>
       Expected: Similar to previous.
 
 ### Saving data
