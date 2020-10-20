@@ -15,11 +15,9 @@ import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Interval;
 
 public class JsonAdaptedSchedule {
-    public static final String MISSING_CLIENT_EMAIL_MESSAGE_FORMAT = "Schedule's %s client email is missing!";
-    public static final String MISSING_SESSION_START_MESSAGE_FORMAT = "Schedule's %s session start time is missing!";
-    public static final String MISSING_SESSION_END_MESSAGE_FORMAT = "Schedule's %s session end time is missing!";
-    public static final String MISSING_PAYMENT_STATUS_MESSAGE_FORMAT = "Schedule's %s payment status is missing!";
-    public static final String MISSING_REMARK_MESSAGE_FORMAT = "Schedule's %s is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s is missing!";
+    public static final String START_TIME_FIELD = "session start time";
+    public static final String END_TIME_FIELD = "session end time";
 
     private final String clientEmail;
     private final String start;
@@ -62,7 +60,7 @@ public class JsonAdaptedSchedule {
     public Email getClientEmail() throws IllegalValueException {
 
         if (clientEmail == null) {
-            throw new IllegalValueException(String.format(MISSING_CLIENT_EMAIL_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Email.class.getSimpleName()));
         }
 
@@ -80,12 +78,21 @@ public class JsonAdaptedSchedule {
      */
     public Interval getSessionInterval() throws IllegalValueException {
         if (start == null) {
-            throw new IllegalValueException(String.format(MISSING_SESSION_START_MESSAGE_FORMAT,
-                    LocalDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    START_TIME_FIELD));
         }
+
+        if (SessionParserUtil.isInvalidDateTime(start)) {
+            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
+        }
+
         if (end == null) {
-            throw new IllegalValueException(String.format(MISSING_SESSION_END_MESSAGE_FORMAT,
-                    LocalDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    END_TIME_FIELD));
+        }
+
+        if (SessionParserUtil.isInvalidDateTime(end)) {
+            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
         }
 
         return SessionParserUtil.parseIntervalFromStartAndEnd(start, end);
@@ -98,7 +105,7 @@ public class JsonAdaptedSchedule {
      */
     public PaymentStatus getPaymentStatus() throws IllegalValueException {
         if (paymentStatus == null) {
-            throw new IllegalValueException(String.format(MISSING_PAYMENT_STATUS_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     PaymentStatus.class.getSimpleName()));
         }
 
@@ -112,7 +119,7 @@ public class JsonAdaptedSchedule {
      */
     public Remark getRemark() throws IllegalValueException {
         if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_REMARK_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Remark.class.getSimpleName()));
         }
 

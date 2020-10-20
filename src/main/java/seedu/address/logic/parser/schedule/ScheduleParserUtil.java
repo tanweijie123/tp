@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.schedule;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.schedule.PaymentStatus.MESSAGE_INVALID_PAYMENT_STATUS;
 import static seedu.address.model.schedule.PaymentStatus.VALUE_PAID;
 import static seedu.address.model.schedule.PaymentStatus.VALUE_UNPAID;
 
@@ -9,8 +10,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.schedule.PaymentStatus;
 
 public class ScheduleParserUtil extends ParserUtil {
-    public static final String MESSAGE_INVALID_PAYMENT_STATUS = "Payment Status must be either paid or unpaid";
-
     /**
      * Parses a {@code String payment status} into a {@code PaymentStatus}.
      * Leading and trailing whitespaces will be trimmed.

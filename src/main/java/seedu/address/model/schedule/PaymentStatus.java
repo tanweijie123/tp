@@ -6,6 +6,8 @@ public class PaymentStatus {
     public static final String VALUE_PAID = "paid";
     public static final String VALUE_UNPAID = "unpaid";
     public static final PaymentStatus PAYMENT_STATUS_UNPAID = new PaymentStatus(VALUE_UNPAID);
+    public static final String MESSAGE_INVALID_PAYMENT_STATUS = "Payment Status must be either paid or unpaid";
+
 
     public final String value;
 
