@@ -55,13 +55,13 @@
     "clientEmail" : "alice@example.com",
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
-    "isPaid": "false",
+    "paymentStatus": "unpaid",
     "remark": ""
   }, {
     "clientEmail" : "johnd@example.com",
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
-    "isPaid": "false",
+    "paymentStatus": "unpaid",
     "remark": ""
   } ]
 }

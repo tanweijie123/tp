@@ -9,6 +9,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.ExerciseType;
@@ -35,7 +36,7 @@ public class ScheduleBuilder {
     public static final LocalDateTime DEFAULT_START_TIME =
             LocalDateTime.of(2020, 9, 29, 13, 0);
 
-    public static final Boolean DEFAULT_IS_PAID = false;
+    public static final PaymentStatus DEFAULT_PAYMENT_STATUS = PaymentStatus.PAYMENT_STATUS_UNPAID;
     public static final Remark DEFAULT_REMARK = Remark.EMPTY_REMARK;
 
     private Name clientName;
@@ -48,7 +49,7 @@ public class ScheduleBuilder {
     private ExerciseType exerciseType;
     private Interval interval;
 
-    private Boolean isPaid;
+    private PaymentStatus paymentStatus;
     private Remark remark;
 
     /**
@@ -66,7 +67,7 @@ public class ScheduleBuilder {
         exerciseType = new ExerciseType(DEFAULT_EXERCISE_TYPE);
         interval = new Interval(DEFAULT_START_TIME, DEFAULT_DURATION);
 
-        isPaid = DEFAULT_IS_PAID;
+        paymentStatus = DEFAULT_PAYMENT_STATUS;
         remark = DEFAULT_REMARK;
     }
 
@@ -84,7 +85,7 @@ public class ScheduleBuilder {
         exerciseType = scheduleToCopy.getSession().getExerciseType();
         interval = scheduleToCopy.getSession().getInterval();
 
-        isPaid = scheduleToCopy.getIsPaid();
+        paymentStatus = scheduleToCopy.getPaymentStatus();
         remark = scheduleToCopy.getRemark();
     }
 
@@ -175,10 +176,10 @@ public class ScheduleBuilder {
     }
 
     /**
-     * Sets the {@code isPaid} of the {@code Schedule} that we are building.
+     * Sets the {@code paymentStatus} of the {@code Schedule} that we are building.
      */
-    public ScheduleBuilder withIsPaid(boolean isPaid) {
-        this.isPaid = isPaid;
+    public ScheduleBuilder withPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
         return this;
     }
 
@@ -196,7 +197,7 @@ public class ScheduleBuilder {
     public Schedule build() {
         Client client = new Client(clientName, clientPhone, clientEmail, clientAddress, clientTags);
         Session session = new Session(gym, exerciseType, interval);
-        return new Schedule(client, session, isPaid, remark);
+        return new Schedule(client, session, paymentStatus, remark);
     }
 
 }
