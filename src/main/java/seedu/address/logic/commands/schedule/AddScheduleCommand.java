@@ -67,11 +67,11 @@ public class AddScheduleCommand extends Command {
 
         Session sessionToSchedule = lastShownSessionList.get(sessionIndex.getZeroBased());
 
-        Schedule scheduleToAdd = new Schedule(clientToSchedule, sessionToSchedule);
-        if (model.hasSchedule(scheduleToAdd)) {
+        if (model.hasAnyScheduleAssociatedWithClientAndSession(clientToSchedule, sessionToSchedule)) {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }
 
+        Schedule scheduleToAdd = new Schedule(clientToSchedule, sessionToSchedule);
         model.addSchedule(scheduleToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, scheduleToAdd));
     }
