@@ -303,10 +303,10 @@ Format: `sview p/PERIOD`
  | y | year|
 *case insensitive
  
- <img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
- * Sample picture of the result of running `sview p/+2week`
-   > Examples:
 
+   > Examples:
+> <img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
+  Sample picture of the result of running `sview p/+2week`
 *  `sview p/all` Displays all sessions.
 *  `sview p/+0D` Display all sessions today.
 *  `sview p/-1d` Display sessions from the past 1 day to today (yesterday and today).
