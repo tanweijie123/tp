@@ -133,6 +133,91 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Logging
+
+We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels 
+and logging destinations.
+
+- The logging level can be controlled using the `logLevel` setting in the configuration file 
+(See [Section 3.2](#configuration), “Configuration”)
+- The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according 
+to the specified logging level
+- Currently log messages are output through both `Console` and to a `.log` file.
+
+**Logging Levels**
+
+- **SEVERE** : Critical problem detected which may possibly cause the termination of the application
+- **WARNING** : Can continue, but with caution
+- **INFO** : Information showing the noteworthy actions by the App
+- **FINE** : Details that is not usually noteworthy but may be useful in debugging 
+e.g. print the actual list instead of just its size
+
+
+### Configuration
+
+Certain properties of the application can be controlled(e.g. user prefs file location, logging level), 
+through the configuration file (default: `config.json`)
+
+
+### Delete Session feature --- Bennett Clement
+
+The delete feature allows user to cancel a session, and delete all schedules associated to the session.
+
+#### Implementation
+
+The delete session mechanism is facilitated by `DeleteSessionCommand` which extends `Command`. The format of the 
+command is given by: 
+
+```sdel INDEX [f/ true]```
+
+When using this command, the `INDEX` should refer to the index shown in the SessionList on the right panel.
+The user can follow up with an optional force parameters to delete all schedules associated to the session.
+
+**Example Commands**
+
+1. `sdel 1` : This command deletes the first session if no schedules are associated to it
+1. `sdel 1 f/ true` : This command deletes the first session, and all schedules associated to it
+
+The following activity diagram summarizes what happens when a user executes a new `DeleteSession` command
+
+![DeleteSessionActivityDiagram](images/DeleteSessionActivityDiagram.png)
+
+In the following sequence diagram, we trace the execution for when the user decides to enter the DeleteSession command 
+`sdel 1 f/ true` into FitEgo. For simplicity, we will refer to this command input as commandText. We also assume that
+there are currently 2 associated schedules to the first session in FitEgo.
+
+![DeleteSessionSequenceDiagram](images/tracing/DeleteSessionSequenceDiagram.png)
+
+![DeleteSessionParseArgsRef](images/tracing/DeleteSessionParseArgsRef)
+ 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteSessionCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The sequence diagram above shows how the `DeleteSessionCommand` is executed in FitEgo. The LogicManager receives user 
+command as commandText and parses it with `AddressBookParser`. It will parse the command and pass the remaining
+arguments to `DeleteSessionCommandParser` to construct a `DeleteSessionCommand`. This `DeleteSessionCommand` is 
+returned to the `LogicManager` which will then executes it with reference to the model argument.
+
+The model will first get the current `FilteredSessionList` instance to get the session to be deleted. It will then check
+whether there exist any `Schedule` associated to the session. If there exists such `Schedule` and the boolean `isForced` 
+is set to true, the model will remove them from `AddressBook`. It will then create a `CommandResult` to relay feedback 
+message back to the UI and return control back to `LogicManager`
+
+#### Design Considerations
+
+In designing this feature, we had to consider the alternative ways in which we can choose to handle Session deletion
+
+- **Alternative 1 (current choice):** 
+    
+    - Pros: Easier to maintain data integrity
+    - Cons: May have performance issues in terms of response time if there are a lot of Schedules or Sessions
+    
+- **Alternative 2:** Allow schedules to exist with deleted session
+    
+    - Pros: Easier to implement.
+    - Cons: We must keep track of deleted sessions, which might make the application bloat up over time
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -252,7 +337,7 @@ administrative matters.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                     | I want to …​                    | So that I can…​                                                         |
+| Priority | As a ...                                     | I want to ...                    | So that I can ...                                                         |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new trainer                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | trainer                                       | add a new client               |                                                                        |
@@ -261,6 +346,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | trainer                                       | delete a client                | remove entries that I no longer need                                   |
 | `* * *`  | trainer                                       | find a client by name          | locate details of clients without having to go through the entire list |
 | `* * *`  | trainer                                       | tag my client         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
+| `* * *`  | trainer                                       | create a Session               |                                                                        |
+| `* * *`  | trainer                                       | delete a Session               | cancel all schedules if there is an urgent need                        |
 | `* *`    | trainer                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | trainer with many clients in the address book | sort clients by name           | locate a client easily                                                 |
 
