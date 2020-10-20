@@ -2,7 +2,7 @@ package seedu.address.logic.commands.schedule;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
-import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_IS_PAID;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
@@ -20,6 +20,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
@@ -38,13 +39,13 @@ public class EditScheduleCommand extends Command {
             + PREFIX_CLIENT_INDEX + "CLIENT (must be a positive integer) "
             + PREFIX_SESSION_INDEX + "SESSION (must be a positive integer) "
             + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION] "
-            + "[" + PREFIX_IS_PAID + "IS PAID] "
+            + "[" + PREFIX_PAYMENT_STATUS + "PAID OR UNPAID?] "
             + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 "
             + PREFIX_UPDATED_SESSION_INDEX + "1 "
-            + PREFIX_IS_PAID + "true "
+            + PREFIX_PAYMENT_STATUS + "paid "
             + PREFIX_REMARK + "Did 5 pushups";
 
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Schedule Edited: \n%1$s";
@@ -132,13 +133,14 @@ public class EditScheduleCommand extends Command {
         } catch (NoSuchElementException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
-        boolean updatedIsPaid = editScheduleDescriptor
-                .getUpdatedIsPaid().orElse(scheduleToEdit.getIsPaid());
+        // get new PaymentStatus else return previous PaymentStatus
+        PaymentStatus updatedPayment = editScheduleDescriptor
+                .getPaymentStatus().orElse(scheduleToEdit.getPaymentStatus());
 
         // get new remark else return previous remark
         Remark remark = editScheduleDescriptor.getRemark().orElse(scheduleToEdit.getRemark());
 
-        return new Schedule(client, session, updatedIsPaid, remark);
+        return new Schedule(client, session, updatedPayment, remark);
     }
 
     @Override
@@ -168,7 +170,7 @@ public class EditScheduleCommand extends Command {
         private Index clientIndex;
         private Index sessionIndex;
         private Index updateSessionIndex;
-        private Boolean updatedIsPaid;
+        private PaymentStatus paymentStatus;
         private Remark remark;
 
         public EditScheduleDescriptor() {}
@@ -181,7 +183,7 @@ public class EditScheduleCommand extends Command {
             setClientIndex(toCopy.clientIndex);
             setSessionIndex(toCopy.sessionIndex);
             setUpdatedSessionIndex(toCopy.updateSessionIndex);
-            setUpdatedIsPaid(toCopy.updatedIsPaid);
+            setUpdatedPayment(toCopy.paymentStatus);
             setUpdatedRemark(toCopy.remark);
         }
 
@@ -189,7 +191,7 @@ public class EditScheduleCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(updateSessionIndex, updatedIsPaid, remark);
+            return CollectionUtil.isAnyNonNull(updateSessionIndex, paymentStatus, remark);
         }
 
         public void setClientIndex(Index clientIndex) {
@@ -216,12 +218,12 @@ public class EditScheduleCommand extends Command {
             return Optional.ofNullable(updateSessionIndex);
         }
 
-        public Optional<Boolean> getUpdatedIsPaid() {
-            return Optional.ofNullable(updatedIsPaid);
+        public Optional<PaymentStatus> getPaymentStatus() {
+            return Optional.ofNullable(paymentStatus);
         }
 
-        public void setUpdatedIsPaid(Boolean updatedIsPaid) {
-            this.updatedIsPaid = updatedIsPaid;
+        public void setUpdatedPayment(PaymentStatus updatedPayment) {
+            this.paymentStatus = updatedPayment;
         }
 
         public Optional<Remark> getRemark() {
@@ -250,7 +252,7 @@ public class EditScheduleCommand extends Command {
             return getClientIndex().equals(e.getClientIndex())
                     && getSessionIndex().equals(e.getSessionIndex())
                     && getUpdatedSessionIndex().equals(e.getUpdatedSessionIndex())
-                    && getUpdatedIsPaid().equals(e.getUpdatedIsPaid())
+                    && getPaymentStatus().equals(e.getPaymentStatus())
                     && getRemark().equals(e.getRemark());
         }
     }

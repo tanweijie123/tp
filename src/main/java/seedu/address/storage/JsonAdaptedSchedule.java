@@ -1,9 +1,5 @@
 package seedu.address.storage;
 
-import static seedu.address.logic.parser.schedule.ScheduleParserUtil.parseIsPaidToString;
-
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,21 +7,20 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.schedule.ScheduleParserUtil;
 import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Email;
+import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Interval;
 
 public class JsonAdaptedSchedule {
-    public static final String MISSING_CLIENT_EMAIL_MESSAGE_FORMAT = "Schedule's %s client email is missing!";
-    public static final String MISSING_SESSION_START_MESSAGE_FORMAT = "Schedule's %s session start time is missing!";
-    public static final String MISSING_SESSION_END_MESSAGE_FORMAT = "Schedule's %s session end time is missing!";
-    public static final String MISSING_IS_PAID_MESSAGE_FORMAT = "Schedule's %s isPaid is missing!";
-    public static final String MISSING_REMARK_MESSAGE_FORMAT = "Schedule's %s is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s is missing!";
+    public static final String START_TIME_FIELD = "session start time";
+    public static final String END_TIME_FIELD = "session end time";
 
     private final String clientEmail;
     private final String start;
     private final String end;
-    private final String isPaid;
+    private final String paymentStatus;
     private final String remark;
 
     /**
@@ -35,12 +30,12 @@ public class JsonAdaptedSchedule {
     public JsonAdaptedSchedule(@JsonProperty("clientEmail") String clientEmail,
                                @JsonProperty("sessionStart") String start,
                                @JsonProperty("sessionEnd") String end,
-                               @JsonProperty("isPaid") String isPaid,
+                               @JsonProperty("paymentStatus") String paymentStatus,
                                @JsonProperty("remark") String remark) {
         this.clientEmail = clientEmail;
         this.start = start;
         this.end = end;
-        this.isPaid = isPaid;
+        this.paymentStatus = paymentStatus;
         this.remark = remark;
     }
 
@@ -51,7 +46,7 @@ public class JsonAdaptedSchedule {
         clientEmail = source.getClient().getEmail().toString();
         start = SessionParserUtil.parseDateTimeToString(source.getSession().getStartTime());
         end = SessionParserUtil.parseDateTimeToString(source.getSession().getEndTime());
-        isPaid = parseIsPaidToString(source.getIsPaid());
+        paymentStatus = source.getPaymentStatus().value;
         remark = source.getRemark().value;
     }
 
@@ -63,7 +58,7 @@ public class JsonAdaptedSchedule {
     public Email getClientEmail() throws IllegalValueException {
 
         if (clientEmail == null) {
-            throw new IllegalValueException(String.format(MISSING_CLIENT_EMAIL_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Email.class.getSimpleName()));
         }
 
@@ -81,29 +76,38 @@ public class JsonAdaptedSchedule {
      */
     public Interval getSessionInterval() throws IllegalValueException {
         if (start == null) {
-            throw new IllegalValueException(String.format(MISSING_SESSION_START_MESSAGE_FORMAT,
-                    LocalDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    START_TIME_FIELD));
         }
+
+        if (SessionParserUtil.isInvalidDateTime(start)) {
+            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
+        }
+
         if (end == null) {
-            throw new IllegalValueException(String.format(MISSING_SESSION_END_MESSAGE_FORMAT,
-                    LocalDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    END_TIME_FIELD));
+        }
+
+        if (SessionParserUtil.isInvalidDateTime(end)) {
+            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
         }
 
         return SessionParserUtil.parseIntervalFromStartAndEnd(start, end);
     }
 
     /**
-     * Converts this Jackson-friendly adapted Schedule object to get its model's {@code isPaid} object.
+     * Converts this Jackson-friendly adapted Schedule object to get its model's {@code PaymentStatus} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted isPaid value.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted payment status.
      */
-    public boolean getIsPaid() throws IllegalValueException {
-        if (isPaid == null) {
-            throw new IllegalValueException(String.format(MISSING_IS_PAID_MESSAGE_FORMAT,
-                    Boolean.class.getSimpleName()));
+    public PaymentStatus getPaymentStatus() throws IllegalValueException {
+        if (paymentStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PaymentStatus.class.getSimpleName()));
         }
 
-        return ScheduleParserUtil.parseIsPaid(isPaid);
+        return ScheduleParserUtil.parsePaymentStatus(paymentStatus);
     }
 
     /**
@@ -113,7 +117,7 @@ public class JsonAdaptedSchedule {
      */
     public Remark getRemark() throws IllegalValueException {
         if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_REMARK_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Remark.class.getSimpleName()));
         }
 
