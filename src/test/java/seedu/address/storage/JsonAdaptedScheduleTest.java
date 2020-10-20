@@ -7,9 +7,8 @@ import static seedu.address.storage.JsonAdaptedSchedule.START_TIME_FIELD;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSchedules.ALICE_GETWELL;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Email;
