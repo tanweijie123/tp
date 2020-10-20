@@ -15,6 +15,10 @@ Class ClientListPanel
 Class ClientCard
 Class StatusBarFooter
 Class CommandBox
+Class Homepage
+class RightSideBar
+class SessionCard
+class ClientInfoPage
 }
 
 package Model <<Rectangle>> {
@@ -28,17 +32,30 @@ Class HiddenLogic #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
+ClientCard .left.> Model
+SessionCard .left.> Model
+ClientInfoPage -left-> Model
+Homepage -left-> Model
+UiManager --> Logic
+MainWindow --> Logic
+ClientListPanel --> Logic
+RightSideBar --> Logic
+
 UiManager .left.|> Ui
 UiManager -down-> MainWindow
 MainWindow --> HelpWindow
-MainWindow *-down-> CommandBox
+MainWindow <-down-> CommandBox
 MainWindow *-down-> ResultDisplay
-MainWindow *-down-> ClientListPanel
+MainWindow <-down-> ClientListPanel
 MainWindow *-down-> StatusBarFooter
+MainWindow *-down-> Homepage
+MainWindow <---> RightSideBar
+MainWindow ..> ClientInfoPage
 
 ClientListPanel -down-> ClientCard
+RightSideBar ---> SessionCard
 
-MainWindow -left-|> UiPart
+MainWindow -up-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
@@ -46,15 +63,13 @@ ClientListPanel --|> UiPart
 ClientCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
+Homepage --|> UiPart
+RightSideBar --|> UiPart
+SessionCard --|> UiPart
+ClientInfoPage --|> UiPart
 
-ClientCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
-
-ClientListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
 @enduml
