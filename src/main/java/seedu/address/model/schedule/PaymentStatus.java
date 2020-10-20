@@ -3,9 +3,9 @@ package seedu.address.model.schedule;
 import static java.util.Objects.requireNonNull;
 
 public class PaymentStatus {
-    public static final String STATUS_PAID = "paid";
-    public static final String STATUS_UNPAID = "unpaid";
-    public static final PaymentStatus UNPAID_PAYMENT = new PaymentStatus(STATUS_UNPAID);
+    public static final String VALUE_PAID = "paid";
+    public static final String VALUE_UNPAID = "unpaid";
+    public static final PaymentStatus PAYMENT_STATUS_UNPAID = new PaymentStatus(VALUE_UNPAID);
 
     public final String value;
 
@@ -16,7 +16,7 @@ public class PaymentStatus {
      */
     public PaymentStatus(String status) {
         requireNonNull(status);
-        assert status.equals(STATUS_PAID) || status.equals(STATUS_UNPAID);
+        assert status.equals(VALUE_PAID) || status.equals(VALUE_UNPAID);
         this.value = status;
     }
 
@@ -24,8 +24,8 @@ public class PaymentStatus {
      * Returns true if paid, or false if unpaid
      */
     public boolean isPaid() {
-        assert value.equals(STATUS_PAID) || value.equals(STATUS_UNPAID);
-        return value.equals(STATUS_PAID) ? true : false;
+        assert value.equals(VALUE_PAID) || value.equals(VALUE_UNPAID);
+        return value.equals(VALUE_PAID) ? true : false;
     }
 
     @Override

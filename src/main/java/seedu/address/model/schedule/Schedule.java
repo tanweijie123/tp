@@ -32,7 +32,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         requireAllNonNull(client, session);
         this.client = client;
         this.session = session;
-        this.paymentStatus = PaymentStatus.UNPAID_PAYMENT;
+        this.paymentStatus = PaymentStatus.PAYMENT_STATUS_UNPAID;
         this.remark = Remark.EMPTY_REMARK;
     }
 
