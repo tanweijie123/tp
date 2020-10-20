@@ -15,8 +15,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SESSION;
 import static seedu.address.testutil.TypicalSchedules.BENSON_GETWELL;
-import static seedu.address.testutil.TypicalSchedules.IS_PAID_FALSE;
-import static seedu.address.testutil.TypicalSchedules.IS_PAID_TRUE;
+import static seedu.address.testutil.TypicalSchedules.PAYMENT_PAID;
+import static seedu.address.testutil.TypicalSchedules.PAYMENT_UNPAID;
 import static seedu.address.testutil.TypicalSchedules.TEST_REMARK;
 import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
 import static seedu.address.testutil.TypicalSessions.MACHOMAN;
@@ -68,12 +68,12 @@ public class EditScheduleCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Schedule editedSchedule = new ScheduleBuilder(BENSON_GETWELL)
                 .withSession(MACHOMAN)
-                .withIsPaid(IS_PAID_FALSE)
+                .withPaymentStatus(PAYMENT_UNPAID)
                 .withRemark(TEST_REMARK)
                 .build();
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
-                .withUpdatedIsPaid(IS_PAID_FALSE)
+                .withUpdatedPaymentStatus(PAYMENT_UNPAID)
                 .withUpdatedRemark(TEST_REMARK)
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_CLIENT, INDEX_FIRST_SESSION,
@@ -86,7 +86,7 @@ public class EditScheduleCommandTest {
 
         assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
         assertEquals(model.getFilteredScheduleList().get(1).getRemark(), TEST_REMARK);
-        assertEquals(model.getFilteredScheduleList().get(1).getIsPaid(), IS_PAID_FALSE);
+        assertEquals(model.getFilteredScheduleList().get(1).getPaymentStatus(), PAYMENT_UNPAID);
     }
 
     @Test
@@ -136,13 +136,12 @@ public class EditScheduleCommandTest {
     public void execute_filteredList_success() {
         Client lastClient = model.getFilteredClientList().get(0);
         Session lastSession = model.getFilteredSessionList().get(2);
-        boolean isPaidTrue = true;
 
         Schedule scheduleInFilteredList = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
         Schedule editedSchedule = new ScheduleBuilder(scheduleInFilteredList)
                 .withClient(lastClient)
                 .withSession(lastSession)
-                .withIsPaid(isPaidTrue)
+                .withPaymentStatus(PAYMENT_PAID)
                 .withRemark(TEST_REMARK)
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
@@ -150,7 +149,7 @@ public class EditScheduleCommandTest {
                         .withClientIndex(INDEX_SECOND_CLIENT)
                         .withSessionIndex(INDEX_FIRST_SESSION)
                         .withUpdatedSessionIndex(INDEX_THIRD_SESSION)
-                        .withUpdatedIsPaid(IS_PAID_TRUE)
+                        .withUpdatedPaymentStatus(PAYMENT_PAID)
                         .withUpdatedRemark(TEST_REMARK)
                         .build());
 
@@ -169,7 +168,7 @@ public class EditScheduleCommandTest {
     public void execute_duplicateScheduleUnfilteredList_failure() {
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
-                .withUpdatedIsPaid(IS_PAID_FALSE)
+                .withUpdatedPaymentStatus(PAYMENT_PAID)
                 .withUpdatedRemark(TEST_REMARK)
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
