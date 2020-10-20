@@ -26,10 +26,33 @@ public class DeleteClientCommand extends Command {
 
     public static final String MESSAGE_DELETE_CLIENT_SUCCESS = "Deleted Client: %1$s";
 
-    private final Index targetIndex;
+    public static final String MESSAGE_FORCE_DELETE_CLIENT_USAGE = COMMAND_WORD
+            + ": Cannot delete the Client identified by the index number because there are schedules tied to it.\n"
+            + "To force delete, pass in f/ true as an option. BEWARE, YOU WILL LOSE ALL RELATED SCHEDULES.\n"
+            + "Parameters: INDEX (must be a positive integer) f/ true\n"
+            + "Example: " + COMMAND_WORD + " 1 f/ true";
 
+    private final Index targetIndex;
+    private final boolean isForced;
+
+    /**
+     * Creates a normal mode DeleteClient to delete the Client at {@code targetIndex}
+     * @param targetIndex index of to-be deleted Client
+     */
     public DeleteClientCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.isForced = false;
+    }
+
+    /**
+     * Creates a increased privilege mode DeleteClient to force delete the Client at {@code targetIndex}
+     * if {@code isForced} is true
+     * @param targetIndex index of to-be deleted Client
+     * @param isForced true if the ClientSession have increased privilege
+     */
+    public DeleteClientCommand(Index targetIndex, boolean isForced) {
+        this.targetIndex = targetIndex;
+        this.isForced = isForced;
     }
 
     @Override
@@ -42,7 +65,17 @@ public class DeleteClientCommand extends Command {
         }
 
         Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        // Do not delete Client unless user use the force flag
+        if (model.hasAnyScheduleAssociatedWithClient(clientToDelete) && !isForced) {
+            return new CommandResult(MESSAGE_FORCE_DELETE_CLIENT_USAGE);
+        }
+
+        assert isForced || !model.hasAnyScheduleAssociatedWithClient(clientToDelete);
+
+        model.deleteClientAssociatedSchedules(clientToDelete);
         model.deleteClient(clientToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete));
     }
 
