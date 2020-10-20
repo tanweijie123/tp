@@ -69,11 +69,14 @@ public class DeleteSessionCommand extends Command {
         // Do not delete session unless user use the force flag
         if (model.hasAnyScheduleAssociatedWithSession(sessionToDelete) && !isForced) {
             return new CommandResult(MESSAGE_FORCE_DELETE_SESSION_USAGE);
-        } else {
-            model.deleteSessionAssociatedSchedules(sessionToDelete);
-            model.deleteSession(sessionToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_SESSION_SUCCESS, sessionToDelete));
         }
+
+        assert isForced || !model.hasAnyScheduleAssociatedWithSession(sessionToDelete);
+
+        model.deleteSessionAssociatedSchedules(sessionToDelete);
+        model.deleteSession(sessionToDelete);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_SESSION_SUCCESS, sessionToDelete));
     }
 
     @Override
