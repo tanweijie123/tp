@@ -72,10 +72,10 @@ attended Session.
 
 Example of a Schedule:
 
-| Client   | Session                                                      | Weight | Remark                                                       | Has been Paid |
-| -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | ------------- |
-| John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | Yes           |
-| Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | Yes           |
+| Client   | Session                                                      | Weight | Remark                                                       | Payment Status |
+| -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | -------------- |
+| John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | paid           |
+| Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | unpaid         |
 
 All schedules' commands have prefix `sch`.
 
@@ -292,17 +292,18 @@ Examples:
 
 Edits the details of the Schedule identified by the client index and session index.
 
-Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`
+Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS]`
 
 * Edits the Schedule that consists of the client and session indicated by `CLIENT_INDEX` and `SESSION_INDEX`
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
-* `SESSION_INDEX` refers to the index number shown in the displayed session list. The index **must be a positive integer** 1, 2, 3, …
+* `SESSION_INDEX` and `UPDATED_SESSION_INDEX` refers to the index number shown in the displayed session list. The index **must be a positive integer** 1, 2, 3, …
+* `PAYMENT_STATUS` can either be `paid` or `unpaid`
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 
 Examples:
 *  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
-*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be paid.
+*  `schedit c/1 s/1 pd/paid` Edits the Schedule containing client index 1 and session index 1 to be paid.
 *  `schedit c/1 s/1 r/ did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
 of doing 5 pushups.
 * `schedit c/1 s/1 r/` Clear the Schedule containing client index 1 and session index 1 remarks.
@@ -359,7 +360,7 @@ FitEgo data are saved in the hard disk automatically after any command that chan
 | Update Session Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
 | Delete a Session |`sdel INDEX [f/ true]` | `sdel 1` |
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`| `schedit c/1 s/1 us/1 pd/true` |
+| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS]`| `schedit c/1 s/1 us/1 pd/paid |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
 

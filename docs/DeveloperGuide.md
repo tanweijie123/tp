@@ -589,12 +589,12 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `editschedule c/2 s/1 us/2`<br>
    Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-   1. Test case: `editschedule c/1 s/1 pd/true`<br>
-         Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
+   1. Test case: `editschedule c/1 s/1 pd/paid<br>
+         Expected: Schedule with client index 2 and session index 1 is edited to be paid. 
          In the right panel, the client's name in the related session will be indicated as green. 
          Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-   1. Test case: `editschedule c/1 s/1 pd/false`<br>
-            Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
+   1. Test case: `editschedule c/1 s/1 pd/unpaid<br>
+            Expected: Schedule with client index 2 and session index 1 is edited to be unpaid. 
             In the right panel, the client's name in the related session will be indicated as red. 
             Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
    1. Other incorrect edit commands to try: `editschedule c/1`, `editschedule c/1 s/2`, `editschedule c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
