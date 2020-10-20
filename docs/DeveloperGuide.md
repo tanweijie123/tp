@@ -88,9 +88,9 @@ The `UI` component,
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cdel 1")` API call.
 
-![Interactions Inside the Logic Component for the `cdel 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `cdel 1` Command](images/DeleteClientSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteClientCommandParser` and `DeleteClientCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### Model component
@@ -319,12 +319,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
+  
+* 2b. User requests to force delete a specific Client in the Client List.
+
+    * 2b1. FitEgo force deletes the Client and its associated Schedules.
+  
+    Use case ends.
 
 * 3a. The given index is invalid.
 
     * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. The given index refers to a client associated with one or more Schedule.
+    
+    * 3b1. FitEgo shows an error message.
+    
+      Use case resumes at step 2.
+      
+      
 
 **Use case: Tag a Client**
 
@@ -528,7 +542,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `cdel 0`<br>
       Expected: No Client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `cdel`, `cdel x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `cdel`, `cdel p/`, `cdel x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
@@ -575,6 +589,23 @@ testers are expected to do more *exploratory* testing.
             Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
 
    1. Other incorrect edit commands to try: `editschedule c/1`, `editschedule c/1 s/2`, `editschedule c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
+      Expected: Similar to previous.
+
+### Viewing Sessions within Period
+
+1. Viewing Sessions within Period while the Session List is non-empty
+
+   1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
+
+   1. Test case: `sview p/+1d`<br>
+      Expected: The right panel only displays Sessions with start time from 0000hrs today to 2359hrs the next day.
+      Indication that Session List has been successfully updated is shown in the status message.
+
+   1. Test case: `sview p/past`<br>
+      Expected: The right panel only displays Sessions that have already ended before time of execution.
+      Indication that Session List has been successfully updated is shown in the status message.
+
+   1. Other incorrect edit commands to try: `sview`, `sview p/+2s` (where unit of time is not d/m/y), `...` <br>
       Expected: Similar to previous.
 
 ### Saving data

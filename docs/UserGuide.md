@@ -135,7 +135,7 @@ Examples:
 
 ### Listing all clients : `clist`
 
-Shows a list of all clients in the clients list.
+Shows a list of all clients in the Client list.
 
 Format: `clist`
 
@@ -185,8 +185,22 @@ Format: `cdel INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `cdel 2` deletes the 2nd Client in the address book.
-* `find Betsy` followed by `cdel 1` deletes the 1st Client in the results of the `find` command.
+* `clist` followed by `cdel 2` deletes the 2nd Client in the address book.
+* `cfind Bernice` followed by `cdel 1` deletes the 1st Client in the results of the `find` command.
+
+* If the 2nd session in the Session List is not associated with any schedule, `list` followed by `sdel 2` will delete the session
+* If the 2nd session in the Session List is associated with one or more schedules, 
+`list` followed by `sdel 2` will return an error message 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    To force deletion of a client (and all associated schedules), pass in the optional force flag after the `INDEX`.
+    Any string after the force flag (`f/`) will be ignored.
+</div>
+
+Examples:
+* If there are one or more associated schedules associated with the 2nd session in the Session List, 
+  `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
+  itself
 
 ### View a Client : `cview`
 
@@ -262,12 +276,12 @@ Examples:
   `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
   itself
   
-### Filtering Sessions by time: `sview`
-You can filter the Session List by time period to manage your sessions.
+### Viewing Sessions within Period: `sview`
+You can filter the Session List to view Sessions within requested period to manage your sessions.
 
 Format: `sview p/PERIOD`
  * Filters the Session List to only display those within the specified period.
- * Right above the Session List, you can see the filter currently being applied.
+ * Right above the Session List, you can find the name of the period you are viewing.
  * The recognized periods are as follows:
  
  | Period | Sessions displayed |
@@ -275,8 +289,9 @@ Format: `sview p/PERIOD`
  | all| All sessions (including past ones)|
  | future | All sessions that have not started|
  | past | All sessions that have already ended|
- | `+[x][unit]` | Sessions within next x time units (inclusive of current date)|
- | `-[x][unit]` | Sessions within past x time units (inclusive of current date)|
+ | week | All sessions within the next 7 days|
+ | `+[x][unit]` | Sessions within next x time units|
+ | `-[x][unit]` | Sessions within past x time units|
  
  * The recognised units are as follows:
 
@@ -288,7 +303,10 @@ Format: `sview p/PERIOD`
  | y | year|
 *case insensitive
  
-Examples:
+ <img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
+ * Sample picture of the result of running `sview p/+2week`
+   > Examples:
+
 *  `sview p/all` Displays all sessions.
 *  `sview p/+0D` Display all sessions today.
 *  `sview p/-1d` Display sessions from the past 1 day to today (yesterday and today).
@@ -385,14 +403,14 @@ FitEgo data are saved in the hard disk automatically after any command that chan
 | -------- | -------- | --------- |
 | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
 | Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
-| Delete Client Info |`cdel INDEX` |`cdel 1`|
+| Delete Client Info |`cdel INDEX [f/]` |`cdel 1`|
 | List All Clients | `clist`  |  `clist`  |
 | View a Client's Full Profile | `cview INDEX` | `cview 1`|
 | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
 | Update Session Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
 | Delete a Session |`sdel INDEX [f/ true]` | `sdel 1` |
-| Filter Sessions |`sview p/PERIOD ` | `sview p/all`|
+| View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
 | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`| `schedit c/1 s/1 us/1 pd/true` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |

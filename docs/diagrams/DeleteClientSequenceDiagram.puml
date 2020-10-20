@@ -48,22 +48,49 @@ deactivate AddressBookParser
 LogicManager -> DeleteClientCommand : execute()
 activate DeleteClientCommand
 
-DeleteClientCommand -> Model : deleteClient(1)
+DeleteClientCommand -> Model : hasAnyScheduleAssociatedWithClient(1)
 activate Model
 
 Model --> DeleteClientCommand
 deactivate Model
 
-create CommandResult
-DeleteClientCommand -> CommandResult
-activate CommandResult
+alt hasAssociatedSchedule and isNotForceDelete
 
-CommandResult --> DeleteClientCommand
-deactivate CommandResult
+        create CommandResult
+        DeleteClientCommand -> CommandResult
+        activate CommandResult
+
+        CommandResult --> DeleteClientCommand
+        deactivate CommandResult
+
+else else
+    DeleteClientCommand -> Model : deleteClientAssociatedSchedules(1)
+    activate Model
+
+    Model --> DeleteClientCommand
+    deactivate Model
+
+    DeleteClientCommand -> Model : deleteClient(1)
+    activate Model
+
+    Model --> DeleteClientCommand
+    deactivate Model
+
+    create CommandResult
+    DeleteClientCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> DeleteClientCommand
+    deactivate CommandResult
+
+    end
 
 DeleteClientCommand --> LogicManager : result
 deactivate DeleteClientCommand
+DeleteClientCommandParser -[hidden]-> AddressBookParser
+destroy DeleteClientCommand
 
 [<--LogicManager
 deactivate LogicManager
 @enduml
+
