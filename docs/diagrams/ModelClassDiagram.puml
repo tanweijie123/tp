@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
@@ -15,7 +16,6 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
-Interface CheckExisting <<Interface>>
 
 Class AddressBook
 Class ReadOnlyAddressBook
@@ -28,12 +28,12 @@ class "UniqueList<T extends CheckExisting<T>>" as UniqueList_t
 Class "UniqueList<Client>" as UniqueList_client
 Class "UniqueList<Session>" as UniqueList_session
 Class "UniqueList<Schedule>" as UniqueList_schedule
-UniqueList_t <|-- UniqueList_client
-UniqueList_t <|-- UniqueList_session
-UniqueList_t <|-- UniqueList_schedule
+UniqueList_t <... UniqueList_client
+UniqueList_t <... UniqueList_session
+UniqueList_t <... UniqueList_schedule
 
 Package Client {
-class Client implements CheckExisting
+class Client
 Class Address
 Class Email
 Class Name
@@ -41,16 +41,17 @@ Class Phone
 }
 
 Package Session {
-Class Session implements CheckExisting
+Class Session
 Class Gym
 Class ExerciseType
 Class Interval
 }
 
 Package Schedule {
-Class Schedule implements CheckExisting
+Class Schedule
 Class Remark
 Class Weight
+Class Payment
 }
 
 Package Tag {
@@ -94,9 +95,10 @@ AddressBook *--> "1" UniqueList_schedule
 UniqueList_schedule o--> "*" Schedule
 Schedule *--> Remark
 Schedule *--> Weight
+Schedule *--> Payment
 
 
-ModelManager -->"1" Client : filtered list
-ModelManager -->"1" Schedule : filtered list
-ModelManager -->"1" Session : filtered list
+ModelManager -->"1" Client : filteredClients
+ModelManager -->"1" Schedule : filteredSchedules
+ModelManager -->"1" Session : filteredSessions
 @enduml
