@@ -532,16 +532,14 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
-
-## Command Summary
+# Command Summary
 
 | Action | Format | Example |
 | -------- | -------- | --------- |
@@ -563,7 +561,8 @@ Examples:
 | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
+--------------------------------------------------------------------------------------------------------------------
 
-### Acknowledgement
+# Acknowledgement
 * Icon made by Freepik from [flaticon](www.flaticon.com)
 * This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)
