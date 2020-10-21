@@ -105,6 +105,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteClientAssociatedSchedules(Client client) {
+        requireNonNull(client);
+
+        List<Schedule> associatedSchedules = addressBook.getScheduleList()
+                .stream()
+                .filter(schedule -> client.isUnique(schedule.getClient()))
+                .collect(Collectors.toList());
+
+        for (Schedule schedule : associatedSchedules) {
+            this.deleteSchedule(schedule);
+        }
+
+        logger.info(String.format("User force delete Client %s\n causing %d schedules to be deleted",
+                client.toString(),
+                associatedSchedules.size()));
+    }
+
+    @Override
     public void deleteClient(Client target) {
         addressBook.removeClient(target);
     }

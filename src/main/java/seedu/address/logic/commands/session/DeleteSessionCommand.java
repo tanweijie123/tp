@@ -28,9 +28,9 @@ public class DeleteSessionCommand extends Command {
 
     public static final String MESSAGE_FORCE_DELETE_SESSION_USAGE = COMMAND_WORD
             + ": Cannot delete the Session identified by the index number because there are schedules tied to it.\n"
-            + "To force delete, pass in f/ true as an option. BEWARE, YOU WILL LOSE ALL RELATED SCHEDULES.\n"
-            + "Parameters: INDEX (must be a positive integer) f/ true\n"
-            + "Example: " + COMMAND_WORD + " 1 f/ true";
+            + "To force delete, pass in f/ as an option. BEWARE, YOU WILL LOSE ALL RELATED SCHEDULES.\n"
+            + "Parameters: INDEX (must be a positive integer) f/\n"
+            + "Example: " + COMMAND_WORD + " 1 f/";
 
     private final Index targetIndex;
     private final boolean isForced;

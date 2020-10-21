@@ -39,7 +39,7 @@ public class SessionCommandTestUtil {
 
     public static final String VALID_START_TIME_GETWELL = "29/09/2020 1300";
     public static final String VALID_START_TIME_MACHOMAN = "29/09/2020 1600";
-    public static final String VALID_START_TIME_MACHOMAN_TODAY = LocalDateTime.now().format(
+    public static final String VALID_START_TIME_MACHOMAN_NOW = LocalDateTime.now().format(
             DATE_TIME_FORMATTER);
     public static final String VALID_START_TIME_MACHOMAN_TOMORROW = LocalDateTime.now().plusDays(1).format(
             DATE_TIME_FORMATTER);
