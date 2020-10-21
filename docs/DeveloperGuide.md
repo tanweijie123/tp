@@ -879,12 +879,15 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Schedule while all Clients and Sessions are being shown
 
    1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   
    1. Test case: `schadd c/1 s/1`<br>
       Expected: Add a Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
       Details of the added Schedule is shown in the status message.
+      
    1. Test case: `schadd s/1 c/2`<br>
       Expected: Add a Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
       Details of the added Schedule is shown in the status message.
+      
    1. Other incorrect Add Schedule commands to try: `schadd c/1`, `schadd c/0 s/2`, `schadd c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
       Expected: No Schedule is added. Error details shown in the status message.
 
