@@ -40,7 +40,7 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 # UI-orientation
 
-[comment]: <> (Kelvin to inside Ui-callout image)
+![annotatedUi](images/annotatedUi.png)
 
 From the above image, the GUI is made up of several components. 
 
@@ -64,6 +64,7 @@ For example, in the above image, I entered "c" and commands that starts with "c"
 For advanced users, you may use the "TAB" key and it will auto-complete the first test into the command box, 
    thus increasing your typing speed!   
 </div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to use FitEgo
@@ -100,10 +101,10 @@ attended Session.
 
 Example of a Schedule:
 
-| Client   | Session                                                      | Weight | Remark                                                       | Has been Paid |
-| -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | ------------- |
-| John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | Yes           |
-| Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | Yes           |
+| Client   | Session                                                      | Weight | Remark                                                       | Payment Status |
+| -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | -------------- |
+| John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | paid           |
+| Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | unpaid         |
 
 All schedules' commands have prefix `sch`.
 
@@ -119,7 +120,7 @@ Although there are a lot of commands, once you learn the verb and entities, it i
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Keyword Syntax
+# Keyword
 
 <div markdown="block" class="alert alert-info">
 
@@ -214,6 +215,12 @@ Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
 * `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
 
+### Listing all clients : `clist`
+
+Shows a list of all clients in the clients list.
+
+Format: `clist`
+
 ### Editing a Client : `cedit`
 
 Edits an existing Client in the clients list.
@@ -263,7 +270,21 @@ Format: `cdel INDEX`
 
 Examples:
 * `clist` followed by `cdel 2` deletes the 2nd Client in the address book.
-* `cfind Betsy` followed by `cdel 1` deletes the 1st Client in the results of the `cfind` command.
+* `cfind Bernice` followed by `cdel 1` deletes the 1st Client in the result of the `cfind` command.
+
+* If the 2nd session in the Client List is not associated with any schedule, `clist` followed by `cdel 2` will delete the session
+* If the 2nd session in the Client List is associated with one or more schedules, 
+`list` followed by `cdel 2` will return an error message 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    To force delete a client (and his associated schedules), pass in the optional force flag after the `INDEX`.
+    Any string after the force flag (`f/`) will be ignored.
+</div>
+
+Examples:
+* If there are one or more associated schedules associated with the 2nd session in the Client List, 
+  `list` followed by `cdel 2 f/` will delete all schedules associated with the 2nd session, then delete the session 
+  itself
 
 ### Viewing a Client : `cview`
 
@@ -291,9 +312,7 @@ session panel which is located at the right of this programme.
 <img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" />
 
 The `ALL` at the top of this panel represents the current settings of session view. You can change the period 
-of session view using [`sview`](#sview) command. 
-
-[comment]: <> (TODO: For Kelvin to hyperlink to sview) 
+of session view using [`sview`](#viewing-sessions-within-period-sview) command. 
 
 ### Adding a Session: `sadd`
 
@@ -332,7 +351,7 @@ Examples:
 Deletes the specified session by the index number used in the displayed Session list and all schedules associated with
 the specified session
 
-Format: `sdel INDEX [f/ true]`
+Format: `sdel INDEX [f/]`
 
 * Deletes the Session at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Session list.
@@ -344,29 +363,63 @@ Examples:
 `list` followed by `sdel 2` will return an error message 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    To force deletion of session (and all associated schedules), pass in the optional force flag followed by
-    any non empty string.
+    To force deletion of session (and all associated schedules), pass in the optional force flag after the `INDEX`. 
+    Any string after the force flag (`f/`) will be ignored.
 </div>
 
-Examples:
 * If there are one or more associated schedules associated with the 2nd session in the Session List, 
-  `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
+  `list` followed by `sdel 2 f/` will delete all schedules associated with the 2nd session, then delete the session 
   itself
   
+  
+### Viewing Sessions within Period: `sview`
+You can filter the Session List to view Sessions within requested period to manage your sessions.
+
+Format: `sview p/PERIOD`
+ * Filters the Session List to only display those within the specified period.
+ * Right above the Session List, you can find the name of the period you are viewing.
+ * The recognized periods are as follows:
+ 
+ | Period | Sessions displayed |
+ | -------- | -------- |
+ | all| All sessions (including past ones)|
+ | future | All sessions that have not started|
+ | past | All sessions that have already ended|
+ | week | All sessions within the next 7 days|
+ | `+[x][unit]` | Sessions within next x time units|
+ | `-[x][unit]` | Sessions within past x time units|
+ 
+ * The recognised units are as follows:
+
+ | Unit | Time unit parsed |
+ | -------- | -------- |
+ | d | day |
+ | w | week|
+ | m | month|
+ | y | year|
+*case insensitive
+ 
+<img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
+Sample picture of the result of running `sview p/+2week`
+
+Examples:
+ 
+* `sview p/all` Displays all sessions.
+* `sview p/+0D` Display all sessions today.
+* `sview p/-1d` Display sessions from the past 1 day to today (yesterday and today).
+* `sview p/+2w` Display sessions from today to 2 weeks later. (e.g. If today is Friday,
+        display from today to the Friday that falls 2 weeks later).
 ---
 
 ## Schedule-related Keywords 
-All of schedule's related keyword is described in this section. All of the commands here will interact with the 
+All of schedule's related keywords are described in this section. All of the commands here will interact with the 
 session panel which is located at the right of this programme. To check if you had already scheduled a session with a client, 
 you may check if the session contains the client's name. 
 
 <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" />
 
-The `ALL` at the top of this panel represents the current settings of session view. You can change the period 
-of session view using [`sview`](#sview) command. If the name is shown in red, it represents that this client had not paid
+If the name is shown in red, it represents that this client had not paid
 for his session, otherwise, it would be indicated in green. 
-
-[comment]: <> (TODO: For Kelvin to hyperlink to sview) 
 
 ### Adding a Schedule: `schadd`
 
@@ -399,17 +452,19 @@ Examples:
 
 Edits the details of the Schedule identified by the client index and session index.
 
-Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`
+Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`
 
 * Edits the Schedule that consists of the client and session indicated by `CLIENT_INDEX` and `SESSION_INDEX`
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
-* `SESSION_INDEX` refers to the index number shown in the displayed session list. The index **must be a positive integer** 1, 2, 3, …
+* `SESSION_INDEX` and `UPDATED_SESSION_INDEX` refers to the index number shown in the displayed session list. The index **must be a positive integer** 1, 2, 3, …
+* `PAYMENT_STATUS` can either be `paid` or `unpaid`
+* `REMARK` can be any string
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 
 Examples:
 *  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
-*  `schedit c/1 s/1 pd/true` Edits the Schedule containing client index 1 and session index 1 to be paid.
+*  `schedit c/1 s/1 pd/paid` Edits the Schedule containing client index 1 and session index 1 to be paid.
 *  `schedit c/1 s/1 r/ did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
 of doing 5 pushups.
 * `schedit c/1 s/1 r/` Clear the Schedule containing client index 1 and session index 1 remarks.
@@ -450,17 +505,18 @@ Examples:
 | Exit this programme | `exit` | `exit`|
 | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
 | Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
-| Delete Client Info |`cdel INDEX` |`cdel 1`|
+| Delete Client Info |`cdel INDEX [f/]` |`cdel 1`|
 | List All Clients | `clist`  |  `clist`  |
 | View a Client's Full Profile | `cview INDEX` | `cview 1`|
 | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
 | Update Session Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
-| Delete a Session |`sdel INDEX [f/ true]` | `sdel 1` |
+| Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
+| View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`| `schedit c/1 s/1 us/1 pd/true` |
+| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS]`| `schedit c/1 s/1 us/1 pd/paid |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
 
 ### Acknowledgement
-Icon made by Freepik from <www.flaticon.com>
+Icon made by Freepik from [flaticon](www.flaticon.com)

@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_GETWELL;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN_MINUS1WEEK;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN_NOW;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN_PLUS2MONTHS;
-import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN_TODAY;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_MACHOMAN_TOMORROW;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.VALID_START_TIME_ULTRAMAN;
 import static seedu.address.testutil.TypicalSchedules.getTypicalSchedules;
@@ -52,10 +52,10 @@ public class TypicalSessions {
             .withInterval(VALID_START_TIME_ULTRAMAN,
                     VALID_DURATION_ULTRAMAN)
             .build();
-    public static final Session MACHOMAN_TODAY = new SessionBuilder()
+    public static final Session MACHOMAN_NOW = new SessionBuilder()
             .withGym(VALID_GYM_MACHOMAN)
             .withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN)
-            .withInterval(VALID_START_TIME_MACHOMAN_TODAY, VALID_DURATION_MACHOMAN)
+            .withInterval(VALID_START_TIME_MACHOMAN_NOW, VALID_DURATION_MACHOMAN)
             .build();
     public static final Session MACHOMAN_TOMORROW = new SessionBuilder()
             .withGym(VALID_GYM_MACHOMAN)
@@ -106,16 +106,16 @@ public class TypicalSessions {
      * Returns an {@code AddressBook} with all the typical Sessions + a Session with interval start that dynamically
      * to the day after application is loaded.
      */
-    public static AddressBook getTypicalWithDayAfterAddressBook() {
+    public static AddressBook getDynamicTimeAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Session session : getTypicalWithDayAfterSessions()) {
+        for (Session session : getDynamicTimeSessions()) {
             ab.addSession(session);
         }
         return ab;
     }
 
-    public static List<Session> getTypicalWithDayAfterSessions() {
-        return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN, MACHOMAN_TODAY, MACHOMAN_TOMORROW,
+    public static List<Session> getDynamicTimeSessions() {
+        return new ArrayList<>(Arrays.asList(GETWELL, MACHOMAN, ULTRAMAN, MACHOMAN_NOW, MACHOMAN_TOMORROW,
                 MACHOMAN_PLUS2MONTHS, MACHOMAN_MINUS1WEEK));
     }
 }
