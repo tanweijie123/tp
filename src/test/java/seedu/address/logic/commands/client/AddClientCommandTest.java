@@ -134,6 +134,11 @@ public class AddClientCommandTest {
         }
 
         @Override
+        public void deleteClientAssociatedSchedules(Client client) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteClient(Client target) {
             throw new AssertionError("This method should not be called.");
         }

@@ -128,7 +128,7 @@ Although there are a lot of commands, once you learn the verb and entities, it i
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features :star:
+# Keyword :star:
 
 <div markdown="block" class="alert alert-info">
 
@@ -222,13 +222,6 @@ a tag with a dash.
 Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
 * `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
-
-
-### Listing all clients : `clist`
-ƒhow
-Shows a list of all clients in the clients list.
-
-Format: `clist`
 
 ### Editing a Client : `cedit`
 
@@ -415,7 +408,7 @@ Examples:
 
 Edits the details of the Schedule identified by the client index and session index.
 
-Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`
+Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/IS_PAID?]`
 
 * Edits the Schedule that consists of the client and session indicated by `CLIENT_INDEX` and `SESSION_INDEX`
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
