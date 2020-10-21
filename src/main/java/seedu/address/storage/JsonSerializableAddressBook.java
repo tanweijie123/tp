@@ -13,6 +13,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
+import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Interval;
@@ -93,10 +94,10 @@ class JsonSerializableAddressBook {
             } else if (session == null) {
                 throw new IllegalValueException(SESSION_NOT_FOUND);
             }
-            boolean isPaid = jsonAdaptedSchedule.getIsPaid();
+            PaymentStatus payment = jsonAdaptedSchedule.getPaymentStatus();
             Remark remark = jsonAdaptedSchedule.getRemark();
 
-            Schedule schedule = new Schedule(client, session, isPaid, remark);
+            Schedule schedule = new Schedule(client, session, payment, remark);
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }

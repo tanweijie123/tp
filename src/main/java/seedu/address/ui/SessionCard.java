@@ -57,7 +57,7 @@ public class SessionCard extends UiPart<Region> {
         if (schedules != null && schedules.size() > 0) {
             schedules.forEach(schedule -> {
                 Label clientLabel = new Label(schedule.getClient().getName().toString());
-                if (schedule.getIsPaid()) {
+                if (schedule.isPaid()) {
                     clientLabel.setId("paidClient");
                 } else {
                     clientLabel.setId("notPaidClient");
