@@ -3,9 +3,11 @@ layout: page
 title: User Guide
 ---
 
+This user guide will serve as an introduction to your next must-have app - FitEgo!
+
 FitEgo is a **desktop app for fitness instructors to manage their clients and schedules, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FitEgo can get your client management tasks done faster than traditional GUI apps.
 
-* Table of Contents
+Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -16,90 +18,112 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 1. Download the latest `fitego.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your FitEgo program.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+  Some example commands you can try:
 
    * **`clist`** : Lists all clients.
 
-   * **`cadd`**`cadd n/Jane Doe p/91234567 e/jane@gmail.com` : Adds a client named `Jane Doe` to the clients list.
+   * **`cadd n/Jane Doe p/91234567 e/jane@gmail.com`** : Adds a client named `Jane Doe` to the clients list.
 
-   * **`cdel`**`3` : Deletes the 3rd client shown in the current list.
+   * **`cdel`**`3` : Deletes the third client shown in the current list.
 
    * **`exit`** : Exits the app.
 
-1. Read [How to use](#how-to-use-fitego) for a quick understanding of commands in FitEgo
+1. Read [How to use](#how-to-use-fitego) for a quick understanding of commands in FitEgo.
 
 1. Refer to the [Keyword](#main-keywords) below for more details of each command.
 
---------------------------------------------------------------------------------------------------------------------
 
-# UI-orientation
+### How to interpret notations
 
-![annotatedUi](images/annotatedUi.png)
+Below are a few blocks which you might want to pay attention to. The different background and icon represents different message.
 
-From the above image, the GUI is made up of several components. 
+[comment]: <> (Copy the blocks below and edit your message)
 
-| Component | Description |
-| --------------- | ---------------------------------------- | 
-| Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
-| Command Box     | Displays a text box for your input. You can type your command here.          | 
-| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt an error message | 
-| Client List     | Displays the list of clients in a list view. You can modify this list using [client's command](#Client-related-Keywords) |
-| Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and Quote of the day | 
-| Session List    | Displays the list of sessions in a list view. You can modify this list using [session's command](#Session-related-Keywords) | 
-| Status Bar Footer | Displays the current date / time of the program. If you notice this is incorrect, your PC might be having a different date / time | 
+<div markdown="block" class="alert alert-info"> 
 
+:information_source: **Note:**
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can type input into the Command Box and it will display the command starting with the input. <br/>
-<br>
-![autocomplete_sample](images/autocomplete_sample.png)
-<br>
-For example, in the above image, I entered "c" and commands that starts with "c" is displayed. <br>
-For advanced users, you may use the "TAB" key and it will auto-complete the first test into the command box, 
-   thus increasing your typing speed!   
+Explains the rationale behind our design. 
+
 </div>
 
---------------------------------------------------------------------------------------------------------------------
+<div markdown="block" class="alert alert-primary">
 
-## How to use FitEgo
+[comment]: <> (This only appears in Github CSS)
 
-There are 3 major entities in FitEgo: Clients, Sessions, and Schedules.
+:bulb: **Tip:**
+
+Good to learn, but not necessary to know to use FitEgo. 
+</div>
+
+
+<div markdown="block" class="alert alert-warning">
+
+:star: **Feature:**
+
+Important to know.
+</div>
+
+<div markdown="block" class="alert alert-success">
+
+:heavy_check_mark: **Example:**
+
+An example to follow. 
+
+</div>
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+May have irreversible effect when used. Backup and caution is recommended.
+</div>
+
+
+### How to use FitEgo
+
+There are 3 major entities in FitEgo: clients, sessions, and schedules.
 There are 5 major verbs in FitEgo: add, edit, delete, view, list.
 
-### Clients
+#### Clients
 
 Clients are customers that is trained by the user (fitness instructor).
 
 All client's commands using the prefix `c`. 
 
-### Sessions
+#### Sessions
 
-Sessions are a timeslot that is scheduled for a training session. It contains information about the gym, the session's 
-main exercise type, start time and the duration of sessions. 
+Sessions are a timeslot that is scheduled for a training session. It contains information about the gym, the session's main exercise type, start time and the duration of sessions. 
 
-Each session can have more than 1 clients, to simulate a trainer instructing a fitness class.
+Each session can have more than 1 client, to model a trainer instructing a fitness class.
 
+We consider two sessions as overlapping if another session starts before the current session ends.
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Info:**
 FitEgo doesn't allow user to create overlapping sessions. This is to protect users from scheduling overlapping sessions
 at different gyms. 
+</div>
 
 All session's commands have prefix `s`.
 
-### Schedules
+#### Schedules
 
-Schedules are what defines a you and your client's interaction. Each schedule contains information about the Client and the 
-attended Session. 
+Schedules are what defines you and your client's interaction. Each schedule contains information about the client and the 
+attended session. 
 
-- You can add in details about your Client's weight progress
-- You can add exercises done during the Session as remark in Schedule
-- You can track whether your Client has paid for the Session attended
+- You can add in details about your client's weight progress
+- You can add exercises done during the session as remark in schedule
+- You can track whether your client has paid for the session attended
 
-Example of a Schedule:
+Example of a schedule:
 
 | Client   | Session                                                      | Weight | Remark                                                       | Payment Status |
 | -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | -------------- |
@@ -108,24 +132,47 @@ Example of a Schedule:
 
 All schedules' commands have prefix `sch`.
 
-Once you learn the entity, you can now combine it with the verb. For example:
-- `cadd`: Add a client, `sadd`: Creates a session, `schadd`: Creates a schedule
-- `cedit`: Edit a client's details, `sedit`: Edit a session's details, `schedit`: Edit a schedule's details
-- `cdel`: Remove a client, `sdel`: Delete a session, `schdel`: Delete a schedule
-
 ### General Note
-* The program will automatically save after every command execution to guarantee that your data will never disappear. 
+
+1. Once you learn the entity, you can now combine it with the verb. For example:
+    - `cadd`: Add a client, `sadd`: Creates a session, `schadd`: Creates a schedule
+    - `cedit`: Edit a client's details, `sedit`: Edit a session's details, `schedit`: Edit a schedule's details
+    - `cdel`: Remove a client, `sdel`: Delete a session, `schdel`: Delete a schedule
+
+1. The program will automatically save after every command execution to guarantee that your data will never disappear. 
 
 Although there are a lot of commands, once you learn the verb and entities, it is so easy to use FitEgo!
 
+--------------------------------------------------------------------------------------------------------------------
 
-## Common Notations
+# UI-orientation
 
-| Emoji | Meaning | text
-| -------- | --------- | --------- |
-| :information_source: | Notes | `:information_source:` |
-| :bulb: | Tip | `:bulb:` |
-| :star: | Feature | `:star:` |
+![AnnotatedUi](images/AnnotatedUi.png)
+
+From the above image, the GUI is made up of several components. 
+
+| Component | Description |
+| --------------- | ---------------------------------------- | 
+| Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
+| Command Box     | Displays a text box for your input. You can type your command here.          | 
+| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt you an error message | 
+| Client List     | Displays the list of clients in a list view. You can modify this list using [client's command](#Client-related-Keywords) |
+| Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and quote of the day | 
+| Session List    | Displays the list of your sessions in a list view. You can modify this list using [session's command](#Session-related-Keywords) | 
+| Status Bar Footer | Displays the current date and time of the program. If you notice this is incorrect, your PC might be using a different timezone| 
+
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:**
+
+You can type input into the Command Box and it will display the command starting with the input. <br/>
+<br>
+![autocomplete_sample](images/autocomplete_sample.png)
+<br>
+For example, in the above image, if you enter `c` and commands that starts with "c" is displayed. <br>
+For advanced users, you can use the "TAB" key and FitEgo will auto-complete the first suggestion into the command box, thus increasing your typing speed!   
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -157,27 +204,32 @@ Shows / Returns to the home page
 
 ![homepage](images/homepage.png)
 
-The homepage will display the statistics of the program, today's schedule and quote of the day. 
+The homepage will display the statistics of your program, today's schedule and quote of the day. 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how you can access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 By default, you can click enter and a browser will open the User Guide. 
 You may also press "ESC" key to close this window. 
 </div>
 
 ### Clearing all data in the program : `clear` 
 
-You can delete all data (client, session, schedule) using the `clear` keyword. All of the existing data will be removed. 
+You can delete all data (client, session, schedule) using the `clear` keyword. All of your existing data will be removed. 
 
-<div markdown="span" class="alert alert-danger">:warning: **Warning:**
-By using this command, it will delete all of your data, and by design of the system, it will be automatically saved. 
+<div markdown="span" class="alert alert-danger"> 
+
+:warning: **Warning:**
+
+By using this command, you will delete all of your data, and by design of the system, it will be automatically saved. 
 You will not be able to retrieve your previous data unless you have backed up the data file into an external location. 
 </div>
 
@@ -194,28 +246,27 @@ FitEgo data are saved in the hard disk automatically after any command that chan
 
 ---
 ## Client-related Keywords
-All of client's related keyword is described in this section. All of the commands here will interact with the client panel
-which is located at the left of this programme. 
+All of client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the left of this program. 
 
 <img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 
 ### Listing all clients : `clist`
 
-Shows a list of all clients in the clients list. The list of clients will be shown at the left panel. 
+You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
 
-By default, the software will display all the clients. In case you used [`cfind`](#locating-clients-by-name-cfind) or any filter-typed commands, 
+By default, Client List will display all the clients. In case you used [`cfind`](#locating-clients-by-name-cfind) or any filter-typed commands, 
 you can use `clist` to view the entire list of clients.  
 
 Format: `clist`
 
-### Adding a client: `cadd`
+### Adding a Client: `cadd`
 
-Adds a client to the clients list.
+You can add a client.
 
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A Client can have any number of tags (including 0). Each tag can include
+A client can have any number of tags (including 0). Each tag can include
 alphanumeric characters or dash (`-`), but you are not allowed to start or end
 a tag with a dash. 
 </div>
@@ -226,36 +277,35 @@ Examples:
 
 ### Editing a Client : `cedit`
 
-Edits an existing Client in the clients list.
+You can edit a client in the Client List.
 
 Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
-* Edits the Client at the specified `INDEX`. The index refers to the index number shown in the displayed Client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the Client will be removed, i.e. adding of tags is not cumulative
-* You can remove all of the Client’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the client will be removed, i.e. adding of tags is not cumulative
+* You can remove all of the client’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `cedit 1 n/Janie Doe` Edits the name of the 1st Client to be `Janie Doe`
-*  `cedit 1 t/`Removes all of the tags of the 1st Client
+*  `cedit 1 n/Janie Doe` Edits the name of the first client to be `Janie Doe`.
+*  `cedit 1 t/`Removes all of the tags of the first client.
 
-### Locating clients by name: `cfind`
+### Locating Clients by Name: `cfind`
 
-Finds clients whose names contain any of the given keywords.
+You can find clients whose name contain any of the given keywords.
 
 Format: `cfind KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive, e.g. `hans` will match `Hans`
+* The order of the keywords does not matter, e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched
-* Partial names will be matched e.g. `Han` will match `Hans`
-* Clients matching any substring will be returned (i.e. `OR` search).
+* Partial names will be matched, e.g. `Han` will match `Hans`
+* Clients matching any substring will be returned (i.e. `OR` search),
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `cfind John` returns `john` and `John Doe`
+* `cfind John` returns `john` and `John Doe`.
 * `cfind alex david` returns `Alex Yeoh`, `David Li` as shown in the image below. <br>
 
 <img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="400" height="400" />
@@ -263,54 +313,56 @@ Examples:
 
 ### Deleting a Client : `cdel`
 
-Deletes the specified client from the clients list.
+You can delete a client currently shown in the Client List.
 
 Format: `cdel INDEX`
 
-* Deletes the Client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Client list.
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Client List.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `clist` followed by `cdel 2` deletes the 2nd Client in the address book.
-* `cfind Bernice` followed by `cdel 1` deletes the 1st Client in the result of the `cfind` command.
+* `clist` followed by `cdel 2` deletes the second client in the Client List.
+* `cfind Bernice` followed by `cdel 1` deletes the first client in the resulting Client List.
+* If the second session in the Client List is not associated with any schedule, `clist` followed by `cdel 2` deletes the session.
+* If the second session in the Client List is associated with one or more schedules, `list` followed by `cdel 2` returns an error message .
 
-* If the 2nd session in the Client List is not associated with any schedule, `clist` followed by `cdel 2` will delete the session
-* If the 2nd session in the Client List is associated with one or more schedules, 
-`list` followed by `cdel 2` will return an error message 
+<div markdown="block" class="alert alert-warning">
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    To force delete a client (and his associated schedules), pass in the optional force flag after the `INDEX`.
-    Any string after the force flag (`f/`) will be ignored.
+:star: **Feature:**
+
+To force delete a client (and his associated schedules), pass in the optional force flag after the `INDEX`. 
+Any string after the force flag (`f/`) will be ignored.
 </div>
 
+
 Examples:
-* If there are one or more associated schedules associated with the 2nd session in the Client List, 
-  `list` followed by `cdel 2 f/` will delete all schedules associated with the 2nd session, then delete the session 
-  itself
+* If there are one or more associated schedules associated with the second session in the Client List, `list` followed by `cdel 2 f/` will delete all schedules associated with the second session, then delete the session.
 
 ### Viewing a Client : `cview`
 
-Viewing the specified client from the clients list.
+You can view the detail of a client from the Client List.
 
 Format: `cview INDEX`
 
-* Views the Client at the specified `INDEX`. The selected client will be displayed in the main window. 
-* The index refers to the index number shown in the displayed Client list.
+* Views the client at the specified `INDEX`. The selected client will be displayed in the main window. 
+* The index refers to the index number shown in the displayed Client List.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `clist` followed by `cview 2` opens the 2nd Client in the address book.
-* `cfind Bernice` followed by `cview 1` opens the 1st Client (Bernice) in the results of the `cfind` command.
+* `clist` followed by `cview 2` opens the second client in FitEgo.
+* `cfind Bernice` followed by `cview 1` opens the first client (Bernice) in the resulting Client List.
    The result of these commands is shown in the image below.
 
 <img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></br>
   > This profile window will be updated when more functionalities are available.
 
 ---
+
 ## Session-related Keywords 
-All of session's related keyword is described in this section. All of the commands here will interact with the 
-session panel which is located at the right of this programme. 
+
+All session-related keywords are described in this section. All of the commands here will interact with the 
+Session List which is located at the right of this program. 
 
 <img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" />
 
@@ -319,7 +371,7 @@ of session view using [`sview`](#viewing-sessions-within-period-sview) command.
 
 ### Adding a Session: `sadd`
 
-Creates a session.
+You can create a session.
 
 Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 
@@ -328,59 +380,60 @@ Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 * Duration should be a positive integer (larger than 0)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    Session should not overlap with previously created session. Otherwise, the programme will not allow the
-    session to be created. 
+    The session's time should not overlap with previously created sessions. 
 </div>
 
 Examples:
-* `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120`
+* `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` - Adds a session at gym `Machoman` with exercise type `Endurance` at `29/09/2020 1600hrs` that lasts for `120` minutes.
 
 
 ### Editing a Session: `sedit`
 
-Edits the details of the Session identified by the index number used in the displayed Session list.
+You can edit the details of the session identified by the index number used in the displayed Session List.
 
-* Edits the Session at the specified `INDEX`. The index refers to the index number shown in the displayed Session list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the session at the specified `INDEX`. The index refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` Edits the Gym of the 1st Session to be `Machoman`.
-*  `sedit 2 at/29/09/2020 1600 t/120 ` Edits the Start Time and Duration of the 2nd Session to be `29/09/2020 1600 with a duration of 120 minutes`.
+*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` - Edits the gym of the first session to be `Machoman`
+*  `sedit 2 at/29/09/2020 1600 t/120 ` - Edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes`
 
 
 ### Deleting a Session: `sdel`
 
-Deletes the specified session by the index number used in the displayed Session list and all schedules associated with
-the specified session
+You can delete the session specified by the index number used in the displayed Session List and all schedules associated with
+the specified session.
 
 Format: `sdel INDEX [f/]`
 
-* Deletes the Session at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Session list.
+* Deletes the session at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Session List.
 * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* If there are no schedules with the 2nd session in the session List, `list` followed by `sdel 2` will delete the session
-* If there are one or more associated schedules associated with the 2nd session in the Session List, 
-`list` followed by `sdel 2` will return an error message 
+* If there are no schedules associated with the second session in the Session List, `sview p/all` followed by `sdel 2` deletes the second session.
+* If there are one or more associated schedules associated with the second session in the Session List, `sview p/all` followed by `sdel 2` displays an error message to the user.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    To force deletion of session (and all associated schedules), pass in the optional force flag after the `INDEX`. 
+<div markdown="block" class="alert alert-warning">
+
+:star: **Feature:**
+
+To force deletion of session (and all associated schedules), pass in the optional force flag after the `INDEX`. 
     Any string after the force flag (`f/`) will be ignored.
 </div>
 
-* If there are one or more associated schedules associated with the 2nd session in the Session List, 
-  `list` followed by `sdel 2 f/` will delete all schedules associated with the 2nd session, then delete the session 
+* If there are one or more schedules associated with the second session, 
+  `list` followed by `sdel 2 f/` will delete all schedules associated with the second session, then delete the session 
   itself
   
   
 ### Viewing Sessions within Period: `sview`
-You can filter the Session List to view Sessions within requested period to manage your sessions.
+You can filter the Session List to view sessions within requested period. This helps you to prioritise your sessions as needed.
 
 Format: `sview p/PERIOD`
- * Filters the Session List to only display those within the specified period.
- * Right above the Session List, you can find the name of the period you are viewing.
+ * Filters the Session List to display sessions within the specified period.
+ * On top of the Session List, you can find the type of the period you are viewing.
  * The recognized periods are as follows:
  
  | Period | Sessions displayed |
@@ -394,74 +447,61 @@ Format: `sview p/PERIOD`
  
  * The recognised units are as follows:
 
- | Unit | Time unit parsed |
+ | Unit* | Time unit parsed |
  | -------- | -------- |
  | d | day |
  | w | week |
  | m | month |
  | y | year |
  
-  * case insensitive
+  * units are case insensitive
  
-<img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
+<img src="images/sview_sample.png" alt="result for 'sview p/+2w'" height="500" width="500"/></br>
 
-Sample picture of the result of running `sview p/+2week`
+Sample picture of the result of running `sview p/+2w`
 
 Examples:
  
-* `sview p/all` Displays all sessions.
-* `sview p/+0D` Display all sessions today.
-* `sview p/-1d` Display sessions from the past 1 day to today (yesterday and today).
-* `sview p/+2w` Display sessions from today to 2 weeks later. (e.g. If today is Friday,
-        display from today to the Friday that falls 2 weeks later).
+* `sview p/all` - Display all sessions stored in FitEgo.
+* `sview p/+0D` - Display all sessions today.
+* `sview p/-1d` - Display all sessions from the past 1 day to today (yesterday and today).
+* `sview p/+2w` - Display all sessions from today to 2 weeks later. (e.g. If today is Friday, display from today to the Friday that falls 2 weeks later).
 ---
 
 ## Schedule-related Keywords 
-All of schedule's related keywords are described in this section. All of the commands here will interact with the 
-session panel which is located at the right of this programme. To check if you had already scheduled a session with a client, 
-you may check if the session contains the client's name. 
+All schedule-related keywords are described in this section. All of the commands here will interact with the 
+Session List which is located at the right of this program. To check if you have  scheduled a session with a client, 
+you can check if the session contains the client's name. 
 
 <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" />
 
-If the name is shown in red, it represents that this client had not paid
-for his session, otherwise, it would be indicated in green. 
+If Session List shows a client's name in red, it represents that this client has not paid
+for his session. Otherwise, the client's name will be shown in green. 
 
 ### Adding a Schedule: `schadd`
 
-You can schedule your Client to a Session.
+You can schedule your client for a session.
 
 Format: `schadd c/CLIENT_INDEX s/SESSION_INDEX`
 
-* This will create a Schedule associated with the specified Client and Session.
-* The Client is specified by `CLIENT_INDEX`, and the Session is specified by `SESSION_INDEX`.
-* You can see that on the Session List, the Client's name will be displayed under the specified Session's detail.
-* On the Client List, you might also see a change in the Client's "Next Session" depending on the date and time of the Session.
-* `CLIENT_INDEX` refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, … .
-* `SESSION_INDEX` refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, … .
+* This will create a schedule associated with the specified client and session.
+* The client is specified by `CLIENT_INDEX`, and the session is specified by `SESSION_INDEX`.
+* `CLIENT_INDEX` refers to the index number shown in the Client List, and **must be a positive integer** 1, 2, 3, … .
+* `SESSION_INDEX` refers to the index number shown in the Session List, and **must be a positive integer** 1, 2, 3, … .
 
-Examples:
+Example:
 
-* `schadd c/1 s/1` Schedules the first Client in the Client List with the first Session in the Session List
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    A Schedule should not overlap with a previously created Schedule.
-</div>
-
-
-Examples:
-
-* You cannot invoke `schadd c/1 s/1` right after invoking `schadd c/1 s/1`  since the two Schedules are overlapping.
-* It is possible to have multiple Schedules of the same Session time as long as those Schedules are not associated with the same Client. This simply means that there are multiple Clients attending the Session.
+* `schadd c/1 s/1` - Schedules the first client in the Client List with the first session in the Session List
 
 ### Editing a Schedule: `schedit`
 
-Edits the details of the Schedule identified by the client index and session index.
+Edits the details of the schedule identified by the client index and session index.
 
 Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`
 
-* Edits the Schedule that consists of the client and session indicated by `CLIENT_INDEX` and `SESSION_INDEX`
-* `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
-* `SESSION_INDEX` and `UPDATED_SESSION_INDEX` refers to the index number shown in the displayed session list. The index **must be a positive integer** 1, 2, 3, …
+* Edits the schedule that consists of the client and session indicated by `CLIENT_INDEX` and `SESSION_INDEX`
+* `CLIENT_INDEX` refers to the index number shown in the Client List. The index **must be a positive integer** 1, 2, 3, …
+* `SESSION_INDEX` and `UPDATED_SESSION_INDEX` refers to the index number shown in the Session List. The index **must be a positive integer** 1, 2, 3, …
 * `PAYMENT_STATUS` can either be `paid` or `unpaid`
 * `REMARK` can be any string
 * At least one of the optional fields must be provided
@@ -469,26 +509,25 @@ Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/P
 
 Examples:
 
-*  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
-*  `schedit c/1 s/1 pd/paid` Edits the Schedule containing client index 1 and session index 1 to be paid.
-*  `schedit c/1 s/1 r/did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
-of doing 5 pushups.
-* `schedit c/1 s/1 r/` Clear the Schedule containing client index 1 and session index 1 remarks.
+*  `schedit c/1 s/1 us/2` - Reschedules the first client in the Client List to the second session in the Session List instead of the first session
+*  `schedit c/1 s/1 pd/paid` - Indicates that the first client in the Client List has paid for the second session in the Session List
+*  `schedit c/1 s/1 r/did 5 pushups` - Edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups
+* `schedit c/1 s/1 r/` - Clears the schedule containing client index 1 and session index 1 remarks
 
 ### Deleting a Schedule: `schdel`
 
-You can unschedule a Client from a Session.
+You can deschedule a client from a session.
 
 Format: `schdel c/CLIENT_INDEX s/SESSION_INDEX`
 
-* This will delete the Schedule associated with the specified Client and Session.
-* The Client is identified by `CLIENT_INDEX`, and the Session is identified by `SCHEDULE_INDEX`.
-* `CLIENT_INDEX` refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, … .
-* `SESSION_INDEX` refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, … .
+* This will delete the schedule associated with the specified client and session.
+* The client is identified by `CLIENT_INDEX`, and the Session is identified by `SCHEDULE_INDEX`.
+* `CLIENT_INDEX` refers to the index number shown in the Client List. The index **must be a positive integer** 1, 2, 3, … .
+* `SESSION_INDEX` refers to the index number shown in the Session List. The index **must be a positive integer** 1, 2, 3, … .
 
 Examples:
 
-* `schdel c/1 s/1` will delete the Schedule associated with the first Client in the Client List and first Session in the Session List.
+* `schdel c/1 s/1` - Deletes the schedule associated with the first client in the Client List and first session in the Session List
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -508,7 +547,7 @@ Examples:
 | Open Home Page | `home` | `home`| 
 | Open Help Window | `help` | `help`|
 | Clear all data | `clear` | `clear` |
-| Exit this programme | `exit` | `exit`|
+| Exit this program | `exit` | `exit`|
 | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
 | Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
 | Delete Client Info |`cdel INDEX [f/]` |`cdel 1`|
