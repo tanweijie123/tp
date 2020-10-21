@@ -478,9 +478,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The Schedule to be added is overlapping with another Schedule
+- 2a. The Client index or Session index is invalid
 
   - 2a1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+  
+- 2b. The Schedule to be added is overlapping with another Schedule
+
+  - 2b1. FitEgo shows an error message
 
     Use case resumes at step 2.
 
@@ -520,9 +526,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. There is no Schedule associated with the specified Client and Session
+- 2a. The Client index or Session index is invalid
 
   - 2a1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+
+- 2b. No Schedule is associated with the specified Client and Session
+
+  - 2b1. FitEgo shows an error message
 
     Use case resumes at step 2.
 
@@ -640,10 +652,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
    1. Test case: `schadd c/1 s/1`<br>
       Expected: Add a Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
-      Details of the added Schedule is shown in the status message. Timestamp in the status bar is updated.
+      Details of the added Schedule is shown in the status message.
    1. Test case: `schadd s/1 c/2`<br>
       Expected: Add a Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
-      Details of the added Schedule is shown in the status message. Timestamp in the status bar is updated.
+      Details of the added Schedule is shown in the status message.
    1. Other incorrect Add Schedule commands to try: `schadd c/1`, `schadd c/0 s/2`, `schadd c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
       Expected: No Schedule is added. Error details shown in the status message.
 
@@ -676,10 +688,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
    1. Test case: `schdel c/1 s/1`<br>
       Expected: Delete the Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
-      Details of the deleted Schedule is shown in the status message. Timestamp in the status bar is updated.
+      Details of the deleted Schedule is shown in the status message.
    1. Test case: `schdel s/1 c/2`<br>
       Expected: Delete the Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
-      Details of the added Schedule is shown in the status message. Timestamp in the status bar is updated.
+      Details of the added Schedule is shown in the status message.
    1. Other incorrect Delete Schedule commands to try: `schdel c/1`, `schdel c/0 s/2`, `schdel c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
       Expected: No Schedule is deleted. Error details shown in the status message.
 
