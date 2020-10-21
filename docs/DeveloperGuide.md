@@ -133,6 +133,44 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Schedule feature --- Dhafin Razaq Oktoyuzan
+
+The add schedule feature allows user to create a Schedule associated with a Client and a Session. 
+In other words, it allows user to schedule a Client to a Session.
+
+#### Implementation
+
+The add Schedule mechanism is facilitated by `AddScheduleCommand` which extends `Command`. The format of the 
+command is given by: 
+
+```schadd c/CLIENT_INDEX s/SESSION_INDEX```
+When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
+
+The following activity diagram summarizes what happens when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
+![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
+
+**Example Commands**
+
+Assume the current state of Client, Session, and Schedule is as illustrated on the following simplified object diagram:
+
+![OverlappingScheduleObjectDiagram0](images/OverlappingScheduleObjectDiagram0.png)
+
+Now, consider two cases of a Schedule Command to be invoked.
+
+**Case 1**:  `schadd c/2 s/1`
+
+Invoking `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List). This process can be traced by referring to the following simplified sequence diagram:
+
+  ![AddScheduleSequenceDiagram](images/AddScheduleSequenceDiagram.png)
+
+Thus, the result can be illustrated by the following object diagram, shown by a new created Schedule:
+
+![OverlappingScheduleObjectDiagram1](images/OverlappingScheduleObjectDiagram1.png)
+
+**Case 2:** `schadd c/1 s/1`
+
+On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as there is an overlapping Schedule (John is already scheduled to endurance training from 12/12/2020 1400 - 1600).
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -217,7 +255,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -284,7 +321,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `FitEgo` and the **Actor** is the `user`, unless specified otherwise)
-
 
 **Use case: Add a Client**
 
@@ -465,6 +501,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.     
 
+**Use case: Add a Schedule**
+
+**MSS**
+
+1. FitEgo shows a list of Clients and list of Sessions
+
+2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List
+
+3. FitEgo adds the Schedule
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The Client index or Session index is invalid
+
+  - 2a1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+  
+- 2b. The Schedule to be added is overlapping with another Schedule
+
+  - 2b1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+    
 **Use case: Edit a Schedule**
 
 **MSS**
@@ -487,6 +549,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Delete a Schedule**
+
+**MSS**
+
+1. FitEgo shows a list of Clients and list of Sessions
+
+2. User requests to delete a Schedule asssociated with a specified Client from the Client List and Session from the Session List
+
+3. FitEgo deletes the Schedule
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The Client index or Session index is invalid
+
+  - 2a1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+
+- 2b. No Schedule is associated with the specified Client and Session
+
+  - 2b1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+
 **Use case: Open User Guide in Browser**
 
 **MSS**
@@ -502,6 +590,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FitEgo closes the help window
 	
       Use case ends.
+
 
 *{More to be added}*
 
@@ -584,15 +673,12 @@ testers are expected to do more *exploratory* testing.
 1. Editing a Session while all Sessions are being shown
 
    1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
-
-   1. Test case: `sedit 1 g/Machoman`<br>
+1. Test case: `sedit 1 g/Machoman`<br>
       Expected: First Session's gym location is edited.
       Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
-
    1. Test case: `sedit 1 at/29/09/2020 1600 t/120`<br>
-      Expected: First Session timing is edited.
+   Expected: First Session timing is edited.
       Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
-
    1. Other incorrect edit commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
@@ -613,33 +699,56 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect edit commands to try: `sview`, `sview p/+2s` (where unit of time is not d/m/y), `...` <br>
       Expected: Similar to previous.
+      
+### Adding a Schedule
+
+1. Adding a Schedule while all Clients and Sessions are being shown
+
+   1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   1. Test case: `schadd c/1 s/1`<br>
+      Expected: Add a Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message.
+   1. Test case: `schadd s/1 c/2`<br>
+      Expected: Add a Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message.
+   1. Other incorrect Add Schedule commands to try: `schadd c/1`, `schadd c/0 s/2`, `schadd c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
+      Expected: No Schedule is added. Error details shown in the status message.
 
 ### Editing a Schedule
 
 1. Editing a Schedule while all Schedules are being shown
 
    1. Prerequisites: Multiple Schedules in the list can be viewed on the main panel of the GUI.
-
-   1. Test case: `editschedule c/1 s/1 us/2`<br>
+1. Test case: `schedit c/1 s/1 us/2`<br>
       Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `editschedule c/2 s/1 us/2`<br>
-      Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
+   1. Test case: `schedit c/2 s/1 us/2`<br>
+   Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-      
-   1. Test case: `editschedule c/1 s/1 pd/true`<br>
-         Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
+   1. Test case: `schedit c/1 s/1 pd/paid`<br>
+         Expected: Schedule with client index 2 and session index 1 is edited to be paid. 
          In the right panel, the client's name in the related session will be indicated as green. 
          Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-         
-   1. Test case: `editschedule c/1 s/1 pd/false`<br>
-            Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
+   1. Test case: `schedit c/1 s/1 pd/unpaid`<br>
+            Expected: Schedule with client index 2 and session index 1 is edited to be unpaid. 
             In the right panel, the client's name in the related session will be indicated as red. 
             Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
-
-   1. Other incorrect edit commands to try: `editschedule c/1`, `editschedule c/1 s/2`, `editschedule c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
+   1. Other incorrect edit commands to try: `schedit c/1`, `schedit c/1 s/2`, `schedit c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
       Expected: Similar to previous.
+
+### Deleting a Schedule
+
+1. Deleting a Schedule while all Clients and Sessions are being shown
+
+   1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   1. Test case: `schdel c/1 s/1`<br>
+      Expected: Delete the Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
+      Details of the deleted Schedule is shown in the status message.
+   1. Test case: `schdel s/1 c/2`<br>
+      Expected: Delete the Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message.
+   1. Other incorrect Delete Schedule commands to try: `schdel c/1`, `schdel c/0 s/2`, `schdel c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
+      Expected: No Schedule is deleted. Error details shown in the status message.
 
 ### Saving data
 

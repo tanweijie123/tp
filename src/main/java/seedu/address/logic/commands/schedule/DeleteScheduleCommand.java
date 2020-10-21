@@ -65,9 +65,8 @@ public class DeleteScheduleCommand extends Command {
 
         Session session = lastShownSessionList.get(sessionIndex.getZeroBased());
 
-        Schedule scheduleToDelete = new Schedule(client, session);
-
-        if (model.hasSchedule(scheduleToDelete)) {
+        if (model.hasAnyScheduleAssociatedWithClientAndSession(client, session)) {
+            Schedule scheduleToDelete = model.findScheduleByClientAndSession(client, session);
             model.deleteSchedule(scheduleToDelete);
             return new CommandResult(String.format(MESSAGE_SUCCESS, scheduleToDelete));
         }
