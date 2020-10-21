@@ -188,7 +188,7 @@ there are currently 2 associated schedules to the first session in FitEgo.
 
 ![DeleteSessionSequenceDiagram](images/tracing/DeleteSessionSequenceDiagram.png)
 
-![DeleteSessionParseArgsRef](images/tracing/DeleteSessionParseArgsRef)
+![DeleteSessionParseArgsRef](images/tracing/DeleteSessionParseArgsRef.png)
  
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteSessionCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
