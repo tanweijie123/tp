@@ -347,6 +347,70 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `cdel`, just save the Client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+### Edit Session feature
+
+The proposed edit session mechanism is facilitated by `AddressBook`.
+
+These operation is exposed in the `Model` interface as `Model#setSession()`.
+
+Given below is an example usage scenario and how the edit session mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+The `AddressBook` will be initialized with the initial client, session and schedule list.
+
+Step 2. The user executes `sedit 1 g/coolgym` command to edit the 1st Session in the address book. 
+The `sedit` command calls `Model#setSession()`, causing changes to be made in the address book after the `sedit 1 g/coolgym` command executes.
+
+The following sequence diagram shows how the edit session operation works:
+
+![EditSessionSequenceDiagram](images/EditSessionSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditSessionCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the edit session command:
+
+![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
+
+### Edit Schedule feature
+
+The proposed edit schedule mechanism is facilitated by `AddressBook`.
+
+These operation is exposed in the `Model` interface as `Model#setSchedule()`.
+
+Given below is an example usage scenario and how the edit schedule mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+The `AddressBook` will be initialized with the initial client, session and schedule list.
+
+Step 2. The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with Session 1 and Client 1 in the address book. 
+The `schedit` command calls `Model#setSchedule()`, causing changes to be made in the address book after the `schedit c/1 s/1 us/2` command executes.
+
+The following sequence diagram shows how the edit schedule operation works:
+
+![EditScheduleSequenceDiagram](images/EditScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the edit schedule command:
+
+![EditScheduleActivityDiagram](images/EditScheduleActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: How edit schedule executes
+
+* **Alternative 1 (current choice):** Retrieve Schedule using Client and Session Index.
+  * Pros: More troublesome to implement. Clearer to retrieve.
+  * Cons: Require user to know the Client and Session Index separately.
+
+* **Alternative 2:** Retrieve Schedule using Schedule Index
+  itself.
+  * Pros: Easier to retrieve.
+  * Cons: Implementation is more confusing as User there's a conflict between Index and user-typed String index.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -580,7 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  FitEgo shows a list of Sessions
-2.  User requests to edit a specific Session in the list
+2.  User requests to edit a specific Session in the list (i.e. gym, exercise type, start time and duration)
 3.  FitEgo edits the Session according to the specified details
 
     Use case ends.
@@ -591,7 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 2a. The given index is invalid or request to edit is absent.
 
     * 2a1. FitEgo shows an error message.
 
@@ -679,22 +743,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  FitEgo shows a list of Schedule
-2.  User requests to edit a specific Schedule in the list
+2.  User requests to edit a specific Schedule in the list (i.e. updated session index, update payment, update weight)
 3.  FitEgo edits the Schedule according to the specified details
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid or request to schedule is absent.
 
-    * 3a1. FitEgo shows an error message.
+    * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+      
 
 **Use case: Delete a Schedule**
 
@@ -719,6 +784,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2b1. FitEgo shows an error message
 
     Use case resumes at step 2.
+
 
 **Use case: Open User Guide in Browser**
 
@@ -782,7 +848,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 
 ### Adding a Client
@@ -790,8 +856,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Client while all Clients are being shown
 
    1. Test case: `cadd n/David …` <br>
-      Expected: First contact is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
-
+      Expected: First contact is added to the list. Details of the added contact shown in the status message.
 
 ### Deleting a Client
 
@@ -800,7 +865,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all Clients using the `clist` command. Multiple Clients in the list.
 
    1. Test case: `cdel 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `cdel 0`<br>
       Expected: No Client is deleted. Error details shown in the status message. Status bar remains the same.
@@ -832,11 +897,11 @@ testers are expected to do more *exploratory* testing.
     
    1. Test case: `sedit 1 g/Machoman`<br>
       Expected: First Session's gym location is edited.
-      Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
+      Details of the edited session is shown in the status message.
 
    1. Test case: `sedit 1 at/29/09/2020 1600 t/120`<br>
       Expected: First Session timing is edited.
-      Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
+      Details of the edited session is shown in the status message.
 
    1. Other incorrect edit commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -899,21 +964,26 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `schedit c/1 s/1 us/2`<br>
       Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2.
-      Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+      Details of the edited schedule is shown in the status message.
 
    1. Test case: `schedit c/2 s/1 us/2`<br>
       Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
-      Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+      Details of the edited schedule is shown in the status message.
       
    1. Test case: `schedit c/1 s/1 pd/paid`<br>
-      Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
-      In the right panel, the client's name in the related session will be indicated as green. 
-      Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+     Expected: Edit Schedule with client index 1 and session index 1 payment update to be paid. 
+     In the right panel, the client's name in the related session will be indicated as green. 
+     Details of the edited schedule is shown in the status message.
          
    1. Test case: `schedit c/1 s/1 pd/unpaid`<br>
-      Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
-      In the right panel, the client's name in the related session will be indicated as red. 
-      Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+    Expected: Edit Schedule with client index 1 and session index 1 payment update to be unpaid. 
+    In the right panel, the client's name in the related session will be indicated as red. 
+    Details of the edited schedule is shown in the status message.
+    
+   1. Test case: `schedit c/1 s/1 r/text`<br>
+       Expected: Edit Schedule with client index 1 and session index 1 remark to "text". 
+       In the right panel, the client's name in the related session will be indicated as red. 
+       Details of the edited schedule is shown in the status message.
 
    1. Other incorrect edit commands to try: `schedit c/1`, `schedit c/1 s/2`, `schedit c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
       Expected: Similar to previous.
