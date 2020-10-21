@@ -34,8 +34,36 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 1. Read [How to use](#how-to-use-fitego) for a quick understanding of commands in FitEgo
 
-1. Refer to the [Features](#features) below for more details of each command.
+1. Refer to the [Keyword](#main-keywords) below for more details of each command.
 
+--------------------------------------------------------------------------------------------------------------------
+
+# UI-orientation
+
+[comment]: <> (Kelvin to inside Ui-callout image)
+
+From the above image, the GUI is made up of several components. 
+
+| Component | Description |
+| --------------- | ---------------------------------------- | 
+| Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
+| Command Box     | Displays a text box for your input. You can type your command here.          | 
+| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt an error message | 
+| Client List     | Displays the list of clients in a list view. You can modify this list using [client's command](#Client-related-Keywords) |
+| Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and Quote of the day | 
+| Session List    | Displays the list of sessions in a list view. You can modify this list using [session's command](#Session-related-Keywords) | 
+| Status Bar Footer | Displays the current date / time of the program. If you notice this is incorrect, your PC might be having a different date / time | 
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can type input into the Command Box and it will display the command starting with the input. <br/>
+
+![autocomplete_sample](images/autocomplete_sample.png)
+
+For example, in the above image, I entered "c" and commands that starts with "c" is displayed. 
+For advanced users, you may use the "TAB" key and it will auto-complete the first test into the command box, 
+   thus increasing your typing speed!   
+</div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to use FitEgo
@@ -84,12 +112,14 @@ Once you learn the entity, you can now combine it with the verb. For example:
 - `cedit`: Edit a client's details, `sedit`: Edit a session's details, `schedit`: Edit a schedule's details
 - `cdel`: Remove a client, `sdel`: Delete a session, `schdel`: Delete a schedule
 
+### General Note
+* The program will automatically save after every command execution to guarantee that your data will never disappear. 
+
 Although there are a lot of commands, once you learn the verb and entities, it is so easy to use FitEgo!
 
 --------------------------------------------------------------------------------------------------------------------
 
-
-## Features
+## Keyword Syntax
 
 <div markdown="block" class="alert alert-info">
 
@@ -109,6 +139,16 @@ Although there are a lot of commands, once you learn the verb and entities, it i
 
 </div>
 
+## Main Keywords
+
+### Viewing home : `home`
+
+Shows / Returns to the home page 
+
+![homepage](images/homepage.png)
+
+The homepage will display the statistics of the program, today's schedule and quote of the day. 
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -117,6 +157,46 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+By default, you can click enter and a browser will open the User Guide. 
+You may also press "ESC" key to close this window. 
+</div>
+
+### Clearing all data in the program : `clear` 
+
+You can delete all data (client, session, schedule) using the `clear` keyword. All of the existing data will be removed. 
+
+<div markdown="span" class="alert alert-danger">:warning: **Warning:**
+By using this command, it will delete all of your data, and by design of the system, it will be automatically saved. 
+You will not be able to retrieve your previous data unless you have backed up the data file into an external location. 
+</div>
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+
+### Saving the data
+
+FitEgo data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+---
+## Client-related Keywords
+All of client's related keyword is described in this section. All of the commands here will interact with the client panel
+which is located at the left of this programme. 
+
+<img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
+
+### Listing all clients : `clist`
+
+Shows a list of all clients in the clients list. The list of clients will be shown at the left panel. 
+
+By default, the software will display all the clients. In case you used [`cfind`](#locating-clients-by-name-cfind) or any filter-typed commands, 
+you can use `clist` to view the entire list of clients.  
+
+Format: `clist`
 
 ### Adding a client: `cadd`
 
@@ -125,19 +205,14 @@ Adds a client to the clients list.
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A Client can have any number of tags (including 0). Each tag can only include
-alphanumeric characters or dash (`-`)
+A Client can have any number of tags (including 0). Each tag can include
+alphanumeric characters or dash (`-`), but you are not allowed to start or end
+a tag with a dash. 
 </div>
 
 Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
 * `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
-
-### Listing all clients : `clist`
-
-Shows a list of all clients in the clients list.
-
-Format: `clist`
 
 ### Editing a Client : `cedit`
 
@@ -170,9 +245,11 @@ Format: `cfind KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `cfind John` returns `john` and `John Doe`
+* `cfind alex david` returns `Alex Yeoh`, `David Li` as shown in the image below. <br>
+
+<img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="400" height="400" />
+
 
 ### Deleting a Client : `cdel`
 
@@ -185,25 +262,38 @@ Format: `cdel INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `cdel 2` deletes the 2nd Client in the address book.
-* `find Betsy` followed by `cdel 1` deletes the 1st Client in the results of the `find` command.
+* `clist` followed by `cdel 2` deletes the 2nd Client in the address book.
+* `cfind Betsy` followed by `cdel 1` deletes the 1st Client in the results of the `cfind` command.
 
-### View a Client : `cview`
+### Viewing a Client : `cview`
 
-View the specified client from the clients list.
+Viewing the specified client from the clients list.
 
 Format: `cview INDEX`
 
-* Views the Client at the specified `INDEX`.
+* Views the Client at the specified `INDEX`. The selected client will be displayed in the main window. 
 * The index refers to the index number shown in the displayed Client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `cview 2` opens the 2nd Client in the address book.
-* `find Bernice` followed by `cview 1` opens the 1st Client (Bernice) in the results of the `find` command.
+* `clist` followed by `cview 2` opens the 2nd Client in the address book.
+* `cfind Bernice` followed by `cview 1` opens the 1st Client (Bernice) in the results of the `cfind` command.
+   The result of these commands is shown in the image below.
 
-<img src="images/cview_sample.png" alt="result for 'cview 1'" height="500" width="500"/></br>
+<img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></br>
   > This profile window will be updated when more functionalities are available.
+
+---
+## Session-related Keywords 
+All of session's related keyword is described in this section. All of the commands here will interact with the 
+session panel which is located at the right of this programme. 
+
+<img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" />
+
+The `ALL` at the top of this panel represents the current settings of session view. You can change the period 
+of session view using [`sview`](#sview) command. 
+
+[comment]: <> (TODO: For Kelvin to hyperlink to sview) 
 
 ### Adding a Session: `sadd`
 
@@ -216,7 +306,8 @@ Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 * Duration should be a positive integer (larger than 0)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    Session should not overlap with previously created session.
+    Session should not overlap with previously created session. Otherwise, the programme will not allow the
+    session to be created. 
 </div>
 
 Examples:
@@ -261,6 +352,22 @@ Examples:
 * If there are one or more associated schedules associated with the 2nd session in the Session List, 
   `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
   itself
+  
+---
+
+## Schedule-related Keywords 
+All of schedule's related keyword is described in this section. All of the commands here will interact with the 
+session panel which is located at the right of this programme. To check if you had already scheduled a session with a client, 
+you may check if the session contains the client's name. 
+
+<img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" />
+
+The `ALL` at the top of this panel represents the current settings of session view. You can change the period 
+of session view using [`sview`](#sview) command. If the name is shown in red, it represents that this client had not paid
+for his session, otherwise, it would be indicated in green. 
+
+[comment]: <> (TODO: For Kelvin to hyperlink to sview) 
+
 ### Adding a Schedule: `schadd`
 
 You can schedule your Client to a Session.
@@ -322,19 +429,7 @@ Examples:
 
 * `schdel c/1 s/1` will delete the Schedule associated with the first Client in the Client List and first Session in the Session List.
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-FitEgo data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-
 --------------------------------------------------------------------------------------------------------------------
-
 
 ## FAQ
 
@@ -349,6 +444,10 @@ FitEgo data are saved in the hard disk automatically after any command that chan
 
 | Action | Format | Example |
 | -------- | -------- | --------- |
+| Open Home Page | `home` | `home`| 
+| Open Help Window | `help` | `help`|
+| Clear all data | `clear` | `clear` |
+| Exit this programme | `exit` | `exit`|
 | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
 | Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
 | Delete Client Info |`cdel INDEX` |`cdel 1`|
