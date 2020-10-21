@@ -26,7 +26,7 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
    * **`clist`** : Lists all clients.
 
-   * **`cadd`**`cadd n/Jane Doe p/91234567 e/jane@gmail.com` : Adds a client named `Jane Doe` to the clients list.
+   * **`cadd n/Jane Doe p/91234567 e/jane@gmail.com`** : Adds a client named `Jane Doe` to the clients list.
 
    * **`cdel`**`3` : Deletes the 3rd client shown in the current list.
 
@@ -36,49 +36,18 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 1. Refer to the [Keyword](#main-keywords) below for more details of each command.
 
---------------------------------------------------------------------------------------------------------------------
-
-# UI-orientation
-
-![annotatedUi](images/annotatedUi.png)
-
-From the above image, the GUI is made up of several components. 
-
-| Component | Description |
-| --------------- | ---------------------------------------- | 
-| Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
-| Command Box     | Displays a text box for your input. You can type your command here.          | 
-| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt an error message | 
-| Client List     | Displays the list of clients in a list view. You can modify this list using [client's command](#Client-related-Keywords) |
-| Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and Quote of the day | 
-| Session List    | Displays the list of sessions in a list view. You can modify this list using [session's command](#Session-related-Keywords) | 
-| Status Bar Footer | Displays the current date / time of the program. If you notice this is incorrect, your PC might be having a different date / time | 
-
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can type input into the Command Box and it will display the command starting with the input. <br/>
-<br>
-![autocomplete_sample](images/autocomplete_sample.png)
-<br>
-For example, in the above image, I entered "c" and commands that starts with "c" is displayed. <br>
-For advanced users, you may use the "TAB" key and it will auto-complete the first test into the command box, 
-   thus increasing your typing speed!   
-</div>
-
---------------------------------------------------------------------------------------------------------------------
-
-## How to use FitEgo
+### How to use FitEgo
 
 There are 3 major entities in FitEgo: Clients, Sessions, and Schedules.
 There are 5 major verbs in FitEgo: add, edit, delete, view, list.
 
-### Clients
+#### Clients
 
 Clients are customers that is trained by the user (fitness instructor).
 
 All client's commands using the prefix `c`. 
 
-### Sessions
+#### Sessions
 
 Sessions are a timeslot that is scheduled for a training session. It contains information about the gym, the session's 
 main exercise type, start time and the duration of sessions. 
@@ -90,7 +59,7 @@ at different gyms.
 
 All session's commands have prefix `s`.
 
-### Schedules
+#### Schedules
 
 Schedules are what defines a you and your client's interaction. Each schedule contains information about the Client and the 
 attended Session. 
@@ -118,6 +87,36 @@ Once you learn the entity, you can now combine it with the verb. For example:
 
 Although there are a lot of commands, once you learn the verb and entities, it is so easy to use FitEgo!
 
+--------------------------------------------------------------------------------------------------------------------
+
+# UI-orientation
+
+![annotatedUi](images/AnnotatedUi.png)
+
+From the above image, the GUI is made up of several components. 
+
+| Component | Description |
+| --------------- | ---------------------------------------- | 
+| Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
+| Command Box     | Displays a text box for your input. You can type your command here.          | 
+| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt an error message | 
+| Client List     | Displays the list of clients in a list view. You can modify this list using [client's command](#Client-related-Keywords) |
+| Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and Quote of the day | 
+| Session List    | Displays the list of sessions in a list view. You can modify this list using [session's command](#Session-related-Keywords) | 
+| Status Bar Footer | Displays the current date and time of the program. If you notice this is incorrect, your PC might be using a different timezone| 
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can type input into the Command Box and it will display the command starting with the input. <br/>
+<br>
+![autocomplete_sample](images/autocomplete_sample.png)
+<br>
+For example, in the above image, if you enter `c` and commands that starts with "c" is displayed. <br>
+For advanced users, you may use the "TAB" key and it will auto-complete the first test into the command box, 
+   thus increasing your typing speed!   
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Common Notations
 
