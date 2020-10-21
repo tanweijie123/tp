@@ -57,10 +57,10 @@ From the above image, the GUI is made up of several components.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can type input into the Command Box and it will display the command starting with the input. <br/>
-
+<br>
 ![autocomplete_sample](images/autocomplete_sample.png)
-
-For example, in the above image, I entered "c" and commands that starts with "c" is displayed. 
+<br>
+For example, in the above image, I entered "c" and commands that starts with "c" is displayed. <br>
 For advanced users, you may use the "TAB" key and it will auto-complete the first test into the command box, 
    thus increasing your typing speed!   
 </div>
@@ -394,12 +394,14 @@ Format: `sview p/PERIOD`
  | Unit | Time unit parsed |
  | -------- | -------- |
  | d | day |
- | w | week|
- | m | month|
- | y | year|
-*case insensitive
+ | w | week |
+ | m | month |
+ | y | year |
+ 
+  * case insensitive
  
 <img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
+
 Sample picture of the result of running `sview p/+2week`
 
 Examples:
