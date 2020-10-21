@@ -63,6 +63,11 @@ public interface Model {
     boolean hasClient(Client client);
 
     /**
+     * Deletes every Schedule with the same client as {@code client}.
+     */
+    void deleteClientAssociatedSchedules(Client client);
+
+    /**
      * Deletes the given Client.
      * The Client must exist in the address book.
      */
