@@ -51,7 +51,7 @@ Package Schedule {
 Class Schedule
 Class Remark
 Class Weight
-Class Payment
+Class PaymentStatus
 }
 
 Package Tag {
@@ -95,7 +95,7 @@ AddressBook *--> "1" UniqueList_schedule
 UniqueList_schedule ---> "*" Schedule
 Schedule *--> Remark
 Schedule *--> Weight
-Schedule *--> Payment
+Schedule *--> PaymentStatus
 
 
 ModelManager -->"1" Client : filteredClients

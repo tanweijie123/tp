@@ -192,6 +192,7 @@ there are currently 2 associated schedules to the first session in FitEgo.
  
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteSessionCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 The sequence diagram above shows how the `DeleteSessionCommand` is executed in FitEgo. The LogicManager receives user 
 command as commandText and parses it with `AddressBookParser`. It will parse the command and pass the remaining
@@ -346,8 +347,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `cdel`, just save the Client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 ### Edit Session feature
 
 The proposed edit session mechanism is facilitated by `AddressBook`.
@@ -413,10 +412,6 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Easier to retrieve.
   * Cons: Implementation is more confusing as User there's a conflict between Index and user-typed String index.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -479,8 +474,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user                                          | change software background between light and dark mode | customise my experience                        |
 | `*`      | trainer focused on coaching pre-NS teen       | track client's date of birth   | adjust the fitness intensity depending on IPPT period                  |
 
-
-*{More to be added}*
 
 ### Use cases
 
@@ -726,9 +719,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. FitEgo shows a list of Clients and list of Sessions
-
 2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List
-
 3. FitEgo adds the Schedule
 
    Use case ends.
@@ -768,18 +759,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
-<<<<<<<<< Temporary merge branch 1
-    
-=========
+      
 
 **Use case: Delete a Schedule**
 
 **MSS**
 
 1. FitEgo shows a list of Clients and list of Sessions
-
 2. User requests to delete a Schedule asssociated with a specified Client from the Client List and Session from the Session List
-
 3. FitEgo deletes the Schedule
 
    Use case ends.
@@ -798,7 +785,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
->>>>>>>>> Temporary merge branch 2
+
 **Use case: Open User Guide in Browser**
 
 **MSS**
@@ -863,7 +850,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Adding a Client
 
@@ -922,6 +908,8 @@ testers are expected to do more *exploratory* testing.
       
 ### Deleting a Session
 
+1. Deleting a Session while all Sessions are being shown
+
    1. Test case: `sdel 1 f/` <br>
        Expected: The session in index 1 (as shown in the Session List) will be deleted alongside all schedules associated
        to the session. Details of the deleted session is shown in the status message.
@@ -956,12 +944,15 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Schedule while all Clients and Sessions are being shown
 
    1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   
    1. Test case: `schadd c/1 s/1`<br>
       Expected: Add a Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
       Details of the added Schedule is shown in the status message.
+      
    1. Test case: `schadd s/1 c/2`<br>
       Expected: Add a Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
       Details of the added Schedule is shown in the status message.
+      
    1. Other incorrect Add Schedule commands to try: `schadd c/1`, `schadd c/0 s/2`, `schadd c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
       Expected: No Schedule is added. Error details shown in the status message.
 
@@ -1002,12 +993,15 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a Schedule while all Clients and Sessions are being shown
 
    1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   
    1. Test case: `schdel c/1 s/1`<br>
       Expected: Delete the Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
       Details of the deleted Schedule is shown in the status message.
+      
    1. Test case: `schdel s/1 c/2`<br>
       Expected: Delete the Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
       Details of the added Schedule is shown in the status message.
+      
    1. Other incorrect Delete Schedule commands to try: `schdel c/1`, `schdel c/0 s/2`, `schdel c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
       Expected: No Schedule is deleted. Error details shown in the status message.
 
@@ -1015,6 +1009,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Test case: Open `data/addressbook.json` and change one of the schedule's `clientEmail` to an email that 
+      does not exist inside the `clients` list
+      Expected: FitEgo notices a invalid storage format and start with an empty addressbook
+      
+   2. Test case: Open `data/addressbook.json` and change one of the schedule's `startTime` or `endTime` so that the
+      resulting interval does not exist inside the `sessions` list
+      Expected: Similar as previous
+    
+    

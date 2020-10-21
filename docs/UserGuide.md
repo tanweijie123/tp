@@ -57,10 +57,10 @@ From the above image, the GUI is made up of several components.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can type input into the Command Box and it will display the command starting with the input. <br/>
-
+<br>
 ![autocomplete_sample](images/autocomplete_sample.png)
-
-For example, in the above image, I entered "c" and commands that starts with "c" is displayed. 
+<br>
+For example, in the above image, I entered "c" and commands that starts with "c" is displayed. <br>
 For advanced users, you may use the "TAB" key and it will auto-complete the first test into the command box, 
    thus increasing your typing speed!   
 </div>
@@ -223,18 +223,6 @@ a tag with a dash.
 Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
 * `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
-
-<<<<<<<<< Temporary merge branch 1
-
-### Listing all clients : `clist`
-ƒhow
-=========
-### Listing all clients : `clist`
-
->>>>>>>>> Temporary merge branch 2
-Shows a list of all clients in the clients list.
-
-Format: `clist`
 
 ### Editing a Client : `cedit`
 
@@ -409,12 +397,14 @@ Format: `sview p/PERIOD`
  | Unit | Time unit parsed |
  | -------- | -------- |
  | d | day |
- | w | week|
- | m | month|
- | y | year|
-*case insensitive
+ | w | week |
+ | m | month |
+ | y | year |
+ 
+  * case insensitive
  
 <img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
+
 Sample picture of the result of running `sview p/+2week`
 
 Examples:
@@ -481,11 +471,7 @@ Examples:
 
 *  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
 *  `schedit c/1 s/1 pd/paid` Edits the Schedule containing client index 1 and session index 1 to be paid.
-<<<<<<<<< Temporary merge branch 1
 *  `schedit c/1 s/1 r/did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
-=========
-*  `schedit c/1 s/1 r/ did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
->>>>>>>>> Temporary merge branch 2
 of doing 5 pushups.
 * `schedit c/1 s/1 r/` Clear the Schedule containing client index 1 and session index 1 remarks.
 
@@ -534,13 +520,10 @@ Examples:
 | Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
 | View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-<<<<<<<<< Temporary merge branch 1
-| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`| `schedit c/1 s/1 us/1 pd/paid r/text` |
-=========
-| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS]`| `schedit c/1 s/1 us/1 pd/paid |
->>>>>>>>> Temporary merge branch 2
+| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
 
 ### Acknowledgement
-Icon made by Freepik from [flaticon](www.flaticon.com)
+* Icon made by Freepik from [flaticon](www.flaticon.com)
+* This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)
