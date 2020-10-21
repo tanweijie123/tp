@@ -215,6 +215,12 @@ Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
 * `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
 
+### Listing all clients : `clist`
+
+Shows a list of all clients in the clients list.
+
+Format: `clist`
+
 ### Editing a Client : `cedit`
 
 Edits an existing Client in the clients list.
@@ -277,7 +283,7 @@ Examples:
 
 Examples:
 * If there are one or more associated schedules associated with the 2nd session in the Client List, 
-  `list` followed by `cdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
+  `list` followed by `cdel 2 f/` will delete all schedules associated with the 2nd session, then delete the session 
   itself
 
 ### Viewing a Client : `cview`
@@ -326,6 +332,7 @@ Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 Examples:
 * `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120`
 
+
 ### Editing a Session: `sedit`
 
 Edits the details of the Session identified by the index number used in the displayed Session list.
@@ -344,7 +351,7 @@ Examples:
 Deletes the specified session by the index number used in the displayed Session list and all schedules associated with
 the specified session
 
-Format: `sdel INDEX [f/ true]`
+Format: `sdel INDEX [f/]`
 
 * Deletes the Session at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Session list.
@@ -356,14 +363,14 @@ Examples:
 `list` followed by `sdel 2` will return an error message 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    To force deletion of session (and all associated schedules), pass in the optional force flag followed by
-    any non empty string.
+    To force deletion of session (and all associated schedules), pass in the optional force flag after the `INDEX`. 
+    Any string after the force flag (`f/`) will be ignored.
 </div>
 
-Examples:
 * If there are one or more associated schedules associated with the 2nd session in the Session List, 
-  `list` followed by `sdel 2 f/ true` will delete all schedules associated with the 2nd session, then delete the session 
+  `list` followed by `sdel 2 f/` will delete all schedules associated with the 2nd session, then delete the session 
   itself
+  
   
 ### Viewing Sessions within Period: `sview`
 You can filter the Session List to view Sessions within requested period to manage your sessions.
@@ -445,12 +452,13 @@ Examples:
 
 Edits the details of the Schedule identified by the client index and session index.
 
-Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS]`
+Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`
 
 * Edits the Schedule that consists of the client and session indicated by `CLIENT_INDEX` and `SESSION_INDEX`
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
 * `SESSION_INDEX` and `UPDATED_SESSION_INDEX` refers to the index number shown in the displayed session list. The index **must be a positive integer** 1, 2, 3, …
 * `PAYMENT_STATUS` can either be `paid` or `unpaid`
+* `REMARK` can be any string
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 
@@ -503,7 +511,7 @@ Examples:
 | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
 | Update Session Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
-| Delete a Session |`sdel INDEX [f/ true]` | `sdel 1` |
+| Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
 | View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
 | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS]`| `schedit c/1 s/1 us/1 pd/paid |
@@ -511,4 +519,4 @@ Examples:
 
 
 ### Acknowledgement
-Icon made by Freepik from <www.flaticon.com>
+Icon made by Freepik from [flaticon](www.flaticon.com)
