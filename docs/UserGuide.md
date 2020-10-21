@@ -264,14 +264,14 @@ Format: `cdel INDEX`
 
 Examples:
 * `clist` followed by `cdel 2` deletes the 2nd Client in the address book.
-* `cfind Bernice` followed by `cdel 1` deletes the 1st Client in the results of the `find` command.
+* `cfind Bernice` followed by `cdel 1` deletes the 1st Client in the result of the `cfind` command.
 
-* If the 2nd session in the Client List is not associated with any schedule, `list` followed by `cdel 2` will delete the session
+* If the 2nd session in the Client List is not associated with any schedule, `clist` followed by `cdel 2` will delete the session
 * If the 2nd session in the Client List is associated with one or more schedules, 
 `list` followed by `cdel 2` will return an error message 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    To force deletion of a client (and all associated schedules), pass in the optional force flag after the `INDEX`.
+    To force delete a client (and his associated schedules), pass in the optional force flag after the `INDEX`.
     Any string after the force flag (`f/`) will be ignored.
 </div>
 
@@ -325,9 +325,6 @@ Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 
 Examples:
 * `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120`
-
-<img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
-Sample picture of the result of running `sview p/+2week`
 
 ### Editing a Session: `sedit`
 
@@ -395,7 +392,10 @@ Format: `sview p/PERIOD`
  | y | year|
 *case insensitive
  
- Examples:
+<img src="images/sview_sample.png" alt="result for 'sview p/week'" height="500" width="500"/></br>
+Sample picture of the result of running `sview p/+2week`
+
+Examples:
  
 * `sview p/all` Displays all sessions.
 * `sview p/+0D` Display all sessions today.
