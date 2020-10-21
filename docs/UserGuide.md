@@ -40,7 +40,7 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 # UI-orientation
 
-[comment]: <> (Kelvin to inside Ui-callout image)
+![annotatedUi](images/annotatedUi.png)
 
 From the above image, the GUI is made up of several components. 
 
@@ -120,7 +120,7 @@ Although there are a lot of commands, once you learn the verb and entities, it i
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Keyword Syntax
+# Keyword
 
 <div markdown="block" class="alert alert-info">
 
