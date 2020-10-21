@@ -215,8 +215,6 @@ _{more aspects and alternatives to be added}_
 
 ### Edit Session feature
 
-#### Proposed Implementation
-
 The proposed edit session mechanism is facilitated by `AddressBook`.
 
 These operation is exposed in the `Model` interface as `Model#setSession()`.
@@ -242,8 +240,6 @@ The following activity diagram summarizes what happens when a user executes the 
 ![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
 
 ### Edit Schedule feature
-
-#### Proposed Implementation
 
 The proposed edit schedule mechanism is facilitated by `AddressBook`.
 
@@ -480,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  FitEgo shows a list of Sessions
-2.  User requests to edit a specific Session in the list
+2.  User requests to edit a specific Session in the list (i.e. gym, exercise type, start time and duration)
 3.  FitEgo edits the Session according to the specified details
 
     Use case ends.
@@ -491,22 +487,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 2a. The given index is invalid or request to edit is absent.
 
     * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
-    
-* 2b. User edits session information (i.e. gym, exercise type, start time and duration).
-
-    Use case resumes at step 2.
 
 **Use case: Edit a Schedule**
 
 **MSS**
 
 1.  FitEgo shows a list of Schedule
-2.  User requests to edit a specific Schedule in the list
+2.  User requests to edit a specific Schedule in the list (i.e. updated session index, update payment, update weight)
 3.  FitEgo edits the Schedule according to the specified details
 
     Use case ends.
@@ -517,15 +509,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 2a. The given index is invalid or request to schedule is absent.
 
     * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
-      
-* 2b. User edits schedule information (i.e. updated session index, update payment, update weight).
-
-    Use case resumes at step 2.
     
 **Use case: Open User Guide in Browser**
 
@@ -590,7 +578,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
@@ -599,7 +587,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Client while all Clients are being shown
 
    1. Test case: `cadd n/David …​` <br>
-      Expected: First contact is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is added to the list. Details of the added contact shown in the status message.
 
 
 ### Deleting a Client
@@ -609,7 +597,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all Clients using the `clist` command. Multiple Clients in the list.
 
    1. Test case: `cdel 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `cdel 0`<br>
       Expected: No Client is deleted. Error details shown in the status message. Status bar remains the same.
@@ -627,11 +615,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `sedit 1 g/Machoman`<br>
       Expected: First Session's gym location is edited.
-      Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
+      Details of the edited session is shown in the status message.
 
    1. Test case: `sedit 1 at/29/09/2020 1600 t/120`<br>
       Expected: First Session timing is edited.
-      Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
+      Details of the edited session is shown in the status message.
 
    1. Other incorrect edit commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -644,21 +632,26 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `schedit c/1 s/1 us/2`<br>
       Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2.
-      Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+      Details of the edited schedule is shown in the status message.
 
    1. Test case: `schedit c/2 s/1 us/2`<br>
       Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
-      Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+      Details of the edited schedule is shown in the status message.
       
-   1. Test case: `schedit c/1 s/1 pd/true`<br>
-         Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
-         In the right panel, the client's name in the related session will be indicated as green. 
-         Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `schedit c/1 s/1 pd/paid`<br>
+     Expected: Edit Schedule with client index 1 and session index 1 payment update to be paid. 
+     In the right panel, the client's name in the related session will be indicated as green. 
+     Details of the edited schedule is shown in the status message.
          
-   1. Test case: `schedit c/1 s/1 pd/false`<br>
-            Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
-            In the right panel, the client's name in the related session will be indicated as red. 
-            Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `schedit c/1 s/1 pd/unpaid`<br>
+    Expected: Edit Schedule with client index 1 and session index 1 payment update to be unpaid. 
+    In the right panel, the client's name in the related session will be indicated as red. 
+    Details of the edited schedule is shown in the status message.
+    
+   1. Test case: `schedit c/1 s/1 r/text`<br>
+       Expected: Edit Schedule with client index 1 and session index 1 remark to "text". 
+       In the right panel, the client's name in the related session will be indicated as red. 
+       Details of the edited schedule is shown in the status message.
 
    1. Other incorrect edit commands to try: `schedit c/1`, `schedit c/1 s/2`, `schedit c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
       Expected: Similar to previous.

@@ -1,15 +1,17 @@
 @startuml
-(*) --> "Execute EditSessionCommand"
-"Execute EditSessionCommand" --> ===B1===
-===B1=== --> if [isUpdatingGym]
---> "Gym"
---> ===B2===
+start
+:Edit Session Command;
 
-===B1=== --> if [isUpdatingStartTime]
---> "StartTime"
---> "Duration"
---> ===B2===
+if () then ([isUpdatingGym])
+    :Update Gym;
+    else ([else])
+    endif
 
-
---> (*)
+    if () then ([isUpdatingStartTime])
+        :Update Start Time;
+        :Duration;
+        else ([else])
+        endif
+        :Print Successful;
+stop
 @enduml

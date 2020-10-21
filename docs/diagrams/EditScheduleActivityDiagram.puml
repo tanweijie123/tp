@@ -1,17 +1,22 @@
 @startuml
-(*) --> "Execute EditScheduleCommand"
-"Execute EditScheduleCommand" --> ===B1===
-===B1=== --> if [isUpdatingSessionIndex]
---> "UpdatedSessionIndex"
---> ===B2===
+start
+:Edit Schedule Command;
 
-===B1=== --> if [isPaid]
---> "Paid"
---> ===B2===
+if () then ([isUpdatingSessionIndex])
+    :Update Session Index;
+    else ([else])
+    endif
 
-===B1=== --> if [isUpdatingRemark]
---> "Remark"
---> ===B2===
+    if () then ([isUpdatingPayment])
+        :Update Payment Status;
+        else ([else])
+        endif
 
---> (*)
+        if () then ([isUpdatingRemark])
+        :Update Remark;
+        else ([else])
+
+        endif
+        :Print Successful;
+stop
 @enduml
