@@ -3,7 +3,7 @@ package seedu.address.logic.commands.schedule;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
-import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_IS_PAID;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
@@ -11,8 +11,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
-import static seedu.address.testutil.TypicalSchedules.IS_PAID_FALSE;
-import static seedu.address.testutil.TypicalSchedules.IS_PAID_TRUE;
+import static seedu.address.testutil.TypicalSchedules.PAYMENT_PAID;
+import static seedu.address.testutil.TypicalSchedules.PAYMENT_UNPAID;
 import static seedu.address.testutil.TypicalSchedules.TEST_REMARK;
 
 import java.util.ArrayList;
@@ -37,8 +37,8 @@ public class ScheduleCommandTestUtil {
     public static final String SESSION_INDEX_DESC_B = " " + PREFIX_SESSION_INDEX + "2";
     public static final String UPDATED_SESSION_INDEX_DESC_A = " " + PREFIX_UPDATED_SESSION_INDEX + "1";
     public static final String UPDATED_SESSION_INDEX_DESC_B = " " + PREFIX_UPDATED_SESSION_INDEX + "2";
-    public static final String UPDATED_IS_PAID_FALSE = " " + PREFIX_IS_PAID + IS_PAID_FALSE;
-    public static final String UPDATED_IS_PAID_TRUE = " " + PREFIX_IS_PAID + IS_PAID_TRUE;
+    public static final String UPDATED_PAYMENT_PAID = " " + PREFIX_PAYMENT_STATUS + PAYMENT_PAID;
+    public static final String UPDATED_PAYMENT_UNPAID = " " + PREFIX_PAYMENT_STATUS + PAYMENT_UNPAID;
     public static final String UPDATED_REMARK_NONEMPTY = " " + PREFIX_REMARK + TEST_REMARK;
     public static final String UPDATED_REMARK_EMPTY = " " + PREFIX_REMARK + Remark.EMPTY_REMARK;
 

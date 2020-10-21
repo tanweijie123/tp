@@ -64,14 +64,14 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter`, `ClientInfoPage` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of several parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter`, `Homepage` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx and ControlsFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component interacts with these external API: 
 
-* Executes user commands using the `Logic` component.
-* Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* `Logic` : Performs the Execution of user's commands.
+* `Model` : Listens for changes to data so that the UI can be updated with the modified data.
 
 ### Logic component
 
@@ -82,15 +82,15 @@ The `UI` component,
 
 1. `Logic` uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a Client).
+1. The command execution can affect the `Model` (e.g. deleting a Client).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cdel 1")` API call.
 
-![Interactions Inside the Logic Component for the `cdel 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `cdel 1` Command](images/DeleteClientSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteClientCommandParser` and `DeleteClientCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### Model component
@@ -159,7 +159,7 @@ Certain properties of the application can be controlled(e.g. user prefs file loc
 through the configuration file (default: `config.json`)
 
 
-### Delete Session feature --- Bennett Clement
+### Delete Session feature
 
 The delete feature allows user to cancel a session, and delete all schedules associated to the session.
 
@@ -183,7 +183,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ![DeleteSessionActivityDiagram](images/DeleteSessionActivityDiagram.png)
 
 In the following sequence diagram, we trace the execution for when the user decides to enter the DeleteSession command 
-`sdel 1 f/ true` into FitEgo. For simplicity, we will refer to this command input as commandText. We also assume that
+`sdel 1 f/` into FitEgo. For simplicity, we will refer to this command input as commandText. We also assume that
 there are currently 2 associated schedules to the first session in FitEgo.
 
 ![DeleteSessionSequenceDiagram](images/tracing/DeleteSessionSequenceDiagram.png)
@@ -229,6 +229,44 @@ In designing this feature, we had to consider the alternative ways in which we c
     - Pros: Easy to implement
     - Cons: A schedule might have invalid session, breaking data integrity
 
+
+### Add Schedule feature
+
+The add schedule feature allows user to create a Schedule associated with a Client and a Session. 
+In other words, it allows user to schedule a Client to a Session.
+
+#### Implementation
+
+The add Schedule mechanism is facilitated by `AddScheduleCommand` which extends `Command`. The format of the 
+command is given by: 
+
+```schadd c/CLIENT_INDEX s/SESSION_INDEX```
+When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
+
+The following activity diagram summarizes what happens when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
+![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
+
+**Example Commands**
+
+Assume the current state of Client, Session, and Schedule is as illustrated on the following simplified object diagram:
+
+![OverlappingScheduleObjectDiagram0](images/OverlappingScheduleObjectDiagram0.png)
+
+Now, consider two cases of a Schedule Command to be invoked.
+
+**Case 1**:  `schadd c/2 s/1`
+
+Invoking `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List). This process can be traced by referring to the following simplified sequence diagram:
+
+  ![AddScheduleSequenceDiagram](images/AddScheduleSequenceDiagram.png)
+
+Thus, the result can be illustrated by the following object diagram, shown by a new created Schedule:
+
+![OverlappingScheduleObjectDiagram1](images/OverlappingScheduleObjectDiagram1.png)
+
+**Case 2:** `schadd c/1 s/1`
+
+On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as there is an overlapping Schedule (John is already scheduled to endurance training from 12/12/2020 1400 - 1600).
 
 ### \[Proposed\] Undo/redo feature
 
@@ -359,9 +397,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | trainer                                       | find a client by name          | locate details of clients without having to go through the entire list |
 | `* * *`  | trainer                                       | tag my client         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
 | `* * *`  | trainer                                       | create a Session               |                                                                        |
+| `* * *`  | trainer                                       | edit a session                 | change the details of a session                                        |
+| `* * *`  | trainer                                       | view a session's detail        | view at all of the session's details at a glance                       |
+| `* * *`  | busy fitness trainer                          | filter sessions by time        | view only the upcoming or other important sessions                             |
 | `* * *`  | trainer                                       | delete a Session               | cancel all schedules if there is an urgent need                        |
+| `* * *`  | trainer                                       | add a new schedule             |                                                                        |
+| `* * *`  | trainer                                       | edit a schedule                | change the details of a schedule                                       |
+| `* * *`  | trainer                                       | view a schedule's detail       | view at all of the schedule's details at a glance                      |
+| `* * *`  | trainer                                       | delete a schedule              | remove schedule that are cancelled or completed                        |
 | `* *`    | trainer                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* *`    | forgetful fitness trainer                     | track clients' payments        | remind those who have not paid up                                      |
+| `* *`    | busy fitness trainer                          | query if a particular time slot is open     | add new clients to that time slot                         |
+| `* *`    | fitness trainer                               | track clients' weight over time| keep track of my clients progress over time                            |
+| `* *`    | fitness trainer                               | store clients' session feedback| utilise previous sessions and plan exercises for upcoming sessions     |
 | `*`      | trainer with many clients in the address book | sort clients by name           | locate a client easily                                                 |
+| `*`      | user                                          | change software background between light and dark mode | customise my experience                        |
+| `*`      | trainer focused on coaching pre-NS teen       | track client's date of birth   | adjust the fitness intensity depending on IPPT period                  |
+
 
 *{More to be added}*
 
@@ -418,12 +470,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
+  
+* 2b. User requests to force delete a specific Client in the Client List.
+
+    * 2b1. FitEgo force deletes the Client and its associated Schedules.
+  
+    Use case ends.
 
 * 3a. The given index is invalid.
 
     * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. The given index refers to a client associated with one or more Schedule.
+    
+    * 3b1. FitEgo shows an error message.
+    
+      Use case resumes at step 2.
+      
+      
 
 **Use case: Tag a Client**
 
@@ -568,6 +634,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
        Use case resumes at step 2.     
       
 
+**Use case: View Session within time period**
+
+**MSS**
+
+1.  FitEgo shows a list of Sessions
+2.  User requests to filter the Session List by a period
+3.  FitEgo filters the Session List according to the specified period and updates its title.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given period is invalid.
+
+    * 2a1. FitEgo shows an error message.
+
+      Use case resumes at step 2.     
+
+**Use case: Add a Schedule**
+
+**MSS**
+
+1. FitEgo shows a list of Clients and list of Sessions
+
+2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List
+
+3. FitEgo adds the Schedule
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The Client index or Session index is invalid
+
+  - 2a1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+  
+- 2b. The Schedule to be added is overlapping with another Schedule
+
+  - 2b1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+    
 **Use case: Edit a Schedule**
 
 **MSS**
@@ -590,7 +704,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Delete a Schedule**
+
+**MSS**
+
+1. FitEgo shows a list of Clients and list of Sessions
+
+2. User requests to delete a Schedule asssociated with a specified Client from the Client List and Session from the Session List
+
+3. FitEgo deletes the Schedule
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The Client index or Session index is invalid
+
+  - 2a1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+
+- 2b. No Schedule is associated with the specified Client and Session
+
+  - 2b1. FitEgo shows an error message
+
+    Use case resumes at step 2.
+
+**Use case: Open User Guide in Browser**
+
+**MSS**
+1.  User requests to view Help window. 
+2.  FitEgo displays help window with the User Guide link.
+3.  User selects the link to access the User Guide. 
+4.  FitEgo opens the User Guide. 
+
+    Use case ends.
+
+**Extensions**
+* 3a. User closes the help window. 
+    * 3a1. FitEgo closes the help window
+	
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -610,6 +765,7 @@ from your previous machine to your new machine.
 
 ### Glossary
 
+* **API**: Application Programming Interface
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
 --------------------------------------------------------------------------------------------------------------------
@@ -618,9 +774,9 @@ from your previous machine to your new machine.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info"> 
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
 ### Launch and shutdown
@@ -684,7 +840,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing a Session while all Sessions are being shown
 
    1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
-
+    
    1. Test case: `sedit 1 g/Machoman`<br>
       Expected: First Session's gym location is edited.
       Details of the edited session is shown in the status message. Timestamp in the status bar is updated.
@@ -698,7 +854,7 @@ testers are expected to do more *exploratory* testing.
       
 ### Deleting a Session
 
-   1. Test case: `sdel 1 f/ true` <br>
+   1. Test case: `sdel 1 f/` <br>
        Expected: The session in index 1 (as shown in the Session List) will be deleted alongside all schedules associated
        to the session. Details of the deleted session is shown in the status message.
     
@@ -709,32 +865,78 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect DeleteSession commands to try: `sdel`, `sdel x` (where x is larger than the list size)<br>
        Expected: It will not delete the session and error message will be shown in the status message.
 
+
+### Viewing Sessions within Period
+
+1. Viewing Sessions within Period while the Session List is non-empty
+
+   1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
+
+   1. Test case: `sview p/+1d`<br>
+      Expected: The right panel only displays Sessions with start time from 0000hrs today to 2359hrs the next day.
+      Indication that Session List has been successfully updated is shown in the status message.
+
+   1. Test case: `sview p/past`<br>
+      Expected: The right panel only displays Sessions that have already ended before time of execution.
+      Indication that Session List has been successfully updated is shown in the status message.
+
+   1. Other incorrect edit commands to try: `sview`, `sview p/+2s` (where unit of time is not d/m/y), `...` <br>
+      Expected: Similar to previous.
+      
+### Adding a Schedule
+
+1. Adding a Schedule while all Clients and Sessions are being shown
+
+   1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   1. Test case: `schadd c/1 s/1`<br>
+      Expected: Add a Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message.
+   1. Test case: `schadd s/1 c/2`<br>
+      Expected: Add a Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message.
+   1. Other incorrect Add Schedule commands to try: `schadd c/1`, `schadd c/0 s/2`, `schadd c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
+      Expected: No Schedule is added. Error details shown in the status message.
+
 ### Editing a Schedule
 
 1. Editing a Schedule while all Schedules are being shown
 
    1. Prerequisites: Multiple Schedules in the list can be viewed on the main panel of the GUI.
 
-   1. Test case: `editschedule c/1 s/1 us/2`<br>
+   1. Test case: `schedit c/1 s/1 us/2`<br>
       Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `editschedule c/2 s/1 us/2`<br>
+   1. Test case: `schedit c/2 s/1 us/2`<br>
       Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
       Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
       
-   1. Test case: `editschedule c/1 s/1 pd/true`<br>
-         Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
-         In the right panel, the client's name in the related session will be indicated as green. 
-         Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `schedit c/1 s/1 pd/paid`<br>
+      Expected: Edit Schedule with client index 2 and session index 1 is edited to be paid. 
+      In the right panel, the client's name in the related session will be indicated as green. 
+      Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
          
-   1. Test case: `editschedule c/1 s/1 pd/false`<br>
-            Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
-            In the right panel, the client's name in the related session will be indicated as red. 
-            Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `schedit c/1 s/1 pd/unpaid`<br>
+      Expected: Edit Schedule with client index 2 and session index 1 is edited to be not paid. 
+      In the right panel, the client's name in the related session will be indicated as red. 
+      Details of the edited schedule is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Other incorrect edit commands to try: `editschedule c/1`, `editschedule c/1 s/2`, `editschedule c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
+   1. Other incorrect edit commands to try: `schedit c/1`, `schedit c/1 s/2`, `schedit c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
       Expected: Similar to previous.
+
+### Deleting a Schedule
+
+1. Deleting a Schedule while all Clients and Sessions are being shown
+
+   1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
+   1. Test case: `schdel c/1 s/1`<br>
+      Expected: Delete the Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
+      Details of the deleted Schedule is shown in the status message.
+   1. Test case: `schdel s/1 c/2`<br>
+      Expected: Delete the Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
+      Details of the added Schedule is shown in the status message.
+   1. Other incorrect Delete Schedule commands to try: `schdel c/1`, `schdel c/0 s/2`, `schdel c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
+      Expected: No Schedule is deleted. Error details shown in the status message.
 
 ### Saving data
 
