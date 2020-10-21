@@ -129,7 +129,6 @@ Although there are a lot of commands, once you learn the verb and entities, it i
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features :star:
-## Keyword Syntax
 
 <div markdown="block" class="alert alert-info">
 
