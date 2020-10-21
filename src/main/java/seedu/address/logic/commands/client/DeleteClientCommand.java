@@ -69,11 +69,14 @@ public class DeleteClientCommand extends Command {
         // Do not delete Client unless user use the force flag
         if (model.hasAnyScheduleAssociatedWithClient(clientToDelete) && !isForced) {
             return new CommandResult(MESSAGE_FORCE_DELETE_CLIENT_USAGE);
-        } else {
-            model.deleteClientAssociatedSchedules(clientToDelete);
-            model.deleteClient(clientToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete));
         }
+
+        assert isForced || !model.hasAnyScheduleAssociatedWithClient(clientToDelete);
+
+        model.deleteClientAssociatedSchedules(clientToDelete);
+        model.deleteClient(clientToDelete);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete));
     }
 
     @Override
