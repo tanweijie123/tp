@@ -192,6 +192,7 @@ there are currently 2 associated schedules to the first session in FitEgo.
  
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteSessionCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 The sequence diagram above shows how the `DeleteSessionCommand` is executed in FitEgo. The LogicManager receives user 
 command as commandText and parses it with `AddressBookParser`. It will parse the command and pass the remaining
