@@ -118,9 +118,18 @@ Once you learn the entity, you can now combine it with the verb. For example:
 
 Although there are a lot of commands, once you learn the verb and entities, it is so easy to use FitEgo!
 
+
+## Common Notations
+
+| Emoji | Meaning | text
+| -------- | --------- | --------- |
+| :information_source: | Notes | `:information_source:` |
+| :bulb: | Tip | `:bulb:` |
+| :star: | Feature | `:star:` |
+
 --------------------------------------------------------------------------------------------------------------------
 
-# Keyword
+# Keyword :star:
 
 <div markdown="block" class="alert alert-info">
 
@@ -215,8 +224,14 @@ Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
 * `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
 
+<<<<<<<<< Temporary merge branch 1
+
+### Listing all clients : `clist`
+ƒhow
+=========
 ### Listing all clients : `clist`
 
+>>>>>>>>> Temporary merge branch 2
 Shows a list of all clients in the clients list.
 
 Format: `clist`
@@ -463,9 +478,14 @@ Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/P
 * Existing values will be updated to the input values
 
 Examples:
+
 *  `schedit c/1 s/1 us/2` Edits the Schedule containing client index 1 and session index 1 to be `SESSION 2`.
 *  `schedit c/1 s/1 pd/paid` Edits the Schedule containing client index 1 and session index 1 to be paid.
+<<<<<<<<< Temporary merge branch 1
+*  `schedit c/1 s/1 r/did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
+=========
 *  `schedit c/1 s/1 r/ did 5 pushups` Edits the Schedule containing client index 1 and session index 1 to have remark 
+>>>>>>>>> Temporary merge branch 2
 of doing 5 pushups.
 * `schedit c/1 s/1 r/` Clear the Schedule containing client index 1 and session index 1 remarks.
 
@@ -514,7 +534,11 @@ Examples:
 | Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
 | View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
+<<<<<<<<< Temporary merge branch 1
+| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`| `schedit c/1 s/1 us/1 pd/paid r/text` |
+=========
 | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS]`| `schedit c/1 s/1 us/1 pd/paid |
+>>>>>>>>> Temporary merge branch 2
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
 
