@@ -36,7 +36,7 @@ Table of Contents
 
 1. Read [How to use](#how-to-use-fitego) for a quick understanding of commands in FitEgo.
 
-1. Refer to the [Keyword](#main-keywords) below for more details of each command.
+1. Refer to the [Keyword](#keyword) below for more details of each command.
 
 
 ### How to interpret notations
@@ -156,9 +156,9 @@ From the above image, the GUI is made up of several components.
 | Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
 | Command Box     | Displays a text box for your input. You can type your command here.          | 
 | Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt you an error message | 
-| Client List     | Displays the list of clients in a list view. You can modify this list using [client's command](#Client-related-Keywords) |
+| Client List     | Displays the list of clients in a list view. You can modify this list using [client's command](#client-related-keywords) |
 | Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and quote of the day | 
-| Session List    | Displays the list of your sessions in a list view. You can modify this list using [session's command](#Session-related-Keywords) | 
+| Session List    | Displays the list of your sessions in a list view. You can modify this list using [session's command](#session-related-keywords) | 
 | Status Bar Footer | Displays the current date and time of the program. If you notice this is incorrect, your PC might be using a different timezone| 
 
 
@@ -176,7 +176,7 @@ For advanced users, you can use the "TAB" key and FitEgo will auto-complete the 
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Keyword :star:
+# Keyword
 
 <div markdown="block" class="alert alert-info">
 
@@ -265,7 +265,7 @@ You can add a client.
 
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br/>
 A client can have any number of tags (including 0). Each tag can include
 alphanumeric characters or dash (`-`), but you are not allowed to start or end
 a tag with a dash. 
@@ -379,7 +379,7 @@ Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 * Duration is in minutes
 * Duration should be a positive integer (larger than 0)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br/>
     The session's time should not overlap with previously created sessions. 
 </div>
 
@@ -456,7 +456,7 @@ Format: `sview p/PERIOD`
  
   * units are case insensitive
  
-<img src="images/sview_sample.png" alt="result for 'sview p/+2w'" height="500" width="500"/></br>
+<img src="images/sview_sample.png" alt="result for 'sview p/+2w'"/>
 
 Sample picture of the result of running `sview p/+2w`
 
@@ -466,6 +466,7 @@ Examples:
 * `sview p/+0D` - Display all sessions today.
 * `sview p/-1d` - Display all sessions from the past 1 day to today (yesterday and today).
 * `sview p/+2w` - Display all sessions from today to 2 weeks later. (e.g. If today is Friday, display from today to the Friday that falls 2 weeks later).
+
 ---
 
 ## Schedule-related Keywords 
