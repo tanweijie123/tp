@@ -306,7 +306,7 @@ session panel which is located at the right of this programme.
 <img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" />
 
 The `ALL` at the top of this panel represents the current settings of session view. You can change the period 
-of session view using [`sview`](#viewing-sessions-within-period:-sview) command. 
+of session view using [`sview`](#viewing-sessions-within-period-sview) command. 
 
 ### Adding a Session: `sadd`
 
