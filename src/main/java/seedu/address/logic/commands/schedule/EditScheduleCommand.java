@@ -42,7 +42,7 @@ public class EditScheduleCommand extends Command {
             + PREFIX_SESSION_INDEX + "SESSION (must be a positive integer) "
             + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION] "
             + "[" + PREFIX_PAYMENT_STATUS + "PAID OR UNPAID?] "
-            + "[" + PREFIX_REMARK + "REMARK]"
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_WEIGHT + "WEIGHT]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
@@ -199,7 +199,7 @@ public class EditScheduleCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(updateSessionIndex, paymentStatus, remark);
+            return CollectionUtil.isAnyNonNull(updateSessionIndex, paymentStatus, remark, weight);
         }
 
         public void setClientIndex(Index clientIndex) {

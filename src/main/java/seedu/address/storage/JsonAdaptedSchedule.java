@@ -149,7 +149,7 @@ public class JsonAdaptedSchedule {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            throw new IllegalValueException(String.format(Weight.MESSAGE_INVALID_PAYMENT_STATUS,
+            throw new IllegalValueException(String.format(Weight.MESSAGE_INVALID_WEIGHT_STATUS,
                     Weight.class.getSimpleName()));
         }
     }

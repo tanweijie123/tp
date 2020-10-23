@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Schedule's Weight in the address book.
  */
 public class Weight {
-    public static final String MESSAGE_INVALID_PAYMENT_STATUS = "Weight must be a positive number.";
+    public static final String MESSAGE_INVALID_WEIGHT_STATUS = "Weight must be a positive number.";
     public final double weight;
 
     /**
@@ -15,7 +15,7 @@ public class Weight {
      * @param weight A valid weight for schedule.
      */
     public Weight(double weight) {
-        checkArgument(isValidWeight(weight), MESSAGE_INVALID_PAYMENT_STATUS);
+        checkArgument(isValidWeight(weight), MESSAGE_INVALID_WEIGHT_STATUS);
         this.weight = weight;
     }
 

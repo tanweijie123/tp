@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_PAYMENT_STATU
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.stream.Stream;
 
@@ -20,6 +21,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.schedule.Remark;
+import seedu.address.model.schedule.Weight;
 
 public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
@@ -40,7 +42,7 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX,
-                        PREFIX_UPDATED_SESSION_INDEX, PREFIX_PAYMENT_STATUS, PREFIX_REMARK);
+                        PREFIX_UPDATED_SESSION_INDEX, PREFIX_PAYMENT_STATUS, PREFIX_REMARK, PREFIX_WEIGHT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -86,6 +88,11 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editScheduleDescriptor
                     .setUpdatedRemark(new Remark(argMultimap.getValue(PREFIX_REMARK).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_WEIGHT).isPresent()) {
+            editScheduleDescriptor
+                    .setUpdatedWeight(ScheduleParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get()));
         }
 
         if (!editScheduleDescriptor.isAnyFieldEdited()) {
