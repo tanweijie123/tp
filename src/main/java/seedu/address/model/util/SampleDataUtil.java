@@ -13,7 +13,10 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.schedule.PaymentStatus;
+import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Weight;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
@@ -53,7 +56,9 @@ public class SampleDataUtil {
                 new Session(new Gym("Getwell gym"), new ExerciseType("Endurance"),
                     new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1300"), 120)),
                 new Session(new Gym("Machoman gym"), new ExerciseType("Bodybuilder"),
-                    new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1600"), 150))
+                    new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1600"), 150)),
+                new Session(new Gym("Machoman gym"), new ExerciseType("Bodybuilder"),
+                    new Interval(SessionParserUtil.parseStringToDateTime("01/10/2020 1800"), 120))
             };
         } catch (ParseException e) {
             //INFO: if you reach here, it means the date input above is wrong.
@@ -71,13 +76,24 @@ public class SampleDataUtil {
                         new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                         getTagSet("allergy-nuts", "injured-thigh")),
                     new Session(new Gym("Getwell gym"), new ExerciseType("Endurance"),
-                        new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1300"), 120))),
+                        new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1300"), 120)),
+                        PaymentStatus.PAYMENT_STATUS_UNPAID, Remark.EMPTY_REMARK, Weight.getDefaultWeight()),
                 new Schedule(
                     new Client(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                         new Address("Blk 30 Geylang Street 29, #06-40"),
                         getTagSet("injured-thigh")),
                     new Session(new Gym("Machoman gym"), new ExerciseType("Bodybuilder"),
-                        new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1600"), 150)))
+                        new Interval(SessionParserUtil.parseStringToDateTime("29/09/2020 1600"), 150)),
+                        new PaymentStatus(PaymentStatus.VALUE_PAID),
+                        new Remark("client request to increase reps for next session"), new Weight(77.3)),
+                new Schedule(
+                        new Client(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                                new Address("Blk 30 Geylang Street 29, #06-40"),
+                                getTagSet("injured-thigh")),
+                        new Session(new Gym("Machoman gym"), new ExerciseType("Bodybuilder"),
+                                new Interval(SessionParserUtil.parseStringToDateTime("01/10/2020 1800"), 120)),
+                        new PaymentStatus(PaymentStatus.VALUE_PAID),
+                        new Remark("client struggling; reduce rep next session"), new Weight(77.9))
             };
         } catch (ParseException e) {
             //INFO: if you reach here, it means the date input above is wrong.

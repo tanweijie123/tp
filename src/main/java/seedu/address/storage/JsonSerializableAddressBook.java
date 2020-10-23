@@ -16,6 +16,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Weight;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
@@ -96,8 +97,9 @@ class JsonSerializableAddressBook {
             }
             PaymentStatus payment = jsonAdaptedSchedule.getPaymentStatus();
             Remark remark = jsonAdaptedSchedule.getRemark();
+            Weight weight = jsonAdaptedSchedule.getWeight();
 
-            Schedule schedule = new Schedule(client, session, payment, remark);
+            Schedule schedule = new Schedule(client, session, payment, remark, weight);
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }

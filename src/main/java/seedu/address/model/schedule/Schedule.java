@@ -13,16 +13,18 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     private Session session;
     private PaymentStatus paymentStatus;
     private Remark remark;
+    private Weight weight;
 
     /**
      * Every field must be present and not null.
      */
-    public Schedule(Client client, Session session, PaymentStatus paymentStatus, Remark remark) {
+    public Schedule(Client client, Session session, PaymentStatus paymentStatus, Remark remark, Weight weight) {
         requireAllNonNull(client, session);
         this.client = client;
         this.session = session;
         this.paymentStatus = paymentStatus;
         this.remark = remark;
+        this.weight = weight;
     }
 
     /**
@@ -34,6 +36,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         this.session = session;
         this.paymentStatus = PaymentStatus.PAYMENT_STATUS_UNPAID;
         this.remark = Remark.EMPTY_REMARK;
+        this.weight = Weight.getDefaultWeight();
     }
 
     public Client getClient() {
@@ -54,6 +57,10 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public Weight getWeight() {
+        return weight;
     }
 
     /**
@@ -87,7 +94,8 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
 
         Schedule otherSchedule = (Schedule) other;
         return otherSchedule.client.equals(this.client) && otherSchedule.session.equals(this.session)
-                && otherSchedule.paymentStatus.equals(paymentStatus) && otherSchedule.remark.equals(this.remark);
+                && otherSchedule.paymentStatus.equals(paymentStatus) && otherSchedule.remark.equals(this.remark)
+                && otherSchedule.weight.equals(weight);
     }
 
     @Override
@@ -105,6 +113,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     public String toString() {
         String paymentStatusString = "Payment status: " + paymentStatus;
         String remarkPresent = !remark.equals(Remark.EMPTY_REMARK) ? "Remark: " + remark : "";
+        String weightPresent = Weight.isValidWeight(weight) ? "Weight : " + weight : "";
         return "Client "
                 + client
                 + "\n"
@@ -113,6 +122,8 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
                 + "\n"
                 + paymentStatusString
                 + "\n"
-                + remarkPresent;
+                + remarkPresent
+                + "\n"
+                + weightPresent;
     }
 }
