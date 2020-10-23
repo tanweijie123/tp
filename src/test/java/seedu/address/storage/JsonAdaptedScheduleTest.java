@@ -105,7 +105,7 @@ public class JsonAdaptedScheduleTest {
 
     @Test
     public void toModelType_invalidWeight_throwsIllegalValueException() {
-        String expectedMessage = Weight.MESSAGE_INVALID_PAYMENT_STATUS;
+        String expectedMessage = Weight.MESSAGE_INVALID_WEIGHT_STATUS;
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_EMAIL, VALID_START_TIME,
                 VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, INVALID_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getWeight);

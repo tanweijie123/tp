@@ -29,10 +29,14 @@ public class ScheduleParserUtil extends ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String} weight into a {@code Weight}
+     * @throws ParseException If given weight contains non-positive numbers, or not a type Double object.
+     */
     public static Weight parseWeight(String weight) throws ParseException {
         requireNonNull(weight);
         try {
-            return new Weight(Double.valueOf(weight));
+            return new Weight(Double.valueOf(weight.trim()));
         } catch (IllegalArgumentException e) {
             throw new ParseException(MESSAGE_INVALID_WEIGHT_STATUS);
         }

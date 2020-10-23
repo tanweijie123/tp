@@ -21,7 +21,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.schedule.Remark;
-import seedu.address.model.schedule.Weight;
 
 public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
