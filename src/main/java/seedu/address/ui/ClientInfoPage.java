@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import static seedu.address.model.schedule.Weight.KILOGRAM;
+import static seedu.address.model.schedule.Weight.POUND;
+import static seedu.address.model.schedule.Weight.isPoundUnit;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +24,6 @@ import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Weight;
 
-import static seedu.address.model.schedule.Weight.*;
 
 
 public class ClientInfoPage extends UiPart<AnchorPane> {

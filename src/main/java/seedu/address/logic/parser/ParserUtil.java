@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.schedule.Weight.POUND;
 import static seedu.address.model.schedule.Weight.isPoundUnit;
 
 import java.util.Collection;

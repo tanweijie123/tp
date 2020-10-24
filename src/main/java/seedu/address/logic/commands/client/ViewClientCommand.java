@@ -88,7 +88,8 @@ public class ViewClientCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.logic.commands.client.ViewClientCommand // instanceof handles nulls
-                && targetIndex.equals(((seedu.address.logic.commands.client.ViewClientCommand) other).targetIndex)); // state check
+                || (other instanceof ViewClientCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewClientCommand) other).targetIndex) // state check
+                && isWeightUnitPound == (((ViewClientCommand) other).isWeightUnitPound));
     }
 }
