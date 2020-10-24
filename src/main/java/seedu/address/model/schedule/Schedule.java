@@ -9,10 +9,10 @@ import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
 
 public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
-    private Client client;
-    private Session session;
-    private PaymentStatus paymentStatus;
-    private Remark remark;
+    private final Client client;
+    private final Session session;
+    private final PaymentStatus paymentStatus;
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
@@ -54,6 +54,14 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public Schedule setClient(Client newClient) {
+        return new Schedule(newClient, this.session, this.paymentStatus, this.remark);
+    }
+
+    public Schedule setSession(Session newSession) {
+        return new Schedule(this.client, newSession, this.paymentStatus, this.remark);
     }
 
     /**
