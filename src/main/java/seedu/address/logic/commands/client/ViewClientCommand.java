@@ -1,6 +1,8 @@
+
 package seedu.address.logic.commands.client;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.client.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -24,15 +26,37 @@ public class ViewClientCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the full details of the selected client index\n"
             + "Parameters: INDEX (must be a positive integer)\n"
+            + "[" + PREFIX_NAME + "NAME] "
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_CLIENT_SUCCESS = "Viewing Client: %1$s";
 
     private final Index targetIndex;
     private Client client;
+    /**
+     * Indicates whether the client's weight graph should be in pounds.
+     */
+    private final boolean isWeightUnitPound;
 
+    /**
+     * Creates a ViewClientCommand to view client at {@code targetIndex}.
+     * It will not display the Client's weight in pound by default.
+     *
+     * @param targetIndex index of the Client in the filtered client list to view.
+     */
     public ViewClientCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.isWeightUnitPound = false;
+    }
+
+    /**
+     *
+     * @param targetIndex index of the Client in the filtered client list to view.
+     * @param isWeightUnitPound true if there is a need to display the Client's weight graph in pounds.
+     */
+    public ViewClientCommand(Index targetIndex, boolean isWeightUnitPound) {
+        this.targetIndex = targetIndex;
+        this.isWeightUnitPound = isWeightUnitPound;
     }
 
     public Client getClient() {
@@ -52,7 +76,8 @@ public class ViewClientCommand extends Command {
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         this.client = clientToView;
         Supplier<AnchorPane> run = () -> {
-            ClientInfoPage cip = new ClientInfoPage(client, model.getAddressBook().getScheduleList(), false);
+            ClientInfoPage cip = new ClientInfoPage(client, model.getAddressBook().getScheduleList(),
+                    isWeightUnitPound);
             return cip.getRoot();
         };
 
@@ -63,7 +88,7 @@ public class ViewClientCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ViewClientCommand // instanceof handles nulls
-                && targetIndex.equals(((ViewClientCommand) other).targetIndex)); // state check
+                || (other instanceof seedu.address.logic.commands.client.ViewClientCommand // instanceof handles nulls
+                && targetIndex.equals(((seedu.address.logic.commands.client.ViewClientCommand) other).targetIndex)); // state check
     }
 }

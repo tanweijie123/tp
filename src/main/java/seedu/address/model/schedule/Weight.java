@@ -9,7 +9,7 @@ public class Weight {
     public static final String MESSAGE_INVALID_WEIGHT_STATUS = "Weight must be a positive number.";
     public static final String MESSAGE_INVALID_UNIT_STATUS = "Weight must be in kg or lbs.";
     public static final String KILOGRAM = "kg";
-    public static final String POUND = "lbs";
+    public static final String POUND = "lb";
     private static final double KILOGRAM_TO_POUND_MULTIPLIER = 2.20462262185;
     private final double weight;
 
@@ -30,7 +30,7 @@ public class Weight {
      */
     public Weight(double weight, String unit) {
         checkArgument(isValidWeight(weight), MESSAGE_INVALID_WEIGHT_STATUS);
-        checkArgument(hasValidWeightUnit(unit), MESSAGE_INVALID_UNIT_STATUS);
+        checkArgument(isValidUnit(unit), MESSAGE_INVALID_UNIT_STATUS);
         if (unit.equals(POUND)) {
             this.weight = weight;
         } else {
@@ -48,8 +48,15 @@ public class Weight {
     /**
      * Returns true if a given String value is a valid unit.
      */
-    public static boolean hasValidWeightUnit(String unit) {
+    public static boolean isValidUnit(String unit) {
         return unit.equals(KILOGRAM) | unit.equals(POUND);
+    }
+
+    /**
+     * Returns true if a given String value represents pound unit.
+     */
+    public static boolean isPoundUnit(String unit) {
+        return unit.equals(POUND);
     }
 
     /**
@@ -78,10 +85,6 @@ public class Weight {
 
     public double getWeightInPound() {
         return this.weight * KILOGRAM_TO_POUND_MULTIPLIER;
-    }
-
-    public String getPoundInString() {
-        return Double.toString(getWeightInPound());
     }
 
     @Override

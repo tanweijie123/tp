@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.model.schedule.Weight.KILOGRAM;
-import static seedu.address.model.schedule.Weight.POUND;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +19,8 @@ import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Weight;
+
+import static seedu.address.model.schedule.Weight.*;
 
 
 public class ClientInfoPage extends UiPart<AnchorPane> {
@@ -82,18 +81,23 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         this.kgRadio.setToggleGroup(this.group);
-        this.kgRadio.setSelected(true);
-        this.kgRadio.setUserData("kg");
-        this.kgRadio.setText("kg");
+        this.kgRadio.setUserData(KILOGRAM);
+        this.kgRadio.setText(KILOGRAM);
 
         this.poundRadio.setToggleGroup(group);
-        this.poundRadio.setUserData("lbs");
-        this.poundRadio.setText("lbs");
+        this.poundRadio.setUserData(POUND);
+        this.poundRadio.setText(POUND);
+
+        if (weightInPound) {
+            this.poundRadio.setSelected(true);
+        } else {
+            this.kgRadio.setSelected(true);
+        }
 
         this.initializeChart(weightInPound, relatedSchedule);
 
         this.group.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
-            if (group.getSelectedToggle().getUserData().equals("lbs")) {
+            if (isPoundUnit(group.getSelectedToggle().getUserData().toString())) {
                 initializeChart(true, relatedSchedule);
             } else {
                 initializeChart(false, relatedSchedule);

@@ -1,9 +1,12 @@
 package seedu.address.logic.parser.client;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.client.CliSyntax.PREFIX_UNIT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.client.ViewClientCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,8 +21,14 @@ public class ViewClientCommandParser implements Parser<ViewClientCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewClientCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_UNIT);
         try {
-            Index index = ParserUtil.parseIndex(args);
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            if (argMultimap.getValue(PREFIX_UNIT).isPresent()) {
+                boolean isPoundUnit = ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNIT).get());
+                return new ViewClientCommand(index, isPoundUnit);
+            }
             return new ViewClientCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(

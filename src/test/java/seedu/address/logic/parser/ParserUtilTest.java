@@ -26,6 +26,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#injured-thigh";
+    private static final String INVALID_UNIT = "g";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +34,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "injured-thigh";
     private static final String VALID_TAG_2 = "allery-dairy";
+    private static final String VALID_UNIT_1 = "kg";
+    private static final String VALID_UNIT_2 = "lb";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -146,6 +150,32 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseUnit_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUnit((String) null));
+    }
+
+    @Test
+    public void parseUnit_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseUnit(INVALID_UNIT));
+    }
+
+    @Test
+    public void parseUnit_validValueWithoutWhitespace_returnsFalse() throws Exception {
+        assertEquals(false, ParserUtil.parseUnit(VALID_UNIT_1));
+    }
+
+    @Test
+    public void parseUnit_validValueWithoutWhitespace_returnsTrue() throws Exception {
+        assertEquals(true, ParserUtil.parseUnit(VALID_UNIT_2));
+    }
+
+    @Test
+    public void parseUnit_validValueWithWhitespace_returnsTrue() throws Exception {
+        String unitWithWhitespace = WHITESPACE + VALID_UNIT_2 + WHITESPACE;
+        assertEquals(true, ParserUtil.parseUnit(unitWithWhitespace));
     }
 
     @Test

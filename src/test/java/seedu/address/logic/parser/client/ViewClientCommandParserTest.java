@@ -29,4 +29,27 @@ public class ViewClientCommandParserTest {
         assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ViewClientCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_validArgsNumAndUnit_returnsViewCommand() {
+        assertParseSuccess(parser, "1 u/kg", new ViewClientCommand(INDEX_FIRST_CLIENT));
+    }
+
+    @Test
+    public void parse_invalidArgsUnitAndValidArgsNumAnd_returnsViewCommand() {
+        assertParseFailure(parser, "1 u/g", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ViewClientCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgsNumAndValidArgsUnitAnd_returnsViewCommand() {
+        assertParseFailure(parser, "0 u/g", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ViewClientCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgs_returnsViewCommand() {
+        assertParseFailure(parser, "0 u/g", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ViewClientCommand.MESSAGE_USAGE));
+    }
 }
