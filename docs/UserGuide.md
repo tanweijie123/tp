@@ -116,7 +116,7 @@ This is to prevent accidental schedule overlaps at different gyms.
 </div>
 
 
-All [session's commands](#session-related-keywords) have prefix `s`.
+All [session-related commands](#session-related-keywords) have prefix `s`.
 
 #### Schedules
 
@@ -136,18 +136,19 @@ The table below shows an example of schedules. The session at Machoman Gym is at
 | John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | paid           |
 | Alex | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 60 kg  | Planks (10 x 30 seconds) | unpaid           |
 | Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | paid         |
-
 <center> Table - Example of Schedule Tracking </center>
 <br/>
 
-All [schedules' commands](#schedule-related-keywords) have prefix `sch`.
+All [schedule-related commands](#schedule-related-keywords) have prefix `sch`.
 
 ### General Note
 
 Once you learn the entity, you can now combine it with the verb. 
 
 For example:
+
     - `cadd`: Adds a client, `sadd`: Adds a session, `schadd`: Adds a schedule
+    
     - `cdel`: Deletes a client, `sdel`: Deletes a session, `schdel`: Deletes a schedule
 
 The program will automatically save after every command execution to guarantee that your data will never be lost.
@@ -184,9 +185,9 @@ From the figure above, the GUI is made up of several components.
 
 You can type input into the Command Box and it will display the command starting with the input. <br/>
 <br>
-![autocomplete_sample](images/autocomplete_sample.png)
+<center><img src="images/autocomplete_sample.png" alt="autocomplete"/>
 <br>
-<center>Figure - Sample of autocomplete command</center>
+Figure - Sample of autocomplete command</center>
 For example, in the above figure, if you enter `c` and commands that starts with "c" is displayed. <br>
 For advanced users, you can use the "TAB" key and FitEgo will auto-complete the first suggestion into the command box, thus increasing your typing speed!   
 </div>
@@ -219,7 +220,7 @@ For advanced users, you can use the "TAB" key and FitEgo will auto-complete the 
 
 You can return to the home page by using this command. 
 
-<center></img src="images/homepage.png" alt="homepage")</center>
+<center><img src="images/homepage.png" alt="homepage"/></center>
 <center> Figure - Homepage View </center>
 
 The homepage will display the statistics of your program, today's schedule and quote of the day. 
@@ -228,7 +229,7 @@ The homepage will display the statistics of your program, today's schedule and q
 
 You can ask FitEgo to open a window with a link to the help page.
 
-<center></img src="images/helpMessage.png" alt="helpMessage")</center>
+<center><img src="images/helpMessage.png" alt="helpMessage"/></center>
 <center> Figure - Help Window </center>
 
 Format: `help`
@@ -267,8 +268,8 @@ Your data in FitEgo are saved in the hard disk automatically after any command t
 ## Client-related Keywords
 All client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the [left of this program](#ui-orientation). 
 
-<img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
-
+<center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
+<br/>Sample of Client List</center>
 ### Listing all clients : `clist`
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
@@ -388,9 +389,8 @@ Examples:
 All session-related keywords are described in this section. All of the commands here will interact with the 
 Session List which is located at the [right of this program](#ui-orientation). 
 
-<center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" />
-Sample of SessionPanel
-</center>
+<center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" /><br/>
+Sample of SessionPanel</center><br/>
 The `ALL` at the top of this panel represents the current settings of session view. You can change the period 
 of session view using [`sview`](#viewing-sessions-within-period--sview) command. 
 
