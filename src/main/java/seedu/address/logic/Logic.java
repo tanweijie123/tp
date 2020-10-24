@@ -45,6 +45,9 @@ public interface Logic {
     /** Returns the list of Sessions associated to a Client*/
     List<Session> getAssociatedSessionList(Client client);
 
+    /** Returns the list of Schedules associated to a Client*/
+    List<Schedule> getAssociatedScheduleList(Client client);
+
     /** Returns the list of Schedules associated to a Session*/
     List<Schedule> getAssociatedScheduleList(Session session);
 

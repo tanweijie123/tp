@@ -1,13 +1,25 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Remark;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Interval;
 
 public class ClientInfoPage extends UiPart<AnchorPane> {
     private static final String FXML = "ClientInfoPage.fxml";
@@ -31,12 +43,17 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private TableView<Schedule> pastSchedulesTableView;
+
     /**
      * Displays a client's profile in a separate window.
      * It should display all the details pertaining to this {@code Client}
-     * @param client The client to display
+     *
+     * @param client        The client to display
+     * @param pastSchedules The list of schedules the client has ever gone through
      */
-    public ClientInfoPage(Client client) {
+    public ClientInfoPage(Client client, List<Schedule> pastSchedules) {
         super(FXML);
         this.client = client;
 
@@ -48,6 +65,54 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        TableColumn<Schedule, Interval> intervalColumn = new TableColumn<>("Interval");
+        intervalColumn.setCellValueFactory(new PropertyValueFactory<>("interval"));
+
+        TableColumn<Schedule, ExerciseType> exTypeColumn = new TableColumn<>("Exercise Type");
+        exTypeColumn.setCellValueFactory(new PropertyValueFactory<>("exerciseType"));
+
+        TableColumn<Schedule, Remark> remarkColumn = new TableColumn<>("Remark");
+        remarkColumn.setCellValueFactory(new PropertyValueFactory<>("remark"));
+
+        this.pastSchedulesTableView.getColumns().addAll(new TableColumn[]{intervalColumn, exTypeColumn, remarkColumn});
+        this.pastSchedulesTableView.getItems().addAll(pastSchedules);
+
+        /* Make remark column can wrap text
+         */
+        remarkColumn.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Schedule, Remark> call(TableColumn<Schedule, Remark> arg0) {
+                return new TableCell<>() {
+                    private Text text;
+
+                    @Override
+                    public void updateItem(Remark item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            text = new Text(item.toString());
+                            text.wrappingWidthProperty().bind(getTableColumn().widthProperty());
+                            text.setStyle("-fx-stroke: white; -fx-stroke-width: 0.5; -fx-padding: 10px;");
+                            text.setFont(Font.font("Segoe UI Light"));
+                            this.setWrapText(true);
+
+                            setGraphic(text);
+                        }
+                    }
+                };
+            }
+        });
+
+        intervalColumn.setMinWidth(pastSchedulesTableView.getWidth() * .25);
+        exTypeColumn.setPrefWidth(150);
+        remarkColumn.setPrefWidth(400);
+
+        remarkColumn.setSortable(false);
+
+        this.pastSchedulesTableView.setPlaceholder(new Label("No schedules to display"));
+        this.pastSchedulesTableView.setPrefHeight(250);
+
+
     }
 
     @Override

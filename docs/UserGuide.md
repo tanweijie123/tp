@@ -40,7 +40,7 @@ FitEgo is a **desktop app for fitness instructors to manage their clients and sc
 
 # UI-orientation
 
-![annotatedUi](images/annotatedUi.png)
+![annotatedUi](images/AnnotatedUi.png)
 
 From the above image, the GUI is made up of several components. 
 

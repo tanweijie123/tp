@@ -83,6 +83,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public List<Schedule> getAssociatedScheduleList(Client clientKey) {
+        return model.findScheduleByClient(clientKey);
+    }
+
+    @Override
     public List<Schedule> getAssociatedScheduleList(Session sessionKey) {
         return model.findScheduleBySession(sessionKey);
     }

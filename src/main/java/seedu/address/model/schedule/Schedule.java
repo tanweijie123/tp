@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import seedu.address.model.CheckExisting;
 import seedu.address.model.client.Client;
+import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
 public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
@@ -56,6 +58,12 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         return remark;
     }
 
+    public ExerciseType getExerciseType() {
+        return session.getExerciseType();
+    }
+
+    public Interval getInterval() { return session.getInterval(); }
+
     /**
      * Returns true if both Schedules have the same identity.
      */
@@ -104,7 +112,6 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     @Override
     public String toString() {
         String paymentStatusString = "Payment status: " + paymentStatus;
-        String remarkPresent = !remark.equals(Remark.EMPTY_REMARK) ? "Remark: " + remark : "";
         return "Client "
                 + client
                 + "\n"
@@ -113,6 +120,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
                 + "\n"
                 + paymentStatusString
                 + "\n"
-                + remarkPresent;
+                + "Remark: "
+                + remark;
     }
 }
