@@ -136,6 +136,7 @@ The table below shows an example of schedules. The session at Machoman Gym is at
 | John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | paid           |
 | Alex | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 60 kg  | Planks (10 x 30 seconds) | unpaid           |
 | Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | paid         |
+
 <center> Table - Example of Schedule Tracking </center>
 <br/>
 
@@ -196,6 +197,8 @@ For advanced users, you can use the "TAB" key and FitEgo will auto-complete the 
 
 # Keyword
 
+You can find all the 
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -214,7 +217,11 @@ For advanced users, you can use the "TAB" key and FitEgo will auto-complete the 
 
 </div>
 
+This program has separated the keywords into 4 different categories - [Main](#main-keywords),
+[Client](#client-related-keywords), [Session](#session-related-keywords) and [Schedule](#schedule-related-keywords).
+
 ## Main Keywords
+All main keywords are described in this section.
 
 ### Viewing home : `home`
 
@@ -266,7 +273,7 @@ Your data in FitEgo are saved in the hard disk automatically after any command t
 
 ---
 ## Client-related Keywords
-All client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the [left of this program](#ui-orientation). 
+All client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the [left of the UI](#ui-orientation). 
 
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 <br/>Sample of Client List</center>
@@ -380,14 +387,14 @@ Examples:
    The result of these commands is shown in the image below.
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
-<center>cfind Bernice then cview 1</center>
+<center>Figure - Result of running `cfind Bernice` then `cview 1`</center>
 
 ---
 
 ## Session-related Keywords 
 
 All session-related keywords are described in this section. All of the commands here will interact with the 
-Session List which is located at the [right of this program](#ui-orientation). 
+Session List which is located at the [right of the UI](#ui-orientation). 
 
 <center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" /><br/>
 Sample of SessionPanel</center><br/>
@@ -421,6 +428,8 @@ Points to take note when editing a session's details from the Session List:
 * Edits the session at the specified `INDEX`. The index refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+Format: `sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]`
 
 Examples:
 *  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` - Edits the gym of the first session to be `Machoman`
@@ -568,7 +577,7 @@ Examples:
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous **FitEgo** home folder.
 
-**Q**: I would like to contribute to this project. May I know who do I reach out to? 
+**Q**: I would like to contribute to this project. May I know who do I reach out to?  
 **A**: You may reach our PR Department email [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
 
@@ -594,15 +603,16 @@ You can find the comprehensive list of commands here.
 | View a Client's Full Profile | `cview INDEX` | `cview 1`|
 | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
-| Update Session Info |`sedit INDEX g/GYM_NAME at/START_TIME t/DURATION ` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
+| Edit Session Info |`sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
 | Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
 | View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups` |
+| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
+
 </div>
 <center>Figure - Command Summary</center>
 
 ### Acknowledgement
-* Icon made by Freepik from [flaticon](www.flaticon.com)
+* Icon made by Freepik from [flaticon](https://www.flaticon.com)
 * This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)
