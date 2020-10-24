@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.RadioButton?>
 <AnchorPane styleClass="centre-anchor-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="imgProfile" fitHeight="128.0" fitWidth="128.0" layoutX="21.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -30,7 +31,9 @@
         <Label fx:id="lblAddress" layoutX="248.0" layoutY="119.0" prefHeight="18.0" prefWidth="338.0" styleClass="cell_small_label" text="{address:placeholder}" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" />
         <Label layoutX="192.0" layoutY="149.0" styleClass="cell_small_label, clientInfoPage-tag" text="Tags" AnchorPane.leftAnchor="20.0"/>
         <FlowPane fx:id="tags" layoutX="20.0" layoutY="179.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="18.0" prefWidth="569.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-      <LineChart fx:id="weightLineChart" layoutX="20.0" layoutY="205.0" legendVisible="false" title="Weight/Time" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <RadioButton fx:id="kgRadio" styleClass="label" layoutY="219.0" AnchorPane.rightAnchor="70.0"></RadioButton>
+        <RadioButton fx:id="poundRadio" styleClass="label" layoutY="219.0" AnchorPane.rightAnchor="20.0" ></RadioButton>
+        <LineChart fx:id="weightLineChart" layoutX="20.0" layoutY="235.0" legendVisible="false" title="Weight/Time" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" fx:id="xAxis" />
         </xAxis>

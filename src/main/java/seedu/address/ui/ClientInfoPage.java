@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.model.schedule.Weight.KILOGRAM;
+import static seedu.address.model.schedule.Weight.POUND;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +13,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -17,6 +22,7 @@ import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Weight;
+
 
 public class ClientInfoPage extends UiPart<AnchorPane> {
     private static final String FXML = "ClientInfoPage.fxml";
@@ -49,12 +55,20 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     @FXML
     private NumberAxis yAxis;
 
+    @FXML
+    private RadioButton kgRadio;
+
+    @FXML
+    private RadioButton poundRadio;
+
+    private final ToggleGroup group = new ToggleGroup();
+
     /**
      * Displays a client's profile in a separate window.
      * It should display all the details pertaining to this {@code Client}
      * @param client The client to display
      */
-    public ClientInfoPage(Client client, List<Schedule> relatedSchedule) {
+    public ClientInfoPage(Client client, List<Schedule> relatedSchedule, boolean weightInPound) {
         super(FXML);
         this.client = client;
 
@@ -67,7 +81,27 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
+        this.kgRadio.setToggleGroup(this.group);
+        this.kgRadio.setSelected(true);
+        this.kgRadio.setUserData("kg");
+        this.kgRadio.setText("kg");
 
+        this.poundRadio.setToggleGroup(group);
+        this.poundRadio.setUserData("lbs");
+        this.poundRadio.setText("lbs");
+
+        this.initializeChart(weightInPound, relatedSchedule);
+
+        this.group.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
+            if (group.getSelectedToggle().getUserData().equals("lbs")) {
+                initializeChart(true, relatedSchedule);
+            } else {
+                initializeChart(false, relatedSchedule);
+            }
+        });
+    }
+
+    private void initializeChart (boolean inPound, List<Schedule> relatedSchedule) {
         //x is date (at the bottom)
         //y is weight (at the left)
         XYChart.Series<String, Number> xy = new XYChart.Series<>();
@@ -78,7 +112,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .map(x -> {
                     XYChart.Data<String, Number> data = new XYChart.Data<>(
                             SessionParserUtil.parseDateTimeToString(x.getSession().getStartTime()),
-                            x.getWeight().getWeight());
+                            inPound ? x.getWeight().getWeightInPound() : x.getWeight().getWeight());
                     return data;
                 })
                 .collect(Collectors.toList());

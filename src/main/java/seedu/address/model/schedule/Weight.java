@@ -7,6 +7,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Weight {
     public static final String MESSAGE_INVALID_WEIGHT_STATUS = "Weight must be a positive number.";
+    public static final String MESSAGE_INVALID_UNIT_STATUS = "Weight must be in kg or lbs.";
+    public static final String KILOGRAM = "kg";
+    public static final String POUND = "lbs";
+    private static final double KILOGRAM_TO_POUND_MULTIPLIER = 2.20462262185;
     private final double weight;
 
     /**
@@ -20,6 +24,21 @@ public class Weight {
     }
 
     /**
+     * Constructs a {@code Weight}.
+     *
+     * @param weight A valid weight for schedule.
+     */
+    public Weight(double weight, String unit) {
+        checkArgument(isValidWeight(weight), MESSAGE_INVALID_WEIGHT_STATUS);
+        checkArgument(hasValidWeightUnit(unit), MESSAGE_INVALID_UNIT_STATUS);
+        if (unit.equals(POUND)) {
+            this.weight = weight;
+        } else {
+            this.weight = weight / KILOGRAM_TO_POUND_MULTIPLIER;
+        }
+    }
+
+    /**
      * Constructs a Default Weight of 0.
      */
     private Weight() {
@@ -27,7 +46,14 @@ public class Weight {
     }
 
     /**
-     * Returns true if a given double value is a valid weight.
+     * Returns true if a given String value is a valid unit.
+     */
+    public static boolean hasValidWeightUnit(String unit) {
+        return unit.equals(KILOGRAM) | unit.equals(POUND);
+    }
+
+    /**
+     * Returns true if a given double value is a valid weight double.
      */
     public static boolean isValidWeight(double weight) {
         return weight > 0;
@@ -36,10 +62,10 @@ public class Weight {
     /**
      * Returns true if a given Weight object contains a valid weight.
      * @param weight Weight object to check if the value is valid weight.
-     * @throws NullPointerException throws NullPointerException if given input is null.
+     * @throws NullPointerException throws NullPointerException if either of the given input is null.
      */
     public static boolean isValidWeight(Weight weight) {
-        return isValidWeight(weight.weight);
+        return isValidWeight(weight.getWeight());
     }
 
     public static Weight getDefaultWeight() {
@@ -48,6 +74,14 @@ public class Weight {
 
     public double getWeight() {
         return this.weight;
+    }
+
+    public double getWeightInPound() {
+        return this.weight * KILOGRAM_TO_POUND_MULTIPLIER;
+    }
+
+    public String getPoundInString() {
+        return Double.toString(getWeightInPound());
     }
 
     @Override
