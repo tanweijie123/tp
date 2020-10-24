@@ -252,7 +252,7 @@ public class ModelManager implements Model {
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
-            this.setSchedule(schedule, new Schedule(editedClient, schedule.getSession()));
+            this.setSchedule(schedule, schedule.setClient(editedClient));
         }
     }
 
@@ -279,7 +279,7 @@ public class ModelManager implements Model {
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
-            this.setSchedule(schedule, new Schedule(schedule.getClient(), editedSession));
+            this.setSchedule(schedule, schedule.setSession(editedSession));
         }
     }
 
