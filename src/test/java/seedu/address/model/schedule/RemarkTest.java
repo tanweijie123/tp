@@ -1,5 +1,6 @@
 package seedu.address.model.schedule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -23,6 +24,9 @@ public class RemarkTest {
         assertTrue(Remark.isValidRemark("MyRemark"));
         assertTrue(Remark.isValidRemark("-")); // one character
         assertTrue(Remark.isValidRemark("My Super Duper Dupe Remark")); // multispace Remark
+
+        // check trimmed remark
+        assertEquals(new Remark("   a   "), new Remark("a"));
     }
 }
 
