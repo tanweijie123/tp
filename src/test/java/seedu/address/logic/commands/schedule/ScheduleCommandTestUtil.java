@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_PAYMENT_STATU
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
@@ -14,6 +15,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalSchedules.PAYMENT_PAID;
 import static seedu.address.testutil.TypicalSchedules.PAYMENT_UNPAID;
 import static seedu.address.testutil.TypicalSchedules.TEST_REMARK;
+import static seedu.address.testutil.TypicalSchedules.TEST_WEIGHT;
+import static seedu.address.testutil.TypicalSchedules.TEST_WEIGHT2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,10 @@ public class ScheduleCommandTestUtil {
     public static final String UPDATED_PAYMENT_UNPAID = " " + PREFIX_PAYMENT_STATUS + PAYMENT_UNPAID;
     public static final String UPDATED_REMARK_NONEMPTY = " " + PREFIX_REMARK + TEST_REMARK;
     public static final String UPDATED_REMARK_EMPTY = " " + PREFIX_REMARK + Remark.EMPTY_REMARK;
+    public static final String UPDATED_WEIGHT_VALID = " " + PREFIX_WEIGHT + TEST_WEIGHT.toString();
+    public static final String UPDATED_WEIGHT_VALID2 = " " + PREFIX_WEIGHT + TEST_WEIGHT2.toString();
+    public static final String UPDATED_WEIGHT_INVALID_0 = " " + PREFIX_WEIGHT + "0";
+    public static final String UPDATED_WEIGHT_INVALID_NEG = " " + PREFIX_WEIGHT + "-123";
 
     public static final EditScheduleDescriptor DESC_SCHA = new EditScheduleDescriptorBuilder()
             .withClientIndex(INDEX_FIRST_CLIENT)

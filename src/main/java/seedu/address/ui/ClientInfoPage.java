@@ -78,7 +78,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .map(x -> {
                     XYChart.Data<String, Number> data = new XYChart.Data<>(
                             SessionParserUtil.parseDateTimeToString(x.getSession().getStartTime()),
-                            x.getWeight().weight);
+                            x.getWeight().getWeight());
                     return data;
                 })
                 .collect(Collectors.toList());

@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Weight {
     public static final String MESSAGE_INVALID_WEIGHT_STATUS = "Weight must be a positive number.";
-    public final double weight;
+    private final double weight;
 
     /**
      * Constructs a {@code Weight}.
@@ -44,6 +44,10 @@ public class Weight {
 
     public static Weight getDefaultWeight() {
         return new Weight();
+    }
+
+    public double getWeight() {
+        return this.weight;
     }
 
     @Override
