@@ -588,8 +588,6 @@ Examples:
 
 You can find the comprehensive list of commands below. 
 
-<div id="commandtable"> 
-
 | Action | Format | Example |
 | ---------| -------- | --------- |
 | Open Home Page | `home` | `home`| 
@@ -610,7 +608,6 @@ You can find the comprehensive list of commands below.
 | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
-</div>
 <center>Figure - Command Summary</center>
 
 # Acknowledgement
