@@ -12,7 +12,7 @@ Made for **fitness instructors** in mind, **FitEgo** is a **desktop program** th
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 If this is your first time, here are some quick tips to get started.
 
@@ -129,7 +129,7 @@ The bullet points listed below are some information you can record in a schedule
 - exercises done by your client during the session as remark
 - your client's payment status on whether he has paid for the session or not
 
-The table below shows an example of schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status.
+The table below shows an example of schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
 
 | Client   | Session                                                      | Weight | Remark                                                       | Payment Status |
 | -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | -------------- |
@@ -572,7 +572,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous **FitEgo** home folder.
@@ -584,9 +584,9 @@ Examples:
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Command Summary
+# Command Summary
 
-You can find the comprehensive list of commands here. 
+You can find the comprehensive list of commands below. 
 
 <div id="commandtable"> 
 
@@ -613,6 +613,6 @@ You can find the comprehensive list of commands here.
 </div>
 <center>Figure - Command Summary</center>
 
-### Acknowledgement
+# Acknowledgement
 * Icon made by Freepik from [flaticon](https://www.flaticon.com)
 * This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)
