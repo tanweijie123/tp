@@ -588,7 +588,7 @@ Examples:
 
 You can find the comprehensive list of commands below. 
 
-| <div style="width:30%">Action</div> | <div style="width:40%">Format</div> | <div style="width:30%">Example</div> |
+| Action | Format | Example |
 | ---------| -------- | --------- |
 | Open Home Page | `home` | `home`| 
 | Open Help Window | `help` | `help`|
