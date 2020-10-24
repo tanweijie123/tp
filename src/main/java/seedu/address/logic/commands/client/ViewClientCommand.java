@@ -52,7 +52,7 @@ public class ViewClientCommand extends Command {
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         this.client = clientToView;
         Supplier<AnchorPane> run = () -> {
-            ClientInfoPage cip = new ClientInfoPage(client, model.getAddressBook().getScheduleList());
+            ClientInfoPage cip = new ClientInfoPage(client, model.getAddressBook().getScheduleList(), false);
             return cip.getRoot();
         };
 
