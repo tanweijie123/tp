@@ -7,7 +7,7 @@ This user guide will serve as an introduction to your next must-have app - **Fit
 
 Made for **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
-Table of Contents
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -175,6 +175,7 @@ From the figure above, the GUI is made up of several components.
 | Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and quote of the day | 
 | Session List    | Displays the list of your sessions in a list view. You can modify this list using [session-related commands](#session-related-keywords) | 
 | Status Bar Footer | Displays the current date and time of the program. If you notice this is incorrect, your PC might be using a different timezone| 
+
 <center> Table - Functions of UI Components </center>
 
 <div markdown="block" class="alert alert-primary">
@@ -185,7 +186,8 @@ You can type input into the Command Box and it will display the command starting
 <br>
 ![autocomplete_sample](images/autocomplete_sample.png)
 <br>
-For example, in the above image, if you enter `c` and commands that starts with "c" is displayed. <br>
+<center>Figure - Sample of autocomplete command</center>
+For example, in the above figure, if you enter `c` and commands that starts with "c" is displayed. <br>
 For advanced users, you can use the "TAB" key and FitEgo will auto-complete the first suggestion into the command box, thus increasing your typing speed!   
 </div>
 
@@ -217,7 +219,7 @@ For advanced users, you can use the "TAB" key and FitEgo will auto-complete the 
 
 You can return to the home page by using this command. 
 
-![homepage](images/homepage.png)p
+<center></img src="images/homepage.png" alt="homepage")</center>
 <center> Figure - Homepage View </center>
 
 The homepage will display the statistics of your program, today's schedule and quote of the day. 
@@ -226,7 +228,7 @@ The homepage will display the statistics of your program, today's schedule and q
 
 You can ask FitEgo to open a window with a link to the help page.
 
-![help message](images/helpMessage.png)
+<center></img src="images/helpMessage.png" alt="helpMessage")</center>
 <center> Figure - Help Window </center>
 
 Format: `help`
@@ -327,8 +329,8 @@ Examples:
 * `cfind John` returns `john` and `John Doe`.
 * `cfind alex david` returns `Alex Yeoh`, `David Li` as shown in the image below. <br>
 
-<img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="400" height="400" />
-<center> Figure - Result of Finding Clients by Name </center>
+<center><img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="400" height="400" /></center>
+<center> Figure - Result of finding clients by name </center>
 
 
 ### Deleting a Client : `cdel`
@@ -376,9 +378,8 @@ Examples:
 * `cfind Bernice` followed by `cview 1` opens the first client (Bernice) in the resulting Client List.
    The result of these commands is shown in the image below.
 
-<img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></br>
-<center> cfind Bernice then cview 1</center>
-  > This profile window will be updated when more functionalities are available.
+<center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
+<center>cfind Bernice then cview 1</center>
 
 ---
 
@@ -387,8 +388,9 @@ Examples:
 All session-related keywords are described in this section. All of the commands here will interact with the 
 Session List which is located at the [right of this program](#ui-orientation). 
 
-<img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" />
-
+<center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" />
+Sample of SessionPanel
+</center>
 The `ALL` at the top of this panel represents the current settings of session view. You can change the period 
 of session view using [`sview`](#viewing-sessions-within-period--sview) command. 
 
@@ -474,18 +476,15 @@ Points to take note when viewing session from the Session List:
  
  * The recognised units are as follows:
 
- | Unit* | Time unit parsed |
+ | Unit | Time unit parsed |
  | -------- | -------- |
- | d | day |
- | w | week |
- | m | month |
- | y | year |
- 
-  * units are case insensitive
- 
-<img src="images/sview_sample.png" alt="result for 'sview p/+2w'" height="500" width="500"/></br>
-
-<center> result for 'sview p/+2w' </center>
+ | d / D | day |
+ | w / W | week |
+ | m / M | month |
+ | y / Y| year |
+  
+<center><img src="images/sview_sample.png" alt="result for 'sview p/+2w'"/>
+result for 'sview p/+2w' </center><br/>
 
 Sample picture of the result of running `sview p/+2w`
 
@@ -495,6 +494,7 @@ Examples:
 * `sview p/+0D` - Display all sessions today.
 * `sview p/-1d` - Display all sessions from the past 1 day to today (yesterday and today).
 * `sview p/+2w` - Display all sessions from today to 2 weeks later. (e.g. If today is Friday, display from today to the Friday that falls 2 weeks later).
+
 ---
 
 ## Schedule-related Keywords 
@@ -502,8 +502,8 @@ All schedule-related keywords are described in this section. All of the commands
 
 To check if you have scheduled a session with a client, you can check if the session in the Session List contains the client's name. 
 
-<img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" />
-<center> Figure - Session List </center>
+<center> <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" />
+Figure - Session List </center>
 
 The figure above shows the Session List, in which for each session, there is a list of clients attending the session. If the client's name is shown in green, it means that he has paid for that particular session. Otherwise, his name will be shown in red.
 
@@ -579,7 +579,7 @@ Examples:
 
 You can find the comprehensive list of commands here. 
 
-<div id="commandtable">
+<div id="commandtable"> 
 
 | Action | Format | Example |
 | ---------| -------- | --------- |
