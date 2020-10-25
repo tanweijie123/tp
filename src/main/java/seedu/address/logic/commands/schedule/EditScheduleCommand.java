@@ -43,7 +43,7 @@ public class EditScheduleCommand extends Command {
             + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION] "
             + "[" + PREFIX_PAYMENT_STATUS + "PAID OR UNPAID?] "
             + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_WEIGHT + "WEIGHT]\n"
+            + "[" + PREFIX_WEIGHT + "WEIGHT[kg/lb]]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 "
