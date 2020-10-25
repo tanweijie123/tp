@@ -26,8 +26,8 @@ import seedu.address.model.session.Interval;
 
 public class ClientInfoPage extends UiPart<AnchorPane> {
     private static final String FXML = "ClientInfoPage.fxml";
-    private final Client client;
     private static final Logger logger = LogsCenter.getLogger(ClientInfoPage.class);
+    private final Client client;
 
     @FXML
     private ImageView imgProfile;

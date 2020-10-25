@@ -62,7 +62,9 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         return session.getExerciseType();
     }
 
-    public Interval getInterval() { return session.getInterval(); }
+    public Interval getInterval() {
+        return session.getInterval();
+    }
 
     public Schedule setClient(Client newClient) {
         return new Schedule(newClient, this.session, this.paymentStatus, this.remark);
