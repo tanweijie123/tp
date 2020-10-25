@@ -1,6 +1,7 @@
 package seedu.address.model.schedule;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.util.WeightUnit.KILOGRAM;
 
 import seedu.address.model.util.WeightUnit;
 
@@ -10,6 +11,9 @@ import seedu.address.model.util.WeightUnit;
  */
 public class Weight {
     public static final String MESSAGE_INVALID_WEIGHT_STATUS = "Weight must be a positive number.";
+    /**
+     * Value of weight in kg.
+     */
     private final double weight;
 
     /**
@@ -29,10 +33,10 @@ public class Weight {
      */
     public Weight(double weight, WeightUnit unit) {
         checkArgument(isValidWeight(weight), MESSAGE_INVALID_WEIGHT_STATUS);
-        if (!unit.isPoundUnit()) {
-            this.weight = weight;
-        } else {
+        if (unit.isPoundUnit()) {
             this.weight = WeightUnit.getPoundInKg(weight);
+        } else {
+            this.weight = weight;
         }
     }
 
@@ -69,7 +73,7 @@ public class Weight {
 
     @Override
     public String toString() {
-        return Double.toString(weight);
+        return String.format("%.1f", weight) + KILOGRAM;
     }
 
     @Override

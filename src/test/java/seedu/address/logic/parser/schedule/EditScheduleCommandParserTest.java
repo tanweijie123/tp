@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDA
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_REMARK_NONEMPTY;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_SESSION_INDEX_DESC_B;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_INVALID_0;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_INVALID_1;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_INVALID_2;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_INVALID_NEG;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_VALID;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_VALID2;
@@ -28,6 +30,7 @@ import seedu.address.logic.commands.schedule.EditScheduleCommand;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Weight;
+import seedu.address.model.util.WeightUnit;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
 
 public class EditScheduleCommandParserTest {
@@ -215,6 +218,12 @@ public class EditScheduleCommandParserTest {
         assertParseFailure(parser, userInput, Weight.MESSAGE_INVALID_WEIGHT_STATUS);
 
         userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_INVALID_NEG;
+        assertParseFailure(parser, userInput, Weight.MESSAGE_INVALID_WEIGHT_STATUS);
+
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_INVALID_1;
+        assertParseFailure(parser, userInput, WeightUnit.MESSAGE_INVALID_UNIT_STATUS);
+
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_INVALID_2;
         assertParseFailure(parser, userInput, Weight.MESSAGE_INVALID_WEIGHT_STATUS);
     }
 }

@@ -47,6 +47,8 @@ public class ScheduleCommandTestUtil {
     public static final String UPDATED_WEIGHT_VALID = " " + PREFIX_WEIGHT + TEST_WEIGHT.toString();
     public static final String UPDATED_WEIGHT_VALID2 = " " + PREFIX_WEIGHT + TEST_WEIGHT2.toString();
     public static final String UPDATED_WEIGHT_INVALID_0 = " " + PREFIX_WEIGHT + "0";
+    public static final String UPDATED_WEIGHT_INVALID_1 = " " + PREFIX_WEIGHT + "0g";
+    public static final String UPDATED_WEIGHT_INVALID_2 = " " + PREFIX_WEIGHT + "g";
     public static final String UPDATED_WEIGHT_INVALID_NEG = " " + PREFIX_WEIGHT + "-123";
 
     public static final EditScheduleDescriptor DESC_SCHA = new EditScheduleDescriptorBuilder()
