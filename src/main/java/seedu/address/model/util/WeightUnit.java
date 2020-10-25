@@ -10,7 +10,7 @@ public class WeightUnit {
     public static final String KILOGRAM = "kg";
     public static final String POUND = "lb";
     public static final String MESSAGE_INVALID_UNIT_STATUS = "Weight must be in kg or lb.";
-    private static final double KILOGRAM_TO_POUND_MULTIPLIER = 2.20462262185;
+    public static final double KILOGRAM_TO_POUND_MULTIPLIER = 2.20462;
     private final String weightUnit;
 
     /**
@@ -45,10 +45,12 @@ public class WeightUnit {
     }
 
     public static double getKgInPound(double weightInKilogram) {
+        checkArgument(weightInKilogram > 0);
         return weightInKilogram * KILOGRAM_TO_POUND_MULTIPLIER;
     }
 
     public static double getPoundInKg(double weightInPound) {
+        checkArgument(weightInPound > 0);
         return weightInPound / KILOGRAM_TO_POUND_MULTIPLIER;
     }
 
@@ -70,5 +72,4 @@ public class WeightUnit {
     public String toString() {
         return weightUnit;
     }
-
 }
