@@ -536,7 +536,7 @@ Example:
 
 If you want to change your client's session, payment status or remarks, you can edit the details of this schedule identified by the client index and session index.
 
-Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK]`
+Format: `schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`
 
 Points to take note when editing a schedule's details:
 * Edits the schedule that consists of the client and session indicated by `CLIENT_INDEX` and `SESSION_INDEX`
@@ -544,6 +544,7 @@ Points to take note when editing a schedule's details:
 * `SESSION_INDEX` and `UPDATED_SESSION_INDEX` refers to the index number shown in the Session List. The index **must be a positive integer** 1, 2, 3, …
 * `PAYMENT_STATUS` can either be `paid` or `unpaid`
 * `REMARK` can be any string
+* `WEIGHT` can be any string
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 
@@ -552,6 +553,7 @@ Examples:
 *  `schedit c/1 s/1 us/2` - Reschedules the first client in the Client List to the second session in the Session List instead of the first session
 *  `schedit c/1 s/1 pd/paid` - Indicates that the first client in the Client List has paid for the second session in the Session List
 *  `schedit c/1 s/1 r/did 5 pushups` - Edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups
+*  `schedit c/1 s/1 w/70kg` - Edits the schedule containing client index 1 and session index 1 to have a weight of 70kg
 * `schedit c/1 s/1 r/` - Clears the schedule containing client index 1 and session index 1 remarks
 
 ### Deleting a Schedule : `schdel`
@@ -605,11 +607,10 @@ You can find the comprehensive list of commands below.
 | Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
 | View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
 | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups` |
+| Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups w/70kg` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
 <center>Figure - Command Summary</center>
 
 # Acknowledgement
-* Icon made by Freepik from [flaticon](https://www.flaticon.com)
 * This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)
