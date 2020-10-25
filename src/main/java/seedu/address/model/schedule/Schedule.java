@@ -63,6 +63,14 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         return weight;
     }
 
+    public Schedule setClient(Client newClient) {
+        return new Schedule(newClient, this.session, this.paymentStatus, this.remark, this.weight);
+    }
+
+    public Schedule setSession(Session newSession) {
+        return new Schedule(this.client, newSession, this.paymentStatus, this.remark, this.weight);
+    }
+
     /**
      * Returns true if both Schedules have the same identity.
      */
