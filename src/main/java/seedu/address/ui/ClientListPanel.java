@@ -73,7 +73,7 @@ public class ClientListPanel extends UiPart<Region> {
     public void onMouseClicked_displayClientInfo() {
         Client toView = clientListView.getFocusModel().getFocusedItem();
         ClientInfoPage cip = new ClientInfoPage(toView, logic.getAddressBook().getScheduleList(),
-                logic.getPreferredWeightUnit().isPoundUnit());
+                logic.getPreferredWeightUnit());
         mainWindow.setMainDisplay(cip.getRoot());
     }
 }

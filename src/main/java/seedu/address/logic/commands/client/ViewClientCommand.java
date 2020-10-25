@@ -53,7 +53,7 @@ public class ViewClientCommand extends Command {
         this.client = clientToView;
         Supplier<AnchorPane> run = () -> {
             ClientInfoPage cip = new ClientInfoPage(client, model.getAddressBook().getScheduleList(),
-                    model.getPreferredWeightUnit().isPoundUnit());
+                    model.getPreferredWeightUnit());
             return cip.getRoot();
         };
 

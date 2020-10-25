@@ -19,6 +19,7 @@ import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Weight;
+import seedu.address.model.util.WeightUnit;
 
 
 
@@ -59,7 +60,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
      * It should display all the details pertaining to this {@code Client}
      * @param client The client to display
      */
-    public ClientInfoPage(Client client, List<Schedule> relatedSchedule, boolean weightInPound) {
+    public ClientInfoPage(Client client, List<Schedule> relatedSchedule, WeightUnit weightUnit) {
         super(FXML);
         this.client = client;
 
@@ -72,10 +73,10 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        this.initializeChart(weightInPound, relatedSchedule);
+        this.initializeChart(weightUnit, relatedSchedule);
     }
 
-    private void initializeChart (boolean inPound, List<Schedule> relatedSchedule) {
+    private void initializeChart (WeightUnit weightUnit, List<Schedule> relatedSchedule) {
         //x is date (at the bottom)
         //y is weight (at the left)
         XYChart.Series<String, Number> xy = new XYChart.Series<>();
@@ -86,7 +87,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .map(x -> {
                     XYChart.Data<String, Number> data = new XYChart.Data<>(
                             SessionParserUtil.parseDateTimeToString(x.getSession().getStartTime()),
-                            inPound ? getKgInPound(x.getWeight().getWeight()) : x.getWeight().getWeight());
+                            weightUnit.isPoundUnit()
+                                    ? getKgInPound(x.getWeight().getWeight())
+                                    : x.getWeight().getWeight());
                     return data;
                 })
                 .collect(Collectors.toList());
@@ -95,6 +98,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
             xy.getData().addAll(xyList);
             weightLineChart.getData().setAll(xy);
             yAxis.setAutoRanging(false);
+            yAxis.setLabel(weightUnit.toString());
             int lowerBound = xyList.stream().mapToInt(x -> (int) x.getYValue().doubleValue()).min().getAsInt() - 3;
             int upperBound = xyList.stream().mapToInt(x -> (int) x.getYValue().doubleValue()).max().getAsInt() + 3;
 
