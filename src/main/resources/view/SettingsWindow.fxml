@@ -17,7 +17,7 @@
     <Scene>
          <VBox alignment="CENTER" spacing="5">
             <children>
-               <Label fx:id="helpMessage" text="Weight Unit:" />
+               <Label fx:id="helpMessage" text="Weight Unit for Graphs:" />
                 <RadioButton fx:id="kgRadio" styleClass="label"></RadioButton>
                 <RadioButton fx:id="poundRadio" styleClass="label" ></RadioButton>
             </children>
