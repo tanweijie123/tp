@@ -15,7 +15,6 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.schedule.Weight;
 import seedu.address.model.util.WeightUnit;
 
 public class JsonUserPrefsStorageTest {

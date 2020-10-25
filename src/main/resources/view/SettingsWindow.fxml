@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <fx:root resizable="false" title="Settings" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/help_icon.png" />
+    <Image url="@/images/gear_icon.png" />
   </icons>
   <scene>
     <Scene>
@@ -22,10 +22,10 @@
                 <RadioButton fx:id="poundRadio" styleClass="label" ></RadioButton>
             </children>
             <opaqueInsets>
-               <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+               <Insets bottom="10.0" left="45.0" right="45.0" top="5.0" />
             </opaqueInsets>
             <padding>
-               <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+               <Insets bottom="10.0" left="45.0" right="45.0" top="5.0" />
             </padding>
          </VBox>
     </Scene>
