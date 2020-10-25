@@ -107,11 +107,6 @@ The `Model`,
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Client` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Client` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
-
 
 ### Storage component
 
@@ -173,18 +168,21 @@ command is given by:
 When using this command, the `INDEX` should refer to the index shown in the SessionList on the right panel.
 The user can follow up with an optional force parameters to delete all schedules associated to the session.
 
-**Example Commands**
-
-1. `sdel 1` : This command deletes the first session if no schedules are associated to it
-1. `sdel 1 f/` : This command deletes the first session, and all schedules associated to it
+These delete operations are exposed in the `Model` interface as `Model#deleteSession`, `Model#deleteSessionAssociatedSchedules`
+and `Model#hasAnyScheduleAssociatedWithSession`.
 
 The following activity diagram summarizes what happens when a user executes a new `DeleteSession` command
 
-![DeleteSessionActivityDiagram](images/DeleteSessionActivityDiagram.png)
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/DeleteSessionActivityDiagram.png" style="width: 75%; height: auto;"/>
+    </p>
+    <figcaption>Figure - Delete Session Activity Diagram</figcaption>
+</figure>
 
 In the following sequence diagram, we trace the execution for when the user decides to enter the DeleteSession command 
 `sdel 1 f/` into FitEgo. For simplicity, we will refer to this command input as commandText. We also assume that
-there are currently 2 associated schedules to the first session in FitEgo.
+there are currently 2 schedules associated to the first session in FitEgo.
 
 ![DeleteSessionSequenceDiagram](images/tracing/DeleteSessionSequenceDiagram.png)
 
