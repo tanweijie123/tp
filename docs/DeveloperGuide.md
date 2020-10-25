@@ -801,7 +801,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FitEgo closes the help window
 	
       Use case ends.
+      
+**Use case: Change Unit of Weight Graph**
 
+**MSS**
+1.  User requests to view Settings window. 
+2.  FitEgo displays Settings window.
+3.  User makes changes to settings. 
+4.  FitEgo saves changes to settings. 
+
+    Use case ends.
+
+**Extensions**
+* 2a. User closes the Settings window. 
+    * 2a1. FitEgo closes the Settings window
+	
+      Use case ends.
 
 ### Non-Functional Requirements
 

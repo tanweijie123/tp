@@ -248,6 +248,26 @@ By default, you can click enter and a browser will open the User Guide.
 You may also press "ESC" key to close this window. 
 </div>
 
+### Viewing help : `help`
+
+You can ask FitEgo to open a window to change user settings.
+
+<center><img src="images/settingsWindow.png" alt="settingsWindow"/></center>
+<center> Figure - Settings Window </center>
+
+Format: `settings`
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+Once the settings window is open, you can use arrow key to toggle the options.
+You may also press "ESC" key to close this window. 
+
+The current settings available are:
+ * preferred weight unit for graphs </br>
+ *more to come!
+</div>
+
 ### Clearing all data in the program : `clear` 
 
 You can delete all data (client, session, schedule) using the `clear` keyword. All of your existing data will be removed. 
@@ -594,6 +614,7 @@ You can find the comprehensive list of commands below.
 | ---------| -------- | --------- |
 | Open Home Page | `home` | `home`| 
 | Open Help Window | `help` | `help`|
+| Open Settings Window | `settings` | `settings`|
 | Clear all data | `clear` | `clear` |
 | Exit this program | `exit` | `exit`|
 | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|

@@ -250,6 +250,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowSettings()) {
+                handleSettings();
+            }
+
             if (commandResult.hasFunctionToRun()) {
                 setMainDisplay(commandResult.getPane().get());
             }

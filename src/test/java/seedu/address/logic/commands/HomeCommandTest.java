@@ -14,7 +14,7 @@ public class HomeCommandTest {
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_SUCCESS_MESSAGE, false, false);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_SUCCESS_MESSAGE, false, false, false);
         assertCommandSuccess(new HomeCommand(), model, expectedCommandResult, expectedModel);
     }
 }
