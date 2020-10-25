@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.model.util.WeightUnit.KILOGRAM;
+import static seedu.address.model.util.WeightUnit.POUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
@@ -19,6 +21,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.WeightUnit;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -163,19 +166,22 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseUnit_validValueWithoutWhitespace_returnsFalse() throws Exception {
-        assertEquals(false, ParserUtil.parseUnit(VALID_UNIT_1));
+    public void parseUnit_validValueWithoutWhitespace_returnsWeightUnit() throws Exception {
+        WeightUnit expectedWeightUnit = new WeightUnit(KILOGRAM);
+        assertEquals(expectedWeightUnit, ParserUtil.parseUnit(VALID_UNIT_1));
     }
 
     @Test
     public void parseUnit_validValueWithoutWhitespace_returnsTrue() throws Exception {
-        assertEquals(true, ParserUtil.parseUnit(VALID_UNIT_2));
+        WeightUnit expectedWeightUnit = new WeightUnit(POUND);
+        assertEquals(expectedWeightUnit, ParserUtil.parseUnit(VALID_UNIT_2));
     }
 
     @Test
     public void parseUnit_validValueWithWhitespace_returnsTrue() throws Exception {
         String unitWithWhitespace = WHITESPACE + VALID_UNIT_2 + WHITESPACE;
-        assertEquals(true, ParserUtil.parseUnit(unitWithWhitespace));
+        WeightUnit expectedWeightUnit = new WeightUnit(POUND);
+        assertEquals(expectedWeightUnit, ParserUtil.parseUnit(unitWithWhitespace));
     }
 
     @Test

@@ -43,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SettingsWindow settingsWindow;
     private RightSideBar rightSideBar;
     private StatusBarFooter statusBarFooter;
 
@@ -51,6 +52,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem settingsMenuItem;
 
     @FXML
     private StackPane clientListPanelPlaceholder;
@@ -94,6 +98,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        settingsWindow = new SettingsWindow(logic);
 
         addDynamicGridPaneChange(primaryStage.getScene());
     }
@@ -104,6 +109,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(settingsMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -183,6 +189,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the settings window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleSettings() {
+        if (!settingsWindow.isShowing()) {
+            settingsWindow.show();
+        } else {
+            settingsWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -196,6 +214,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        settingsWindow.hide();
         primaryStage.hide();
     }
 

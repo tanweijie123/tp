@@ -3,6 +3,7 @@ package seedu.address.logic.commands.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.client.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.util.WeightUnit.KILOGRAM;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.util.WeightUnit;
 import seedu.address.ui.ClientInfoPage;
 
 /**
@@ -34,29 +36,29 @@ public class ViewClientCommand extends Command {
     private final Index targetIndex;
     private Client client;
     /**
-     * Indicates whether the client's weight graph should be in pounds.
+     * Indicates the unit of the weight graph shown if the Client has associated schedule with weight recorded.
      */
-    private final boolean isWeightUnitPound;
+    private final WeightUnit weightUnit;
 
     /**
      * Creates a ViewClientCommand to view client at {@code targetIndex}.
-     * It will not display the Client's weight in pound by default.
+     * Weight unit is set to Kilogram by default.
      *
      * @param targetIndex index of the Client in the filtered client list to view.
      */
     public ViewClientCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
-        this.isWeightUnitPound = false;
+        this.weightUnit = new WeightUnit(KILOGRAM);
     }
 
     /**
      *
      * @param targetIndex index of the Client in the filtered client list to view.
-     * @param isWeightUnitPound true if there is a need to display the Client's weight graph in pounds.
+     * @param weightUnit unit of the weight graph shown if the Client has associated schedule with weight recorded.
      */
-    public ViewClientCommand(Index targetIndex, boolean isWeightUnitPound) {
+    public ViewClientCommand(Index targetIndex, WeightUnit weightUnit) {
         this.targetIndex = targetIndex;
-        this.isWeightUnitPound = isWeightUnitPound;
+        this.weightUnit = weightUnit;
     }
 
     public Client getClient() {
@@ -77,7 +79,7 @@ public class ViewClientCommand extends Command {
         this.client = clientToView;
         Supplier<AnchorPane> run = () -> {
             ClientInfoPage cip = new ClientInfoPage(client, model.getAddressBook().getScheduleList(),
-                    isWeightUnitPound);
+                    weightUnit.isPoundUnit());
             return cip.getRoot();
         };
 
@@ -90,6 +92,6 @@ public class ViewClientCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof ViewClientCommand // instanceof handles nulls
                 && targetIndex.equals(((ViewClientCommand) other).targetIndex) // state check
-                && isWeightUnitPound == (((ViewClientCommand) other).isWeightUnitPound));
+                && weightUnit == (((ViewClientCommand) other).weightUnit));
     }
 }

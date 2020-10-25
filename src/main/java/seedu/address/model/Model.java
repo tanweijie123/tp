@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
+import seedu.address.model.util.WeightUnit;
 
 /**
  * The API of the Model component.
@@ -48,6 +49,16 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Returns the user prefs' weight unit
+     */
+    WeightUnit getPreferredWeightUnit();
+
+    /**
+     * Sets the user prefs' weight unit
+     */
+    void setPreferredWeightUnit(WeightUnit preferredWeightUnit);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

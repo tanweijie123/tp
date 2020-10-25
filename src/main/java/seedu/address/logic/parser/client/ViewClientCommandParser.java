@@ -10,6 +10,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.util.WeightUnit;
 
 /**
  * Parses input arguments and creates a new ViewClientCommand object
@@ -26,8 +27,8 @@ public class ViewClientCommandParser implements Parser<ViewClientCommand> {
         try {
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
             if (argMultimap.getValue(PREFIX_UNIT).isPresent()) {
-                boolean isPoundUnit = ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNIT).get());
-                return new ViewClientCommand(index, isPoundUnit);
+                WeightUnit weightUnit = ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNIT).get());
+                return new ViewClientCommand(index, weightUnit);
             }
             return new ViewClientCommand(index);
         } catch (ParseException pe) {

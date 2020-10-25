@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
+import seedu.address.model.util.WeightUnit;
 
 /**
  * Represents the in-memory model of the FitEgo's data (client + session + schedule).
@@ -84,6 +85,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public WeightUnit getPreferredWeightUnit() {
+        return userPrefs.getPreferredWeightUnit();
+    }
+
+    @Override
+    public void setPreferredWeightUnit(WeightUnit preferredWeightUnit) {
+        requireNonNull(preferredWeightUnit);
+        userPrefs.setPreferredWeightUnit(preferredWeightUnit);
     }
 
     //=========== AddressBook ================================================================================

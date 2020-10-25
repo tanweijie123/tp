@@ -1,8 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.schedule.Weight.KILOGRAM;
-import static seedu.address.model.schedule.Weight.POUND;
-import static seedu.address.model.schedule.Weight.isPoundUnit;
+import static seedu.address.model.util.WeightUnit.getKgInPound;
 
 import java.util.Comparator;
 import java.util.List;
@@ -14,8 +12,6 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -57,13 +53,6 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     @FXML
     private NumberAxis yAxis;
 
-    @FXML
-    private RadioButton kgRadio;
-
-    @FXML
-    private RadioButton poundRadio;
-
-    private final ToggleGroup group = new ToggleGroup();
 
     /**
      * Displays a client's profile in a separate window.
@@ -83,29 +72,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        this.kgRadio.setToggleGroup(this.group);
-        this.kgRadio.setUserData(KILOGRAM);
-        this.kgRadio.setText(KILOGRAM);
-
-        this.poundRadio.setToggleGroup(group);
-        this.poundRadio.setUserData(POUND);
-        this.poundRadio.setText(POUND);
-
-        if (weightInPound) {
-            this.poundRadio.setSelected(true);
-        } else {
-            this.kgRadio.setSelected(true);
-        }
-
         this.initializeChart(weightInPound, relatedSchedule);
-
-        this.group.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
-            if (isPoundUnit(group.getSelectedToggle().getUserData().toString())) {
-                initializeChart(true, relatedSchedule);
-            } else {
-                initializeChart(false, relatedSchedule);
-            }
-        });
     }
 
     private void initializeChart (boolean inPound, List<Schedule> relatedSchedule) {
@@ -119,7 +86,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .map(x -> {
                     XYChart.Data<String, Number> data = new XYChart.Data<>(
                             SessionParserUtil.parseDateTimeToString(x.getSession().getStartTime()),
-                            inPound ? x.getWeight().getWeightInPound() : x.getWeight().getWeight());
+                            inPound ? getKgInPound(x.getWeight().getWeight()) : x.getWeight().getWeight());
                     return data;
                 })
                 .collect(Collectors.toList());

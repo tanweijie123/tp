@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
+import seedu.address.model.util.WeightUnit;
 import seedu.address.testutil.ClientBuilder;
 
 public class AddClientCommandTest {
@@ -110,6 +111,16 @@ public class AddClientCommandTest {
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public WeightUnit getPreferredWeightUnit() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPreferredWeightUnit(WeightUnit preferredWeightUnit) {
             throw new AssertionError("This method should not be called.");
         }
 

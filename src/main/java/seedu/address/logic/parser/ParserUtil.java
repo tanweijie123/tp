@@ -1,7 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.schedule.Weight.isPoundUnit;
+import static seedu.address.model.util.WeightUnit.MESSAGE_INVALID_UNIT_STATUS;
+import static seedu.address.model.util.WeightUnit.isValidUnit;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,8 +15,8 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.schedule.Weight;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.WeightUnit;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -104,13 +105,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code unit} is invalid.
      */
-    public static boolean parseUnit(String unit) throws ParseException {
+    public static WeightUnit parseUnit(String unit) throws ParseException {
         requireNonNull(unit);
         String trimmedUnit = unit.trim();
-        if (!Weight.isValidUnit(trimmedUnit)) {
-            throw new ParseException(Weight.MESSAGE_INVALID_UNIT_STATUS);
+        if (!isValidUnit(trimmedUnit)) {
+            throw new ParseException(MESSAGE_INVALID_UNIT_STATUS);
         }
-        return isPoundUnit(trimmedUnit);
+        return new WeightUnit(trimmedUnit);
     }
 
     /**

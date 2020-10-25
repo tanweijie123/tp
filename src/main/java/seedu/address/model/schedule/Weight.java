@@ -2,15 +2,14 @@ package seedu.address.model.schedule;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.util.WeightUnit;
+
+
 /**
  * Represents a Schedule's Weight in the address book.
  */
 public class Weight {
     public static final String MESSAGE_INVALID_WEIGHT_STATUS = "Weight must be a positive number.";
-    public static final String MESSAGE_INVALID_UNIT_STATUS = "Weight must be in kg or lbs.";
-    public static final String KILOGRAM = "kg";
-    public static final String POUND = "lb";
-    private static final double KILOGRAM_TO_POUND_MULTIPLIER = 2.20462262185;
     private final double weight;
 
     /**
@@ -28,13 +27,12 @@ public class Weight {
      *
      * @param weight A valid weight for schedule.
      */
-    public Weight(double weight, String unit) {
+    public Weight(double weight, WeightUnit unit) {
         checkArgument(isValidWeight(weight), MESSAGE_INVALID_WEIGHT_STATUS);
-        checkArgument(isValidUnit(unit), MESSAGE_INVALID_UNIT_STATUS);
-        if (unit.equals(POUND)) {
+        if (!unit.isPoundUnit()) {
             this.weight = weight;
         } else {
-            this.weight = weight / KILOGRAM_TO_POUND_MULTIPLIER;
+            this.weight = WeightUnit.getPoundInKg(weight);
         }
     }
 
@@ -43,20 +41,6 @@ public class Weight {
      */
     private Weight() {
         this.weight = 0;
-    }
-
-    /**
-     * Returns true if a given String value is a valid unit.
-     */
-    public static boolean isValidUnit(String unit) {
-        return unit.equals(KILOGRAM) | unit.equals(POUND);
-    }
-
-    /**
-     * Returns true if a given String value represents pound unit.
-     */
-    public static boolean isPoundUnit(String unit) {
-        return unit.equals(POUND);
     }
 
     /**
@@ -81,10 +65,6 @@ public class Weight {
 
     public double getWeight() {
         return this.weight;
-    }
-
-    public double getWeightInPound() {
-        return this.weight * KILOGRAM_TO_POUND_MULTIPLIER;
     }
 
     @Override
