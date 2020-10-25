@@ -156,35 +156,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseUnit_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseUnit((String) null));
-    }
-
-    @Test
-    public void parseUnit_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseUnit(INVALID_UNIT));
-    }
-
-    @Test
-    public void parseUnit_validValueWithoutWhitespace_returnsWeightUnit() throws Exception {
-        WeightUnit expectedWeightUnit = new WeightUnit(KILOGRAM);
-        assertEquals(expectedWeightUnit, ParserUtil.parseUnit(VALID_UNIT_1));
-    }
-
-    @Test
-    public void parseUnit_validValueWithoutWhitespace_returnsTrue() throws Exception {
-        WeightUnit expectedWeightUnit = new WeightUnit(POUND);
-        assertEquals(expectedWeightUnit, ParserUtil.parseUnit(VALID_UNIT_2));
-    }
-
-    @Test
-    public void parseUnit_validValueWithWhitespace_returnsTrue() throws Exception {
-        String unitWithWhitespace = WHITESPACE + VALID_UNIT_2 + WHITESPACE;
-        WeightUnit expectedWeightUnit = new WeightUnit(POUND);
-        assertEquals(expectedWeightUnit, ParserUtil.parseUnit(unitWithWhitespace));
-    }
-
-    @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
