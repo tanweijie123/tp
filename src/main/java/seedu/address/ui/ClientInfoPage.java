@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,12 +10,14 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
@@ -24,6 +27,7 @@ import seedu.address.model.session.Interval;
 public class ClientInfoPage extends UiPart<AnchorPane> {
     private static final String FXML = "ClientInfoPage.fxml";
     private final Client client;
+    private static final Logger logger = LogsCenter.getLogger(ClientInfoPage.class);
 
     @FXML
     private ImageView imgProfile;
@@ -66,6 +70,16 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
+        // Set image based on client's name first character. Skipping if invalid url found.
+        // Just to make the app a bit nicer with real human image
+        try {
+            Image img = new Image("/images/profile-"
+                    + ((client.getName().fullName.toLowerCase().charAt(0) - 'a') / 6 + 1) + ".jpg");
+            this.imgProfile.setImage(img);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            logger.info("Invalid image url, using default image\nException: " + ex);
+        }
+
         TableColumn<Schedule, Interval> intervalColumn = new TableColumn<>("Interval");
         intervalColumn.setCellValueFactory(new PropertyValueFactory<>("interval"));
 
@@ -75,7 +89,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         TableColumn<Schedule, Remark> remarkColumn = new TableColumn<>("Remark");
         remarkColumn.setCellValueFactory(new PropertyValueFactory<>("remark"));
 
-        this.pastSchedulesTableView.getColumns().addAll(new TableColumn[]{intervalColumn, exTypeColumn, remarkColumn});
+        this.pastSchedulesTableView.getColumns().add(intervalColumn);
+        this.pastSchedulesTableView.getColumns().add(exTypeColumn);
+        this.pastSchedulesTableView.getColumns().add(remarkColumn);
         this.pastSchedulesTableView.getItems().addAll(pastSchedules);
 
         /* Make remark column can wrap text
