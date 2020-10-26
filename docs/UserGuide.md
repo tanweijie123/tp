@@ -165,7 +165,7 @@ You can refer to the table and the figure below to familiarize yourself with the
 [comment]: <> (Why cant you figure out yourself?)
 
 ![AnnotatedUi](images/AnnotatedUi.png)
-<center> Figure 2 - Callouts of the various UI components</center></br>
+<center> Figure 2 - Callouts of the various UI components</center><br/>
 <center> Table 2 - Functions of UI Components </center>
 From the figure above, the GUI is made up of several components. 
 
