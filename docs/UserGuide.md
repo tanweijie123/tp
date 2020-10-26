@@ -276,7 +276,7 @@ Your data in FitEgo are saved in the hard disk automatically after any command t
 All client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the [left of the UI](#ui-orientation). 
 
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
-<br/>Sample of Client List</center>
+<br/>Figure - Sample of Client List</center>
 ### Listing all clients : `clist`
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
@@ -397,8 +397,8 @@ All session-related keywords are described in this section. All of the commands 
 Session List which is located at the [right of the UI](#ui-orientation). 
 
 <center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" /><br/>
-Sample of SessionPanel</center><br/>
-The `ALL` at the top of this panel represents the current settings of session view. You can change the period 
+Figure - Sample of Session List</center><br/>
+The `ALL` at the top of this Session List panel represents the current settings of session view. You can change the period 
 of session view using [`sview`](#viewing-sessions-within-period--sview) command. 
 
 ### Adding a Session : `sadd`
@@ -511,8 +511,8 @@ All schedule-related keywords are described in this section. All of the commands
 
 To check if you have scheduled a session with a client, you can check if the session in the Session List contains the client's name. 
 
-<center> <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" /> </br>
-Figure - Session List </center>
+<center> <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" /><br>
+Figure - Sample of Session List </center>
 
 The figure above shows the Session List, in which for each session, there is a list of clients attending the session. If the client's name is shown in green, it means that he has paid for that particular session. Otherwise, his name will be shown in red.
 
@@ -610,7 +610,7 @@ You can find the comprehensive list of commands below.
 | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups w/70kg` |
 | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
 
-<center>Figure - Command Summary</center>
+<center>Table - Command Summary</center>
 
 # Acknowledgement
 * This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)
