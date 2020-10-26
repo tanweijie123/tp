@@ -4,13 +4,14 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.RadioButton?>
 <AnchorPane styleClass="centre-anchor-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="imgProfile" fitHeight="128.0" fitWidth="128.0" layoutX="21.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -29,15 +30,28 @@
         <Label fx:id="lblEmail" layoutX="248.0" layoutY="89.0" prefHeight="18.0" prefWidth="338.0" styleClass="cell_small_label" text="{email:placeholder}" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" />
         <Label layoutX="192.0" layoutY="119.0" styleClass="cell_small_label" text="Address" AnchorPane.leftAnchor="192.0" />
         <Label fx:id="lblAddress" layoutX="248.0" layoutY="119.0" prefHeight="18.0" prefWidth="338.0" styleClass="cell_small_label" text="{address:placeholder}" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" />
-        <Label layoutX="192.0" layoutY="149.0" styleClass="cell_small_label, clientInfoPage-tag" text="Tags" AnchorPane.leftAnchor="20.0"/>
+        <Label layoutX="192.0" layoutY="149.0" styleClass="cell_small_label, clientInfoPage-tag" text="Tags" AnchorPane.leftAnchor="20.0" />
         <FlowPane fx:id="tags" layoutX="20.0" layoutY="179.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="18.0" prefWidth="569.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-        <LineChart fx:id="weightLineChart" layoutX="20.0" layoutY="235.0" legendVisible="false" title="Weight/Time" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" fx:id="xAxis" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis fx:id="yAxis" autoRanging="false" side="LEFT" tickLabelFill="WHITE" />
-        </yAxis>
-      </LineChart>
+      <TabPane layoutX="20.0" layoutY="235.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <tabs>
+            <Tab fx:id="tabSchedule" closable="false" text="Schedule">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab fx:id="tabWeight" closable="false" text="Weight">
+               <content>
+                    <LineChart fx:id="weightLineChart" legendVisible="false" title="Weight/Time">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" fx:id="xAxis" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="yAxis" autoRanging="false" side="LEFT" tickLabelFill="WHITE" />
+                    </yAxis>
+                  </LineChart>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
     </children>
 </AnchorPane>

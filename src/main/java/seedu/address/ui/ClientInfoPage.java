@@ -12,6 +12,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -54,6 +55,11 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     @FXML
     private NumberAxis yAxis;
 
+    @FXML
+    private Tab tabWeight;
+
+    @FXML
+    private Tab tabSchedule
 
     /**
      * Displays a client's profile in a separate window.
