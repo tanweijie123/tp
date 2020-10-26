@@ -251,11 +251,7 @@ By default, you can click enter and a browser will open the User Guide.
 You may also press "ESC" key to close this window. 
 </div>
 
-<<<<<<< Updated upstream
-### Clearing all data in the program : `clear` 
-=======
 ### 3.1.3 Clearing all data in the program : `clear` 
->>>>>>> Stashed changes
 
 You can delete all data (client, session, schedule) using the `clear` keyword. All of your existing data will be removed. 
 
@@ -432,12 +428,14 @@ Examples:
 
 You can edit the details of the session identified by the index number used in the displayed Session List. This ensures that you can always record the latest changes.
 
+Format: `sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]`
+
 Points to take note when editing a session's details from the Session List:
 * Edits the session at the specified `INDEX`. The index refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, …​
+* `GYM_NAME` & `EXERCISE_TYPE` can be any words.
+* `START_TIME` & `DURATION` convention follows the command `sadd`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-
-Format: `sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]`
 
 Examples:
 *  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` - Edits the gym of the first session to be `Machoman`
@@ -553,8 +551,8 @@ Points to take note when editing a schedule's details:
 * `CLIENT_INDEX` refers to the index number shown in the Client List. The index **must be a positive integer** 1, 2, 3, …
 * `SESSION_INDEX` and `UPDATED_SESSION_INDEX` refers to the index number shown in the Session List. The index **must be a positive integer** 1, 2, 3, …
 * `PAYMENT_STATUS` can either be `paid` or `unpaid`.
-* `REMARK` can be any string.
-* `WEIGHT` must be **positive numbers** and defaults to kilogram  unit. You can add either `kg` or `lb` to the back to specify unit.
+* `REMARK` can be any words, phrases or sentences.
+* `WEIGHT` must be **positive numbers**. By default, units will be set to kilogram. You can also add either `kg` or `lb` to the back to specify the units.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -563,7 +561,7 @@ Examples:
 *  `schedit c/1 s/1 us/2` - Reschedules the first client in the Client List to the second session in the Session List
 *  `schedit c/1 s/1 pd/paid` - Indicates that the first client in the Client List has paid for the second session in the Session List
 *  `schedit c/1 s/1 r/did 5 pushups` - Edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups
-*  `schedit c/1 s/1 w/70kg` - Edits the schedule containing client index 1 and session index 1 to a weight of 70kg
+*  `schedit c/1 s/1 w/70` - Edits the schedule containing client index 1 and session index 1 to a weight of 70kg
 * `schedit c/1 s/1 r/` - Clears the schedule containing client index 1 and session index 1 remarks
 
 ### 3.4.3 Deleting a Schedule : `schdel`
@@ -622,10 +620,5 @@ You can find the comprehensive list of commands in the table below.
 |  | View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
 | Find | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
 
-
-<<<<<<< Updated upstream
-# Acknowledgement
-=======
 # 6 Acknowledgement
->>>>>>> Stashed changes
 * This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)
