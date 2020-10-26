@@ -276,6 +276,11 @@ public class AddClientCommandTest {
         }
 
         @Override
+        public List<Schedule> findScheduleByClient(Client clientKey) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Schedule findScheduleByClientAndSession(Client clientKey, Session sessionKey) {
             throw new AssertionError("This method should not be called.");
         }

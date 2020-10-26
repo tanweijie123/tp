@@ -362,6 +362,12 @@ public class ModelManager implements Model {
         return addressBook.findScheduleBySession(sessionKey);
     }
 
+    @Override
+    public List<Schedule> findScheduleByClient(Client clientKey) {
+        requireAllNonNull(clientKey);
+        return addressBook.findScheduleByClient(clientKey);
+    }
+
 
 
     //=========== Util-related ===============================================================================

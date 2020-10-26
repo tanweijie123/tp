@@ -5,6 +5,7 @@ import static seedu.address.model.util.WeightUnit.getKgInPound;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -13,19 +14,32 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.image.Image;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Weight;
 import seedu.address.model.util.WeightUnit;
-
+import seedu.address.model.schedule.Remark;
+import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Interval;
+import javafx.util.Callback;
+import seedu.address.commons.core.LogsCenter;
 
 
 public class ClientInfoPage extends UiPart<AnchorPane> {
     private static final String FXML = "ClientInfoPage.fxml";
+    private static final Logger logger = LogsCenter.getLogger(ClientInfoPage.class);
     private final Client client;
 
     @FXML
@@ -47,6 +61,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     private FlowPane tags;
 
     @FXML
+
     private LineChart<String, Number> weightLineChart;
 
     @FXML
@@ -59,14 +74,20 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     private Tab tabWeight;
 
     @FXML
-    private Tab tabSchedule
+    private Tab tabSchedule;
+
+    @FXML
+    private TableView<Schedule> pastSchedulesTableView;
+
 
     /**
      * Displays a client's profile in a separate window.
      * It should display all the details pertaining to this {@code Client}
-     * @param client The client to display
+     *
+     * @param client        The client to display
+     * @param pastSchedules The list of schedules the client has ever gone through
      */
-    public ClientInfoPage(Client client, List<Schedule> relatedSchedule, WeightUnit weightUnit) {
+    public ClientInfoPage(Client client, List<Schedule> pastSchedules, WeightUnit weightUnit) {
         super(FXML);
         this.client = client;
 
@@ -79,15 +100,16 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        this.initializeChart(weightUnit, relatedSchedule);
+        this.initializeSchedule();
+        this.initializeChart(weightUnit, pastSchedules);
     }
 
-    private void initializeChart (WeightUnit weightUnit, List<Schedule> relatedSchedule) {
+    private void initializeChart (WeightUnit weightUnit, List<Schedule> pastSchedules) {
         //x is date (at the bottom)
         //y is weight (at the left)
         XYChart.Series<String, Number> xy = new XYChart.Series<>();
 
-        List<XYChart.Data<String, Number>> xyList = relatedSchedule.stream()
+        List<XYChart.Data<String, Number>> xyList = pastSchedules.stream()
                 .filter(x -> x.getClient().equals(client) && !x.getWeight().equals(Weight.getDefaultWeight()))
                 .sorted() //use default comparator
                 .map(x -> {
@@ -114,6 +136,66 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         } else {
             weightLineChart.setVisible(false);
         }
+    }
+
+    private void initializeSchedule (WeightUnit weightUnit, List<Schedule> pastSchedules) {
+        // Set image based on client's name first character. Skipping if invalid url found.
+        // Just to make the app a bit nicer with real human image
+        try {
+            Image img = new Image("/images/profile-"
+                    + ((client.getName().fullName.toLowerCase().charAt(0) - 'a') / 6 + 1) + ".jpg");
+            this.imgProfile.setImage(img);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            logger.info("Invalid image url, using default image\nException: " + ex);
+        }
+
+        TableColumn<Schedule, Interval> intervalColumn = new TableColumn<>("Interval");
+        intervalColumn.setCellValueFactory(new PropertyValueFactory<>("interval"));
+
+        TableColumn<Schedule, ExerciseType> exTypeColumn = new TableColumn<>("Exercise Type");
+        exTypeColumn.setCellValueFactory(new PropertyValueFactory<>("exerciseType"));
+
+        TableColumn<Schedule, Remark> remarkColumn = new TableColumn<>("Remark");
+        remarkColumn.setCellValueFactory(new PropertyValueFactory<>("remark"));
+
+        this.pastSchedulesTableView.getColumns().add(intervalColumn);
+        this.pastSchedulesTableView.getColumns().add(exTypeColumn);
+        this.pastSchedulesTableView.getColumns().add(remarkColumn);
+        this.pastSchedulesTableView.getItems().addAll(pastSchedules);
+
+        /* Make remark column can wrap text
+         */
+        remarkColumn.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Schedule, Remark> call(TableColumn<Schedule, Remark> arg0) {
+                return new TableCell<>() {
+                    private Text text;
+
+                    @Override
+                    public void updateItem(Remark item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            text = new Text(item.toString());
+                            text.wrappingWidthProperty().bind(getTableColumn().widthProperty());
+                            text.setStyle("-fx-stroke: white; -fx-stroke-width: 0.5; -fx-padding: 10px;");
+                            text.setFont(Font.font("Segoe UI Light"));
+                            this.setWrapText(true);
+
+                            setGraphic(text);
+                        }
+                    }
+                };
+            }
+        });
+
+        intervalColumn.setMinWidth(pastSchedulesTableView.getWidth() * .25);
+        exTypeColumn.setPrefWidth(150);
+        remarkColumn.setPrefWidth(400);
+
+        remarkColumn.setSortable(false);
+
+        this.pastSchedulesTableView.setPlaceholder(new Label("No schedules to display"));
+        this.pastSchedulesTableView.setPrefHeight(250);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package seedu.address.model.schedule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalSchedules.ALICE_GETWELL;
@@ -11,6 +12,7 @@ import static seedu.address.testutil.TypicalSchedules.PAYMENT_UNPAID;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ScheduleBuilder;
+import seedu.address.testutil.TypicalSessions;
 
 public class ScheduleTest {
     @Test
@@ -59,6 +61,11 @@ public class ScheduleTest {
         Schedule unpaidAliceGetwell = new ScheduleBuilder(ALICE_GETWELL)
                 .withPaymentStatus(PAYMENT_UNPAID).build();
         assertFalse(paidAliceGetwell.equals(unpaidAliceGetwell));
+
+        // test getter
+        Schedule schedule = new ScheduleBuilder().withSession(TypicalSessions.MACHOMAN).build();
+        assertEquals(schedule.getInterval(), TypicalSessions.MACHOMAN.getInterval());
+        assertEquals(schedule.getExerciseType(), TypicalSessions.MACHOMAN.getExerciseType());
     }
 
     @Test

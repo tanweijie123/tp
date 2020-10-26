@@ -27,7 +27,7 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 <img src="images/benclmnt.png" width="200px">
 
 [[github](https://github.com/benclmnt)]
-[[portfolio](team/benclmnt.md)]
+
 #### Developer & Code Quality in-charge
 
 * Looks after code quality, ensures adherence to coding standards within the project.

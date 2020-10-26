@@ -393,6 +393,7 @@ Examples:
 ### Viewing a Client : `cview`
 
 You can view the full details of a client from the Client List. If you need to quickly look up a client based off their name, this is the fastest way.
+You can also find a list of all schedules related to this client in table form, which can be sorted by date or exercise type.
 
 Format: `cview INDEX`
 
@@ -401,13 +402,23 @@ Points to take note when viewing clients from the Client List:
 * The index refers to the index number shown in the displayed Client List.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="block" class="alert alert-warning">
+
+:star: **Feature:**
+
+If you edit the details of the client, or the schedules related to the client you are currently viewing, 
+you need to re-run the earlier <code>cview</code> command to see the updates.
+
+In the future, we might improve the panel to auto-update based on the changes that you made.
+</div>
+
 Examples:
 * `clist` followed by `cview 2` opens the second client in **FitEgo**.
 * `cfind Bernice` followed by `cview 1` opens the first client (Bernice) in the resulting Client List.
    The result of these commands is shown in the image below.
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
-<center>Figure - Result of running `cfind Bernice` then `cview 1`</center>
+<center>Figure - Result of running <code>cfind Bernice</code> then <code>cview 1</code></center>
 
 ---
 
