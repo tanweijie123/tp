@@ -511,7 +511,7 @@ All schedule-related keywords are described in this section. All of the commands
 
 To check if you have scheduled a session with a client, you can check if the session in the Session List contains the client's name. 
 
-<center> <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" />
+<center> <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" /> </br>
 Figure - Session List </center>
 
 The figure above shows the Session List, in which for each session, there is a list of clients attending the session. If the client's name is shown in green, it means that he has paid for that particular session. Otherwise, his name will be shown in red.
