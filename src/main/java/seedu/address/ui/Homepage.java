@@ -1,8 +1,15 @@
 package seedu.address.ui;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -11,6 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Gym;
+import seedu.address.model.session.Interval;
+import seedu.address.model.session.Session;
 
 public class Homepage extends UiPart<AnchorPane> {
     private static final String FXML = "Homepage.fxml";
@@ -87,8 +98,20 @@ public class Homepage extends UiPart<AnchorPane> {
         assert(Homepage.homepage != null);
         this.lblContent.setText("Today's Schedule - "
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE dd MMMM")));
-        todaySchedule.setItems(this.addressBook.getScheduleList());
+        todaySchedule.setItems(getTodaySchedule(addressBook.getScheduleList()));
+        todaySchedule.setPlaceholder(new Label("There is no schedules assigned today!"));
+        todaySchedule.setPrefHeight(250);
         todaySchedule.setCellFactory(listView -> new Homepage.ScheduleListViewCell());
+    }
+
+    private ObservableList<Schedule> getTodaySchedule(ObservableList<Schedule> scheduleList) {
+        Interval interval = new Interval(LocalDateTime.now().truncatedTo(DAYS), 60 * 24); //full day interval
+        Session overlappingSession = new Session(new Gym("temp"), new ExerciseType("temp"), interval);
+        List<Schedule> updatedList = scheduleList.stream()
+                .filter(x -> x.getSession().isUnique(overlappingSession))
+                .sorted()
+                .collect(Collectors.toList());
+        return FXCollections.observableList(updatedList);
     }
 
     /**
