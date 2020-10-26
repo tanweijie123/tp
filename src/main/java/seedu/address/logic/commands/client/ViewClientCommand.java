@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.client;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.ui.ClientInfoPage.getClientInfoPage;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -56,7 +57,7 @@ public class ViewClientCommand extends Command {
         List<Schedule> pastSchedules = model.findScheduleByClient(this.client);
 
         Supplier<AnchorPane> run = () -> {
-            ClientInfoPage cip = new ClientInfoPage(client, pastSchedules, model.getPreferredWeightUnit());
+            ClientInfoPage cip = ClientInfoPage.getClientInfoPage(client, pastSchedules, model.getPreferredWeightUnit());
             return cip.getRoot();
         };
 

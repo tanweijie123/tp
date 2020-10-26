@@ -262,6 +262,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            ClientInfoPage currentClientInfoPage = ClientInfoPage.getCurrentClientInfoPage();
+            currentClientInfoPage.update(logic);
             clientListPanel.update();
             rightSideBar.update(commandResult, commandText);
             homepage.update();

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.ClientInfoPage.getClientInfoPage;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -72,7 +74,7 @@ public class ClientListPanel extends UiPart<Region> {
      */
     public void onMouseClicked_displayClientInfo() {
         Client toView = clientListView.getFocusModel().getFocusedItem();
-        ClientInfoPage cip = new ClientInfoPage(toView, logic.getAssociatedScheduleList(toView),
+        ClientInfoPage cip = ClientInfoPage.getClientInfoPage(toView, logic.getAssociatedScheduleList(toView),
                 logic.getPreferredWeightUnit());
         mainWindow.setMainDisplay(cip.getRoot());
     }

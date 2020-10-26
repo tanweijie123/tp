@@ -2,10 +2,12 @@ package seedu.address.ui;
 
 import static seedu.address.model.util.WeightUnit.getKgInPound;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -14,32 +16,34 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
-import seedu.address.logic.parser.session.SessionParserUtil;
-import seedu.address.model.client.Client;
-import seedu.address.model.schedule.Schedule;
-import seedu.address.model.schedule.Weight;
-import seedu.address.model.util.WeightUnit;
-import seedu.address.model.schedule.Remark;
-import seedu.address.model.session.ExerciseType;
-import seedu.address.model.session.Interval;
 import javafx.util.Callback;
 import seedu.address.commons.core.LogsCenter;
-
+import seedu.address.logic.Logic;
+import seedu.address.logic.parser.session.SessionParserUtil;
+import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Remark;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Weight;
+import seedu.address.model.session.ExerciseType;
+import seedu.address.model.session.Interval;
+import seedu.address.model.util.WeightUnit;
 
 public class ClientInfoPage extends UiPart<AnchorPane> {
     private static final String FXML = "ClientInfoPage.fxml";
     private static final Logger logger = LogsCenter.getLogger(ClientInfoPage.class);
+    private static ClientInfoPage currentPage;
     private final Client client;
 
     @FXML
@@ -61,7 +65,6 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     private FlowPane tags;
 
     @FXML
-
     private LineChart<String, Number> weightLineChart;
 
     @FXML
@@ -69,6 +72,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
 
     @FXML
     private NumberAxis yAxis;
+
+    @FXML
+    private TabPane tabPane;
 
     @FXML
     private Tab tabWeight;
@@ -87,7 +93,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
      * @param client        The client to display
      * @param pastSchedules The list of schedules the client has ever gone through
      */
-    public ClientInfoPage(Client client, List<Schedule> pastSchedules, WeightUnit weightUnit) {
+    private ClientInfoPage(Client client, List<Schedule> pastSchedules, WeightUnit weightUnit) {
         super(FXML);
         this.client = client;
 
@@ -100,11 +106,53 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        this.initializeSchedule();
+        this.initializeSchedule(weightUnit, pastSchedules);
         this.initializeChart(weightUnit, pastSchedules);
+        currentPage = this;
     }
 
-    private void initializeChart (WeightUnit weightUnit, List<Schedule> pastSchedules) {
+    private ClientInfoPage() {
+        super(FXML);
+        this.client = null;
+        currentPage = this;
+    }
+
+    public void selectTab(KeyCode key) {
+        if (this.client == null) {
+            return;
+        }
+        if (key == KeyCode.F3) {
+            this.tabPane.getSelectionModel().select(tabSchedule);
+        } else if (key == KeyCode.F4) {
+            this.tabPane.getSelectionModel().select(tabWeight);
+        }
+    }
+
+    public static ClientInfoPage getCurrentClientInfoPage() {
+        if (currentPage == null) {
+            currentPage = new ClientInfoPage();
+        }
+        return currentPage;
+    }
+
+    public void update(Logic logic) {
+        if (this.client == null) {
+            return;
+        }
+        Optional<Client> optionalClient = logic.getAddressBook().getClientList().stream()
+                .filter(x->x.isUnique(this.client)).findFirst();
+        if (optionalClient.isPresent()) {
+            Client currentClient = optionalClient.get();
+            new ClientInfoPage(currentClient, logic.getAssociatedScheduleList(currentClient),
+                    logic.getPreferredWeightUnit());
+        }
+    }
+
+    public static ClientInfoPage getClientInfoPage(Client client, List<Schedule> pastSchedules, WeightUnit weightUnit) {
+        return new ClientInfoPage(client, pastSchedules, weightUnit);
+    }
+
+    private void initializeChart(WeightUnit weightUnit, List<Schedule> pastSchedules) {
         //x is date (at the bottom)
         //y is weight (at the left)
         XYChart.Series<String, Number> xy = new XYChart.Series<>();
@@ -134,11 +182,11 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
             yAxis.setUpperBound(upperBound);
             yAxis.setTickUnit(1);
         } else {
-            weightLineChart.setVisible(false);
+            tabPane.getTabs().remove(tabWeight);
         }
     }
 
-    private void initializeSchedule (WeightUnit weightUnit, List<Schedule> pastSchedules) {
+    private void initializeSchedule(WeightUnit weightUnit, List<Schedule> pastSchedules) {
         // Set image based on client's name first character. Skipping if invalid url found.
         // Just to make the app a bit nicer with real human image
         try {
