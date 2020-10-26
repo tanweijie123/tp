@@ -432,8 +432,8 @@ Format: `sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]`
 
 Points to take note when editing a session's details from the Session List:
 * Edits the session at the specified `INDEX`. The index refers to the index number shown in the displayed Session List. The index **must be a positive integer** 1, 2, 3, …​
-* `GYM_NAME` & `EXERCISE_TYPE` can be any words.
-* `START_TIME` & `DURATION` convention follows the command `sadd`.
+* `GYM_NAME` and `EXERCISE_TYPE` can be any words.
+* `START_TIME` and `DURATION` convention follows the command `sadd`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
