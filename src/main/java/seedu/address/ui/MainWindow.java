@@ -263,6 +263,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             ClientInfoPage.getCurrentClientInfoPage().update(logic);
+            clientListPanel.update();
             rightSideBar.update(commandResult, commandText);
             homepage.update();
             return commandResult;
