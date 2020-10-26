@@ -263,10 +263,8 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             ClientInfoPage.getCurrentClientInfoPage().update(logic);
-            clientListPanel.update();
             rightSideBar.update(commandResult, commandText);
             homepage.update();
-            setMainDisplay(ClientInfoPage.getCurrentClientInfoPage().getRoot());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

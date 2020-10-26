@@ -2,7 +2,6 @@ package seedu.address.model.schedule;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.util.WeightUnit.KILOGRAM;
-import static seedu.address.model.util.WeightUnit.getKgInPound;
 
 import seedu.address.model.util.WeightUnit;
 
