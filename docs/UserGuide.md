@@ -248,7 +248,7 @@ By default, you can click enter and a browser will open the User Guide.
 You may also press "ESC" key to close this window. 
 </div>
 
-### Viewing help : `help`
+### Viewing settings: `settings`
 
 You can ask FitEgo to open a window to change user settings.
 
