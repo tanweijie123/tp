@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.ui.ClientInfoPage.getClientInfoPage;
-
 import java.util.List;
 import java.util.logging.Logger;
 

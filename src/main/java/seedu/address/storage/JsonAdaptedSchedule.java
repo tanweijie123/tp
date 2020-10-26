@@ -52,7 +52,7 @@ public class JsonAdaptedSchedule {
         end = SessionParserUtil.parseDateTimeToString(source.getSession().getEndTime());
         paymentStatus = source.getPaymentStatus().value;
         remark = source.getRemark().value;
-        weight = source.getWeight().toString();
+        weight = String.valueOf(source.getWeight().getWeight());
     }
 
     /**

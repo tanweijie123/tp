@@ -2,6 +2,7 @@ package seedu.address.model.schedule;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.util.WeightUnit.KILOGRAM;
+import static seedu.address.model.util.WeightUnit.getKgInPound;
 
 import seedu.address.model.util.WeightUnit;
 
@@ -73,7 +74,7 @@ public class Weight {
 
     @Override
     public String toString() {
-        return String.format("%.1f", weight) + KILOGRAM;
+        return String.format("%.1f", this.weight) + KILOGRAM;
     }
 
     @Override

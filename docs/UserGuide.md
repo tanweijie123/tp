@@ -261,7 +261,7 @@ Format: `settings`
 
 :bulb: **Tip:**
 Once the settings window is open, you can use arrow key to toggle the options.
-You may also press "ESC" key to close this window. 
+You may also press "ESC" key to save your changes and close this window. 
 
 The current settings available are:
  * preferred weight unit for graphs </br>
@@ -406,10 +406,8 @@ Points to take note when viewing clients from the Client List:
 
 :star: **Feature:**
 
-If you edit the details of the client, or the schedules related to the client you are currently viewing, 
-you need to re-run the earlier <code>cview</code> command to see the updates.
+If you edit the client's name, you need to re-run the earlier <code>cview</code> command to see the updates.
 
-In the future, we might improve the panel to auto-update based on the changes that you made.
 </div>
 
 Examples:

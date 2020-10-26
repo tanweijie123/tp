@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import static seedu.address.model.util.WeightUnit.getKgInPound;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +33,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Weight;
@@ -97,7 +98,6 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         super(FXML);
         this.client = client;
 
-        //TODO: update profile image
         this.lblName.setText(client.getName().fullName);
         this.lblPhone.setText(client.getPhone().value);
         this.lblEmail.setText(client.getEmail().value);
@@ -105,6 +105,15 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        // Set image based on client's name first character. Skipping if invalid url found.
+        // Just to make the app a bit nicer with real human image
+        try {
+            Image img = new Image("/images/profile-"
+                    + ((client.getName().fullName.toLowerCase().charAt(0) - 'a') / 6 + 1) + ".jpg");
+            this.imgProfile.setImage(img);
+        } catch (NullPointerException | IllegalArgumentException ex) {
+            logger.info("Invalid image url, using default image\nException: " + ex);
+        }
 
         this.initializeSchedule(weightUnit, pastSchedules);
         this.initializeChart(weightUnit, pastSchedules);
@@ -116,7 +125,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         this.client = null;
         currentPage = this;
     }
-
+    /**
+     * Sets the viewing panel of tabPane using KeyCode.
+     */
     public void selectTab(KeyCode key) {
         if (this.client == null) {
             return;
@@ -145,6 +156,8 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
             Client currentClient = optionalClient.get();
             new ClientInfoPage(currentClient, logic.getAssociatedScheduleList(currentClient),
                     logic.getPreferredWeightUnit());
+        } else {
+
         }
     }
 
@@ -187,16 +200,8 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     }
 
     private void initializeSchedule(WeightUnit weightUnit, List<Schedule> pastSchedules) {
-        // Set image based on client's name first character. Skipping if invalid url found.
-        // Just to make the app a bit nicer with real human image
-        try {
-            Image img = new Image("/images/profile-"
-                    + ((client.getName().fullName.toLowerCase().charAt(0) - 'a') / 6 + 1) + ".jpg");
-            this.imgProfile.setImage(img);
-        } catch (NullPointerException | IllegalArgumentException ex) {
-            logger.info("Invalid image url, using default image\nException: " + ex);
-        }
-
+        Collections.sort(pastSchedules);
+        Collections.reverse(pastSchedules);
         TableColumn<Schedule, Interval> intervalColumn = new TableColumn<>("Interval");
         intervalColumn.setCellValueFactory(new PropertyValueFactory<>("interval"));
 
