@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.session.ViewSessionCommand.PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS;
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_PERIOD;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public class RightSideBar extends UiPart<AnchorPane> {
         this.logic = logic;
         sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new RightSideBar.SessionListViewCell());
+        logic.updateFilteredSessionList(PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS);
     }
 
     /**
