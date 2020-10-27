@@ -83,7 +83,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     private Tab tabSchedule;
 
     @FXML
-    private TableView<Schedule> pastSchedulesTableView;
+    private TableView<Schedule> schedulesToDisplay;
 
 
     /**
@@ -91,15 +91,15 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
      * It should display all the details pertaining to this {@code Client}
      *
      * @param client        The client to display
-     * @param pastSchedules The list of schedules the client has ever gone through
+     * @param associatedSchedules The list of schedules the client related to the client
      */
-    private ClientInfoPage(Client client, List<Schedule> pastSchedules, WeightUnit weightUnit) {
+    private ClientInfoPage(Client client, List<Schedule> associatedSchedules, WeightUnit weightUnit) {
         super(FXML);
         this.client = client;
 
         this.initializeProfile();
-        this.initializeSchedule(pastSchedules);
-        this.initializeChart(weightUnit, pastSchedules);
+        this.initializeSchedule(associatedSchedules);
+        this.initializeChart(weightUnit, associatedSchedules);
         currentPage = this;
     }
 
@@ -146,8 +146,8 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         }
     }
 
-    public static ClientInfoPage getClientInfoPage(Client client, List<Schedule> pastSchedules, WeightUnit weightUnit) {
-        return new ClientInfoPage(client, pastSchedules, weightUnit);
+    public static ClientInfoPage getClientInfoPage(Client client, List<Schedule> associatedSchedules, WeightUnit weightUnit) {
+        return new ClientInfoPage(client, associatedSchedules, weightUnit);
     }
 
     private void initializeProfile() {
@@ -175,12 +175,12 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     }
 
     @SuppressWarnings("unchecked")
-    private void initializeChart(WeightUnit weightUnit, List<Schedule> pastSchedules) {
+    private void initializeChart(WeightUnit weightUnit, List<Schedule> associatedSchedules) {
         //x is date (at the bottom)
         //y is weight (at the left)
         XYChart.Series<String, Number> xy = new XYChart.Series<>();
 
-        List<XYChart.Data<String, Number>> xyList = pastSchedules.stream()
+        List<XYChart.Data<String, Number>> xyList = associatedSchedules.stream()
                 .filter(x -> x.getClient().equals(client) && !x.getWeight().equals(Weight.getDefaultWeight()))
                 .sorted() //use default comparator
                 .map(x -> {
@@ -209,9 +209,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         }
     }
 
-    private void initializeSchedule(List<Schedule> pastSchedules) {
-        Collections.sort(pastSchedules);
-        Collections.reverse(pastSchedules);
+    private void initializeSchedule(List<Schedule> associatedSchedules) {
+        Collections.sort(associatedSchedules);
+        Collections.reverse(associatedSchedules);
         TableColumn<Schedule, Interval> intervalColumn = new TableColumn<>("Interval");
         intervalColumn.setCellValueFactory(new PropertyValueFactory<>("interval"));
 
@@ -221,12 +221,12 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         TableColumn<Schedule, Remark> remarkColumn = new TableColumn<>("Remark");
         remarkColumn.setCellValueFactory(new PropertyValueFactory<>("remark"));
 
-        this.pastSchedulesTableView.getColumns().clear();
-        this.pastSchedulesTableView.getColumns().add(intervalColumn);
-        this.pastSchedulesTableView.getColumns().add(exTypeColumn);
-        this.pastSchedulesTableView.getColumns().add(remarkColumn);
-        this.pastSchedulesTableView.getItems().clear();
-        this.pastSchedulesTableView.getItems().addAll(pastSchedules);
+        this.schedulesToDisplay.getColumns().clear();
+        this.schedulesToDisplay.getColumns().add(intervalColumn);
+        this.schedulesToDisplay.getColumns().add(exTypeColumn);
+        this.schedulesToDisplay.getColumns().add(remarkColumn);
+        this.schedulesToDisplay.getItems().clear();
+        this.schedulesToDisplay.getItems().addAll(associatedSchedules);
 
         /* Make remark column can wrap text
          */
@@ -253,14 +253,14 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
             }
         });
 
-        intervalColumn.setMinWidth(pastSchedulesTableView.getWidth() * .25);
+        intervalColumn.setMinWidth(schedulesToDisplay.getWidth() * .25);
         exTypeColumn.setPrefWidth(150);
         remarkColumn.setPrefWidth(400);
 
         remarkColumn.setSortable(false);
 
-        this.pastSchedulesTableView.setPlaceholder(new Label("No schedules to display"));
-        this.pastSchedulesTableView.setPrefHeight(250);
+        this.schedulesToDisplay.setPlaceholder(new Label("No schedules to display"));
+        this.schedulesToDisplay.setPrefHeight(250);
     }
 
     @Override

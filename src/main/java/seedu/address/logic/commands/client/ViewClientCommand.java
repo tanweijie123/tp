@@ -53,10 +53,10 @@ public class ViewClientCommand extends Command {
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         this.client = clientToView;
 
-        List<Schedule> pastSchedules = model.findScheduleByClient(this.client);
+        List<Schedule> scheduleByClient = model.findScheduleByClient(this.client);
 
         Supplier<AnchorPane> run = () -> {
-            ClientInfoPage cip = ClientInfoPage.getClientInfoPage(client, pastSchedules,
+            ClientInfoPage cip = ClientInfoPage.getClientInfoPage(client, scheduleByClient,
                     model.getPreferredWeightUnit());
             return cip.getRoot();
         };

@@ -59,7 +59,7 @@
                          <tabs>
                             <Tab fx:id="tabSchedule" closable="false" text="Schedule">
                                <content>
-                                   <TableView fx:id="pastSchedulesTableView" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                                   <TableView fx:id="schedulesToDisplay" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
                                </content>
                             </Tab>
                             <Tab fx:id="tabWeight" closable="false" text="Weight">
