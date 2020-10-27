@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -97,6 +98,8 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        setupKeypressHandlers();
+
         helpWindow = new HelpWindow();
         settingsWindow = new SettingsWindow(logic);
 
@@ -138,6 +141,17 @@ public class MainWindow extends UiPart<Stage> {
             if (keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
+            }
+        });
+    }
+
+    /**
+     * Sets up key press event handlers
+     */
+    private void setupKeypressHandlers() {
+        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, k -> {
+            if (k.getCode() == KeyCode.F3 || k.getCode() == KeyCode.F4) {
+                ClientInfoPage.getCurrentClientInfoPage().selectTab(k.getCode());
             }
         });
     }

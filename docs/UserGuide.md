@@ -397,15 +397,21 @@ Any string after the force flag (`f/`) will be ignored.
 
 ### 3.2.6 Viewing a Client : `cview`
 
-You can view the full details of a client from the Client List. If you need to quickly look up a client based off their name, this is the fastest way.
-You can also find a list of all schedules related to this client in table form, which can be sorted by date or exercise type.
+You can view the full details of a client from the Client List. 
+
+You can easily look up the following information about the client in the central panel:
+* Your client's name, email, address, phone, tags
+* Your client's weight history in line graph form
+* A list of schedules associated with your client, together with the interval, exercise type and remark
 
 Format: `cview INDEX`
 
 Points to take note when viewing clients from the Client List:
 * Views the client at the specified `INDEX`. The selected client will be displayed in the main window. 
 * The index refers to the index number shown in the displayed Client List.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, ...
+* You can use `F3` to view your client's list of schedules, and `F4` to view your client's weight progression.
+* You can sort the list of schedules by the interval or exercise type.
 
 <div markdown="block" class="alert alert-warning">
 
