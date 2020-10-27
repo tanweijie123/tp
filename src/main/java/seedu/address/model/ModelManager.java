@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
+import seedu.address.model.util.WeightUnit;
 
 /**
  * Represents the in-memory model of the FitEgo's data (client + session + schedule).
@@ -84,6 +85,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public WeightUnit getPreferredWeightUnit() {
+        return userPrefs.getPreferredWeightUnit();
+    }
+
+    @Override
+    public void setPreferredWeightUnit(WeightUnit preferredWeightUnit) {
+        requireNonNull(preferredWeightUnit);
+        userPrefs.setPreferredWeightUnit(preferredWeightUnit);
     }
 
     //=========== AddressBook ================================================================================
@@ -252,7 +264,7 @@ public class ModelManager implements Model {
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
-            this.setSchedule(schedule, new Schedule(editedClient, schedule.getSession()));
+            this.setSchedule(schedule, schedule.setClient(editedClient));
         }
     }
 
@@ -279,7 +291,7 @@ public class ModelManager implements Model {
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
-            this.setSchedule(schedule, new Schedule(schedule.getClient(), editedSession));
+            this.setSchedule(schedule, schedule.setSession(editedSession));
         }
     }
 
@@ -348,6 +360,12 @@ public class ModelManager implements Model {
     public List<Schedule> findScheduleBySession(Session sessionKey) {
         requireAllNonNull(sessionKey);
         return addressBook.findScheduleBySession(sessionKey);
+    }
+
+    @Override
+    public List<Schedule> findScheduleByClient(Client clientKey) {
+        requireAllNonNull(clientKey);
+        return addressBook.findScheduleByClient(clientKey);
     }
 
 

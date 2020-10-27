@@ -100,6 +100,8 @@ public class CommandBox extends UiPart<Region> {
                     commandTextField.setText("");
                     mainWindow.setPastCommandListCursor(cursor);
                 }
+            } else if (k.getCode() == KeyCode.F3 || k.getCode() == KeyCode.F4) {
+                ClientInfoPage.getCurrentClientInfoPage().selectTab(k.getCode());
             }
         });
     }

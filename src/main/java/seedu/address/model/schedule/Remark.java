@@ -27,7 +27,7 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
-        value = remark;
+        value = remark.trim();
     }
 
     /**
