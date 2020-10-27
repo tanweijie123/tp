@@ -132,6 +132,7 @@ public class Homepage extends UiPart<AnchorPane> {
                 Label lbl = new Label();
                 lbl.setText(schedule.getClient().getName() + "\n" + schedule.getSession().getGym() + "\n"
                         + schedule.getSession().getInterval().toString());
+                lbl.setStyle("-fx-padding:10px;");
                 setGraphic(lbl);
             }
         }
