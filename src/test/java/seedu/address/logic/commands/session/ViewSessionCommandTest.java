@@ -2,7 +2,9 @@ package seedu.address.logic.commands.session;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.session.SessionCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.session.SessionCommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.session.ViewSessionCommand.MESSAGE_INVALID_PERIOD;
 import static seedu.address.logic.commands.session.ViewSessionCommand.MESSAGE_SHOW_SESSIONS_SUCCESS;
 import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_ALL_SESSIONS_PERIOD;
 import static seedu.address.logic.commands.session.ViewSessionCommand.VALID_FUTURE_SESSIONS_PERIOD;
@@ -17,7 +19,6 @@ import static seedu.address.testutil.TypicalSessions.MACHOMAN_TOMORROW;
 import static seedu.address.testutil.TypicalSessions.ULTRAMAN;
 import static seedu.address.testutil.TypicalSessions.getDynamicTimeAddressBook;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -166,13 +167,8 @@ public class ViewSessionCommandTest {
 
     @Test
     public void execute_viewInvalidUnit_thrownAssertionError() {
-        try {
-            ViewSessionCommand viewSessionCommand = new ViewSessionCommand("+2s");
-            viewSessionCommand.execute(model);
-            Assertions.fail();
-        } catch (AssertionError e) {
-            Assertions.assertEquals(new AssertionError().getMessage(), e.getMessage());
-        }
+        ViewSessionCommand viewSessionCommand = new ViewSessionCommand("+2s");
+        assertCommandFailure(viewSessionCommand, model, MESSAGE_INVALID_PERIOD);
     }
 
     @Test
