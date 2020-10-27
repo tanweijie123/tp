@@ -44,7 +44,7 @@ public class ViewClientCommandTest {
 
         String expectedMessage = String.format(ViewClientCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredClientList(x -> x.isUnique(clientToView));
+        expectedModel.updateFilteredClientList(x -> x.isIdentical(clientToView));
 
         assertCommandSuccess(viewClientCommand, model, expectedMessage, expectedModel);
         assertEquals(clientToView, viewClientCommand.getClient());

@@ -289,7 +289,7 @@ public class AddSessionCommandTest {
         @Override
         public boolean hasSession(Session session) {
             requireNonNull(session);
-            return this.session.isUnique(session);
+            return this.session.isIdentical(session);
         }
     }
 
@@ -302,7 +302,7 @@ public class AddSessionCommandTest {
         @Override
         public boolean hasSession(Session session) {
             requireNonNull(session);
-            return sessionsAdded.stream().anyMatch(session::isUnique);
+            return sessionsAdded.stream().anyMatch(session::isIdentical);
         }
 
         @Override

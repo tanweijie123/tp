@@ -14,25 +14,25 @@ import seedu.address.testutil.ScheduleBuilder;
 
 public class ScheduleTest {
     @Test
-    public void isUniqueSchedule() {
+    public void isIdenticalSchedule() {
         // same object -> returns true
-        assertTrue(ALICE_GETWELL.isUnique(ALICE_GETWELL));
+        assertTrue(ALICE_GETWELL.isIdentical(ALICE_GETWELL));
 
         // null -> returns false
-        assertFalse(ALICE_GETWELL.isUnique(null));
+        assertFalse(ALICE_GETWELL.isIdentical(null));
 
         // different payment status, everything else the same -> returns true
         Schedule unpaidSchedule = new ScheduleBuilder(ALICE_GETWELL)
                 .withPaymentStatus(PAYMENT_UNPAID).build();
         Schedule paidSchedule = new ScheduleBuilder(ALICE_GETWELL)
                 .withPaymentStatus(PAYMENT_PAID).build();
-        assertTrue(unpaidSchedule.isUnique(paidSchedule));
+        assertTrue(unpaidSchedule.isIdentical(paidSchedule));
 
         // different client -> returns false
-        assertFalse(ALICE_GETWELL.isUnique(BENSON_GETWELL));
+        assertFalse(ALICE_GETWELL.isIdentical(BENSON_GETWELL));
 
         // different session -> returns false
-        assertFalse(ALICE_GETWELL.isUnique(ALICE_MACHOMAN));
+        assertFalse(ALICE_GETWELL.isIdentical(ALICE_MACHOMAN));
     }
 
     @Test

@@ -25,7 +25,7 @@ public class UniqueList<T extends CheckExisting<T> & Comparable<T>> implements I
      */
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isUnique);
+        return internalList.stream().anyMatch(toCheck::isIdentical);
     }
 
     /**
@@ -53,7 +53,7 @@ public class UniqueList<T extends CheckExisting<T> & Comparable<T>> implements I
             throw new EntityNotFoundException();
         }
 
-        if (!target.isUnique(edited) && contains(edited)) {
+        if (!target.isIdentical(edited) && contains(edited)) {
             throw new DuplicateEntityException();
         }
 
@@ -138,12 +138,12 @@ public class UniqueList<T extends CheckExisting<T> & Comparable<T>> implements I
 
     /**
      * Returns true if {@code elements} contains are unique.
-     * Note that this only compares using CheckExisiting::isUnique
+     * Note that this only compares using CheckExisiting::isIdentical
      */
     private boolean elementsAreUnique(List<T> elements) {
         for (int i = 0; i < elements.size() - 1; i++) {
             for (int j = i + 1; j < elements.size(); j++) {
-                if (elements.get(i).isUnique(elements.get(j))) {
+                if (elements.get(i).isIdentical(elements.get(j))) {
                     return false;
                 }
             }
