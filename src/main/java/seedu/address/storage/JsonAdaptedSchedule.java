@@ -46,7 +46,7 @@ public class JsonAdaptedSchedule {
         clientEmail = source.getClient().getEmail().toString();
         start = SessionParserUtil.parseDateTimeToString(source.getSession().getStartTime());
         end = SessionParserUtil.parseDateTimeToString(source.getSession().getEndTime());
-        paymentStatus = source.getPaymentStatus().value;
+        paymentStatus = source.getPaymentStatus().getValue();
         remark = source.getRemark().value;
     }
 
