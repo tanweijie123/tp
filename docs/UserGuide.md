@@ -234,6 +234,15 @@ You can return to the home page by using this command.
 <center> Figure 4 - Homepage View </center>
 
 The homepage will display the statistics of your program, today's schedule and quote of the day as shown in the figure above. 
+If you do not have any planned schedules for the day, it will display `There is no schedules assigned today!`.  
+
+<div markdown="block" class="alert alert-warning">
+
+:star: **Feature:**
+
+If your session spreads over more than 1 day, the schedule will still be displayed if it intersects with today's date. 
+
+</div>
 
 ### 3.1.2 Viewing help : `help`
 
@@ -247,8 +256,8 @@ Format: `help`
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-By default, you can click enter and a browser will open the User Guide. 
-You may also press "ESC" key to close this window. 
+By default, you can press "ENTER" key and a browser will open the User Guide. This pop-up window will close after you clicked on the link. 
+Alternatively, you may press the "ESC" key to close this window. 
 </div>
 
 ### 3.1.3 Viewing settings: `settings`
@@ -285,7 +294,7 @@ You will not be able to retrieve your previous data unless you have backed up th
 
 ### 3.1.5 Exiting the program : `exit`
 
-You can exit the program using the `exit` command.
+You can exit the program using the `exit` command. Your data is saved automatically. 
 
 Format: `exit`
 
@@ -417,7 +426,7 @@ Points to take note when viewing clients from the Client List:
 
 :star: **Feature:**
 
-If you edit the client's name, you need to re-run the earlier <code>cview</code> command to see the updates.
+If you perform [`cedit`](#323-editing-a-client--cedit) and [`cdel`](#325-deleting-a-client--cdel), you will be returned to the homepage. 
 
 </div>
 
@@ -429,7 +438,7 @@ Examples:
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
 
-<center>Figure 8 - Result of running <code>cfind Bernice</code> then <code>cview 1</code></center>
+<center>Figure 8 - Client View with Schedules </center>
 
 ---
 
