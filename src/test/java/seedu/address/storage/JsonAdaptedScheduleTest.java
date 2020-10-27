@@ -26,7 +26,7 @@ public class JsonAdaptedScheduleTest {
             .parseDateTimeToString(ALICE_GETWELL.getSession().getStartTime());
     private static final String VALID_END_TIME = SessionParserUtil
             .parseDateTimeToString(ALICE_GETWELL.getSession().getEndTime());
-    private static final String VALID_PAYMENT_STATUS = ALICE_GETWELL.getPaymentStatus().value;
+    private static final String VALID_PAYMENT_STATUS = ALICE_GETWELL.getPaymentStatus().getValue();
     private static final String VALID_REMARK = ALICE_GETWELL.getRemark().value;
 
     @Test

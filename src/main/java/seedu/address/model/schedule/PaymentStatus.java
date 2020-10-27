@@ -10,7 +10,7 @@ public class PaymentStatus {
     public static final String MESSAGE_INVALID_PAYMENT_STATUS = "Payment Status must be either paid or unpaid";
 
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a {@code PaymentStatus}.
@@ -22,6 +22,10 @@ public class PaymentStatus {
         checkArgument(isValidPaymentStatus(status), MESSAGE_INVALID_PAYMENT_STATUS);
         assert status.equals(VALUE_PAID) || status.equals(VALUE_UNPAID);
         this.value = status;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     /**
