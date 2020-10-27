@@ -146,7 +146,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         }
     }
 
-    public static ClientInfoPage getClientInfoPage(Client client, List<Schedule> associatedSchedules, WeightUnit weightUnit) {
+    public static ClientInfoPage getClientInfoPage(Client client,
+                                                   List<Schedule> associatedSchedules,
+                                                   WeightUnit weightUnit) {
         return new ClientInfoPage(client, associatedSchedules, weightUnit);
     }
 
