@@ -22,13 +22,13 @@ public class RightSideBar extends UiPart<AnchorPane> {
     private final Logger logger = LogsCenter.getLogger(RightSideBar.class);
     private final MainWindow mainWindow;
     private final Logic logic;
-    private String previousCommand = "ALL";
+    private String latestPeriod = "WEEK";
 
     @FXML
     private ListView<Session> sessionListView;
 
     @FXML
-    private Label title;
+    private Label title = new Label(latestPeriod);
 
     /**
      * Creates a {@code RightSideBar} with the given {@code ObservableList}.
@@ -61,10 +61,10 @@ public class RightSideBar extends UiPart<AnchorPane> {
                 && commandText.contains(PREFIX_PERIOD.toString())) {
             int startOfPeriod = commandText.indexOf(PREFIX_PERIOD.toString());
             String period = commandText.substring(startOfPeriod + 2).toUpperCase();
-            this.previousCommand = period;
+            this.latestPeriod = period;
             return period;
         }
-        return this.previousCommand;
+        return this.latestPeriod;
     }
 
     /**

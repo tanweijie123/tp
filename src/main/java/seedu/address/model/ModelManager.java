@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.session.ViewSessionCommand.PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -43,6 +44,9 @@ public class ModelManager implements Model {
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
         filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
         filteredSchedules = new FilteredList<>(this.addressBook.getScheduleList());
+
+        // default to the upcoming week's sessions
+        updateFilteredSessionList(PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS);
 
         sortSession();
     }
