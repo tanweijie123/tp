@@ -26,6 +26,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#injured-thigh";
+    private static final String INVALID_UNIT = "g";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +34,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "injured-thigh";
     private static final String VALID_TAG_2 = "allery-dairy";
+    private static final String VALID_UNIT_1 = "kg";
+    private static final String VALID_UNIT_2 = "lb";
+
 
     private static final String WHITESPACE = " \t\r\n";
 

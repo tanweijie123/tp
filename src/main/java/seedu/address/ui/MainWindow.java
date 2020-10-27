@@ -8,7 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -43,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SettingsWindow settingsWindow;
     private RightSideBar rightSideBar;
     private StatusBarFooter statusBarFooter;
 
@@ -51,6 +52,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem settingsMenuItem;
 
     @FXML
     private StackPane clientListPanelPlaceholder;
@@ -93,7 +97,10 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        setupKeypressHandlers();
+
         helpWindow = new HelpWindow();
+        settingsWindow = new SettingsWindow(logic);
 
         addDynamicGridPaneChange(primaryStage.getScene());
     }
@@ -104,6 +111,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(settingsMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -129,9 +137,20 @@ public class MainWindow extends UiPart<Stage> {
          * in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+            if (keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
+            }
+        });
+    }
+
+    /**
+     * Sets up key press event handlers
+     */
+    private void setupKeypressHandlers() {
+        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, k -> {
+            if (k.getCode() == KeyCode.F3 || k.getCode() == KeyCode.F4) {
+                ClientInfoPage.getCurrentClientInfoPage().selectTab(k.getCode());
             }
         });
     }
@@ -183,6 +202,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the settings window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleSettings() {
+        if (!settingsWindow.isShowing()) {
+            settingsWindow.show();
+        } else {
+            settingsWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -196,6 +227,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        settingsWindow.hide();
         primaryStage.hide();
     }
 
@@ -231,6 +263,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowSettings()) {
+                handleSettings();
+            }
+
             if (commandResult.hasFunctionToRun()) {
                 setMainDisplay(commandResult.getPane().get());
             }
@@ -239,6 +275,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            ClientInfoPage.getCurrentClientInfoPage().update(logic);
             clientListPanel.update();
             rightSideBar.update(commandResult, commandText);
             homepage.update();

@@ -251,7 +251,27 @@ By default, you can click enter and a browser will open the User Guide.
 You may also press "ESC" key to close this window. 
 </div>
 
-### 3.1.3 Clearing all data in the program : `clear` 
+### 3.1.3 Viewing settings: `settings`
+
+You can ask FitEgo to open a window to change user settings.
+
+<center><img src="images/settingsWindow.png" alt="settingsWindow"/></center>
+<center> Figure - Settings Window </center>
+
+Format: `settings`
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+Once the settings window is open, you can use arrow key to toggle the options.
+You may also press "ESC" key to save your changes and close this window. 
+
+The current settings available are:
+ * preferred weight unit for graphs </br>
+ *more to come!
+</div>
+
+### 3.1.4 Clearing all data in the program : `clear` 
 
 You can delete all data (client, session, schedule) using the `clear` keyword. All of your existing data will be removed. 
 
@@ -263,18 +283,19 @@ By using this command, you will delete all of your data, and by design of the sy
 You will not be able to retrieve your previous data unless you have backed up the data file into an external location. 
 </div>
 
-### 3.1.4 Exiting the program : `exit`
+### 3.1.5 Exiting the program : `exit`
 
 You can exit the program using the `exit` command.
 
 Format: `exit`
 
 
-### 3.1.5 Saving the data
+### 3.1.6 Saving the data
 
 Your data in FitEgo are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ---
+
 ## 3.2 Client-related Keywords
 All client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the [left of the UI](#ui-orientation). 
 
@@ -376,14 +397,29 @@ Any string after the force flag (`f/`) will be ignored.
 
 ### 3.2.6 Viewing a Client : `cview`
 
-You can view the full details of a client from the Client List. If you need to quickly look up a client based off their name, this is the fastest way.
+You can view the full details of a client from the Client List. 
+
+You can easily look up the following information about the client in the central panel:
+* Your client's name, email, address, phone, tags
+* Your client's weight history in line graph form
+* A list of schedules associated with your client, together with the interval, exercise type and remark
 
 Format: `cview INDEX`
 
 Points to take note when viewing clients from the Client List:
 * Views the client at the specified `INDEX`. The selected client will be displayed in the main window. 
 * The index refers to the index number shown in the displayed Client List.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, ...
+* You can use `F3` to view your client's list of schedules, and `F4` to view your client's weight progression.
+* You can sort the list of schedules by the interval or exercise type.
+
+<div markdown="block" class="alert alert-warning">
+
+:star: **Feature:**
+
+If you edit the client's name, you need to re-run the earlier <code>cview</code> command to see the updates.
+
+</div>
 
 Examples:
 * `cview 2` opens the second client in FitEgo
@@ -392,6 +428,7 @@ Examples:
    The result of these commands is shown in the image below
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
+
 <center>Figure 8 - Result of running <code>cfind Bernice</code> then <code>cview 1</code></center>
 
 ---
@@ -604,6 +641,7 @@ You can find the comprehensive list of commands in the table below.
 | ------ | ---------| -------- | --------- |
 | General Commands | Open Home Page | `home` | `home`| 
 |  | Open Help Window | `help` | `help`|
+|  | Open Settings Window | `settings` | `settings`|
 |  | Clear all data | `clear` | `clear` |
 |  | Exit this program | `exit` | `exit`|
 | Add | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
