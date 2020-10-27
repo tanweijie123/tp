@@ -33,6 +33,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.Weight;
@@ -223,9 +224,13 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         TableColumn<Schedule, Remark> remarkColumn = new TableColumn<>("Remark");
         remarkColumn.setCellValueFactory(new PropertyValueFactory<>("remark"));
 
+        TableColumn<Schedule, PaymentStatus> paymentStatusColumn = new TableColumn<>("Payment");
+        paymentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
+
         this.schedulesToDisplay.getColumns().clear();
         this.schedulesToDisplay.getColumns().add(intervalColumn);
         this.schedulesToDisplay.getColumns().add(exTypeColumn);
+        this.schedulesToDisplay.getColumns().add(paymentStatusColumn);
         this.schedulesToDisplay.getColumns().add(remarkColumn);
         this.schedulesToDisplay.getItems().clear();
         this.schedulesToDisplay.getItems().addAll(associatedSchedules);
@@ -255,9 +260,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
             }
         });
 
-        intervalColumn.setMinWidth(schedulesToDisplay.getWidth() * .25);
-        exTypeColumn.setPrefWidth(150);
-        remarkColumn.setPrefWidth(400);
+        schedulesToDisplay.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         remarkColumn.setSortable(false);
 
