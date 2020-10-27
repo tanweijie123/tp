@@ -131,7 +131,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     public String toString() {
         String paymentStatusString = "Payment status: " + paymentStatus;
         String remarkPresent = !remark.equals(Remark.EMPTY_REMARK) ? "Remark: " + remark : "";
-        String weightPresent = Weight.isValidWeight(weight) ? "Weight : " + weight : "";
+        String weightPresent = Weight.isValidWeight(weight) ? "Weight: " + weight : "";
         return "Client "
                 + client
                 + "\n"
