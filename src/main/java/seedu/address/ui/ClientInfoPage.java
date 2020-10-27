@@ -260,6 +260,35 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
             }
         });
 
+        /* Make payment column can wrap text
+         */
+        paymentStatusColumn.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Schedule, PaymentStatus> call(TableColumn<Schedule, PaymentStatus> arg0) {
+                return new TableCell<>() {
+                    private Text text;
+
+                    @Override
+                    public void updateItem(PaymentStatus item, boolean isEmpty) {
+                        super.updateItem(item, isEmpty);
+                        if (!isEmpty()) {
+                            text = new Text(item.toString());
+                            text.wrappingWidthProperty().bind(getTableColumn().widthProperty());
+                            if (item.isPaid()) {
+                                text.setStyle("-fx-stroke: green; -fx-stroke-width: 0.5; -fx-padding: 10px;");
+                            } else {
+                                text.setStyle("-fx-stroke: red; -fx-stroke-width: 0.5; -fx-padding: 10px;");
+                            }
+                            text.setFont(Font.font("Segoe UI Light"));
+                            this.setWrapText(true);
+
+                            setGraphic(text);
+                        }
+                    }
+                };
+            }
+        });
+
         schedulesToDisplay.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         remarkColumn.setSortable(false);
