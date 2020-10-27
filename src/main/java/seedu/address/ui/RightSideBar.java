@@ -29,7 +29,7 @@ public class RightSideBar extends UiPart<AnchorPane> {
     private ListView<Session> sessionListView;
 
     @FXML
-    private Label title = new Label(latestPeriod);
+    private Label title;
 
     /**
      * Creates a {@code RightSideBar} with the given {@code ObservableList}.
@@ -40,6 +40,7 @@ public class RightSideBar extends UiPart<AnchorPane> {
         this.logic = logic;
         sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new RightSideBar.SessionListViewCell());
+        title.setText(latestPeriod);
         logic.updateFilteredSessionList(PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS);
     }
 
