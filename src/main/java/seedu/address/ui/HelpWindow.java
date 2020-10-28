@@ -48,6 +48,8 @@ public class HelpWindow extends UiPart<Stage> {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
                 e.printStackTrace();
+            } finally {
+                root.close();
             }
         });
 

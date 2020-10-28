@@ -34,7 +34,7 @@ public class ViewSessionCommandTest {
     public void execute_defaultSessionListIsAll_success() {
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_ALL_SESSIONS_PERIOD);
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, VALID_ALL_SESSIONS_PERIOD);
         ModelManager expectedModel = new ModelManager(getDynamicTimeAddressBook(), new UserPrefs());
 
         assertCommandSuccess(viewSessionCommand, model, expectedMessage, expectedModel);
@@ -44,7 +44,7 @@ public class ViewSessionCommandTest {
     public void execute_viewPastSessions_success() {
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_PAST_SESSIONS_PERIOD);
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, VALID_PAST_SESSIONS_PERIOD);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN);
         addressBookStub.withSession(ULTRAMAN);
@@ -60,7 +60,7 @@ public class ViewSessionCommandTest {
     public void execute_viewFutureSessions_success() {
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_FUTURE_SESSIONS_PERIOD);
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, VALID_FUTURE_SESSIONS_PERIOD);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_TOMORROW);
         addressBookStub.withSession(MACHOMAN_PLUS2MONTHS);
@@ -73,7 +73,7 @@ public class ViewSessionCommandTest {
     public void execute_viewUpcomingWeekSessions_success() {
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_WEEK_SESSIONS_PERIOD);
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, VALID_WEEK_SESSIONS_PERIOD);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_TOMORROW);
         addressBookStub.withSession(MACHOMAN_NOW);
@@ -86,7 +86,7 @@ public class ViewSessionCommandTest {
     public void execute_viewAllSessions_success() {
         ViewSessionCommand viewSessionCommand = new ViewSessionCommand(VALID_ALL_SESSIONS_PERIOD);
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, VALID_ALL_SESSIONS_PERIOD);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_NOW);
         addressBookStub.withSession(MACHOMAN_TOMORROW);
@@ -102,9 +102,10 @@ public class ViewSessionCommandTest {
 
     @Test
     public void execute_viewPlus0DaySessions_success() {
-        ViewSessionCommand viewSessionCommand = new ViewSessionCommand("+0D"); //today
+        String validPeriod = "+0D";
+        ViewSessionCommand viewSessionCommand = new ViewSessionCommand(validPeriod); //today
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, validPeriod);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_NOW);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
@@ -114,9 +115,10 @@ public class ViewSessionCommandTest {
 
     @Test
     public void execute_viewMinus0DaySessions_success() {
-        ViewSessionCommand viewSessionCommand = new ViewSessionCommand("-0D"); //today
+        String validPeriod = "-0D";
+        ViewSessionCommand viewSessionCommand = new ViewSessionCommand(validPeriod); //today
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, validPeriod);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_NOW);
         ModelManager expectedModel = new ModelManager(addressBookStub.build(), new UserPrefs());
@@ -126,9 +128,11 @@ public class ViewSessionCommandTest {
 
     @Test
     public void execute_viewPlus1DaySessions_success() {
-        ViewSessionCommand viewSessionCommand = new ViewSessionCommand("+1D"); //today & tomorrow
+        String validPeriod = "+1D"; //today & tomorrow
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        ViewSessionCommand viewSessionCommand = new ViewSessionCommand(validPeriod);
+
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, validPeriod);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_NOW);
         addressBookStub.withSession(MACHOMAN_TOMORROW);
@@ -139,9 +143,10 @@ public class ViewSessionCommandTest {
 
     @Test
     public void execute_viewMinus1WeekSessions_success() {
-        ViewSessionCommand viewSessionCommand = new ViewSessionCommand("-1w");
+        String validPeriod = "-1w";
+        ViewSessionCommand viewSessionCommand = new ViewSessionCommand(validPeriod);
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, validPeriod);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_MINUS1WEEK);
         addressBookStub.withSession(MACHOMAN_NOW);
@@ -152,9 +157,10 @@ public class ViewSessionCommandTest {
 
     @Test
     public void execute_viewPlus2MonthsSessions_success() {
-        ViewSessionCommand viewSessionCommand = new ViewSessionCommand("+2M");
+        String validPeriod = "+2M";
+        ViewSessionCommand viewSessionCommand = new ViewSessionCommand(validPeriod);
 
-        String expectedMessage = MESSAGE_SHOW_SESSIONS_SUCCESS;
+        String expectedMessage = String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, validPeriod);
         AddressBookBuilder addressBookStub = new AddressBookBuilder();
         addressBookStub.withSession(MACHOMAN_NOW);
         addressBookStub.withSession(MACHOMAN_TOMORROW);

@@ -10,6 +10,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Weight;
 import seedu.address.model.session.Interval;
 
 public class JsonAdaptedSchedule {
@@ -22,6 +23,7 @@ public class JsonAdaptedSchedule {
     private final String end;
     private final String paymentStatus;
     private final String remark;
+    private final String weight;
 
     /**
      * Constructs a {@code JsonAdaptedSchedule} with the given Schedule details.
@@ -31,12 +33,14 @@ public class JsonAdaptedSchedule {
                                @JsonProperty("sessionStart") String start,
                                @JsonProperty("sessionEnd") String end,
                                @JsonProperty("paymentStatus") String paymentStatus,
-                               @JsonProperty("remark") String remark) {
+                               @JsonProperty("remark") String remark,
+                               @JsonProperty("weight") String weight) {
         this.clientEmail = clientEmail;
         this.start = start;
         this.end = end;
         this.paymentStatus = paymentStatus;
         this.remark = remark;
+        this.weight = weight;
     }
 
     /**
@@ -46,8 +50,9 @@ public class JsonAdaptedSchedule {
         clientEmail = source.getClient().getEmail().toString();
         start = SessionParserUtil.parseDateTimeToString(source.getSession().getStartTime());
         end = SessionParserUtil.parseDateTimeToString(source.getSession().getEndTime());
-        paymentStatus = source.getPaymentStatus().value;
+        paymentStatus = source.getPaymentStatus().getValue();
         remark = source.getRemark().value;
+        weight = String.valueOf(source.getWeight().getWeight());
     }
 
     /**
@@ -122,5 +127,30 @@ public class JsonAdaptedSchedule {
         }
 
         return new Remark(remark);
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted Schedule object to get its model's {@code weight} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted weight value.
+     */
+    public Weight getWeight() throws IllegalValueException {
+        if (weight == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Weight.class.getSimpleName()));
+        }
+        try {
+            Double weightDouble = Double.valueOf(weight);
+            if (weightDouble == 0) {
+                return Weight.getDefaultWeight();
+            } else if (weightDouble > 0) {
+                return new Weight(weightDouble);
+            } else {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException(String.format(Weight.MESSAGE_INVALID_WEIGHT_STATUS,
+                    Weight.class.getSimpleName()));
+        }
     }
 }

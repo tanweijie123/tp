@@ -5,10 +5,9 @@
 <?import javafx.scene.control.Label?>
 
 
-<?import javafx.geometry.Insets?>
 <AnchorPane styleClass="right-bar" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
    <children>
       <ListView fx:id="sessionListView" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
    </children>
-   <Label fx:id="title" text="ALL" AnchorPane.leftAnchor="78.0"></Label>
+   <Label fx:id="title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"></Label>
 </AnchorPane>

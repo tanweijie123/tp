@@ -6,9 +6,9 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "tagged": [ "injured-thigh" ]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
+    "name": "Alice Paulo",
+    "phone": "94351254",
+    "email": "alice@example.com",
     "address": "4th street"
   } ],
   "sessions": [{
@@ -24,12 +24,14 @@
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
     "paymentStatus": "unpaid",
-    "remark": ""
+    "remark": "",
+    "weight": "67.3"
   }, {
     "clientEmail" : "lidavid@example.com",
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
     "paymentStatus": "unpaid",
-    "remark": ""
+    "remark": "",
+    "weight": "56.8"
   } ]
 }
