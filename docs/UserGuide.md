@@ -349,6 +349,7 @@ Points to take note when editing a client's information:
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed, i.e. adding of tags is not cumulative.
 * You can remove all of the client’s tags by typing `t/` without specifying any tags after it.
+* After performing a `cedit` command, you will see the updated client information page.
 
 Examples:
 *  `cedit 1 n/Janie Doe` Edits the name of the first client to be `Janie Doe`
@@ -397,8 +398,10 @@ Examples:
 
 :star: **Feature:**
 
-To force delete a client (and his associated schedules), pass in the optional force flag after the `INDEX`. 
+- To force delete a client (and his associated schedules), pass in the optional force flag after the `INDEX`. 
 Any string after the force flag (`f/`) will be ignored.
+
+- If you perform [`cdel`](#325-deleting-a-client--cdel), you will be returned to the homepage.
 </div>
 
 * If there are one or more associated schedules associated with Bernice, `cfind Bernice` followed by `cdel 1 f/` will:
@@ -422,14 +425,6 @@ Points to take note when viewing clients from the Client List:
 * The index **must be a positive integer** 1, 2, 3, ...
 * You can use `F3` to view your client's list of schedules, and `F4` to view your client's weight progression.
 * You can sort the list of schedules by the interval or exercise type.
-
-<div markdown="block" class="alert alert-warning">
-
-:star: **Feature:**
-
-If you perform [`cedit`](#323-editing-a-client--cedit) and [`cdel`](#325-deleting-a-client--cdel), you will be returned to the homepage. 
-
-</div>
 
 Examples:
 * `cview 2` opens the second client in FitEgo

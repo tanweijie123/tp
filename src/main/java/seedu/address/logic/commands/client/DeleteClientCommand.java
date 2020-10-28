@@ -3,7 +3,9 @@ package seedu.address.logic.commands.client;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Supplier;
 
+import javafx.scene.layout.AnchorPane;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -11,6 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.ui.Homepage;
 
 /**
  * Deletes a Client identified using it's displayed index from the address book.
@@ -76,7 +79,9 @@ public class DeleteClientCommand extends Command {
         model.deleteClientAssociatedSchedules(clientToDelete);
         model.deleteClient(clientToDelete);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete));
+        Supplier<AnchorPane> mainWindowSupplier = () -> Homepage.getHomePage().getRoot();
+
+        return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete), mainWindowSupplier);
     }
 
     @Override

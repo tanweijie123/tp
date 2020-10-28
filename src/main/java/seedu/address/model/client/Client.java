@@ -17,11 +17,11 @@ import seedu.address.model.tag.Tag;
 public class Client implements CheckExisting<Client>, Comparable<Client> {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
     private final Email email;
 
     // Data fields
+    private final Name name;
+    private final Phone phone;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -62,7 +62,7 @@ public class Client implements CheckExisting<Client>, Comparable<Client> {
     }
 
     /**
-     * Returns true if both Clients of the same name have at least one other identity field that is the same.
+     * Returns true if both Clients of the same identity field (email).
      * This defines a weaker notion of equality between two Clients.
      */
     @Override
@@ -71,9 +71,7 @@ public class Client implements CheckExisting<Client>, Comparable<Client> {
             return true;
         }
 
-        return otherClient != null
-                && otherClient.getName().equals(getName())
-                && (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()));
+        return otherClient != null && otherClient.getEmail().equals(getEmail());
     }
 
     /**
