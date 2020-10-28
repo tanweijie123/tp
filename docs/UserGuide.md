@@ -273,10 +273,11 @@ Format: `settings`
 
 :bulb: **Tip:**
 Once the settings window is open, you can use arrow key to toggle the options.
-You may also press "ESC" key to save your changes and close this window. 
+You may press "ESC" key to save your changes and close this window. You can press "F2" key anytime in the 
+program to open the settings window too. <br/>
 
 The current settings available are:
- * preferred weight unit for graphs </br>
+ * preferred weight unit for graphs <br/>
  *more to come!
 </div>
 
