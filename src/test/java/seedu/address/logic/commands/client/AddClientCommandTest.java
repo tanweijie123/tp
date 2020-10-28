@@ -305,7 +305,7 @@ public class AddClientCommandTest {
         @Override
         public boolean hasClient(Client client) {
             requireNonNull(client);
-            return this.client.isUnique(client);
+            return this.client.isIdentical(client);
         }
     }
 
@@ -318,7 +318,7 @@ public class AddClientCommandTest {
         @Override
         public boolean hasClient(Client client) {
             requireNonNull(client);
-            return clientsAdded.stream().anyMatch(client::isUnique);
+            return clientsAdded.stream().anyMatch(client::isIdentical);
         }
 
         @Override

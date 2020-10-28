@@ -107,7 +107,7 @@ public class Homepage extends UiPart<AnchorPane> {
         Interval interval = new Interval(LocalDateTime.now().truncatedTo(DAYS), 60 * 24); //full day interval
         Session overlappingSession = new Session(new Gym("temp"), new ExerciseType("temp"), interval);
         List<Schedule> updatedList = scheduleList.stream()
-                .filter(x -> x.getSession().isUnique(overlappingSession))
+                .filter(x -> x.getSession().isIdentical(overlappingSession))
                 .sorted()
                 .collect(Collectors.toList());
         return FXCollections.observableList(updatedList);

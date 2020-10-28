@@ -38,7 +38,7 @@ loop all schedule in scheduleList
     Model -> Schedule : getSession()
     activate Schedule
 
-    Schedule -> Session: isUnique()
+    Schedule -> Session: isIdentical()
     note left : search for schedule with same session
     activate Session
 
@@ -71,7 +71,7 @@ loop all schedule in scheduleList
     Schedule --> Model : sessionToTest
     deactivate Schedule
 
-    Model --> Session: isUnique(sessionToTest)
+    Model --> Session: isIdentical(sessionToTest)
     note left : search for schedule with same session
     activate Session
 

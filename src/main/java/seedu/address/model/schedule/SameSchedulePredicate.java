@@ -11,7 +11,7 @@ public class SameSchedulePredicate implements Predicate<Schedule> {
 
     @Override
     public boolean test(Schedule otherSchedule) {
-        return schedule.isUnique(otherSchedule);
+        return schedule.isIdentical(otherSchedule);
     }
 
     @Override

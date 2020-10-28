@@ -16,25 +16,25 @@ import seedu.address.testutil.SessionBuilder;
 public class SessionTest {
 
     @Test
-    public void isUniqueSession() {
+    public void isIdenticalSession() {
         // same object -> returns true
-        assertTrue(GETWELL.isUnique(GETWELL));
+        assertTrue(GETWELL.isIdentical(GETWELL));
 
         // null -> returns false
-        assertFalse(GETWELL.isUnique(null));
+        assertFalse(GETWELL.isIdentical(null));
 
         // different exerciseType -> returns true
         Session editedGetwell = new SessionBuilder(GETWELL).withExerciseType(VALID_EXERCISE_TYPE_MACHOMAN).build();
-        assertTrue(GETWELL.isUnique(editedGetwell));
+        assertTrue(GETWELL.isIdentical(editedGetwell));
 
         // different gym -> returns true
         editedGetwell = new SessionBuilder(GETWELL).withGym(VALID_GYM_MACHOMAN).build();
-        assertTrue(GETWELL.isUnique(editedGetwell));
+        assertTrue(GETWELL.isIdentical(editedGetwell));
 
         // non-overlapping interval -> returns false
         editedGetwell = new SessionBuilder(GETWELL)
                 .withInterval(VALID_START_TIME_MACHOMAN, VALID_DURATION_MACHOMAN).build();
-        assertFalse(GETWELL.isUnique(editedGetwell));
+        assertFalse(GETWELL.isIdentical(editedGetwell));
     }
 
     @Test

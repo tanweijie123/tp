@@ -85,7 +85,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
      * Returns true if both Schedules have the same identity.
      */
     @Override
-    public boolean isUnique(Schedule otherSchedule) {
+    public boolean isIdentical(Schedule otherSchedule) {
         if (otherSchedule == this) {
             return true;
         }

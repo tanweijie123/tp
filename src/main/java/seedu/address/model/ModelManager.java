@@ -122,7 +122,7 @@ public class ModelManager implements Model {
 
         List<Schedule> associatedSchedules = addressBook.getScheduleList()
                 .stream()
-                .filter(schedule -> client.isUnique(schedule.getClient()))
+                .filter(schedule -> client.isIdentical(schedule.getClient()))
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
@@ -183,7 +183,7 @@ public class ModelManager implements Model {
 
         List<Schedule> associatedSchedules = addressBook.getScheduleList()
                 .stream()
-                .filter(schedule -> session.isUnique(schedule.getSession()))
+                .filter(schedule -> session.isIdentical(schedule.getSession()))
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
@@ -249,7 +249,7 @@ public class ModelManager implements Model {
         return addressBook.getScheduleList()
                 .stream()
                 .map(Schedule::getClient)
-                .anyMatch(clientToEdit::isUnique);
+                .anyMatch(clientToEdit::isIdentical);
     }
 
     /**
@@ -260,7 +260,7 @@ public class ModelManager implements Model {
 
         List<Schedule> associatedSchedules = addressBook.getScheduleList()
                 .stream()
-                .filter(schedule -> clientToEdit.isUnique(schedule.getClient()))
+                .filter(schedule -> clientToEdit.isIdentical(schedule.getClient()))
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {
@@ -276,7 +276,7 @@ public class ModelManager implements Model {
         return addressBook.getScheduleList()
                 .stream()
                 .map(Schedule::getSession)
-                .anyMatch(session::isUnique);
+                .anyMatch(session::isIdentical);
     }
 
     /**
@@ -287,7 +287,7 @@ public class ModelManager implements Model {
 
         List<Schedule> associatedSchedules = addressBook.getScheduleList()
                 .stream()
-                .filter(schedule -> sessionToEdit.isUnique(schedule.getSession()))
+                .filter(schedule -> sessionToEdit.isIdentical(schedule.getSession()))
                 .collect(Collectors.toList());
 
         for (Schedule schedule : associatedSchedules) {

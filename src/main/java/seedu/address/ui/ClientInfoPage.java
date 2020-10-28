@@ -149,7 +149,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
             return;
         }
         Optional<Client> optionalClient = logic.getAddressBook().getClientList().stream()
-                .filter(x->x.isUnique(this.client)).findFirst();
+                .filter(x->x.isIdentical(this.client)).findFirst();
         if (optionalClient.isPresent()) {
             this.client = optionalClient.get();
             initializeProfile();
