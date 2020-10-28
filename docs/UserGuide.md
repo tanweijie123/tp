@@ -446,8 +446,13 @@ All session-related keywords are described in this section. All of the commands 
 
 <center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" /><br/>
 Figure 9 - Sample of Session List</center><br/>
-The `ALL` at the top of this Session List panel represents the current settings of session view. You can change the period 
+The `ALL` at the top of this Session List panel represents the current period of session view. 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The default period of session view is 'WEEK'. You can change the period 
 of session view using [`sview`](#viewing-sessions-within-period--sview) command. 
+</div>
+
 
 ### 3.3.1 Adding a Session : `sadd`
 
@@ -531,7 +536,7 @@ Points to take note when viewing session from the Session List:
  | all| All sessions (including past ones)|
  | future | All sessions that have not started|
  | past | All sessions that have already ended|
- | week | All sessions within the next 7 days|
+ | week | All sessions within the next 7 days (inclusive of today)|
  | `+[x][unit]` | Sessions within next x time units|
  | `-[x][unit]` | Sessions within past x time units|
  
