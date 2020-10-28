@@ -40,10 +40,12 @@ UiManager --> Logic
 MainWindow --> Logic
 ClientListPanel --> Logic
 RightSideBar --> Logic
+SettingsWindow --> Logic
 
 UiManager .left.|> Ui
 UiManager -down-> MainWindow
 MainWindow --> HelpWindow
+MainWindow --> SettingsWindow
 MainWindow <-down-> CommandBox
 MainWindow *-down-> ResultDisplay
 MainWindow <-down-> ClientListPanel

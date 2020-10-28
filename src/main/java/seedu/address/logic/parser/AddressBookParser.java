@@ -14,6 +14,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HomeCommand;
+import seedu.address.logic.commands.SettingsCommand;
 import seedu.address.logic.commands.client.AddClientCommand;
 import seedu.address.logic.commands.client.DeleteClientCommand;
 import seedu.address.logic.commands.client.EditClientCommand;
@@ -87,6 +88,7 @@ public class AddressBookParser {
         commandMapper.put(ClearCommand.COMMAND_WORD, (args) -> new ClearCommand());
         commandMapper.put(ExitCommand.COMMAND_WORD, (args) -> new ExitCommand());
         commandMapper.put(HelpCommand.COMMAND_WORD, (args) -> new HelpCommand());
+        commandMapper.put(SettingsCommand.COMMAND_WORD, (args) -> new SettingsCommand());
         commandMapper.put(HomeCommand.COMMAND_WORD, (args) -> new HomeCommand());
     }
 

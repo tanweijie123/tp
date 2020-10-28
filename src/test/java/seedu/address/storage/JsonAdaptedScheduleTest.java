@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.session.SessionParserUtil;
 import seedu.address.model.client.Email;
 import seedu.address.model.schedule.PaymentStatus;
+import seedu.address.model.schedule.Weight;
 import seedu.address.model.session.Interval;
 
 public class JsonAdaptedScheduleTest {
@@ -28,6 +29,9 @@ public class JsonAdaptedScheduleTest {
             .parseDateTimeToString(ALICE_GETWELL.getSession().getEndTime());
     private static final String VALID_PAYMENT_STATUS = ALICE_GETWELL.getPaymentStatus().getValue();
     private static final String VALID_REMARK = ALICE_GETWELL.getRemark().value;
+    private static final String DEFAULT_WEIGHT = Weight.getDefaultWeight().toString();
+    private static final String VALID_WEIGHT = new Weight(67.4).toString();
+    private static final String INVALID_WEIGHT = "-3.4";
 
     @Test
     public void toModelType_validScheduleDetails_success() throws Exception {
@@ -41,7 +45,7 @@ public class JsonAdaptedScheduleTest {
     public void toModelType_invalidClientEmail_throwsIllegalValueException() {
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(INVALID_EMAIL, VALID_START_TIME,
-                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK);
+                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getClientEmail);
     }
 
@@ -49,7 +53,7 @@ public class JsonAdaptedScheduleTest {
     public void toModelType_nullEmail_throwsIllegalValueException() {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(null, VALID_START_TIME,
-                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK);
+                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getClientEmail);
     }
 
@@ -57,7 +61,7 @@ public class JsonAdaptedScheduleTest {
     public void toModelType_invalidPaymentStatus_throwsIllegalValueException() {
         String expectedMessage = PaymentStatus.MESSAGE_INVALID_PAYMENT_STATUS;
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_EMAIL, VALID_START_TIME,
-                VALID_END_TIME, INVALID_PAYMENT_STATUS, VALID_REMARK);
+                VALID_END_TIME, INVALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getPaymentStatus);
     }
 
@@ -65,7 +69,7 @@ public class JsonAdaptedScheduleTest {
     public void toModelType_nullPaymentStatus_throwsIllegalValueException() {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PaymentStatus.class.getSimpleName());
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_EMAIL, VALID_START_TIME,
-                VALID_END_TIME, null, VALID_REMARK);
+                VALID_END_TIME, null, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getPaymentStatus);
     }
 
@@ -74,13 +78,13 @@ public class JsonAdaptedScheduleTest {
         // invalid start time
         String expectedMessage = Interval.MESSAGE_CONSTRAINTS;
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_EMAIL, INVALID_START_TIME,
-                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK);
+                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getSessionInterval);
 
         // invalid end time
         expectedMessage = Interval.MESSAGE_CONSTRAINTS;
         schedule = new JsonAdaptedSchedule(VALID_EMAIL, VALID_START_TIME,
-                INVALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK);
+                INVALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getSessionInterval);
     }
 
@@ -89,13 +93,29 @@ public class JsonAdaptedScheduleTest {
         // null start time
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, START_TIME_FIELD);
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_EMAIL, null,
-                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK);
+                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getSessionInterval);
 
         // null end time
         expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, END_TIME_FIELD);
         schedule = new JsonAdaptedSchedule(VALID_EMAIL, VALID_START_TIME,
-                null, VALID_PAYMENT_STATUS, VALID_REMARK);
+                null, VALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getSessionInterval);
+    }
+
+    @Test
+    public void toModelType_invalidWeight_throwsIllegalValueException() {
+        String expectedMessage = Weight.MESSAGE_INVALID_WEIGHT_STATUS;
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_EMAIL, VALID_START_TIME,
+                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, INVALID_WEIGHT);
+        assertThrows(IllegalValueException.class, expectedMessage, schedule::getWeight);
+    }
+
+    @Test
+    public void toModelType_nullWeight_throwsIllegalValueException() {
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName());
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_EMAIL, VALID_START_TIME,
+                VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, null);
+        assertThrows(IllegalValueException.class, expectedMessage, schedule::getWeight);
     }
 }

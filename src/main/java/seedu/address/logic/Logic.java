@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
+import seedu.address.model.util.WeightUnit;
 
 /**
  * API of the Logic component
@@ -45,6 +46,9 @@ public interface Logic {
     /** Returns the list of Sessions associated to a Client*/
     List<Session> getAssociatedSessionList(Client client);
 
+    /** Returns the list of Schedules associated to a Client*/
+    List<Schedule> getAssociatedScheduleList(Client client);
+
     /** Returns the list of Schedules associated to a Session*/
     List<Schedule> getAssociatedScheduleList(Session session);
 
@@ -62,4 +66,14 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' preferred weight unit.
+     */
+    WeightUnit getPreferredWeightUnit();
+
+    /**
+     * Set the user prefs' preferred weight unit.
+     */
+    void setPreferredWeightUnit(WeightUnit weightUnit);
 }

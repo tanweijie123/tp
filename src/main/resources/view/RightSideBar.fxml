@@ -10,5 +10,5 @@
    <children>
       <ListView fx:id="sessionListView" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
    </children>
-   <Label fx:id="title" text="ALL" AnchorPane.leftAnchor="78.0"></Label>
+   <Label fx:id="title" text="ALL" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"></Label>
 </AnchorPane>
