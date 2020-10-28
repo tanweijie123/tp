@@ -249,9 +249,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return A list of session that are associated to {@code clientKey} in the {@code ScheduleList}.
      */
     public List<Session> findSessionByClient(Client clientKey) {
-        Stream<Schedule> schedulesContainingSession = schedules.findAllMatch(s-> s.getClient().equals(clientKey));
-        Stream<Session> sessionsInClient = schedulesContainingSession.map(Schedule::getSession);
-        return sessionsInClient.collect(Collectors.toList());
+        return findScheduleByClient(clientKey)
+                .stream()
+                .map(Schedule::getSession)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds all {@code Schedule} that is associated to {@code clientKey} from this {@code ScheduleList}.
+     * {@code clientKey} must exist in the schedule list.
+     * @return A list of schedules that are associated to {@code clientKey} in the {@code ScheduleList}.
+     */
+    public List<Schedule> findScheduleByClient(Client clientKey) {
+        return schedules.findAllMatch(s -> s.getClient().equals(clientKey))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -273,7 +284,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Schedule findScheduleByClientAndSession(Client clientKey, Session sessionKey) {
         Optional<Schedule> schedulesContainingClientAndSession = schedules.findAnyMatch(s->
                 s.getClient().equals(clientKey) && s.getSession().equals(sessionKey));
-        return schedulesContainingClientAndSession.get();
+        return schedulesContainingClientAndSession.orElse(null);
     }
 
     @Override

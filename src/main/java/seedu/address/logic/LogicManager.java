@@ -19,6 +19,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.session.Session;
+import seedu.address.model.util.WeightUnit;
 import seedu.address.storage.Storage;
 
 /**
@@ -89,6 +90,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public List<Schedule> getAssociatedScheduleList(Client clientKey) {
+        return model.findScheduleByClient(clientKey);
+    }
+
+    @Override
     public List<Schedule> getAssociatedScheduleList(Session sessionKey) {
         return model.findScheduleBySession(sessionKey);
     }
@@ -106,5 +112,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public WeightUnit getPreferredWeightUnit() {
+        return model.getPreferredWeightUnit();
+    }
+
+    @Override
+    public void setPreferredWeightUnit(WeightUnit weightUnit) {
+        model.setPreferredWeightUnit(weightUnit);
     }
 }

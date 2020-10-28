@@ -4,6 +4,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
 import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
+import seedu.address.model.schedule.Weight;
 
 /**
  * A utility class to help with building EditScheduleDescriptorBuilder objects.
@@ -52,6 +53,14 @@ public class EditScheduleDescriptorBuilder {
      */
     public EditScheduleDescriptorBuilder withUpdatedRemark(Remark remark) {
         descriptor.setUpdatedRemark(remark);
+        return this;
+    }
+
+    /**
+     * Sets the {@code remark} of the {@code EditScheduleDescriptorBuilder} that we are building.
+     */
+    public EditScheduleDescriptorBuilder withUpdatedWeight(Weight weight) {
+        descriptor.setUpdatedWeight(weight);
         return this;
     }
 

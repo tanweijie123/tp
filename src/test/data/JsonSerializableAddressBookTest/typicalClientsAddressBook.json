@@ -43,7 +43,6 @@
     "address" : "4th street",
     "tagged" : [ ]
   } ],
-  "_comment": "TODO: Sessions are not within TypicalClients#getTypicalAddressBook()",
   "sessions": [{
     "id" : "1",
     "gym" : "Getwell gym",
@@ -56,12 +55,14 @@
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
     "paymentStatus": "unpaid",
-    "remark": ""
+    "remark": "",
+    "weight": "76.3"
   }, {
     "clientEmail" : "johnd@example.com",
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
     "paymentStatus": "unpaid",
-    "remark": ""
+    "remark": "",
+    "weight": "86.2"
   } ]
 }

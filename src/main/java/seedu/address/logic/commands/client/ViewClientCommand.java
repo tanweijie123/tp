@@ -13,6 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.ui.ClientInfoPage;
 
 /**
@@ -51,8 +52,12 @@ public class ViewClientCommand extends Command {
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         this.client = clientToView;
+
+        List<Schedule> scheduleByClient = model.findScheduleByClient(this.client);
+
         Supplier<AnchorPane> run = () -> {
-            ClientInfoPage cip = new ClientInfoPage(client);
+            ClientInfoPage cip = ClientInfoPage.getClientInfoPage(client, scheduleByClient,
+                    model.getPreferredWeightUnit());
             return cip.getRoot();
         };
 

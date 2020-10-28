@@ -12,6 +12,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Weight;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Gym;
 import seedu.address.model.session.Interval;
@@ -38,6 +39,7 @@ public class ScheduleBuilder {
 
     public static final PaymentStatus DEFAULT_PAYMENT_STATUS = PaymentStatus.PAYMENT_STATUS_UNPAID;
     public static final Remark DEFAULT_REMARK = Remark.EMPTY_REMARK;
+    public static final Weight DEFAULT_WEIGHT = Weight.getDefaultWeight();
 
     private Name clientName;
     private Phone clientPhone;
@@ -51,6 +53,7 @@ public class ScheduleBuilder {
 
     private PaymentStatus paymentStatus;
     private Remark remark;
+    private Weight weight;
 
     /**
      * Creates a {@code ScheduleBuilder} with the default details.
@@ -69,6 +72,7 @@ public class ScheduleBuilder {
 
         paymentStatus = DEFAULT_PAYMENT_STATUS;
         remark = DEFAULT_REMARK;
+        weight = DEFAULT_WEIGHT;
     }
 
     /**
@@ -87,6 +91,7 @@ public class ScheduleBuilder {
 
         paymentStatus = scheduleToCopy.getPaymentStatus();
         remark = scheduleToCopy.getRemark();
+        weight = scheduleToCopy.getWeight();
     }
 
     /**
@@ -192,12 +197,20 @@ public class ScheduleBuilder {
     }
 
     /**
+     * Sets the {@code weight} of the {@code Schedule} that we are building.
+     */
+    public ScheduleBuilder withWeight(Weight weight) {
+        this.weight = weight;
+        return this;
+    }
+
+    /**
      * Returns the {@code Schedule} based on this properties.
      */
     public Schedule build() {
         Client client = new Client(clientName, clientPhone, clientEmail, clientAddress, clientTags);
         Session session = new Session(gym, exerciseType, interval);
-        return new Schedule(client, session, paymentStatus, remark);
+        return new Schedule(client, session, paymentStatus, remark, weight);
     }
 
 }

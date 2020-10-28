@@ -17,12 +17,14 @@
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
     "paymentStatus": "unpaid",
-    "remark": ""
+    "remark": "",
+    "weight": "0"
   }, {
     "clientEmail" : "lidavid@example.com",
     "start" : "29/09/2020 1300",
     "end" : "29/09/2020 1500",
     "paymentStatus": "unpaid",
-    "remark": ""
+    "remark": "",
+    "weight": "0"
   } ]
 }

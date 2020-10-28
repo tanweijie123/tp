@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -38,6 +39,7 @@ public class RightSideBar extends UiPart<AnchorPane> {
         super(FXML);
         this.mainWindow = mainWindow;
         this.logic = logic;
+        this.title.setAlignment(Pos.CENTER);
         sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new RightSideBar.SessionListViewCell());
         title.setText(latestPeriod);

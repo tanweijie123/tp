@@ -8,6 +8,12 @@ import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDA
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_REMARK_EMPTY;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_REMARK_NONEMPTY;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_SESSION_INDEX_DESC_B;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_INVALID_0;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_INVALID_1;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_INVALID_2;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_INVALID_NEG;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_VALID;
+import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.UPDATED_WEIGHT_VALID2;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
@@ -16,12 +22,15 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SESSION;
 import static seedu.address.testutil.TypicalSchedules.PAYMENT_PAID;
 import static seedu.address.testutil.TypicalSchedules.PAYMENT_UNPAID;
 import static seedu.address.testutil.TypicalSchedules.TEST_REMARK;
+import static seedu.address.testutil.TypicalSchedules.TEST_WEIGHT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.schedule.EditScheduleCommand;
 import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
 import seedu.address.model.schedule.Remark;
+import seedu.address.model.schedule.Weight;
+import seedu.address.model.util.WeightUnit;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
 
 public class EditScheduleCommandParserTest {
@@ -61,8 +70,8 @@ public class EditScheduleCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A
-                + UPDATED_SESSION_INDEX_DESC_B + UPDATED_PAYMENT_UNPAID + UPDATED_REMARK_NONEMPTY;
+        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_SESSION_INDEX_DESC_B
+                + UPDATED_PAYMENT_UNPAID + UPDATED_REMARK_NONEMPTY + UPDATED_WEIGHT_VALID;
 
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
                 .withClientIndex(INDEX_FIRST_CLIENT)
@@ -70,6 +79,7 @@ public class EditScheduleCommandParserTest {
                 .withUpdatedSessionIndex(INDEX_SECOND_SESSION)
                 .withUpdatedPaymentStatus(PAYMENT_UNPAID)
                 .withUpdatedRemark(TEST_REMARK)
+                .withUpdatedWeight(TEST_WEIGHT)
                 .build();
         EditScheduleCommand expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
@@ -116,6 +126,17 @@ public class EditScheduleCommandParserTest {
         expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
                 descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        //update weight
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_VALID;
+        descriptor = new EditScheduleDescriptorBuilder()
+                .withClientIndex(INDEX_FIRST_CLIENT)
+                .withSessionIndex(INDEX_FIRST_SESSION)
+                .withUpdatedWeight(TEST_WEIGHT)
+                .build();
+        expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+                descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -148,6 +169,20 @@ public class EditScheduleCommandParserTest {
                 descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        //update weight twice, takes last
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_VALID2
+                + UPDATED_WEIGHT_VALID;
+
+        descriptor = new EditScheduleDescriptorBuilder()
+                .withClientIndex(INDEX_FIRST_CLIENT)
+                .withSessionIndex(INDEX_FIRST_SESSION)
+                .withUpdatedWeight(TEST_WEIGHT)
+                .build();
+        expectedCommand = new EditScheduleCommand(INDEX_FIRST_CLIENT, INDEX_FIRST_SESSION,
+                descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -175,5 +210,20 @@ public class EditScheduleCommandParserTest {
         //                .build();
         //        expectedCommand = new EditScheduleCommand(targetIndex, descriptor);
         //        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidWeight_thrownParseException() {
+        String userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_INVALID_0;
+        assertParseFailure(parser, userInput, Weight.MESSAGE_INVALID_WEIGHT_STATUS);
+
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_INVALID_NEG;
+        assertParseFailure(parser, userInput, Weight.MESSAGE_INVALID_WEIGHT_STATUS);
+
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_INVALID_1;
+        assertParseFailure(parser, userInput, WeightUnit.MESSAGE_INVALID_UNIT_STATUS);
+
+        userInput = CLIENT_INDEX_DESC_A + SESSION_INDEX_DESC_A + UPDATED_WEIGHT_INVALID_2;
+        assertParseFailure(parser, userInput, Weight.MESSAGE_INVALID_WEIGHT_STATUS);
     }
 }
