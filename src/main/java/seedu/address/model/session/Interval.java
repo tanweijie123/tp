@@ -20,7 +20,7 @@ public class Interval {
             SIMPLE_DATE_TIME_PATTERN);
     public static final DateTimeFormatter TIME_12HR_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(TIME_12HR_PATTERN);
 
-    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must follow "
+    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must be a valid datetime and follow "
             + DATE_TIME_PATTERN + " pattern";
     public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, "
             + "but duration must be a positive integer and " + MESSAGE_DATE_TIME_CONSTRAINTS;
