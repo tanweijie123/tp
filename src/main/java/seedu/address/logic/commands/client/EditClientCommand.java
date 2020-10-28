@@ -29,6 +29,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.ClientInfoPage;
 import seedu.address.ui.Homepage;
 
 /**
@@ -94,7 +95,10 @@ public class EditClientCommand extends Command {
 
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        Supplier<AnchorPane> run = () -> Homepage.getHomePage().getRoot();
+        Supplier<AnchorPane> run = () -> {
+            ClientInfoPage cip = new ClientInfoPage(editedClient);
+            return cip.getRoot();
+        };
 
         return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient), run);
     }
