@@ -30,7 +30,6 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.ClientInfoPage;
-import seedu.address.ui.Homepage;
 
 /**
  * Edits the details of an existing Client in the address book.
@@ -95,12 +94,12 @@ public class EditClientCommand extends Command {
 
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        Supplier<AnchorPane> run = () -> {
+        Supplier<AnchorPane> mainWindowSupplier = () -> {
             ClientInfoPage cip = new ClientInfoPage(editedClient);
             return cip.getRoot();
         };
 
-        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient), run);
+        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient), mainWindowSupplier);
     }
 
     /**
