@@ -26,11 +26,11 @@ public class ViewSessionCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the sessions shown in the Session List "
             + "to the period specified. "
             + "Possible periods -> 'week', 'all', 'future', 'past'. "
-            + "Variable periods are also possble with this format: (+/-)#(D/W/M/Y). "
+            + "Variable periods are also possible with this format: (+/-)#(D/W/M/Y). "
             + "Parameters: " + PREFIX_PERIOD + "PERIOD \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PERIOD + "week "
             + "or " + COMMAND_WORD + " " + PREFIX_PERIOD + "+1W";
-    public static final String MESSAGE_SHOW_SESSIONS_SUCCESS = "Session List updated with requested period!";
+    public static final String MESSAGE_SHOW_SESSIONS_SUCCESS = "Session List updated with requested period: %1$s";
 
     public static final Pattern VALID_PATTERN = Pattern.compile("^(\\+|-)\\d+[DdWwMmYy]$");
 
@@ -63,35 +63,14 @@ public class ViewSessionCommand extends Command {
         this.period = period;
     }
 
-    @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        Predicate<Session> pred = PREDICATE_HASH_MAP.get(period);
-
-        if (pred == null) {
-            //Matches the pattern
-            assert(VALID_PATTERN.matcher(period).matches());
-            boolean before = (this.period.charAt(0) == '-') ? true : false;
-            int amountOfUnit = Integer.parseInt(this.period.substring(1, this.period.length() - 1));
-            ChronoUnit unit = getUnitOfTime(this.period.charAt(this.period.length() - 1));
-            assert(unit != null);
-
-            //truncatedTo will make all time period to <Date> 0000H. In order to retrieve that terminating day,
-            // need to add 1 day. Eg +0d = today ==> Gets Today's 0000H to Today's 2359
-
-            if (before) {
-                pred = (session) -> session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS)
-                        .minus(amountOfUnit, unit))
-                        && session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS)
-                        .plusDays(1).minusMinutes(1));
-            } else {
-                pred = (session) -> session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS)
-                        .plus(amountOfUnit, unit).plusDays(1).minusMinutes(1))
-                        && session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
-            }
-        }
-        model.updateFilteredSessionList(pred);
-        return new CommandResult(MESSAGE_SHOW_SESSIONS_SUCCESS);
+    /**
+     * Checks if a period provided by the user is recognised
+     *
+     * @param period a String to check whether if it is a valid period.
+     * @return true if period is valid, false otherwise.
+     */
+    public static boolean isValidPeriod(String period) {
+        return PREDICATE_HASH_MAP.containsKey(period) || VALID_PATTERN.matcher(period).matches();
     }
 
     private ChronoUnit getUnitOfTime(char c) {
@@ -111,6 +90,46 @@ public class ViewSessionCommand extends Command {
         default:
             return null; //It should never reach here, because it matches the pattern
         }
+    }
+
+    /**
+     * Returns a Predicate that filters Sessions that starts between current date and a custom date
+     * (inclusive of current date). If custom date is in the past, start from 0000hrs; else, end at 2359hrs.
+     *
+     * @param periodAmount amount of temporal unit to offset from current date.
+     * @param periodUnit type of temporal unit based on ChronoUnit.
+     * @param isPast true if the specified amount of time should be subtracted from current date,
+     *               false if it should be added to current date.
+     * @return the corresponding predicate based on amount and unit of time to offset from current date.
+     */
+    private static Predicate<Session> getCustomPeriodPredicate(int periodAmount, ChronoUnit periodUnit,
+                                                               boolean isPast) {
+        assert(periodUnit != null);
+        if (isPast) {
+            return (session) -> session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS)
+                    .minus(periodAmount, periodUnit))
+                    && session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS)
+                    .plusDays(1).minusMinutes(1));
+        } else {
+            return (session) -> session.getStartTime().isBefore(LocalDateTime.now().truncatedTo(DAYS)
+                    .plus(periodAmount, periodUnit).plusDays(1).minusMinutes(1))
+                    && session.getStartTime().isAfter(LocalDateTime.now().truncatedTo(DAYS));
+        }
+    }
+
+    @Override
+    public CommandResult execute(Model model) {
+        requireNonNull(model);
+        Predicate<Session> pred = PREDICATE_HASH_MAP.get(period);
+
+        if (pred == null) {
+            boolean isPast = (this.period.charAt(0) == '-') ? true : false;
+            int periodAmount = Integer.parseInt(this.period.substring(1, this.period.length() - 1));
+            ChronoUnit periodUnit = getUnitOfTime(this.period.charAt(this.period.length() - 1));
+            pred = getCustomPeriodPredicate(periodAmount, periodUnit, isPast);
+        }
+        model.updateFilteredSessionList(pred);
+        return new CommandResult(String.format(MESSAGE_SHOW_SESSIONS_SUCCESS, period));
     }
 
     @Override

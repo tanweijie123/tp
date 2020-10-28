@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -39,6 +40,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of Sessions */
     ObservableList<Session> getFilteredSessionList();
+
+    /** Updates the predicate on the filtered list of Session */
+    void updateFilteredSessionList(Predicate<Session> predicate);
 
     /** Returns the list of Clients associated to a Session*/
     List<Client> getAssociatedClientList(Session session);
