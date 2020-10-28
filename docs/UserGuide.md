@@ -389,8 +389,9 @@ Examples:
 * `cview 2` opens the second client in FitEgo
 * `cfind Bernice` followed by `cview 1` opens the first client (Bernice) in the resulting Client List
 
-</br>
-   The result of these commands is shown in the image below
+<br>
+
+The result of these commands is shown in the image below
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
 <center>Figure 8 - Result of running <code>cfind Bernice</code> then <code>cview 1</code></center>
