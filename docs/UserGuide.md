@@ -388,6 +388,7 @@ Points to take note when viewing clients from the Client List:
 Examples:
 * `cview 2` opens the second client in FitEgo
 * `cfind Bernice` followed by `cview 1` opens the first client (Bernice) in the resulting Client List
+
 </br>
    The result of these commands is shown in the image below
 
