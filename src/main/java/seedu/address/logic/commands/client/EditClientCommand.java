@@ -28,6 +28,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.ClientInfoPage;
 
@@ -94,8 +95,11 @@ public class EditClientCommand extends Command {
 
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
+        List<Schedule> scheduleByClient = model.findScheduleByClient(editedClient);
+
         Supplier<AnchorPane> mainWindowSupplier = () -> {
-            ClientInfoPage cip = new ClientInfoPage(editedClient);
+            ClientInfoPage cip = ClientInfoPage.getClientInfoPage(editedClient, scheduleByClient,
+                    model.getPreferredWeightUnit());
             return cip.getRoot();
         };
 

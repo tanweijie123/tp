@@ -348,12 +348,7 @@ Points to take note when editing a client's information:
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed, i.e. adding of tags is not cumulative.
 * You can remove all of the client’s tags by typing `t/` without specifying any tags after it.
-
-<div markdown="block" class="alert alert-warning">
-
-:star: **Feature:**
-If you perform [`cedit`](#323-editing-a-client--cedit), you will see the updated client information page. 
-</div>
+* After performing a `cedit` command, you will see the updated client information page.
 
 Examples:
 *  `cedit 1 n/Janie Doe` Edits the name of the first client to be `Janie Doe`
