@@ -43,6 +43,10 @@
     -fx-max-height: 0;
 }
 
+.tab-header-background {
+    -fx-background-color: transparent ;
+}
+
 .table-view {
     -fx-base: #1d1d1d;
     -fx-control-inner-background: #1d1d1d;
@@ -69,11 +73,15 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 13pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
+}
+
+.table-row-cell {
+    -fx-cell-size: 30px;
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
@@ -337,6 +345,11 @@
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
+}
+/* Other Chart Properties, refer to https://stackoverflow.com/questions/32639882/conditionally-color-background-javafx-linechart */
+
+.chart-plot-background {
+    -fx-background-color:transparent;
 }
 
 #cardPane {

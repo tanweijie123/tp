@@ -30,4 +30,15 @@ public class DeleteClientCommandParserTest {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteClientCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_validArgsAndForce_throwsParseException() {
+        assertParseSuccess(parser, "1 f/", new DeleteClientCommand(INDEX_FIRST_CLIENT));
+    }
+
+
+    @Test
+    public void parse_validArgsAndForceWhitespace_throwsParseException() {
+        assertParseSuccess(parser, "1 f/ ", new DeleteClientCommand(INDEX_FIRST_CLIENT));
+    }
 }

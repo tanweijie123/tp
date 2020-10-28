@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_PAYMENT_STATU
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_SESSION_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_UPDATED_SESSION_INDEX;
+import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.schedule.PaymentStatus;
 import seedu.address.model.schedule.Remark;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Weight;
 import seedu.address.model.session.Session;
 
 /**
@@ -40,7 +42,8 @@ public class EditScheduleCommand extends Command {
             + PREFIX_SESSION_INDEX + "SESSION (must be a positive integer) "
             + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION] "
             + "[" + PREFIX_PAYMENT_STATUS + "PAID OR UNPAID?] "
-            + "[" + PREFIX_REMARK + "REMARK]\n"
+            + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_WEIGHT + "WEIGHT[kg/lb]]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 "
@@ -140,7 +143,10 @@ public class EditScheduleCommand extends Command {
         // get new remark else return previous remark
         Remark remark = editScheduleDescriptor.getRemark().orElse(scheduleToEdit.getRemark());
 
-        return new Schedule(client, session, updatedPayment, remark);
+        // get new weight else return previous weight
+        Weight weight = editScheduleDescriptor.getWeight().orElse(scheduleToEdit.getWeight());
+
+        return new Schedule(client, session, updatedPayment, remark, weight);
     }
 
     @Override
@@ -172,6 +178,7 @@ public class EditScheduleCommand extends Command {
         private Index updateSessionIndex;
         private PaymentStatus paymentStatus;
         private Remark remark;
+        private Weight weight;
 
         public EditScheduleDescriptor() {}
 
@@ -185,13 +192,14 @@ public class EditScheduleCommand extends Command {
             setUpdatedSessionIndex(toCopy.updateSessionIndex);
             setUpdatedPayment(toCopy.paymentStatus);
             setUpdatedRemark(toCopy.remark);
+            setUpdatedWeight(toCopy.weight);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(updateSessionIndex, paymentStatus, remark);
+            return CollectionUtil.isAnyNonNull(updateSessionIndex, paymentStatus, remark, weight);
         }
 
         public void setClientIndex(Index clientIndex) {
@@ -232,6 +240,14 @@ public class EditScheduleCommand extends Command {
 
         public void setUpdatedRemark(Remark remark) {
             this.remark = remark;
+        }
+
+        public Optional<Weight> getWeight() {
+            return Optional.ofNullable(weight);
+        }
+
+        public void setUpdatedWeight(Weight weight) {
+            this.weight = weight;
         }
 
         @Override
