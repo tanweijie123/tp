@@ -218,6 +218,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
             yAxis.setLowerBound(lowerBound);
             yAxis.setUpperBound(upperBound);
             yAxis.setTickUnit(1);
+            if (!tabPane.getTabs().contains(tabWeight)) {
+                tabPane.getTabs().add(tabWeight);
+            }
         } else {
             tabPane.getTabs().remove(tabWeight);
         }
