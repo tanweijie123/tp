@@ -281,9 +281,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                         if (!isEmpty()) {
                             text = new Text(item.toString());
                             if (item.isPaid()) {
-                                text.setStyle("-fx-stroke: green; -fx-stroke-width: 0.5; -fx-padding: 10px;");
+                                text.setStyle("-fx-stroke: #00FF00; -fx-stroke-width: 0.5; -fx-padding: 10px;");
                             } else {
-                                text.setStyle("-fx-stroke: red; -fx-stroke-width: 0.5; -fx-padding: 10px;");
+                                text.setStyle("-fx-stroke: #FF0000; -fx-stroke-width: 0.5; -fx-padding: 10px;");
                             }
                             text.setFont(Font.font("Segoe UI Light"));
 
