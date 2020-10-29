@@ -333,6 +333,15 @@ alphanumeric characters or dash (`-`), but you are not allowed to start or end
 a tag with a dash. 
 </div>
 
+<div markdown="block" class="alert alert-warning">
+
+:star: **Feature:**
+
+You can add profile picture to your client by storing their photo in `data/images` folder. You should name the photo 
+as `profile-<client's full name in lowercase and separated by dash>.jpg`. <br/> For example, if your client's name is Alex Yeoh, 
+store his photo as `data/images/profile-alex-yeoh.jpg`
+</div>
+
 Examples:
 * `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
 * `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
