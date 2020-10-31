@@ -130,11 +130,19 @@ public class SettingsWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    /**
+     * Adds an observer to the set of observers for this object
+     * @param o an observer to be added.
+     */
     public void addUi(UiObserver o) {
+        assert(o != null);
         observerList.add(o);
     }
 
-    private void notifyUIs() {
+    /**
+     * If this is called, then notify and update all of its observers.
+     */
+    public void notifyUIs() {
         for (UiObserver o: observerList) {
             o.update();
         }
