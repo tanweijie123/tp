@@ -561,7 +561,7 @@ Points to take note when viewing session from the Session List:
  | y / Y| year |
   
 <center><img src="images/sview_sample.png" alt="result for 'sview p/+2w'"/><br>
-Figure 10 - Result of running 'sview p/+2w' </center>
+Figure 10 - Result of running <code>sview p/+2w</code> </center>
 
 Examples:
  
