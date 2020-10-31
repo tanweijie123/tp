@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-Welcome to FitEgo! This document will serve as an user guide to the all-in-one scheduling application.
+Welcome to FitEgo! This document will serve as a user guide to the all-in-one scheduling application.
 
-Made for **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
+Made with **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
 Table of Contents
 * Table of Contents
@@ -19,7 +19,7 @@ If this is your first time, here are some quick tips to get started.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `fitego.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/releases).
+1. Download the latest `FitEgo.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your **FitEgo** program.
 
@@ -312,7 +312,7 @@ All client-related keywords are described in this section. All of the commands h
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 <br/>Figure 6 - Sample of Client List</center>
 
-### 3.2.1 Listing all clients : `clist`
+### 3.2.1 Listing all Clients : `clist`
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
 
@@ -433,7 +433,7 @@ Points to take note when viewing clients from the Client List:
 * The index refers to the index number shown in the displayed Client List.
 * The index **must be a positive integer** 1, 2, 3, ...
 * You can use `F3` to view your client's list of schedules, and `F4` to view your client's weight progression.
-* You can sort the list of schedules by the interval or exercise type.
+* You can sort the list of schedules by the interval's start time, payment status or exercise type.
 
 Examples:
 * `cview 2` opens the second client in FitEgo
@@ -441,7 +441,7 @@ Examples:
 
 <br>
 
-The result of these commands is shown in the image below
+The result of these commands is shown in the figure below
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
 
