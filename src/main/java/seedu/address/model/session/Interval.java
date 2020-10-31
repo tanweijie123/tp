@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidInterval(int)}
  */
 public class Interval {
-    private static final String DATE_TIME_PATTERN = "dd/MM/yyyy HHmm";
+    private static final String DATE_TIME_PATTERN = "dd/MM/uuuu HHmm";
     private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM";
     private static final String TIME_12HR_PATTERN = "hh:mm a";
 
