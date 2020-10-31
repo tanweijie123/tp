@@ -12,20 +12,20 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidInterval(int)}
  */
 public class Interval {
+    private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM uuuu";
+    private static final String DATE_TIME_PATTERN = "dd/MM/uuuu HHmm";
+    private static final String TIME_12HR_PATTERN = "hh:mm a";
+
     public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must be a valid date and time and follows "
             + DATE_TIME_PATTERN + " pattern";
     public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, "
             + "but duration must be a positive integer and " + MESSAGE_DATE_TIME_CONSTRAINTS;
-  
-    private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM uuuu";
-    private static final String DATE_TIME_PATTERN = "dd/MM/uuuu HHmm";
-    private static final String TIME_12HR_PATTERN = "hh:mm a";
 
     public static final DateTimeFormatter SIMPLE_DATE_TIME_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(
             SIMPLE_DATE_TIME_PATTERN);
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
     public static final DateTimeFormatter TIME_12HR_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(TIME_12HR_PATTERN);
-  
+
     private final LocalDateTime start;
     private final int durationInMinutes;
 
