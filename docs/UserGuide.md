@@ -102,7 +102,7 @@ Let's first look at the entities.
 
 If you have a new client interested in your fitness training services, FitEgo can help you to keep track of their information, such as their injury history and contact number.  
 
-All [client-related commands](#32-client-related-keywords) use the prefix `c`. 
+All [client-related commands](#32-client-related-keywords) use prefix `c`. 
 
 #### Sessions
 
@@ -120,7 +120,7 @@ This is to prevent accidental schedule overlaps at different gyms.
 </div>
 
 
-All [session-related commands](#33-session-related-keywords) have prefix `s`.
+All [session-related commands](#33-session-related-keywords) use prefix `s`.
 
 #### Schedules
 
@@ -143,7 +143,7 @@ The table below shows an example of schedules. The session at Machoman Gym is at
 | Alex | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 60 kg  | Planks (10 x 30 seconds) | unpaid           |
 | Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | paid         |
 
-All [schedule-related commands](#34-schedule-related-keywords) have prefix `sch`.
+All [schedule-related commands](#34-schedule-related-keywords) use prefix `sch`.
 
 #### Verbs 
 
