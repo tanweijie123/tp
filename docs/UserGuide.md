@@ -23,7 +23,7 @@ If this is your first time, here are some quick tips to get started.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your **FitEgo** program.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the figure below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
    <center>Figure 1 - Sample screenshot of our Ui</center>
 
@@ -45,7 +45,7 @@ If this is your first time, here are some quick tips to get started.
 
 ### 1.1 How to interpret notations
 
-Below are a few examples of the common notations in this document in which the different backgrounds and icons represents different meanings.
+Below are a few examples of the common notations in this document in which the different backgrounds and icons represent different meanings.
 
 [comment]: <> (Copy the blocks below and edit your message)
 
@@ -106,7 +106,7 @@ All [client-related commands](#32-client-related-keywords) use prefix `c`.
 
 #### Sessions
 
-Sessions are a timeslot that is scheduled for a training session. It contains information about the gym, the session's main exercise type, start time and the duration of sessions.
+Sessions are timeslots that are marked for a training session. It contains information about the gym, the session's main exercise type, start time and the duration of sessions.
 
 If you want to host a new training session, you can create it and FitEgo can help you to keep track of its details.
 
@@ -115,7 +115,7 @@ Each session can have more than 1 client, to model a trainer instructing a fitne
 <div markdown="block" class="alert alert-info"> 
 
 :information_source: **Info:**
-FitEgo doesn't allow user to create overlapping sessions. We consider two sessions as overlapping if another session starts before the current session ends.
+FitEgo will not allow you to create overlapping sessions. We consider two sessions as overlapping if another session starts before the current session ends.
 This is to prevent accidental schedule overlaps at different gyms. 
 </div>
 
@@ -176,9 +176,9 @@ From the figure above, the GUI is made up of several components.
 | --------------- | ---------------------------------------- | 
 | Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
 | Command Box     | Displays a text box for your input. You can type your command here.          | 
-| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt you an error message | 
+| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt an error message | 
 | Client List     | Displays the list of clients in a list view. You can modify this list using [client-related commands](#32-client-related-keywords) |
-| Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and quote of the day | 
+| Main Window     | Displays the main window of this program. It consists of the statistics of this program, today's schedule and quote of the day | 
 | Session List    | Displays the list of your sessions in a list view. You can modify this list using [session-related commands](#33-session-related-keywords) | 
 | Status Bar Footer | Displays the current date and time of the program. If you notice this is incorrect, your PC might be using a different timezone| 
 
@@ -187,7 +187,7 @@ From the figure above, the GUI is made up of several components.
 
 :bulb: **Tip:**
 
-You can type input into the Command Box and it will display the command starting with the input. <br/>
+You can type into the Command Box and it will display the commands that start with your current input. <br/>
 <br>
 <center><img src="images/autocomplete_sample.png" alt="autocomplete"/>
 <br>
@@ -206,10 +206,10 @@ In this section, you can find all the keywords that will help you fully utilize 
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters that you need to provide.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets are optional parameters.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/injured-thigh` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -234,7 +234,7 @@ You can return to the home page by using this command.
 <center> Figure 4 - Homepage View </center>
 
 The homepage will display the statistics of your program, today's schedule and quote of the day as shown in the figure above. 
-If you do not have any planned schedules for the day, it will display `There is no schedules assigned today!`.  
+If you do not have any planned schedules for the day, it will display `There are no schedules assigned today!`.  
 
 <div markdown="block" class="alert alert-warning">
 
@@ -272,7 +272,7 @@ Format: `settings`
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-Once the settings window is open, you can use arrow key to toggle the options.
+Once the settings window is open, you can use arrow keys to toggle the options.
 You may press "ESC" key to save your changes and close this window. You can press "F2" key anytime in the 
 program to open the settings window too. <br/>
 
@@ -316,7 +316,7 @@ All client-related keywords are described in this section. All of the commands h
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
 
-By default, Client List will display all the clients. In case you used [`cfind`](#324-locating-clients-by-name--cfind) or any filter-typed commands, 
+By default, Client List will display all the clients. If you have used [`cfind`](#324-locating-clients-by-name--cfind) or any other commands to filter the Client List, 
 you can use `clist` to view the entire list of clients.  
 
 Format: `clist`
