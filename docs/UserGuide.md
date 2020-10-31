@@ -126,14 +126,14 @@ All [session-related commands](#33-session-related-keywords) use prefix `s`.
 
 Once you have created a session, you can schedule your clients to sessions. 
 
-Schedules are what defines you and your client's interaction. Each schedule contains information about the client and the attended session. 
+Schedules define your interactions with clients. Each schedule contains information about a client and the attended session. 
 
 The bullet points listed below are some information you can record in a schedule.
 - your client's weight if you have recorded your client's weight during a session
 - exercises done by your client during the session as remark
 - your client's payment status on whether he has paid for the session or not
 
-The table below shows an example of schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
+The table below shows an example of 3 schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
 
 <center> Table 1 - Example of Schedule Tracking </center>
 
