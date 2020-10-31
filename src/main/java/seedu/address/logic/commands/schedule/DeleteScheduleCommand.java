@@ -20,10 +20,11 @@ import seedu.address.model.session.Session;
 public class DeleteScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schdel";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deschedule a client from a session. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a schedule associated with the specified"
+            + "client and session. "
             + "Parameters: "
-            + PREFIX_CLIENT_INDEX + "CLIENT "
-            + PREFIX_SESSION_INDEX + "SESSION\n"
+            + PREFIX_CLIENT_INDEX + "CLIENT_INDEX (must be a positive integer)"
+            + PREFIX_SESSION_INDEX + "SESSION_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 ";

@@ -174,18 +174,22 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         try {
-            this.imgProfile.setImage(retrieveImage());
+            Image clientProfileImage = retrieveImage(client.getName().fullName);
+            if (clientProfileImage.getException() == null) {
+                // no exception means client profile image existed
+                this.imgProfile.setImage(clientProfileImage);
+            }
         } catch (NullPointerException | IllegalArgumentException e) {
+            assert false : "Should not reach here";
             logger.info("Invalid image url, using default image\nException: " + e);
         }
 
     }
 
-    private Image retrieveImage() {
-        // Set image based on client's name first character. Skipping if invalid url found.
-        // Just to make the app a bit nicer with real human image
-        return new Image("/images/profile-"
-                + ((client.getName().fullName.toLowerCase().charAt(0) - 'a') / 6 + 1) + ".jpg");
+    private Image retrieveImage(String fullname) {
+        // find image based on client's fullname, in lower case, dashed. Example: Alex Yeoh -> profile-alex-yeoh.jpg
+        String sluggedName = String.join("-", fullname.split("\\s+")).toLowerCase();
+        return new Image("file:data/images/profile-" + sluggedName + ".jpg");
     }
 
     @SuppressWarnings("unchecked")
@@ -281,9 +285,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                         if (!isEmpty()) {
                             text = new Text(item.toString());
                             if (item.isPaid()) {
-                                text.setStyle("-fx-stroke: green; -fx-stroke-width: 0.5; -fx-padding: 10px;");
+                                text.setStyle("-fx-stroke: #00FF00; -fx-stroke-width: 0.5; -fx-padding: 10px;");
                             } else {
-                                text.setStyle("-fx-stroke: red; -fx-stroke-width: 0.5; -fx-padding: 10px;");
+                                text.setStyle("-fx-stroke: #FF0000; -fx-stroke-width: 0.5; -fx-padding: 10px;");
                             }
                             text.setFont(Font.font("Segoe UI Light"));
 

@@ -25,7 +25,7 @@ public class ScheduleParserUtil extends ParserUtil {
      */
     public static PaymentStatus parsePaymentStatus(String status) throws ParseException {
         requireNonNull(status);
-        String trimmedPaymentStatus = status.trim();
+        String trimmedPaymentStatus = status.trim().toLowerCase();
         if (trimmedPaymentStatus.equals(VALUE_PAID)) {
             return new PaymentStatus(VALUE_PAID);
         } else if (trimmedPaymentStatus.equals(VALUE_UNPAID)) {

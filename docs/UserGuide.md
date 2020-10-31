@@ -30,17 +30,17 @@ If this is your first time, here are some quick tips to get started.
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
   Some example commands you can try:
 
-   * **[`clist`](#listing-all-clients--clist)** : Lists all clients stored in **FitEgo**.
+   * **[`clist`](#321-listing-all-clients--clist)** : Lists all clients stored in **FitEgo**.
 
-   * **[`cadd n/Jane Doe p/91234567 e/jane@gmail.com`](#adding-a-client--cadd)** : Adds a client named `Jane Doe` to the Client List.
+   * **[`cadd n/Jane Doe p/91234567 e/jane@gmail.com`](#322-adding-a-client--cadd)** : Adds a client named `Jane Doe` to the Client List.
 
-   * **[`cdel 3`](#deleting-a-client--cdel)** : Deletes the third client shown in the Client List.
+   * **[`cdel 3`](#325-deleting-a-client--cdel)** : Deletes the third client shown in the Client List.
 
-   * **[`exit`](#exiting-the-program--exit)** : Exits the app.
+   * **[`exit`](#315-exiting-the-program--exit)** : Exits the app.
 
-1. Read [How to use](#how-to-use-fitego) for a quick understanding of commands in FitEgo.
+1. Read [How to use](#12-how-to-use-fitego) for a quick understanding of commands in FitEgo.
 
-1. Refer to the [Keyword](#main-keywords) below for more details of each command.
+1. Refer to the [Keyword](#31-main-keywords) below for more details of each command.
 
 
 ### 1.1 How to interpret notations
@@ -92,7 +92,7 @@ May have irreversible effect when used. Backup and caution is recommended.
 
 ### 1.2 How to use FitEgo
 
-FitEgo supports a lot of [commands](#command-summary), and it might seem daunting to learn all at once. This section aims to solve that, and guide you to understand how most FitEgo's commands are structured!
+FitEgo supports a lot of [commands](#5-command-summary), and it might seem daunting to learn all at once. This section aims to solve that, and guide you to understand how most FitEgo's commands are structured!
 
 There are 3 major entities in FitEgo (clients, sessions, and schedules), and 5 major verbs (add, edit, delete, view, list).
 
@@ -102,7 +102,7 @@ Let's first look at the entities.
 
 If you have a new client interested in your fitness training services, FitEgo can help you to keep track of their information, such as their injury history and contact number.  
 
-All [client-related commands](#client-related-keywords) use the prefix `c`. 
+All [client-related commands](#32-client-related-keywords) use the prefix `c`. 
 
 #### Sessions
 
@@ -120,7 +120,7 @@ This is to prevent accidental schedule overlaps at different gyms.
 </div>
 
 
-All [session-related commands](#session-related-keywords) have prefix `s`.
+All [session-related commands](#33-session-related-keywords) have prefix `s`.
 
 #### Schedules
 
@@ -143,7 +143,7 @@ The table below shows an example of schedules. The session at Machoman Gym is at
 | Alex | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 60 kg  | Planks (10 x 30 seconds) | unpaid           |
 | Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | paid         |
 
-All [schedule-related commands](#schedule-related-keywords) have prefix `sch`.
+All [schedule-related commands](#34-schedule-related-keywords) have prefix `sch`.
 
 #### Verbs 
 
@@ -177,9 +177,9 @@ From the figure above, the GUI is made up of several components.
 | Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
 | Command Box     | Displays a text box for your input. You can type your command here.          | 
 | Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt you an error message | 
-| Client List     | Displays the list of clients in a list view. You can modify this list using [client-related commands](#client-related-keywords) |
+| Client List     | Displays the list of clients in a list view. You can modify this list using [client-related commands](#32-client-related-keywords) |
 | Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and quote of the day | 
-| Session List    | Displays the list of your sessions in a list view. You can modify this list using [session-related commands](#session-related-keywords) | 
+| Session List    | Displays the list of your sessions in a list view. You can modify this list using [session-related commands](#33-session-related-keywords) | 
 | Status Bar Footer | Displays the current date and time of the program. If you notice this is incorrect, your PC might be using a different timezone| 
 
 
@@ -220,8 +220,8 @@ In this section, you can find all the keywords that will help you fully utilize 
 
 </div>
 
-This program has separated the keywords into 4 different categories - [Main](#main-keywords),
-[Client](#client-related-keywords), [Session](#session-related-keywords) and [Schedule](#schedule-related-keywords).
+This program has separated the keywords into 4 different categories - [Main](#31-main-keywords),
+[Client](#32-client-related-keywords), [Session](#33-session-related-keywords) and [Schedule](#34-schedule-related-keywords).
 
 ## 3.1 Main Keywords
 All main keywords are described in this section.
@@ -307,7 +307,7 @@ Your data in FitEgo are saved in the hard disk automatically after any command t
 ---
 
 ## 3.2 Client-related Keywords
-All client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the [left of the UI](#ui-orientation). 
+All client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the [left of the UI](#2-ui-orientation). 
 
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 <br/>Figure 6 - Sample of Client List</center>
@@ -316,7 +316,7 @@ All client-related keywords are described in this section. All of the commands h
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
 
-By default, Client List will display all the clients. In case you used [`cfind`](#locating-clients-by-name--cfind) or any filter-typed commands, 
+By default, Client List will display all the clients. In case you used [`cfind`](#324-locating-clients-by-name--cfind) or any filter-typed commands, 
 you can use `clist` to view the entire list of clients.  
 
 Format: `clist`
@@ -331,6 +331,15 @@ Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 A client can have any number of tags (including 0). Each tag can include
 alphanumeric characters or dash (`-`), but you are not allowed to start or end
 a tag with a dash. 
+</div>
+
+<div markdown="block" class="alert alert-warning">
+
+:star: **Feature:**
+
+You can add profile picture to your client by storing their photo in `data/images` folder. You should name the photo 
+as `profile-<client's full name in lowercase and separated by dash>.jpg`. <br/> For example, if your client's name is Alex Yeoh, 
+store his photo as `data/images/profile-alex-yeoh.jpg`
 </div>
 
 Examples:
@@ -442,7 +451,7 @@ The result of these commands is shown in the image below
 
 ## 3.3 Session-related Keywords 
 
-All session-related keywords are described in this section. All of the commands here will interact with the Session List which is located at the [right of the UI](#ui-orientation). The figure below shows how it looks like.
+All session-related keywords are described in this section. All of the commands here will interact with the Session List which is located at the [right of the UI](#2-ui-orientation). The figure below shows how it looks like.
 
 <center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" /><br/>
 Figure 9 - Sample of Session List</center><br/>
@@ -487,8 +496,8 @@ Points to take note when editing a session's details from the Session List:
 * Existing values will be updated to the input values.
 
 Examples:
-*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` - Edits the gym of the first session to be `Machoman`
-*  `sedit 2 at/29/09/2020 1600 t/120 ` - Edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes`
+*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` - Edits the gym of the first session to be `Machoman` and the start time and duration to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
+*  `sedit 2 at/29/09/2020 1600 t/120 ` - Edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
 
 
 ### 3.3.3 Deleting a Session : `sdel`
@@ -564,7 +573,7 @@ Examples:
 ---
 
 ## 3.4 Schedule-related Keywords 
-All schedule-related keywords are described in this section. All of the commands here will interact with the various parts of [Ui](#ui-orientation). 
+All schedule-related keywords are described in this section. All of the commands here will interact with the various parts of [Ui](#2-ui-orientation). 
 
 To check if you have scheduled a session with a client, you can check if the session in the Session List contains the client's name. 
 
@@ -607,11 +616,11 @@ Points to take note when editing a schedule's details:
 
 Examples:
 
-*  `schedit c/1 s/1 us/2` - Reschedules the first client in the Client List to the second session in the Session List
-*  `schedit c/1 s/1 pd/paid` - Indicates that the first client in the Client List has paid for the second session in the Session List
-*  `schedit c/1 s/1 r/did 5 pushups` - Edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups
-*  `schedit c/1 s/1 w/70` - Edits the schedule containing client index 1 and session index 1 to a weight of 70kg
-* `schedit c/1 s/1 r/` - Clears the schedule containing client index 1 and session index 1 remarks
+*  `schedit c/1 s/1 us/2` - Reschedules the first client in the Client List to the second session in the Session List while keeping all other fields the same
+*  `schedit c/1 s/1 pd/paid` - Indicates that the first client in the Client List has paid for the second session in the Session List while keeping all other fields the same
+*  `schedit c/1 s/1 r/did 5 pushups` - Edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups while keeping all other fields the same
+*  `schedit c/1 s/1 w/70` - Edits the schedule containing client index 1 and session index 1 to a weight of 70kg while keeping all other fields the same
+* `schedit c/1 s/1 r/` - Clears the schedule containing client index 1 and session index 1 remarks while keeping all other fields the same
 
 ### 3.4.3 Deleting a Schedule : `schdel`
 
