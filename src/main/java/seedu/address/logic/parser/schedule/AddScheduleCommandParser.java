@@ -8,14 +8,12 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
-import seedu.address.logic.commands.session.EditSessionCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.session.SessionParserUtil;
 
 /**
  * Parses input arguments and creates a new AddScheduleCommand object
