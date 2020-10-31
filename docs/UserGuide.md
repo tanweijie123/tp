@@ -529,7 +529,7 @@ Points to take note when viewing session from the Session List:
  * On top of the Session List, you can find the type of the period you are viewing.
  * The recognized periods are as follows:
  
- <center>Table 3 - List of recognised periods </center>
+ <center>Table 3 - List of recognized periods </center>
  
  | Period | Sessions displayed |
  | -------- | -------- |
@@ -541,8 +541,8 @@ Points to take note when viewing session from the Session List:
  | `-[x][unit]` | Sessions within past x time units|
  
  
- * The recognised units are as follows:
- <center>Table 4 - List of recognised time units </center>
+ * The recognized units are as follows:
+ <center>Table 4 - List of recognized time units </center>
  
  | Unit | Time unit parsed |
  | -------- | -------- |
