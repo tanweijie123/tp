@@ -32,7 +32,7 @@ public class AddScheduleCommand extends Command {
             + PREFIX_SESSION_INDEX + "1 ";
 
     public static final String MESSAGE_SUCCESS = "New Schedule added: \n%1$s";
-    public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "The Schedule already exists in FitEgo";
 
     private final Index clientIndex;
     private final Index sessionIndex;
