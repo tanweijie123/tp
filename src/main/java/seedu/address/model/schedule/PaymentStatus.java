@@ -19,8 +19,10 @@ public class PaymentStatus {
      */
     public PaymentStatus(String status) {
         requireNonNull(status);
+
+        // "paid" or "unpaid" should be case-insensitive
+        status = status.toLowerCase();
         checkArgument(isValidPaymentStatus(status), MESSAGE_INVALID_PAYMENT_STATUS);
-        assert status.equals(VALUE_PAID) || status.equals(VALUE_UNPAID);
         this.value = status;
     }
 
@@ -33,14 +35,14 @@ public class PaymentStatus {
      */
     public boolean isPaid() {
         assert isValidPaymentStatus(value);
-        return value.equals(VALUE_PAID) ? true : false;
+        return value.equals(VALUE_PAID);
     }
 
     /**
-     * Returns true if a given string is a valid payment status.
+     * Returns true if a given string is a valid payment status ("paid" or "unpaid", case insensitive).
      */
     public static boolean isValidPaymentStatus(String test) {
-        return test.equals(VALUE_PAID) || test.equals(VALUE_UNPAID);
+        return test.toLowerCase().equals(VALUE_PAID) || test.toLowerCase().equals(VALUE_UNPAID);
     }
 
 
