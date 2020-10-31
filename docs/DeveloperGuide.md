@@ -428,9 +428,9 @@ The following activity diagram summarizes what happens when a user executes the 
 ### Product scope
 
 **Target user profile**:
-* is a fitness instructor who have trouble managing a significant number of clients and sessions
+* is a fitness instructor who has trouble managing a significant number of clients and sessions
 * prefer desktop apps over other types
-* favours a All-in-One software tracker
+* favours an All-in-One software tracker
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps while appreciates a nice GUI that can show his weekly schedule
@@ -482,8 +482,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a specific Client in the list
-2.  FitEgo adds the Client
+1.  User requests to add a specific Client in the list.
+2.  FitEgo adds the Client.
 
     Use case ends.
 
@@ -491,10 +491,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list Clients
-2.  FitEgo shows a list of Clients
-3.  User requests to edit a specific Client in the list
-4.  FitEgo edits the Client according to the specified details
+1.  User requests to list Clients.
+2.  FitEgo shows a list of Clients.
+3.  User requests to edit a specific Client in the list.
+4.  FitEgo edits the Client according to the specified details.
 
     Use case ends.
 
@@ -514,10 +514,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list Clients
-2.  FitEgo shows a list of Clients
-3.  User requests to delete a specific Client in the list
-4.  FitEgo deletes the Client
+1.  User requests to list Clients.
+2.  FitEgo shows a list of Clients.
+3.  User requests to delete a specific Client in the list.
+4.  FitEgo deletes the Client.
 
     Use case ends.
 
@@ -539,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given index refers to a client associated with one or more Schedule.
+* 3b. The given index refers to a Client associated with one or more Schedule.
     
     * 3b1. FitEgo shows an error message.
     
@@ -551,10 +551,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list Clients
-2.  FitEgo shows a list of Clients
-3.  User requests to tag a specific Client from the list
-4.  FitEgo changes the Client's current tag(s) according to the specified details
+1.  User requests to list Clients.
+2.  FitEgo shows a list of Clients.
+3.  User requests to tag a specific Client from the list.
+4.  FitEgo changes the Client's current tag(s) according to the specified details.
     Use case ends.
 
 **Extensions**
@@ -574,7 +574,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to find some Client based on keyword or text.
-2.  FitEgo displays the client's whose name matches the keyword or text.
+2.  FitEgo displays the Client's whose name matches the keyword or text.
 
     Use case ends.
 
@@ -591,8 +591,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list Clients.
 2.  FitEgo shows a list of Clients.
-3.  User requests to view a specific Client in the list
-4.  FitEgo opens the client's profile in a new window.
+3.  User requests to view a specific Client in the list.
+4.  FitEgo opens the Client's profile in a new window.
 
     Use case ends.
 
@@ -608,16 +608,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 * 4a. Previous Client's profile window is not closed.
-    * 4a1. The previous client's profile will be closed.
-    * 4a2. The current client's profile will be displayed.
+    * 4a1. The previous Client's profile will be closed.
+    * 4a2. The current Client's profile will be displayed.
 
-      Use case ends
+      Use case ends.
       
       
 **Use case: Create a Session**
 
 **MSS**
-1.  User requests to add a specific Session in the list
+1.  User requests to add a specific Session to the Session List.
 2.  FitEgo adds the Session.
 
     Use case ends.
@@ -630,7 +630,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
       
-* 1b. The Session is missing some required details.
+* 1b. The session is missing some required details.
 
     * 1b1. FitEgo shows an error message.
     
@@ -641,9 +641,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  FitEgo shows a list of Sessions
-2.  User requests to edit a specific Session in the list (i.e. gym, exercise type, start time and duration)
-3.  FitEgo edits the Session according to the specified details
+1.  FitEgo shows a list of Sessions.
+2.  User requests to edit a specific Session in the list (i.e. gym, exercise type, start time and duration).
+3.  FitEgo edits the Session according to the specified details.
 
     Use case ends.
 
@@ -664,10 +664,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list Sessions
-2.  FitEgo shows a list of Sessions
-3.  User requests to delete a specific Session in the list
-4.  FitEgo deletes the Session
+1.  User requests to list Sessions.
+2.  FitEgo shows a list of Sessions.
+3.  User requests to delete a specific Session in the Session List.
+4.  FitEgo deletes the Session.
 
     Use case ends.
 
@@ -716,23 +716,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. FitEgo shows a list of Clients and list of Sessions
-2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List
-3. FitEgo adds the Schedule
+1. FitEgo shows a list of Clients and list of Sessions.
+2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List.
+3. FitEgo adds the Schedule.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. The Client index or Session index is invalid
+- 2a. The Client index or Session index is invalid.
 
-  - 2a1. FitEgo shows an error message
+  - 2a1. FitEgo shows an error message.
 
     Use case resumes at step 2.
   
-- 2b. The Schedule to be added is overlapping with another Schedule
+- 2b. The Schedule to be added is overlapping with another Schedule.
 
-  - 2b1. FitEgo shows an error message
+  - 2b1. FitEgo shows an error message.
 
     Use case resumes at step 2.
     
@@ -740,9 +740,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  FitEgo shows a list of Schedule
-2.  User requests to edit a specific Schedule in the list (i.e. updated session index, update payment, update weight)
-3.  FitEgo edits the Schedule according to the specified details
+1.  FitEgo shows a list of Schedule.
+2.  User requests to edit a specific Schedule in the list (i.e. updated Session index, update payment, update weight).
+3.  FitEgo edits the Schedule according to the specified details.
 
     Use case ends.
 
@@ -752,7 +752,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index is invalid or request to schedule is absent.
+* 2a. The given index is invalid or requested Schedule does not exist.
 
     * 2a1. FitEgo shows an error message.
 
@@ -763,23 +763,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. FitEgo shows a list of Clients and list of Sessions
-2. User requests to delete a Schedule asssociated with a specified Client from the Client List and Session from the Session List
-3. FitEgo deletes the Schedule
+1. FitEgo shows a list of Clients and list of Sessions.
+2. User requests to delete a Schedule asssociated with a specified Client from the Client List and Session from the Session List.
+3. FitEgo deletes the Schedule.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. The Client index or Session index is invalid
+- 2a. The Client index or Session index is invalid.
 
-  - 2a1. FitEgo shows an error message
+  - 2a1. FitEgo shows an error message.
 
     Use case resumes at step 2.
 
-- 2b. No Schedule is associated with the specified Client and Session
+- 2b. There are no schedules with the specified Client and Session.
 
-  - 2b1. FitEgo shows an error message
+  - 2b1. FitEgo shows an error message.
 
     Use case resumes at step 2.
 
@@ -788,15 +788,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1.  User requests to view Help window. 
-2.  FitEgo displays help window with the User Guide link.
+2.  FitEgo displays Help window with the User Guide link.
 3.  User selects the link to access the User Guide. 
 4.  FitEgo opens the User Guide. 
 
     Use case ends.
 
 **Extensions**
-* 3a. User closes the help window. 
-    * 3a1. FitEgo closes the help window
+* 3a. User closes the Help window. 
+    * 3a1. FitEgo closes the Help window.
 	
       Use case ends.
       
@@ -812,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. User closes the Settings window. 
-    * 2a1. FitEgo closes the Settings window
+    * 2a1. FitEgo closes the Settings window.
 	
       Use case ends.
 
@@ -878,12 +878,12 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all Clients using the `clist` command. Multiple Clients in the list.
 
    1. Test case: `cdel 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Expected: The Client of index 1 is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `cdel 0`<br>
       Expected: No Client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect client delete commands to try: `cdel`, `cdel x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect Delete Client commands to try: `cdel`, `cdel x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Adding a Session
@@ -891,13 +891,13 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Session while all Clients are being shown.
 
     1. Test case: `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` <br>
-       Expected: Session is added to the list, and it is shown in order. Details of the added session shown in the
+       Expected: Session is added to the list, and it is shown in order. Details of the added Session shown in the
        status message.
     
     1. Test case: `sadd g/machoman` <br>
        Expected: No Session is added. Error details shown in the status message.
        
-    1. Other incorrect AddSession commands to try: 
+    1. Other incorrect Add Session commands to try: 
         `sadd g/machoman ex/endurance at/29/09/2020 t/120` (wrong date format),
         `sadd g/machoman ex/endurance at/29/09/2020 1600 t/0` (invalid duration) <br>
        Expected: Similar to previous.
@@ -910,13 +910,13 @@ testers are expected to do more *exploratory* testing.
     
    1. Test case: `sedit 1 g/Machoman`<br>
       Expected: First Session's gym location is edited.
-      Details of the edited session is shown in the status message.
+      Details of the edited Session is shown in the status message.
 
    1. Test case: `sedit 1 at/29/09/2020 1600 t/120`<br>
       Expected: First Session timing is edited.
-      Details of the edited session is shown in the status message.
+      Details of the edited Session is shown in the status message.
 
-   1. Other incorrect edit commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect Edit Session commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
       
 ### Deleting a Session
@@ -924,15 +924,15 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a Session while all Sessions are being shown
 
    1. Test case: `sdel 1 f/` <br>
-       Expected: The session in index 1 (as shown in the Session List) will be deleted alongside all schedules associated
-       to the session. Details of the deleted session is shown in the status message.
+       Expected: The Session in index 1 (as shown in the Session List) will be deleted alongside all Schedules associated
+       to the Session. Details of the deleted Session is shown in the status message.
     
    1. Test case: `sdel 1` <br>
-       Expected: If there are no schedules associated to the session in index 1 (as shown in the Session List), similar to
-       previous. Else, it will not delete the session and error message will be shown in the status message
+       Expected: If there are no Schedules associated to the Session in index 1 (as shown in the Session List), similar to
+       previous. Else, it will not delete the Session and error message will be shown in the status message
        
-   1. Other incorrect DeleteSession commands to try: `sdel`, `sdel x` (where x is larger than the list size)<br>
-       Expected: It will not delete the session and error message will be shown in the status message.
+   1. Other incorrect Delete Session commands to try: `sdel`, `sdel x` (where x is larger than the list size)<br>
+       Expected: It will not delete the Session and error message will be shown in the status message.
 
 
 ### Viewing Sessions within Period
@@ -949,7 +949,7 @@ testers are expected to do more *exploratory* testing.
       Expected: The right panel only displays Sessions that have already ended before time of execution.
       Indication that Session List has been successfully updated is shown in the status message.
 
-   1. Other incorrect edit commands to try: `sview`, `sview p/+2s` (where unit of time is not d/m/y), `...` <br>
+   1. Other incorrect View Session commands to try: `sview`, `sview p/+2s` (where unit of time is not d/m/y), `...` <br>
       Expected: Similar to previous.
       
 ### Adding a Schedule
@@ -976,29 +976,29 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple Schedules in the list can be viewed on the main panel of the GUI.
 
    1. Test case: `schedit c/1 s/1 us/2`<br>
-      Expected: Edit Schedule with client index 1 and session index 1 is edited to session index 2.
-      Details of the edited schedule is shown in the status message.
+      Expected: Edit Schedule with Client index 1 and Session index 1 is edited to Session index 2.
+      Details of the edited Schedule is shown in the status message.
 
    1. Test case: `schedit c/2 s/1 us/2`<br>
-      Expected: Edit Schedule with client index 2 and session index 1 is edited to session index 2.
-      Details of the edited schedule is shown in the status message.
+      Expected: Edit Schedule with Client index 2 and Session index 1 is edited to Session index 2.
+      Details of the edited Schedule is shown in the status message.
       
    1. Test case: `schedit c/1 s/1 pd/paid`<br>
-     Expected: Edit Schedule with client index 1 and session index 1 payment update to be paid. 
-     In the right panel, the client's name in the related session will be indicated as green. 
-     Details of the edited schedule is shown in the status message.
+     Expected: Edit Schedule with Client index 1 and Session index 1 payment update to be paid. 
+     In the right panel, the Client's name in the related Session will be indicated as green. 
+     Details of the edited Schedule is shown in the status message.
          
    1. Test case: `schedit c/1 s/1 pd/unpaid`<br>
-    Expected: Edit Schedule with client index 1 and session index 1 payment update to be unpaid. 
-    In the right panel, the client's name in the related session will be indicated as red. 
-    Details of the edited schedule is shown in the status message.
+    Expected: Edit Schedule with Client index 1 and Session index 1 payment update to be unpaid. 
+    In the right panel, the Client's name in the related Session will be indicated as red. 
+    Details of the edited Schedule is shown in the status message.
     
    1. Test case: `schedit c/1 s/1 r/text`<br>
-       Expected: Edit Schedule with client index 1 and session index 1 remark to "text". 
-       In the right panel, the client's name in the related session will be indicated as red. 
-       Details of the edited schedule is shown in the status message.
+       Expected: Edit Schedule with Client index 1 and Session index 1 remark to "text". 
+       In the right panel, the Client's name in the related Session will be indicated as red. 
+       Details of the edited Schedule is shown in the status message.
 
-   1. Other incorrect edit commands to try: `schedit c/1`, `schedit c/1 s/2`, `schedit c/x s/y us/y`, `...` (where x is larger than the client list size or y is larger than the session list size)<br>
+   1. Other incorrect Edit Schedule commands to try: `schedit c/1`, `schedit c/1 s/2`, `schedit c/x s/y us/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
       Expected: Similar to previous.
 
 ### Deleting a Schedule
@@ -1022,12 +1022,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. Test case: Open `data/addressbook.json` and change one of the schedule's `clientEmail` to an email that 
-      does not exist inside the `clients` list
-      Expected: FitEgo notices a invalid storage format and start with an empty addressbook
+   1. Test case: Open `data/addressbook.json` and change one of the Schedule's `clientEmail` to an email that 
+      does not exist inside the Client List.
+      Expected: FitEgo notices an invalid storage format and start with an empty addressbook.
       
-   2. Test case: Open `data/addressbook.json` and change one of the schedule's `startTime` or `endTime` so that the
-      resulting interval does not exist inside the `sessions` list
+   2. Test case: Open `data/addressbook.json` and change one of the Schedule's `startTime` or `endTime` so that the
+      resulting interval does not exist inside the Session List.
       Expected: Similar as previous
     
     
