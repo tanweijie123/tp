@@ -312,6 +312,14 @@ All client-related keywords are described in this section. All of the commands h
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 <br/>Figure 6 - Sample of Client List</center>
 
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+The `Next Session` field below each Client shows you the earliest upcoming session. It is not updated in real-time but after FitEgo executes a command.
+
+</div>
+
 ### 3.2.1 Listing all clients : `clist`
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
@@ -461,6 +469,9 @@ The `ALL` at the top of this Session List panel represents the current period of
 The default period of session view is 'WEEK'. You can change the period 
 of session view using [`sview`](#viewing-sessions-within-period--sview) command. 
 </div>
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
 
 
 ### 3.3.1 Adding a Session : `sadd`
@@ -569,6 +580,17 @@ Examples:
 * `sview p/+0D` - Display all sessions today
 * `sview p/-1d` - Display all sessions from the past 1 day to today (yesterday and today)
 * `sview p/+2w` - Display all sessions from today to 2 weeks later. (e.g. If today is Friday, display from today to the Friday that falls 2 weeks later)
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+The effect of `sview` is not updated in real-time but after FitEgo executes a command. For example, if you 
+1. run `sview p/+0D` at 2359hrs on Friday
+2. do not execute any command until 0000 hrs on Saturday
+
+the Session List will still be showing Friday's sessions at that point of time. To update, simply run any command successfully in FitEgo.
+</div>
 
 ---
 
