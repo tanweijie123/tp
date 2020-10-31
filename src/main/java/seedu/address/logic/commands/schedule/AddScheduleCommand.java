@@ -25,14 +25,14 @@ public class AddScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule a client with a session. "
             + "Parameters: "
-            + PREFIX_CLIENT_INDEX + "CLIENT "
-            + PREFIX_SESSION_INDEX + "SESSION "
+            + PREFIX_CLIENT_INDEX + "CLIENT_INDEX (must be a positive integer) "
+            + PREFIX_SESSION_INDEX + "SESSION_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_SESSION_INDEX + "1 ";
 
     public static final String MESSAGE_SUCCESS = "New Schedule added: \n%1$s";
-    public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "The Schedule already exists in FitEgo";
 
     private final Index clientIndex;
     private final Index sessionIndex;

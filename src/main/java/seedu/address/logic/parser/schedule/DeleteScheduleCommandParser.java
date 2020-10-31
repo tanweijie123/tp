@@ -45,8 +45,16 @@ public class DeleteScheduleCommandParser implements Parser<DeleteScheduleCommand
                     DeleteScheduleCommand.MESSAGE_USAGE));
         }
 
-        Index clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
-        Index sessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get());
+        Index clientIndex;
+        Index sessionIndex;
+
+        try {
+            clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+            sessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteScheduleCommand.MESSAGE_USAGE), pe);
+        }
 
 
         return new DeleteScheduleCommand(clientIndex, sessionIndex);

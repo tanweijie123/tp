@@ -3,7 +3,6 @@ package seedu.address.logic.parser.schedule;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SESSION;
 
@@ -31,13 +30,15 @@ public class DeleteScheduleCommandParserTest {
     }
 
     @Test
-    public void parse_invalidClientIndex_throwsInvalidIndexException() {
-        assertParseFailure(parser, " c/word s/0", MESSAGE_INVALID_INDEX);
+    public void parse_invalidClientIndex_throwsParseException() {
+        assertParseFailure(parser, " c/word s/0",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteScheduleCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidSessionIndex_throwsInvalidIndexException() {
-        assertParseFailure(parser, " c/0 s/word", MESSAGE_INVALID_INDEX);
+    public void parse_invalidSessionIndex_throwsParseException() {
+        assertParseFailure(parser, " c/0 s/word",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteScheduleCommand.MESSAGE_USAGE));
     }
 
     @Test
