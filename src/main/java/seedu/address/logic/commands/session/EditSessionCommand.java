@@ -62,22 +62,23 @@ public class EditSessionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Session> lastShownList = model.getFilteredSessionList();
+        List<Session> lastShownSessionList = model.getFilteredSessionList();
+        List<Session> sessionList = model.getAddressBook().getSessionList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownSessionList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
 
-        Session sessionToEdit = lastShownList.get(index.getZeroBased());
+        Session sessionToEdit = lastShownSessionList.get(index.getZeroBased());
         Session editedSession = createEditedSession(sessionToEdit, editSessionDescriptor);
 
         if (!sessionToEdit.isIdentical(editedSession) && model.hasSession(editedSession)) {
             throw new CommandException(MESSAGE_DUPLICATE_SESSION);
         }
 
-        for (int i = 0; i < lastShownList.size(); i++) {
-            if (!lastShownList.get(i).equals(sessionToEdit)) {
-                if (Interval.isOverlap(lastShownList.get(i).getInterval(), editedSession.getInterval())) {
+        for (int i = 0; i < sessionList.size(); i++) {
+            if (!sessionList.get(i).equals(sessionToEdit)) {
+                if (Interval.isOverlap(sessionList.get(i).getInterval(), editedSession.getInterval())) {
                     throw new CommandException(MESSAGE_OVERLAPPING_SESSION);
                 }
             }
