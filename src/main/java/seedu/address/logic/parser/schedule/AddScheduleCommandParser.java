@@ -8,12 +8,14 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.session.EditSessionCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.session.SessionParserUtil;
 
 /**
  * Parses input arguments and creates a new AddScheduleCommand object
@@ -43,9 +45,16 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
         }
 
-        Index clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
-        Index sessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get());
+        Index clientIndex;
+        Index sessionIndex;
 
+        try {
+            clientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+            sessionIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SESSION_INDEX).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddScheduleCommand.MESSAGE_USAGE), pe);
+        }
 
         return new AddScheduleCommand(clientIndex, sessionIndex);
     }
