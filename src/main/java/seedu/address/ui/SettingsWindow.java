@@ -3,6 +3,8 @@ package seedu.address.ui;
 import static seedu.address.model.util.WeightUnit.KILOGRAM;
 import static seedu.address.model.util.WeightUnit.POUND;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -27,6 +29,8 @@ public class SettingsWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(SettingsWindow.class);
     private static final String FXML = "SettingsWindow.fxml";
+
+    private List<UiObserver> observerList = new ArrayList<>();
 
     @FXML
     private RadioButton kgRadio;
@@ -62,6 +66,7 @@ public class SettingsWindow extends UiPart<Stage> {
         // watch for changes to radio selected option then update userPrefs
         this.group.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
             logic.setPreferredWeightUnit(new WeightUnit(group.getSelectedToggle().getUserData().toString()));
+            notifyUIs();
         });
 
         //Create an event on ESC click, it will close this window
@@ -122,5 +127,23 @@ public class SettingsWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Adds an observer to the set of observers for this object
+     * @param o an observer to be added.
+     */
+    public void addUi(UiObserver o) {
+        assert(o != null);
+        observerList.add(o);
+    }
+
+    /**
+     * If this is called, then notify and update all of its observers.
+     */
+    public void notifyUIs() {
+        for (UiObserver o: observerList) {
+            o.update();
+        }
     }
 }
