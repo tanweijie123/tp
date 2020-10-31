@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Interval {
     private static final String DATE_TIME_PATTERN = "dd/MM/yyyy HHmm";
-    private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM";
+    private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM YYYY";
     private static final String TIME_12HR_PATTERN = "hh:mm a";
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
