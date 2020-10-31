@@ -5,7 +5,6 @@ import static seedu.address.model.util.WeightUnit.POUND;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
