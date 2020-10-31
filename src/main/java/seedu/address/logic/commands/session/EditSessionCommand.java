@@ -41,6 +41,8 @@ public class EditSessionCommand extends Command {
     public static final String MESSAGE_EDIT_SESSION_SUCCESS = "Edited Session: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_SESSION = "This Session already exists in the FitEgo.";
+    public static final String MESSAGE_OVERLAPPING_SESSION = "This Session overlaps with another " +
+            "session in the FitEgo.";
 
     private final Index index;
     private final EditSessionDescriptor editSessionDescriptor;
@@ -73,7 +75,15 @@ public class EditSessionCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SESSION);
         }
 
+        for (int i = 0; i < lastShownList.size(); i++) {
+            if (!lastShownList.get(i).equals(sessionToEdit)) {
+                if (Interval.isOverlap(lastShownList.get(i).getInterval(), editedSession.getInterval())) {
+                    throw new CommandException(MESSAGE_OVERLAPPING_SESSION);
+                }
+            }
+        }
         model.setSession(sessionToEdit, editedSession);
+
         if (model.hasAnyScheduleAssociatedWithSession(sessionToEdit)) {
             model.editSchedulesAssociatedWithSession(sessionToEdit, editedSession);
         }

@@ -496,8 +496,8 @@ Points to take note when editing a session's details from the Session List:
 * Existing values will be updated to the input values.
 
 Examples:
-*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` - Edits the gym of the first session to be `Machoman`
-*  `sedit 2 at/29/09/2020 1600 t/120 ` - Edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes`
+*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` - Edits the gym of the first session to be `Machoman` and the start time and duration to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
+*  `sedit 2 at/29/09/2020 1600 t/120 ` - Edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
 
 
 ### 3.3.3 Deleting a Session : `sdel`
@@ -616,11 +616,11 @@ Points to take note when editing a schedule's details:
 
 Examples:
 
-*  `schedit c/1 s/1 us/2` - Reschedules the first client in the Client List to the second session in the Session List
-*  `schedit c/1 s/1 pd/paid` - Indicates that the first client in the Client List has paid for the second session in the Session List
-*  `schedit c/1 s/1 r/did 5 pushups` - Edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups
-*  `schedit c/1 s/1 w/70` - Edits the schedule containing client index 1 and session index 1 to a weight of 70kg
-* `schedit c/1 s/1 r/` - Clears the schedule containing client index 1 and session index 1 remarks
+*  `schedit c/1 s/1 us/2` - Reschedules the first client in the Client List to the second session in the Session List while keeping all other fields the same
+*  `schedit c/1 s/1 pd/paid` - Indicates that the first client in the Client List has paid for the second session in the Session List while keeping all other fields the same
+*  `schedit c/1 s/1 r/did 5 pushups` - Edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups while keeping all other fields the same
+*  `schedit c/1 s/1 w/70` - Edits the schedule containing client index 1 and session index 1 to a weight of 70kg while keeping all other fields the same
+* `schedit c/1 s/1 r/` - Clears the schedule containing client index 1 and session index 1 remarks while keeping all other fields the same
 
 ### 3.4.3 Deleting a Schedule : `schdel`
 
