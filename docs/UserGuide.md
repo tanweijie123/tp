@@ -469,9 +469,6 @@ The `ALL` at the top of this Session List panel represents the current period of
 The default period of session view is 'WEEK'. You can change the period 
 of session view using [`sview`](#viewing-sessions-within-period--sview) command. 
 </div>
-<div markdown="block" class="alert alert-info"> 
-
-:information_source: **Note:**
 
 
 ### 3.3.1 Adding a Session : `sadd`
