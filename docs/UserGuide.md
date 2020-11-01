@@ -17,7 +17,7 @@ Table of Contents
 
 If this is your first time, here are some quick tips to get started.
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have [Java `11`](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or above installed in your Computer.
 
 1. Download the latest `fitego.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/releases).
 
