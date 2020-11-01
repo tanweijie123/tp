@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Welcome to FitEgo! This document will serve as an user guide to the all-in-one scheduling application.
+Welcome to FitEgo! This document will serve as a user guide to the all-in-one scheduling application.
 
 Made for **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
@@ -465,9 +465,12 @@ All session-related keywords are described in this section. All of the commands 
 Figure 9 - Sample of Session List</center><br/>
 The `ALL` at the top of this Session List panel represents the current period of session view. 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 The default period of session view is 'WEEK'. You can change the period 
-of session view using [`sview`](#viewing-sessions-within-period--sview) command. 
+of session view using [<code>sview</code>](#334-viewing-sessions-within-period--sview) command.
+ 
 </div>
 
 
