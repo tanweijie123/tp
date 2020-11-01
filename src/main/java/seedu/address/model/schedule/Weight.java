@@ -7,10 +7,12 @@ import seedu.address.model.util.WeightUnit;
 
 
 /**
- * Represents a Schedule's Weight in the address book.
+ * Represents a weight associated to a Schedule in the address book.
  */
 public class Weight {
-    public static final String MESSAGE_INVALID_WEIGHT_STATUS = "Weight must be a positive number.";
+    public static final String MESSAGE_INVALID_WEIGHT_STATUS = "Weight must be a positive number and less than 1000kg.";
+    public static final Double MAX_WEIGHT_ACCEPTED = 1000.0;
+
     /**
      * Value of weight in kg.
      */
@@ -32,12 +34,9 @@ public class Weight {
      * @param weight A valid weight for schedule.
      */
     public Weight(double weight, WeightUnit unit) {
-        checkArgument(isValidWeight(weight), MESSAGE_INVALID_WEIGHT_STATUS);
-        if (unit.isPoundUnit()) {
-            this.weight = WeightUnit.getPoundInKg(weight);
-        } else {
-            this.weight = weight;
-        }
+        double weightInKg = unit.isPoundUnit() ? WeightUnit.getPoundInKg(weight) : weight;
+        checkArgument(isValidWeight(weightInKg), MESSAGE_INVALID_WEIGHT_STATUS);
+        this.weight = weightInKg;
     }
 
     /**
@@ -48,10 +47,10 @@ public class Weight {
     }
 
     /**
-     * Returns true if a given double value is a valid weight double.
+     * Returns true if a given double value is a valid weight double and less than 10000.
      */
     public static boolean isValidWeight(double weight) {
-        return weight > 0;
+        return weight > 0 && weight < MAX_WEIGHT_ACCEPTED;
     }
 
     /**
