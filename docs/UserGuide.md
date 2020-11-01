@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Welcome to FitEgo! This document will serve as an user guide to the all-in-one scheduling application.
+Welcome to FitEgo! This document will serve as a user guide to the all-in-one scheduling application.
 
 Made for **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
@@ -312,6 +312,14 @@ All client-related keywords are described in this section. All of the commands h
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 <br/>Figure 6 - Sample of Client List</center>
 
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+The `Next Session` field below each Client shows you the earliest upcoming session. It is not updated in real-time but after FitEgo executes a command.
+
+</div>
+
 ### 3.2.1 Listing all clients : `clist`
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
@@ -457,9 +465,12 @@ All session-related keywords are described in this section. All of the commands 
 Figure 9 - Sample of Session List</center><br/>
 The `ALL` at the top of this Session List panel represents the current period of session view. 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 The default period of session view is 'WEEK'. You can change the period 
-of session view using [`sview`](#viewing-sessions-within-period--sview) command. 
+of session view using [<code>sview</code>](#334-viewing-sessions-within-period--sview) command.
+ 
 </div>
 
 
@@ -570,6 +581,17 @@ Examples:
 * `sview p/-1d` - Display all sessions from the past 1 day to today (yesterday and today)
 * `sview p/+2w` - Display all sessions from today to 2 weeks later. (e.g. If today is Friday, display from today to the Friday that falls 2 weeks later)
 
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+The effect of `sview` is not updated in real-time but after FitEgo executes a command. For example, if you 
+1. run <code>sview p/+0D</code> at 2359hrs on Friday
+2. do not execute any command until 0000 hrs on Saturday
+
+the Session List will still be showing Friday's sessions at that point of time. To update, simply run any command successfully in FitEgo.
+</div>
+
 ---
 
 ## 3.4 Schedule-related Keywords 
@@ -610,7 +632,7 @@ Points to take note when editing a schedule's details:
 * `SESSION_INDEX` and `UPDATED_SESSION_INDEX` refers to the index number shown in the Session List. The index **must be a positive integer** 1, 2, 3, …
 * `PAYMENT_STATUS` can either be `paid` or `unpaid`.
 * `REMARK` can be any words, phrases or sentences.
-* `WEIGHT` must be **positive numbers**. By default, units will be set to kilogram. You can also add either `kg` or `lb` to the back to specify the units.
+* `WEIGHT` must be **positive numbers** and **less than 1000kg**. By default, units will be set to kilogram. You can also add either `kg` or `lb` to the back to specify the units.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
