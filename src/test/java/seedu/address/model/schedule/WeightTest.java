@@ -25,13 +25,13 @@ public class WeightTest {
 
     @Test
     public void constructor_invalidWeight4_throwsIllegalArgumentException() {
-        double invalidWeight = 10000;
+        double invalidWeight = 1000;
         assertThrows(IllegalArgumentException.class, () -> new Weight(invalidWeight));
     }
 
     @Test
     public void constructor_invalidWeight5_throwsIllegalArgumentException() {
-        double invalidWeight = 10001;
+        double invalidWeight = 1001;
         assertThrows(IllegalArgumentException.class, () -> new Weight(invalidWeight));
     }
 
@@ -66,7 +66,7 @@ public class WeightTest {
         // eq: negative weight
         assertThrows(NullPointerException.class, () -> Weight.isValidWeight(null));
 
-        // eq: >10000 weight
+        // eq: > weight
         assertFalse(Weight.isValidWeight(Double.MAX_VALUE)); // max double
         assertFalse(Weight.isValidWeight(1001.0)); // max double
 

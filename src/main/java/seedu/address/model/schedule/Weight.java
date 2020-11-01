@@ -34,12 +34,9 @@ public class Weight {
      * @param weight A valid weight for schedule.
      */
     public Weight(double weight, WeightUnit unit) {
-        checkArgument(isValidWeight(weight), MESSAGE_INVALID_WEIGHT_STATUS);
-        if (unit.isPoundUnit()) {
-            this.weight = WeightUnit.getPoundInKg(weight);
-        } else {
-            this.weight = weight;
-        }
+        double weightInKg = unit.isPoundUnit() ? WeightUnit.getPoundInKg(weight) : weight;
+        checkArgument(isValidWeight(weightInKg), MESSAGE_INVALID_WEIGHT_STATUS);
+        this.weight = weightInKg;
     }
 
     /**

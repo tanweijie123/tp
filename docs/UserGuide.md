@@ -586,7 +586,7 @@ Examples:
 :information_source: **Note:**
 
 The effect of `sview` is not updated in real-time but after FitEgo executes a command. For example, if you 
-1. run `sview p/+0D` at 2359hrs on Friday
+1. run <code>sview p/+0D</code> at 2359hrs on Friday
 2. do not execute any command until 0000 hrs on Saturday
 
 the Session List will still be showing Friday's sessions at that point of time. To update, simply run any command successfully in FitEgo.
