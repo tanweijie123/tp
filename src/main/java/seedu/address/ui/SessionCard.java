@@ -51,7 +51,7 @@ public class SessionCard extends UiPart<Region> {
         super(FXML);
         this.session = session;
         id.setText(displayedIndex + ". ");
-        sessionTime.setText(session.getInterval().getTime12hrPattern());
+        sessionTime.setText(session.getInterval().getAdjustedStartDateTime());
         gymName.setText(session.getGym().toString());
         dayOfWeek.setText(session.getInterval().getFormattedStartDateTime(SIMPLE_DATE_TIME_PATTERN_FORMATTER));
         if (schedules != null && schedules.size() > 0) {
