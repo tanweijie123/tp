@@ -108,7 +108,7 @@ All [client-related commands](#32-client-related-keywords) use prefix `c`.
 
 :information_source: **Note:**
 FitEgo will not allow you to have clients with the same email. This is because we believe that email is the most
-suitable identifier to differentiate between clients.
+suitable identifier to differentiate clients.
 </div>
 
 
@@ -374,7 +374,7 @@ Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 Points to take note when editing a client's information:
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* You cannot have multiple clients with the same email. This means you might get an error message if the email you specified here is already used by another client.
+* You cannot have multiple clients with the same email. This means you will get an error message if the email you specified here is already used by another client.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed, i.e. adding of tags is not cumulative.
 * You can remove all of the client’s tags by typing `t/` without specifying any tags after it.
