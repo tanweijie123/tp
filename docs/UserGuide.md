@@ -333,7 +333,7 @@ Format: `clist`
 
 You can add a client to the Client List including their details. This allows you to easily refer to their information when needed. 
 
-Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
+Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0). Each tag can include
@@ -351,8 +351,8 @@ store his photo as `data/images/profile-alex-yeoh.jpg`
 </div>
 
 Examples:
-* `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
-* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
+* `cadd n/Jane Doe p/91234567 e/jane@gmail.com a/12 Marina Boulevard`
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com a/13 Marina Boulevard t/injured-thigh`
 
 ### 3.2.3 Editing a Client : `cedit`
 
@@ -687,7 +687,7 @@ You can find the comprehensive list of commands in the table below.
 |  | Open Settings Window | `settings` | `settings`|
 |  | Clear all data | `clear` | `clear` |
 |  | Exit this program | `exit` | `exit`|
-| Add | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
+| Add | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com a/12 Marina Boulevard`|
 |  | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
 |  | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
 | Edit | Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
