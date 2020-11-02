@@ -104,6 +104,14 @@ If you have a new client interested in your fitness training services, FitEgo ca
 
 All [client-related commands](#32-client-related-keywords) use prefix `c`. 
 
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+FitEgo will not allow you to have clients with the same email. This is because we believe that email is the most
+suitable identifier to differentiate between clients.
+</div>
+
+
 #### Sessions
 
 Sessions are timeslots that are marked for a training session. It contains information about the gym, the session's main exercise type, start time and the duration of sessions.
@@ -335,6 +343,9 @@ You can add a client to the Client List including their details. This allows you
 
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
 
+Points to take note when editing a client's information:
+* Email is unique for each client. This means you cannot add a new client if the email specified is already used by another client.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0). Each tag can include
 alphanumeric characters or dash (`-`), but you are not allowed to start or end
@@ -363,6 +374,7 @@ Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 Points to take note when editing a client's information:
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* You cannot have multiple clients with the same email. This means you might get an error message if the email you specified here is already used by another client.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed, i.e. adding of tags is not cumulative.
 * You can remove all of the client’s tags by typing `t/` without specifying any tags after it.
