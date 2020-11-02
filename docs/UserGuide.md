@@ -107,8 +107,7 @@ All [client-related commands](#32-client-related-keywords) use prefix `c`.
 <div markdown="block" class="alert alert-info"> 
 
 :information_source: **Note:**
-FitEgo will not allow you to have clients with the same email. This is because we believe that email is the most
-suitable identifier to differentiate clients.
+Each client must have a unique email.
 </div>
 
 
