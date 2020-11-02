@@ -312,7 +312,7 @@ All client-related keywords are described in this section. All of the commands h
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 <br/>Figure 6 - Sample of Client List</center>
 
-### 3.2.1 Listing all clients : `clist`
+### 3.2.1 Listing all Clients : `clist`
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
 
