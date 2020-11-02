@@ -325,7 +325,7 @@ Format: `clist`
 
 You can add a client to the Client List including their details. This allows you to easily refer to their information when needed. 
 
-Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`
+Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0). Each tag can include
@@ -337,14 +337,14 @@ a tag with a dash.
 
 :star: **Feature:**
 
-You can add profile picture to your client by storing their photo in `data/images` folder. You should name the photo 
+You can add a profile picture to your client by storing their photo in a new folder named images within the data folder. You should name the photo 
 as `profile-<client's full name in lowercase and separated by dash>.jpg`. <br/> For example, if your client's name is Alex Yeoh, 
 store his photo as `data/images/profile-alex-yeoh.jpg`
 </div>
 
 Examples:
-* `cadd n/Jane Doe p/91234567 e/jane@gmail.com`
-* `cadd n/John Doe p/91231367 e/jojo@gmail.com t/injured-thigh`
+* `cadd n/Jane Doe p/91234567 e/jane@gmail.com a/311, Clementi Ave 2, #02-25`
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com a/311, Clementi Ave 2, #02-25 t/injured-thigh`
 
 ### 3.2.3 Editing a Client : `cedit`
 
@@ -361,8 +361,8 @@ Points to take note when editing a client's information:
 * After performing a `cedit` command, you will see the updated client information page.
 
 Examples:
-*  `cedit 1 n/Janie Doe` Edits the name of the first client to be `Janie Doe`
-*  `cedit 1 t/` Removes all of the tags of the first client
+*  `cedit 1 n/Janie Doe` edits the name of the first client to be `Janie Doe`
+*  `cedit 1 t/` removes all of the tags of the first client
 
 ### 3.2.4 Locating Clients by Name : `cfind`
 
@@ -380,7 +380,7 @@ Points to take note when finding clients by name:
 
 Examples:
 * `cfind John` returns `john` and `John Doe`
-* `cfind alex david` returns `Alex Yeoh`, `David Li` as shown in the image below <br>
+* `cfind alex david` returns `Alex Yeoh`, `David Li` as shown in the figure below <br>
 
 <center><img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="400" height="400" /></center>
 <center> Figure 7 - Result of finding clients by name </center>
@@ -441,7 +441,7 @@ Examples:
 
 <br>
 
-The result of these commands is shown in the image below
+The result of these commands is shown in the figure below
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
 
@@ -479,7 +479,7 @@ Points to take note when adding a session to the Session List:
 </div>
 
 Examples:
-* `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` - Adds a session at gym `Machoman` with exercise type `Endurance` at `29/09/2020 1600hrs` that lasts for `120` minutes
+* `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` adds a session at gym `Machoman` with exercise type `Endurance` at `29/09/2020 1600hrs` that lasts for `120` minutes
 
 
 ### 3.3.2 Editing a Session : `sedit`
@@ -496,8 +496,8 @@ Points to take note when editing a session's details from the Session List:
 * Existing values will be updated to the input values.
 
 Examples:
-*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` - Edits the gym of the first session to be `Machoman` and the start time and duration to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
-*  `sedit 2 at/29/09/2020 1600 t/120 ` - Edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
+*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` edits the gym of the first session to be `Machoman` and the start time and duration to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
+*  `sedit 2 at/29/09/2020 1600 t/120 ` edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
 
 
 ### 3.3.3 Deleting a Session : `sdel`
@@ -565,10 +565,10 @@ Figure 10 - Result of running 'sview p/+2w' </center>
 
 Examples:
  
-* `sview p/all` - Display all sessions stored in FitEgo
-* `sview p/+0D` - Display all sessions today
-* `sview p/-1d` - Display all sessions from the past 1 day to today (yesterday and today)
-* `sview p/+2w` - Display all sessions from today to 2 weeks later. (e.g. If today is Friday, display from today to the Friday that falls 2 weeks later)
+* `sview p/all` displays all sessions stored in FitEgo
+* `sview p/+0D` displays all sessions today
+* `sview p/-1d` displays all sessions from the past 1 day to today (yesterday and today)
+* `sview p/+2w` displays all sessions from today to 2 weeks later. (e.g. If today is Friday, display from today to the Friday that falls 2 weeks later)
 
 ---
 
@@ -596,7 +596,7 @@ Points to take note when adding a schedule:
 
 Example:
 
-* `schadd c/1 s/1` - Schedules the first client in the Client List with the first session in the Session List
+* `schadd c/1 s/1` schedules the first client in the Client List with the first session in the Session List
 
 ### 3.4.2 Editing a Schedule : `schedit`
 
@@ -616,11 +616,11 @@ Points to take note when editing a schedule's details:
 
 Examples:
 
-*  `schedit c/1 s/1 us/2` - Reschedules the first client in the Client List to the second session in the Session List while keeping all other fields the same
-*  `schedit c/1 s/1 pd/paid` - Indicates that the first client in the Client List has paid for the second session in the Session List while keeping all other fields the same
-*  `schedit c/1 s/1 r/did 5 pushups` - Edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups while keeping all other fields the same
-*  `schedit c/1 s/1 w/70` - Edits the schedule containing client index 1 and session index 1 to a weight of 70kg while keeping all other fields the same
-* `schedit c/1 s/1 r/` - Clears the schedule containing client index 1 and session index 1 remarks while keeping all other fields the same
+*  `schedit c/1 s/1 us/2` reschedules the first client in the Client List to the second session in the Session List while keeping all other fields the same
+*  `schedit c/1 s/1 pd/paid` indicates that the first client in the Client List has paid for the second session in the Session List while keeping all other fields the same
+*  `schedit c/1 s/1 r/did 5 pushups` edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups while keeping all other fields the same
+*  `schedit c/1 s/1 w/70` edits the schedule containing client index 1 and session index 1 to a weight of 70kg while keeping all other fields the same
+* `schedit c/1 s/1 r/` clears the schedule containing client index 1 and session index 1 remarks while keeping all other fields the same
 
 ### 3.4.3 Deleting a Schedule : `schdel`
 
@@ -636,7 +636,7 @@ Some points to take note when deleting a schedule:
 
 Examples:
 
-* `schdel c/1 s/1` - Deletes the schedule associated with the first client in the Client List and first session in the Session List
+* `schdel c/1 s/1` deletes the schedule associated with the first client in the Client List and first session in the Session List
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -648,6 +648,8 @@ Examples:
 **Q**: I would like to contribute to this project. May I know who do I reach out to?  
 **A**: You may reach our PR Department email [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
+**Q**: Is my data backed up to the internet?  
+**A**: No, your data in FitEgo are saved in the hard disk. You will have to transfer the file, which contains your data, to whichever device you wish to continue using FitEgo on.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -665,7 +667,7 @@ You can find the comprehensive list of commands in the table below.
 |  | Open Settings Window | `settings` | `settings`|
 |  | Clear all data | `clear` | `clear` |
 |  | Exit this program | `exit` | `exit`|
-| Add | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com`|
+| Add | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com a/311, Clementi Ave 2, #02-25`|
 |  | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
 |  | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
 | Edit | Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
