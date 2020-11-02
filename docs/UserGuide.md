@@ -5,7 +5,7 @@ title: User Guide
 
 Welcome to FitEgo! This document will serve as a user guide to the all-in-one scheduling application.
 
-Made for **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
+Made with **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
 Table of Contents
 * Table of Contents
@@ -19,11 +19,11 @@ If this is your first time, here are some quick tips to get started.
 
 1. Ensure you have [Java `11`](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or above installed in your Computer.
 
-1. Download the latest `fitego.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/releases).
+1. Download the latest `FitEgo.jar` from [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your **FitEgo** program.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the figure below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
    <center>Figure 1 - Sample screenshot of our Ui</center>
 
@@ -45,7 +45,7 @@ If this is your first time, here are some quick tips to get started.
 
 ### 1.1 How to interpret notations
 
-Below are a few examples of the common notations in this document in which the different backgrounds and icons represents different meanings.
+Below are a few examples of the common notations in this document in which the different backgrounds and icons represent different meanings.
 
 [comment]: <> (Copy the blocks below and edit your message)
 
@@ -102,11 +102,11 @@ Let's first look at the entities.
 
 If you have a new client interested in your fitness training services, FitEgo can help you to keep track of their information, such as their injury history and contact number.  
 
-All [client-related commands](#32-client-related-keywords) use the prefix `c`. 
+All [client-related commands](#32-client-related-keywords) use prefix `c`. 
 
 #### Sessions
 
-Sessions are a timeslot that is scheduled for a training session. It contains information about the gym, the session's main exercise type, start time and the duration of sessions.
+Sessions are timeslots that are marked for a training session. It contains information about the gym, the session's main exercise type, start time and the duration of sessions.
 
 If you want to host a new training session, you can create it and FitEgo can help you to keep track of its details.
 
@@ -115,25 +115,25 @@ Each session can have more than 1 client, to model a trainer instructing a fitne
 <div markdown="block" class="alert alert-info"> 
 
 :information_source: **Info:**
-FitEgo doesn't allow user to create overlapping sessions. We consider two sessions as overlapping if another session starts before the current session ends.
+FitEgo will not allow you to create overlapping sessions. We consider two sessions as overlapping if another session starts before the current session ends.
 This is to prevent accidental schedule overlaps at different gyms. 
 </div>
 
 
-All [session-related commands](#33-session-related-keywords) have prefix `s`.
+All [session-related commands](#33-session-related-keywords) use prefix `s`.
 
 #### Schedules
 
 Once you have created a session, you can schedule your clients to sessions. 
 
-Schedules are what defines you and your client's interaction. Each schedule contains information about the client and the attended session. 
+Schedules define your interactions with clients. Each schedule contains information about a client and the attended session. 
 
 The bullet points listed below are some information you can record in a schedule.
 - your client's weight if you have recorded your client's weight during a session
 - exercises done by your client during the session as remark
 - your client's payment status on whether he has paid for the session or not
 
-The table below shows an example of schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
+The table below shows an example of 3 schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
 
 <center> Table 1 - Example of Schedule Tracking </center>
 
@@ -143,7 +143,7 @@ The table below shows an example of schedules. The session at Machoman Gym is at
 | Alex | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 60 kg  | Planks (10 x 30 seconds) | unpaid           |
 | Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | paid         |
 
-All [schedule-related commands](#34-schedule-related-keywords) have prefix `sch`.
+All [schedule-related commands](#34-schedule-related-keywords) use prefix `sch`.
 
 #### Verbs 
 
@@ -176,9 +176,9 @@ From the figure above, the GUI is made up of several components.
 | --------------- | ---------------------------------------- | 
 | Toolbar         | Displays the toolbar for this program. You can access the `exit` and `help` command from here.  | 
 | Command Box     | Displays a text box for your input. You can type your command here.          | 
-| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt you an error message | 
+| Result Display  | Displays the result of your command. If the execution is successful, it will display a success message. Otherwise, it will prompt an error message | 
 | Client List     | Displays the list of clients in a list view. You can modify this list using [client-related commands](#32-client-related-keywords) |
-| Main Window     | Displays the main window of this program. It consist of the statistics of this program, today's schedule and quote of the day | 
+| Main Window     | Displays the main window of this program. It consists of the statistics of this program, today's schedule and quote of the day | 
 | Session List    | Displays the list of your sessions in a list view. You can modify this list using [session-related commands](#33-session-related-keywords) | 
 | Status Bar Footer | Displays the current date and time of the program. If you notice this is incorrect, your PC might be using a different timezone| 
 
@@ -187,7 +187,7 @@ From the figure above, the GUI is made up of several components.
 
 :bulb: **Tip:**
 
-You can type input into the Command Box and it will display the command starting with the input. <br/>
+You can type into the Command Box and it will display the commands that start with your current input. <br/>
 <br>
 <center><img src="images/autocomplete_sample.png" alt="autocomplete"/>
 <br>
@@ -206,10 +206,10 @@ In this section, you can find all the keywords that will help you fully utilize 
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters that you need to provide.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets are optional parameters.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/injured-thigh` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -234,7 +234,7 @@ You can return to the home page by using this command.
 <center> Figure 4 - Homepage View </center>
 
 The homepage will display the statistics of your program, today's schedule and quote of the day as shown in the figure above. 
-If you do not have any planned schedules for the day, it will display `There is no schedules assigned today!`.  
+If you do not have any planned schedules for the day, it will display `There are no schedules assigned today!`.  
 
 <div markdown="block" class="alert alert-warning">
 
@@ -272,7 +272,7 @@ Format: `settings`
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-Once the settings window is open, you can use arrow key to toggle the options.
+Once the settings window is open, you can use arrow keys to toggle the options.
 You may press "ESC" key to save your changes and close this window. You can press "F2" key anytime in the 
 program to open the settings window too. <br/>
 
@@ -320,11 +320,11 @@ The `Next Session` field below each Client shows you the earliest upcoming sessi
 
 </div>
 
-### 3.2.1 Listing all clients : `clist`
+### 3.2.1 Listing all Clients : `clist`
 
 You can view the list of all clients in FitEgo. The list of clients will be shown at the Client List. 
 
-By default, Client List will display all the clients. In case you used [`cfind`](#324-locating-clients-by-name--cfind) or any filter-typed commands, 
+By default, Client List will display all the clients. If you have used [`cfind`](#324-locating-clients-by-name--cfind) or any other commands to filter the Client List, 
 you can use `clist` to view the entire list of clients.  
 
 Format: `clist`
@@ -441,7 +441,7 @@ Points to take note when viewing clients from the Client List:
 * The index refers to the index number shown in the displayed Client List.
 * The index **must be a positive integer** 1, 2, 3, ...
 * You can use `F3` to view your client's list of schedules, and `F4` to view your client's weight progression.
-* You can sort the list of schedules by the interval or exercise type.
+* You can sort the list of schedules by the interval's start time, payment status or exercise type.
 
 Examples:
 * `cview 2` opens the second client in FitEgo
@@ -449,7 +449,7 @@ Examples:
 
 <br>
 
-The result of these commands is shown in the image below
+The result of these commands is shown in the figure below
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
 
@@ -572,7 +572,7 @@ Points to take note when viewing session from the Session List:
  | y / Y| year |
   
 <center><img src="images/sview_sample.png" alt="result for 'sview p/+2w'"/><br>
-Figure 10 - Result of running 'sview p/+2w' </center>
+Figure 10 - Result of running <code>sview p/+2w</code> </center>
 
 Examples:
  

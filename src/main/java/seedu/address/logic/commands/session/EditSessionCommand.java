@@ -40,7 +40,7 @@ public class EditSessionCommand extends Command {
 
     public static final String MESSAGE_EDIT_SESSION_SUCCESS = "Edited Session: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_SESSION = "This Session already exists in the FitEgo.";
+    public static final String MESSAGE_DUPLICATE_SESSION = "This Session already exists in FitEgo.";
     public static final String MESSAGE_OVERLAPPING_SESSION = "This Session overlaps with another "
             + "session in the FitEgo.";
 
