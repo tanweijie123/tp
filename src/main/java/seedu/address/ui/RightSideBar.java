@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.session.ViewSessionCommand.PREDICATE_
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_PERIOD;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -13,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.schedule.Schedule;
@@ -21,7 +19,6 @@ import seedu.address.model.session.Session;
 
 public class RightSideBar extends UiPart<AnchorPane> {
     private static final String FXML = "RightSideBar.fxml";
-    private final Logger logger = LogsCenter.getLogger(RightSideBar.class);
     private final MainWindow mainWindow;
     private final Logic logic;
     private String latestPeriod = "WEEK";

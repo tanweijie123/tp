@@ -1,5 +1,6 @@
 package seedu.address.model.session;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -11,16 +12,18 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidInterval(int)}
  */
 public class Interval {
+    private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM uuuu";
     private static final String DATE_TIME_PATTERN = "dd/MM/uuuu HHmm";
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+    private static final String TIME_12HR_PATTERN = "hh:mm a";
+
     public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must be a valid date and time and follows "
             + "dd/MM/yyyy HHmm pattern";
     public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, "
             + "but duration must be a positive integer and " + MESSAGE_DATE_TIME_CONSTRAINTS;
-    private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM";
+
     public static final DateTimeFormatter SIMPLE_DATE_TIME_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(
             SIMPLE_DATE_TIME_PATTERN);
-    private static final String TIME_12HR_PATTERN = "hh:mm a";
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
     public static final DateTimeFormatter TIME_12HR_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(TIME_12HR_PATTERN);
 
     private final LocalDateTime start;
@@ -63,25 +66,56 @@ public class Interval {
         return this.start;
     }
 
-    public String getFormattedStartDateTime(DateTimeFormatter formatter) {
-        return this.start.format(formatter);
-    }
-
     public LocalDateTime getEnd() {
         return this.start.plusMinutes(durationInMinutes);
     }
 
+    public String getFormattedStartDateTime(DateTimeFormatter formatter) {
+        return this.getStart().format(formatter);
+    }
+
+    public String getFormattedEndDateTime(DateTimeFormatter formatter) {
+        return this.getEnd().format(formatter);
+    }
+
+    /**
+     * Returns a String representation of start and end time depending on whether they are on different days.
+     * If same day, the String representation will specify the time of start and end.
+     * Else, also specify the date of the end time.
+     *
+     * @return String representation of start and end time specifying end date if interval is over >1 days.
+     */
+    public String getAdjustedStartDateTime() {
+        if (this.isPastMidnight()) {
+            return getFormattedStartDateTime(TIME_12HR_PATTERN_FORMATTER) + " - "
+                    + getFormattedEndDateTime(SIMPLE_DATE_TIME_PATTERN_FORMATTER) + " "
+                    + getFormattedEndDateTime(TIME_12HR_PATTERN_FORMATTER);
+        } else {
+            return getFormattedStartDateTime(TIME_12HR_PATTERN_FORMATTER) + " - "
+                    + getFormattedEndDateTime(TIME_12HR_PATTERN_FORMATTER);
+        }
+    }
+
+    /**
+     * Returns true if the start and end time are on different days.
+     * @return Boolean value of whether start and end time are on different days
+     */
+    public boolean isPastMidnight() {
+        assert(this.getStart() != null && this.getEnd() != null);
+        return this.getEnd().truncatedTo(DAYS).isAfter(this.getStart().truncatedTo(DAYS));
+    }
+
     @Override
     public String toString() {
-        return getStart().format(DATE_TIME_FORMATTER)
+        return getFormattedStartDateTime(DATE_TIME_FORMATTER)
                 + " - "
-                + getEnd().format(DATE_TIME_FORMATTER);
+                + getFormattedEndDateTime(DATE_TIME_FORMATTER);
     }
 
     public String getTime12hrPattern() {
-        return getStart().format(TIME_12HR_PATTERN_FORMATTER)
+        return getFormattedStartDateTime(TIME_12HR_PATTERN_FORMATTER)
                 + " - "
-                + getEnd().format(TIME_12HR_PATTERN_FORMATTER);
+                + getFormattedEndDateTime(TIME_12HR_PATTERN_FORMATTER);
     }
 
     @Override

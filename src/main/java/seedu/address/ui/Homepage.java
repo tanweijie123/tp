@@ -98,7 +98,7 @@ public class Homepage extends UiPart<AnchorPane> {
         this.lblContent.setText("Today's Schedule - "
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE dd MMMM")));
         todaySchedule.setItems(getTodaySchedule(addressBook.getScheduleList()));
-        todaySchedule.setPlaceholder(new Label("There is no schedules assigned today!"));
+        todaySchedule.setPlaceholder(new Label("There are no schedules assigned today!"));
         todaySchedule.setPrefHeight(250);
         todaySchedule.setCellFactory(listView -> new Homepage.ScheduleListViewCell());
     }

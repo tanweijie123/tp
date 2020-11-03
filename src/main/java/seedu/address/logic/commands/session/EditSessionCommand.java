@@ -40,7 +40,9 @@ public class EditSessionCommand extends Command {
 
     public static final String MESSAGE_EDIT_SESSION_SUCCESS = "Edited Session: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_SESSION = "This Session already exists in the FitEgo.";
+    public static final String MESSAGE_DUPLICATE_SESSION = "This Session already exists in FitEgo.";
+    public static final String MESSAGE_OVERLAPPING_SESSION = "This Session overlaps with another "
+            + "session in the FitEgo.";
 
     private final Index index;
     private final EditSessionDescriptor editSessionDescriptor;
@@ -60,20 +62,29 @@ public class EditSessionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Session> lastShownList = model.getFilteredSessionList();
+        List<Session> lastShownSessionList = model.getFilteredSessionList();
+        List<Session> sessionList = model.getAddressBook().getSessionList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownSessionList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
 
-        Session sessionToEdit = lastShownList.get(index.getZeroBased());
+        Session sessionToEdit = lastShownSessionList.get(index.getZeroBased());
         Session editedSession = createEditedSession(sessionToEdit, editSessionDescriptor);
 
         if (!sessionToEdit.isIdentical(editedSession) && model.hasSession(editedSession)) {
             throw new CommandException(MESSAGE_DUPLICATE_SESSION);
         }
 
+        for (int i = 0; i < sessionList.size(); i++) {
+            if (!sessionList.get(i).equals(sessionToEdit)) {
+                if (Interval.isOverlap(sessionList.get(i).getInterval(), editedSession.getInterval())) {
+                    throw new CommandException(MESSAGE_OVERLAPPING_SESSION);
+                }
+            }
+        }
         model.setSession(sessionToEdit, editedSession);
+
         if (model.hasAnyScheduleAssociatedWithSession(sessionToEdit)) {
             model.editSchedulesAssociatedWithSession(sessionToEdit, editedSession);
         }

@@ -23,7 +23,7 @@ public class WeightUnit {
     /**
      * Constructs a {@code WeightUnit}.
      *
-     * @param weightUnit A valid weightUnit of either kg or lb.
+     * @param weightUnit A String of either 'kg' or 'lb'.
      */
     public WeightUnit(String weightUnit) {
         checkArgument(isValidUnit(weightUnit), MESSAGE_INVALID_UNIT_STATUS);

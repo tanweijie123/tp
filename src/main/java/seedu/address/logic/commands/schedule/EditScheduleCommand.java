@@ -53,7 +53,7 @@ public class EditScheduleCommand extends Command {
 
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Schedule Edited: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule overlaps with an existing Schedule";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "This Schedule already exists in FitEgo";
     public static final String MESSAGE_SCHEDULE_NOT_FOUND = "No schedule is associated with this client and session";
 
     private final Index sessionIndex;

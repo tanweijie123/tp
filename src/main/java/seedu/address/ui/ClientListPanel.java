@@ -1,13 +1,13 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.client.Client;
 import seedu.address.model.session.Session;
@@ -18,7 +18,6 @@ import seedu.address.model.session.Session;
 public class ClientListPanel extends UiPart<Region> {
     private static final String FXML = "ClientListPanel.fxml";
     public final Logic logic;
-    private final Logger logger = LogsCenter.getLogger(ClientListPanel.class);
     private final MainWindow mainWindow;
 
     @FXML
@@ -57,9 +56,13 @@ public class ClientListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 List<Session> associatedSessions = logic.getAssociatedSessionList(client);
-                associatedSessions.sort(Session::compareTo);
-                if (associatedSessions.size() > 0) {
-                    setGraphic(new ClientCard(client, getIndex() + 1, associatedSessions.get(0)).getRoot());
+                List<Session> sortedUpcomingSessions = associatedSessions
+                        .stream()
+                        .filter(s -> !s.getStartTime().isBefore(LocalDateTime.now()))
+                        .sorted()
+                        .collect(Collectors.toList());
+                if (sortedUpcomingSessions.size() > 0) {
+                    setGraphic(new ClientCard(client, getIndex() + 1, sortedUpcomingSessions.get(0)).getRoot());
                 } else {
                     setGraphic(new ClientCard(client, getIndex() + 1, null).getRoot());
                 }
