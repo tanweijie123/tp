@@ -145,7 +145,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets up key press event handlers
+     * Sets up key press event handlers.
      */
     private void setupKeypressHandlers() {
         primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, k -> {

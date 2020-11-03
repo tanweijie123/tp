@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Session's gym in FitEgo.
- * Guarantees: immutable; is valid as declared in {@link #isValidGym(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidGym(String)}.
  */
 public class Gym {
     public static final String MESSAGE_CONSTRAINTS = "Gyms can take any values, and it should not be blank";

@@ -66,7 +66,7 @@ public class SessionBuilder {
     }
 
     /**
-     * Builds the {@code Session}
+     * Builds the {@code Session}.
      */
     public Session build() {
         return new Session(gym, exerciseType, interval);
