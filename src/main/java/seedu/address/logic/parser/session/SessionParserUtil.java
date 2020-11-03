@@ -22,6 +22,7 @@ public class SessionParserUtil extends ParserUtil {
      * Parses a {@code String gym} into a {@code Gym}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param gym String to be parsed.
      * @throws ParseException if the given {@code gym} is invalid.
      */
     public static Gym parseGym(String gym) throws ParseException {
@@ -37,6 +38,7 @@ public class SessionParserUtil extends ParserUtil {
      * Parses a {@code String exerciseType} into an {@code ExerciseType}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param exerciseType String to be parsed.
      * @throws ParseException if the given {@code exerciseType} is invalid.
      */
     public static ExerciseType parseExerciseType(String exerciseType) throws ParseException {
@@ -51,6 +53,8 @@ public class SessionParserUtil extends ParserUtil {
     /**
      * Parses a {@code String startTime, @code String duration} into an {@code Interval}.
      *
+     * @param startTime Interval's start time.
+     * @param duration Interval's duration in minutes.
      * @throws ParseException if the given {@code interval} is invalid.
      */
     public static Interval parseIntervalFromStartAndDuration(String startTime, String duration) throws ParseException {
@@ -78,6 +82,8 @@ public class SessionParserUtil extends ParserUtil {
     /**
      * Parses a {@code String startTime, @code String duration} into an {@code Interval}.
      *
+     * @param startTime Interval's start time.
+     * @param endTime Interval's end time.
      * @throws ParseException if the given {@code interval} is invalid.
      */
     public static Interval parseIntervalFromStartAndEnd(String startTime, String endTime) throws ParseException {
@@ -101,20 +107,20 @@ public class SessionParserUtil extends ParserUtil {
     }
 
     /**
-     * Standardize the output format for DateTime string.
+     * Standardizes the output format for LocalDateTime string.
      *
-     * @param dateTime the LocalDateTime object.
-     * @return the String object of datetime parsed.
+     * @param dateTime LocalDateTime input.
+     * @return The String object of datetime parsed.
      */
     public static String parseDateTimeToString(LocalDateTime dateTime) {
         return dateTime.format(Interval.DATE_TIME_FORMATTER);
     }
 
     /**
-     * Standardize the input format for DateTime string.
+     * Standardizes the input format for LocalDateTime string.
      *
      * @param input the string to parse into LocalDateTime.
-     * @return the LocalDateTime object converted.
+     * @return The LocalDateTime object converted.
      */
     public static LocalDateTime parseStringToDateTime(String input) throws ParseException {
         try {
@@ -126,10 +132,10 @@ public class SessionParserUtil extends ParserUtil {
     }
 
     /**
-     * Tries to parse a String input as LocalDateTime
+     * Checks whether the String input can be parsed into the standardized LocalDateTime format
      *
-     * @param input a String to check whether if it is a valid date time pattern.
-     * @return true if input is a invalid date time pattern, false otherwise.
+     * @param input the String to check.
+     * @return true if input is a invalid date time pattern.
      */
     public static boolean isInvalidDateTime(String input) {
         try {
@@ -141,10 +147,10 @@ public class SessionParserUtil extends ParserUtil {
     }
 
     /**
-     * Tries to parse a String input as Integer
+     * Checks whether the String input can be parsed as an integer.
      *
-     * @param input a String to check whether if it contains an integer.
-     * @return true if input is integer, false otherwise.
+     * @param input String to check.
+     * @return true if input is integer.
      */
     public static boolean isInteger(String input) {
         try {

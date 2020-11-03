@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.session.Session;
 
 /**
- * Adds a session
+ * Adds a session to the address book.
  */
 public class AddSessionCommand extends Command {
     public static final String COMMAND_WORD = "sadd";

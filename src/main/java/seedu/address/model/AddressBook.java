@@ -258,6 +258,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Finds all {@code Schedule} that is associated to {@code clientKey} from this {@code ScheduleList}.
      * {@code clientKey} must exist in the schedule list.
+     *
      * @return A list of schedules that are associated to {@code clientKey} in the {@code ScheduleList}.
      */
     public List<Schedule> findScheduleByClient(Client clientKey) {

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Session's exercise type in FitEgo.
- * Guarantees: immutable; is valid as declared in {@link #isValidExerciseType(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidExerciseType(String)}.
  */
 public class ExerciseType {
     public static final String MESSAGE_CONSTRAINTS = "Exercise types can take any values, and it should not be blank";

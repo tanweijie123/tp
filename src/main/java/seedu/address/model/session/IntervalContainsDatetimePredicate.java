@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Session}'s {@code interval} contains datetime given (interval's start and end time inclusive)
+ * Tests that a {@code Session}'s {@code interval} contains datetime given (inclusive of interval's start and end time).
  */
 public class IntervalContainsDatetimePredicate implements Predicate<Session> {
     private final LocalDateTime datetime;

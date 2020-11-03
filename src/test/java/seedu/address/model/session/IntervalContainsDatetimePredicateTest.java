@@ -15,11 +15,12 @@ public class IntervalContainsDatetimePredicateTest {
     private LocalDateTime firstDateTime;
     private LocalDateTime secondDateTime;
 
-    {
+    public IntervalContainsDatetimePredicateTest() {
         try {
             firstDateTime = SessionParserUtil.parseStringToDateTime("20/09/2020 1300");
             secondDateTime = firstDateTime.plusMinutes(60);
         } catch (Exception e) {
+            // If you reach here, it means your string input to firstDateTime is invalid.
             throw new AssertionError("This should not be reached!");
         }
     }

@@ -13,8 +13,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.session.Session;
 
 /**
- * Covering integration test between DeleteSessionCommand and Associated Schedules
- * Since index has been unit tested in DeleteSessionCommandTest, we will focus on the interaction between the 2 classes
+ * Covers integration test between DeleteSessionCommand and Associated Schedules.
+ * Since index has been unit tested in DeleteSessionCommandTest, we will focus on the interaction between the 2 classes.
  */
 public class DeleteSessionCommandIntegrationTest {
 

@@ -286,7 +286,9 @@ In this section, we will describe client-related keywords. Before that, let's de
 
 :information_source: **Client:**
 
-A Client are someone who is interested in or has engaged with your fitness training services.
+A client is someone who is interested in or has engaged with your fitness training services. 
+
+Each client must have a unique email.
 
 </div>
 
@@ -318,6 +320,9 @@ You can add a client to the Client List including their details. This allows you
 
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
+Points to take note when editing a client's information:
+* Email is unique for each client. This means you cannot add a new client if the email specified is already used by another client.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0). Each tag can include
 alphanumeric characters or dash (`-`), but you are not allowed to start or end
@@ -346,6 +351,7 @@ Format: `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 Points to take note when editing a client's information:
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed Client List. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* You cannot have multiple clients with the same email. This means you will get an error message if the email you specified here is already used by another client.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed, i.e. adding of tags is not cumulative.
 * You can remove all of the client’s tags by typing `t/` without specifying any tags after it.
