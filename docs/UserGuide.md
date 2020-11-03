@@ -7,7 +7,8 @@ Welcome to FitEgo! This document will serve as a user guide to the all-in-one sc
 
 Made with **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
-Table of Contents
+## Table of Contents
+
 * Table of Contents
 {:toc}
 
@@ -140,7 +141,7 @@ You can refer to the table and the figure below to familiarize yourself with the
 
 ![AnnotatedUi](images/AnnotatedUi.png)
 <center> Figure 2 - Callouts of the various UI components</center><br/>
-<center> Table 2 - Functions of UI Components </center>
+<center> Table 1 - Functions of UI Components </center>
 From the figure above, the GUI is made up of several components. 
 
 | Component | Description |
@@ -551,7 +552,7 @@ Points to take note when viewing session from the Session List:
  * On top of the Session List, you can find the type of the period you are viewing.
  * The recognized periods are as follows:
  
- <center>Table 3 - List of recognized periods </center>
+ <center>Table 2 - List of recognized periods </center>
  
  | Period | Sessions displayed |
  | -------- | -------- |
@@ -564,7 +565,7 @@ Points to take note when viewing session from the Session List:
  
  
  * The recognized units are as follows:
- <center>Table 4 - List of recognized time units </center>
+ <center>Table 3 - List of recognized time units </center>
  
  | Unit | Time unit parsed |
  | -------- | -------- |
@@ -617,7 +618,7 @@ Listed below are three other types of information that you can add into a schedu
 
 The table below shows an example of schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
 
-<center> Table 1 - Example of Schedule Tracking </center>
+<center> Table 4 - Example of Schedule Tracking </center>
 
 | Client   | Session                                                      | Weight | Remark                                                       | Payment Status |
 | -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | -------------- |
@@ -706,28 +707,33 @@ Examples:
 
 You can find the comprehensive list of commands in the table below. 
 
-<center>Table 5 - Command Summary</center>
+<center>Table 5 - General Commands Summary</center>
 
-| Common Commands | Action | Format | Example |
-| ------ | ---------| -------- | --------- |
-| General Commands | Open Home Page | `home` | `home`| 
-|  | Open Help Window | `help` | `help`|
-|  | Open Settings Window | `settings` | `settings`|
-|  | Clear all data | `clear` | `clear` |
-|  | Exit this program | `exit` | `exit`|
-| Add | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com a/12 Marina Boulevard`|
-|  | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
-|  | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-| Edit | Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
-|  | Edit Session Info |`sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
-|  | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups w/70kg` |
-| Delete | Delete Client Info |`cdel INDEX [f/]` |`cdel 1`|
-|  | Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
-|  | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
-| List/View | List All Clients | `clist`  |  `clist`  |
-|   | View a Client's Full Profile | `cview INDEX` | `cview 1`|
-|  | View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
-| Find | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
+| Action | Format |
+| ---------| -------- |
+| Open Home Page | `home` |
+| Open Help Window | `help` |
+| Open Settings Window | `settings` |
+| Clear all data | `clear` |
+| Exit this program | `exit` |
+
+<center>Table 6 - Keyword based Commands Summary (grouped by action) </center>
+
+| Action | Entity | Format |
+| ---------| -------- | -------- |
+| Add | Client | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`|
+| Add | Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` |
+| Add | Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`|
+| Edit | Client | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`|
+| Edit | Session |`sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]` |
+| Edit | Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`|
+| Delete | Client |`cdel INDEX [f/]` |
+| Delete | Session |`sdel INDEX [f/]` |
+| Delete | Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX` |
+| List | All Clients | `clist`  |
+| View | Client's Full Profile | `cview INDEX` |
+| View | Sessions within Period |`sview p/PERIOD ` |
+| Find | Client by Name | `cfind KEYWORD [MORE_KEYWORDS]` |
 
 # 6 Acknowledgement
 * This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)

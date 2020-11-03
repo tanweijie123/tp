@@ -37,7 +37,7 @@ public class AddSessionCommand extends Command {
     private final Session toAdd;
 
     /**
-     * Creates an AddSession to add the specified {@code Session}
+     * Creates an AddSession to add the specified {@code Session}.
      */
     public AddSessionCommand(Session session) {
         requireNonNull(session);
