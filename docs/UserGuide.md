@@ -23,7 +23,7 @@ If this is your first time, here are some quick tips to get started.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your **FitEgo** program.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the figure below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
    <center>Figure 1 - Sample screenshot of our Ui</center>
 
@@ -94,31 +94,31 @@ May have irreversible effect when used. Backup and caution is recommended.
 
 You're a fitness instructor.
 
-Your clients' details, clients' progress, clients' payment status, and your own schedules are spread across 3 or 4 different applications. 
+You record your clients' details, training progress, payment status and your own timetable across 3 or 4 different applications.
 
-You struggle to keep it updated.
+You struggle to keep all of them updated.
 
 You struggle even more to get insights out of them.
 
 FitEgo can help you with that. Here's how:
 
-FitEgo lets you record crucial information that you want to keep track of using three types of items:
+FitEgo lets you record crucial information that you want to keep track of using three types of entities:
 
 Item | Prefix | What it represents
 -----|-------| -------------------
-Client | c | Your client
+Client | c | Someone who is interested in or has engaged with your services
 Session | s | Timeslot for a fitness session
-Schedule | sch | A schedule you made with your client
+Schedule | sch | A client's booking of a session
 
 And here's what you can do:
-1. When you find a client that is interested in your fitness training services, add it to your list of clients with the: <br />
+1. When you find a client that is interested in your fitness training services, you can add him/her to your list of clients with the: <br />
 [`cadd` command](#322-adding-a-client--cadd)
 2. Next, create a fitness session on any free timeslot that you have with the: <br />
 [`sadd` command](#331-adding-a-session--sadd)
 3. And, schedule your client to the fitness session with the: <br />
 [`schadd` command](#341-adding-a-schedule--schadd)
 
-Simple? Well that's how simple it is to use FitEgo.
+Simple? That's the point of FitEgo.
 
 Now, you will probably need to edit, delete and look through your clients and sessions along the way - 
 FitEgo supports all those features and more.
@@ -279,13 +279,17 @@ Your data in FitEgo are saved in the hard disk automatically after any command t
 
 ## 3.2 Client-related Keywords
 
-We will describe client-related keywords in this section. Before that, let's define what we mean by a client.
+In this section, we will describe client-related keywords. Before that, let's define what we mean by `client`.
   
-#### Clients
+<div markdown="block" class="alert alert-info"> 
 
-Someone who is interested in your fitness training services
+:information_source: **Client:**
 
-All of the commands here will interact with the Client List which is located at the [left of the UI](#2-ui-orientation). 
+A Client are someone who is interested in or has engaged with your fitness training services.
+
+</div>
+
+Client-related commands will interact with the Client List which is located on the [left of the UI](#2-ui-orientation). 
 
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 <br/>Figure 6 - Sample of Client List</center>
@@ -437,15 +441,19 @@ The result of these commands is shown in the figure below
 
 ## 3.3 Session-related Keywords 
 
-We will describe all session-related keywords in this section, but before that what exactly is a session?
+We will describe all session-related keywords in this section. Before that, let's define what we mean by `session`.
 
-#### Sessions
+<div markdown="block" class="alert alert-info"> 
 
-Sessions represents a timeslot that is scheduled for a training session. It contains information about the gym, the session's main exercise type, start time and the duration of sessions.
+:information_source: **Session:**
 
-Each session can have more than 1 client, to model a trainer instructing a fitness class.
+A session represents a timeslot that is marked for a training session. It contains information about the gym, the main exercise type, the start time and the duration of sessions.
 
-All of the session-related commands will interact with the Session List which is located at the [right of the UI](#2-ui-orientation). The figure below shows how it looks like.
+Each session can be scheduled with multiple clients, to model a trainer instructing a group fitness class.
+
+</div>
+
+Session-related commands will interact with the Session List which is located on the [right of the UI](#2-ui-orientation). The figure below shows how it looks like.
 
 <center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" /><br/>
 Figure 9 - Sample of Session List</center><br/>
@@ -468,7 +476,7 @@ This provides you with an easy reference to the periods in which you have sessio
 Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 
 Points to take note when adding a session to the Session List:
-* Start time should be of format "dd/MM/yyyy HHmm" (date/month/year Hour minutes).
+* Start time should be of format "dd/MM/yyyy HHmm" (date/month/year Hour minutes in 24 hr format).
 * Duration is in minutes.
 * Duration should be a positive integer (larger than 0).
 * If you want to schedule a session with a client, you need to make sure the session exists in FitEgo, then create a schedule (`schadd`) that references the client and the session.
@@ -476,8 +484,10 @@ Points to take note when adding a session to the Session List:
 <div markdown="block" class="alert alert-info"> 
 
 :information_source: **Info:**
-FitEgo doesn't allow user to create overlapping sessions. We consider two sessions as overlapping if another session starts before the current session ends.
-This is to prevent accidental schedule overlaps at different gyms. 
+
+FitEgo will not allow you to create overlapping sessions. We consider two sessions as overlapping if another session starts before the current session ends.
+
+This helps to prevent you from accidentally agreeing to 2 sessions that overlaps with each other but are located on two different gyms. 
 
 </div>
 
@@ -588,16 +598,22 @@ the Session List will still be showing Friday's sessions at that point of time. 
 
 ## 3.4 Schedule-related Keywords 
 
-In this section, we will describe all schedule-related keywords, but before that, what exactly is a schedule?
+In this section, we will describe all schedule-related keywords. Before that, let's define what we mean by `schedule`.
 
-#### Schedules
+<div markdown="block" class="alert alert-info"> 
 
-Schedules are what defines you and your client's interaction. Each schedule contains information about the client and the attended session. 
+:information_source: **Schedule:**
 
-Listed below are some information you can record in a schedule.
-- your client's weight if you have recorded your client's weight during a session
-- exercises done by your client during the session as remark
-- your client's payment status on whether he has paid for the session or not
+A schedule records the interaction between you and your client within a session. 
+Each schedule contains information about the client and the attended session. 
+
+Listed below are three other types of information that you can add into a schedule:
+1. your client's weight if you have recorded your client's weight during a session
+1. exercises done by your client during the session as remark
+1. your client's payment status on whether he has or has not paid for the session
+
+</div>
+
 
 The table below shows an example of schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
 
