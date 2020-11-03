@@ -616,7 +616,7 @@ Points to take note when editing a schedule's details:
 
 Examples:
 
-*  `schedit c/1 s/1 us/2` reschedules the first client in the Client List to the second session in the Session List while keeping all other fields the same
+*  `schedit c/1 s/1 us/2` reschedules the first session in the Session List to the second session in the Session List while keeping all other fields the same
 *  `schedit c/1 s/1 pd/paid` indicates that the first client in the Client List has paid for the second session in the Session List while keeping all other fields the same
 *  `schedit c/1 s/1 r/did 5 pushups` edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups while keeping all other fields the same
 *  `schedit c/1 s/1 w/70` edits the schedule containing client index 1 and session index 1 to a weight of 70kg while keeping all other fields the same
