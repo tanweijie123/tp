@@ -679,7 +679,7 @@ Examples:
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FitEgo home folder.
 
 **Q**: I would like to contribute to this project. May I know who do I reach out to?  
-**A**: You may reach our PR Department email [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+**A**: To get in touch with us, you may post an issue [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/issues/new), and we will get back to you as soon as possible.
 
 **Q**: Am I able to mark multiple schedules as paid or unpaid with one command?  
 **A**: Currently, you are only able to mark only one schedule as paid or unpaid per command. This is a feature we are aiming to implement in the future.
