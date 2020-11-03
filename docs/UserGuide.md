@@ -7,7 +7,8 @@ Welcome to FitEgo! This document will serve as a user guide to the all-in-one sc
 
 Made with **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
-Table of Contents
+## Table of Contents
+
 * Table of Contents
 {:toc}
 
@@ -38,7 +39,7 @@ If this is your first time, here are some quick tips to get started.
 
    * **[`exit`](#315-exiting-the-program--exit)** : Exits the app.
 
-1. Read [How to use](#12-how-to-use-fitego) for a quick understanding of commands in FitEgo.
+1. Read [Overview](#12-overview) for a quick understanding of commands in FitEgo.
 
 1. Refer to the [Keyword](#31-main-keywords) below for more details of each command.
 
@@ -90,76 +91,40 @@ May have irreversible effect when used. Backup and caution is recommended.
 </div>
 
 
-### 1.2 How to use FitEgo
+### 1.2 Overview
 
-FitEgo supports a lot of [commands](#5-command-summary), and it might seem daunting to learn all at once. This section aims to solve that, and guide you to understand how most FitEgo's commands are structured!
+You're a fitness instructor.
 
-There are 3 major entities in FitEgo (clients, sessions, and schedules), and 5 major verbs (add, edit, delete, view, list).
+You record your clients' details, training progress, payment status and your own timetable across 3 or 4 different applications.
 
-Let's first look at the entities.
+You struggle to keep all of them updated.
 
-#### Clients
+You struggle even more to get insights out of them.
 
-If you have a new client interested in your fitness training services, FitEgo can help you to keep track of their information, such as their injury history and contact number.  
+FitEgo can help you with that. Here's how:
 
-All [client-related commands](#32-client-related-keywords) use prefix `c`. 
+FitEgo lets you record crucial information that you want to keep track of using three types of entities:
 
-<div markdown="block" class="alert alert-info"> 
+Item | Prefix | What it represents
+-----|-------| -------------------
+Client | c | Someone who is interested in or has engaged with your services
+Session | s | Timeslot for a fitness session
+Schedule | sch | A client's booking of a session
 
-:information_source: **Note:**
-Each client must have a unique email.
-</div>
+And here's what you can do:
+1. When you find a client that is interested in your fitness training services, you can add him/her to your list of clients with the: <br />
+[`cadd` command](#322-adding-a-client--cadd)
+2. Next, create a fitness session on any free timeslot that you have with the: <br />
+[`sadd` command](#331-adding-a-session--sadd)
+3. And, schedule your client to the fitness session with the: <br />
+[`schadd` command](#341-adding-a-schedule--schadd)
 
+Simple? That's the point of FitEgo.
 
-#### Sessions
+Now, you will probably need to edit, delete and look through your clients and sessions along the way - 
+FitEgo supports all those features and more.
 
-Sessions are timeslots that are marked for a training session. It contains information about the gym, the session's main exercise type, start time and the duration of sessions.
-
-If you want to host a new training session, you can create it and FitEgo can help you to keep track of its details.
-
-Each session can have more than 1 client, to model a trainer instructing a fitness class.
-
-<div markdown="block" class="alert alert-info"> 
-
-:information_source: **Info:**
-FitEgo will not allow you to create overlapping sessions. We consider two sessions as overlapping if another session starts before the current session ends.
-This is to prevent accidental schedule overlaps at different gyms. 
-</div>
-
-
-All [session-related commands](#33-session-related-keywords) use prefix `s`.
-
-#### Schedules
-
-Once you have created a session, you can schedule your clients to sessions. 
-
-Schedules define your interactions with clients. Each schedule contains information about a client and the attended session. 
-
-The bullet points listed below are some information you can record in a schedule.
-- your client's weight if you have recorded your client's weight during a session
-- exercises done by your client during the session as remark
-- your client's payment status on whether he has paid for the session or not
-
-The table below shows an example of 3 schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
-
-<center> Table 1 - Example of Schedule Tracking </center>
-
-| Client   | Session                                                      | Weight | Remark                                                       | Payment Status |
-| -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | -------------- |
-| John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | paid           |
-| Alex | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 60 kg  | Planks (10 x 30 seconds) | unpaid           |
-| Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | paid         |
-
-All [schedule-related commands](#34-schedule-related-keywords) use prefix `sch`.
-
-#### Verbs 
-
-Once you learn the entities, you can now combine it with the verbs. For example, if you combine `c` (client prefix) and `add` (verb for adding an entity), you have `cadd` which adds a client to FitEgo.
-
-Other examples include:
-
-- `sadd`: Adds a session, `schadd`: Adds a schedule
-- `cdel`: Deletes a client, `sdel`: Deletes a session, `schdel`: Deletes a schedule
+Ready to begin? Let's start exploring!
     
 ### 1.3 General Note
 
@@ -176,7 +141,7 @@ You can refer to the table and the figure below to familiarize yourself with the
 
 ![AnnotatedUi](images/AnnotatedUi.png)
 <center> Figure 2 - Callouts of the various UI components</center><br/>
-<center> Table 2 - Functions of UI Components </center>
+<center> Table 1 - Functions of UI Components </center>
 From the figure above, the GUI is made up of several components. 
 
 | Component | Description |
@@ -314,7 +279,20 @@ Your data in FitEgo are saved in the hard disk automatically after any command t
 ---
 
 ## 3.2 Client-related Keywords
-All client-related keywords are described in this section. All of the commands here will interact with the Client List which is located at the [left of the UI](#2-ui-orientation). 
+
+In this section, we will describe client-related keywords. Before that, let's define what we mean by `client`.
+  
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Client:**
+
+A client is someone who is interested in or has engaged with your fitness training services. 
+
+Each client must have a unique email.
+
+</div>
+
+Client-related commands will interact with the Client List which is located on the [left of the UI](#2-ui-orientation). 
 
 <center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
 <br/>Figure 6 - Sample of Client List</center>
@@ -470,7 +448,19 @@ The result of these commands is shown in the figure below
 
 ## 3.3 Session-related Keywords 
 
-All session-related keywords are described in this section. All of the commands here will interact with the Session List which is located at the [right of the UI](#2-ui-orientation). The figure below shows how it looks like.
+We will describe all session-related keywords in this section. Before that, let's define what we mean by `session`.
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Session:**
+
+A session represents a timeslot that is marked for a training session. It contains information about the gym, the main exercise type, the start time and the duration of sessions.
+
+Each session can be scheduled with multiple clients, to model a trainer instructing a group fitness class.
+
+</div>
+
+Session-related commands will interact with the Session List which is located on the [right of the UI](#2-ui-orientation). The figure below shows how it looks like.
 
 <center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" /><br/>
 Figure 9 - Sample of Session List</center><br/>
@@ -487,17 +477,25 @@ of session view using [<code>sview</code>](#334-viewing-sessions-within-period--
 
 ### 3.3.1 Adding a Session : `sadd`
 
-If you have planned a session in your timetable, you can create a session with its relevant details. This provides you with an easy reference to the periods where you are not available and the location of the session.
+You can create a session with its relevant details. It will show up on the Session List panel on the right side of the UI.
+This provides you with an easy reference to the periods in which you have session(s) scheduled and the location of each session.
 
 Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
 
 Points to take note when adding a session to the Session List:
-* Start time should be of format "dd/MM/yyyy HHmm".
+* Start time should be of format "dd/MM/yyyy HHmm" (date/month/year Hour minutes in 24 hr format).
 * Duration is in minutes.
 * Duration should be a positive integer (larger than 0).
+* If you want to schedule a session with a client, you need to make sure the session exists in FitEgo, then create a schedule (`schadd`) that references the client and the session.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    The session's time should not overlap with previously created sessions. 
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Info:**
+
+FitEgo will not allow you to create overlapping sessions. We consider two sessions as overlapping if another session starts before the current session ends.
+
+This helps to prevent you from accidentally agreeing to 2 sessions that overlaps with each other but are located on two different gyms. 
+
 </div>
 
 Examples:
@@ -560,7 +558,7 @@ Points to take note when viewing session from the Session List:
  * On top of the Session List, you can find the type of the period you are viewing.
  * The recognized periods are as follows:
  
- <center>Table 3 - List of recognized periods </center>
+ <center>Table 2 - List of recognized periods </center>
  
  | Period | Sessions displayed |
  | -------- | -------- |
@@ -573,7 +571,7 @@ Points to take note when viewing session from the Session List:
  
  
  * The recognized units are as follows:
- <center>Table 4 - List of recognized time units </center>
+ <center>Table 3 - List of recognized time units </center>
  
  | Unit | Time unit parsed |
  | -------- | -------- |
@@ -606,7 +604,33 @@ the Session List will still be showing Friday's sessions at that point of time. 
 ---
 
 ## 3.4 Schedule-related Keywords 
-All schedule-related keywords are described in this section. All of the commands here will interact with the various parts of [Ui](#2-ui-orientation). 
+
+In this section, we will describe all schedule-related keywords. Before that, let's define what we mean by `schedule`.
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Schedule:**
+
+A schedule records the interaction between you and your client within a session. 
+Each schedule contains information about the client and the attended session. 
+
+Listed below are three other types of information that you can add into a schedule:
+1. your client's weight if you have recorded your client's weight during a session
+1. exercises done by your client during the session as remark
+1. your client's payment status on whether he has or has not paid for the session
+
+</div>
+
+
+The table below shows an example of schedules. The session at Machoman Gym is attended by 2 clients. For each client, we can take note of their weight, activities, and payment status. 
+
+<center> Table 4 - Example of Schedule Tracking </center>
+
+| Client   | Session                                                      | Weight | Remark                                                       | Payment Status |
+| -------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ | -------------- |
+| John Doe | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 70 kg  | Planks (20 x 30 seconds), body weight squats (5 sets of 25 reps) | paid           |
+| Alex | Endurance training at Machoman Gym (24/10/2020 1200 - 1400)  | 60 kg  | Planks (10 x 30 seconds) | unpaid           |
+| Bernice  | Body building training at Getwell Gym (27/10/2020 1300 - 1500) | 85 kg  | Chinup (5 sets of 5 reps), muscle strain after bench press   | paid         |
 
 To check if you have scheduled a session with a client, you can check if the session in the Session List contains the client's name. 
 
@@ -689,28 +713,33 @@ Examples:
 
 You can find the comprehensive list of commands in the table below. 
 
-<center>Table 5 - Command Summary</center>
+<center>Table 5 - General Commands Summary</center>
 
-| Common Commands | Action | Format | Example |
-| ------ | ---------| -------- | --------- |
-| General Commands | Open Home Page | `home` | `home`| 
-|  | Open Help Window | `help` | `help`|
-|  | Open Settings Window | `settings` | `settings`|
-|  | Clear all data | `clear` | `clear` |
-|  | Exit this program | `exit` | `exit`|
-| Add | Add Client Info | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`| `cadd n/Jane Doe p/91234567 e/jane@gmail.com a/12 Marina Boulevard`|
-|  | Add a Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` | `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` |
-|  | Create a Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`| `schadd c/1 s/3`|
-| Edit | Edit Client Info | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`| `cedit 1 n/Janie Doe`|
-|  | Edit Session Info |`sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]` | `sedit 1 g/Machoman at/29/09/2020 1600 t/120`|
-|  | Edit a Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`| `schedit c/1 s/1 us/1 pd/paid r/did 5 pushups w/70kg` |
-| Delete | Delete Client Info |`cdel INDEX [f/]` |`cdel 1`|
-|  | Delete a Session |`sdel INDEX [f/]` | `sdel 1` |
-|  | Delete a Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX`  | `schdel c/2 s/3` |
-| List/View | List All Clients | `clist`  |  `clist`  |
-|   | View a Client's Full Profile | `cview INDEX` | `cview 1`|
-|  | View Sessions within Period|`sview p/PERIOD ` | `sview p/all`|
-| Find | Find Client by Name | `cfind KEYWORD [MORE_KEYWORDS]`| `cfind John Doe`|
+| Action | Format |
+| ---------| -------- |
+| Open Home Page | `home` |
+| Open Help Window | `help` |
+| Open Settings Window | `settings` |
+| Clear all data | `clear` |
+| Exit this program | `exit` |
+
+<center>Table 6 - Keyword based Commands Summary (grouped by action) </center>
+
+| Action | Entity | Format |
+| ---------| -------- | -------- |
+| Add | Client | `cadd n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]`|
+| Add | Session | `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION` |
+| Add | Schedule |`schadd c/CLIENT_INDEX s/SESSION_INDEX`|
+| Edit | Client | `cedit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`|
+| Edit | Session |`sedit INDEX [g/GYM_NAME] [ex/EXERCISE_TYPE] [at/START_TIME t/DURATION]` |
+| Edit | Schedule |`schedit c/CLIENT_INDEX s/SESSION_INDEX [us/UPDATED_SESSION_INDEX] [pd/PAYMENT_STATUS] [r/REMARK] [w/WEIGHT]`|
+| Delete | Client |`cdel INDEX [f/]` |
+| Delete | Session |`sdel INDEX [f/]` |
+| Delete | Schedule |`schdel c/CLIENT_INDEX s/SESSION_INDEX` |
+| List | All Clients | `clist`  |
+| View | Client's Full Profile | `cview INDEX` |
+| View | Sessions within Period |`sview p/PERIOD ` |
+| Find | Client by Name | `cfind KEYWORD [MORE_KEYWORDS]` |
 
 # 6 Acknowledgement
 * This project uses libraries from [ControlsFX](https://github.com/controlsfx/controlsfx)
