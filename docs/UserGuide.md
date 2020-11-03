@@ -681,6 +681,9 @@ Examples:
 **Q**: I would like to contribute to this project. May I know who do I reach out to?  
 **A**: You may reach our PR Department email [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
+**Q**: Am I able to mark multiple schedules as paid or unpaid with one command?  
+**A**: Currently, you are only able to mark only one schedule as paid or unpaid per command. This is a feature we are aiming to implement in the future.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
