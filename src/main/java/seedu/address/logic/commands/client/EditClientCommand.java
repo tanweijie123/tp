@@ -54,7 +54,7 @@ public class EditClientCommand extends Command {
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CLIENT = "This Client already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "A client with the same email already exists in FitEgo.";
 
     private final Index index;
     private final EditClientDescriptor editClientDescriptor;

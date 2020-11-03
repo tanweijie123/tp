@@ -36,7 +36,7 @@ public class AddClientCommand extends Command {
             + PREFIX_TAG + "allergy-dairy ";
 
     public static final String MESSAGE_SUCCESS = "New Client added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CLIENT = "This Client already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "A client with the same email already exists in FitEgo.";
 
     private final Client toAdd;
 
