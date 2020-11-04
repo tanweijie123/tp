@@ -181,7 +181,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/DeleteSessionActivityDiagram.png" style="width: 75%; height: auto;"/>
+        <img src="images/DeleteSessionActivityDiagram.png" style="width: 50%; height: auto;"/>
     </p>
     <figcaption>Figure - Delete Session Activity Diagram</figcaption>
 </figure>
@@ -190,13 +190,13 @@ The following diagram shows a possible application state in FitEgo.
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/tracing/DeleteSessionObjectDiagram.png" style="width: 75%; height: auto;"/>
+        <img src="images/tracing/DeleteSessionObjectDiagram.png" style="width: auto; height: 50%;"/>
     </p>
     <figcaption>Figure - A possible application state</figcaption>
 </figure>
 
 In the following sequence diagram, we trace the execution when the user decides to enter the DeleteSession command 
-`sdel 1 f/` into FitEgo with the above scenario, where the first session in FitEgo is the "enduranceTraining" session. 
+`sdel 1 f/` into FitEgo with the above scenario, where the first session in FitEgo is the `enduranceTraining` session. 
 For simplicity, we will refer to this command input as `commandText`. 
 
 ![DeleteSessionSequenceDiagram](images/tracing/DeleteSessionSequenceDiagram.png)
@@ -219,29 +219,29 @@ message back to the UI and return control back to `LogicManager`. It will persis
 
 #### Design Considerations
 
-In designing this feature, we had to consider the alternative ways in which we can choose to handle Session deletion
+In designing this feature, we had to consider several alternative ways in which we can choose to handle session deletion
 
 - **Alternative 1 (current choice):** Delete session only after all associated schedules are deleted.
     
     - Pros: 
-        1. Easier to maintain data integrity
+        1. Easier to maintain data integrity.
     - Cons:
-        1. Extra logic inside the method implementation 
-        2. May have performance issues in terms of response time if there are a lot of Schedules or Sessions
+        1. Extra logic inside the method implementation.
+        2. May have performance issues in terms of response time if there are a lot of schedules or sessions stored in FitEgo.
     
 - **Alternative 2:** Mark session as deleted and treat schedules with deleted session as invalid
     
     - Pros: 
         1. Easier to implement the method. 
-        2. No need to handle additional force flag option
+        2. No need to handle additional force flag option.
     - Cons: 
-        1. We must keep track of deleted sessions, which might make the application bloat up over time.
-        2. Harder to maintain data integrity over time
+        1. We must keep track of deleted sessions, which might bloat up the application over time.
+        2. Harder to maintain data integrity over time.
         
 - **Alternative 3:** Delete the session without checking for associated schedules
 
-    - Pros: Easy to implement
-    - Cons: A schedule might have invalid session, breaking data integrity
+    - Pros: Easy to implement.
+    - Cons: A schedule might have invalid session, breaking data integrity.
 
 
 ### Add Schedule feature
