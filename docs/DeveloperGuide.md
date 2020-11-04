@@ -429,8 +429,8 @@ The following activity diagram summarizes what happens when a user executes the 
 
 **Target user profile**:
 * is a fitness instructor who has trouble managing a significant number of clients and sessions
-* prefer desktop apps over other types
-* favours an All-in-One software tracker
+* prefers desktop apps over other types
+* favours an All-in-One software over multiple apps
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps while appreciates a nice GUI that can show his weekly schedule
@@ -614,18 +614,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
       
       
-**Use case: Create a Session**
+**Use case: Add a Session**
 
 **MSS**
-1.  User requests to add a specific Session to the Session List.
-2.  FitEgo adds the Session.
+1.  User requests to add a specific session and provides details.
+2.  FitEgo adds the Session to the Session List.
 
     Use case ends.
     
 **Extensions**
 
 * 1a. The session overlaps with an existing Session.
-    
+
     * 1a1. FitEgo shows an error message.
 
       Use case ends.
@@ -819,23 +819,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 clients and sessions without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients and sessions without a noticeable sluggishness in performance for typical usage (respond to commands within 2 seconds).
+3.  The application should be a single user product.
 3.  A fitness instructor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The source code should be open source.
 5.  The application should be usable without internet connection
 6.  The user interface should be intuitive enough for users who are not IT-savvy
 7.  The product can be downloaded freely from Github.
-8.  The user should be able to read the data files.
-9.  The user should be able to modify the data files.
+8.  The user should be able to read and modify the data files.
 10.  The user should be able to use the application on different machines just by moving the data file
 from your previous machine to your new machine.
-
-
 
 ### Glossary
 
 * **API**: Application Programming Interface
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **CLI**: Command-Line Interface
+* **GUI**: Graphical User Interface
+* **json**: JavaScript Object Notation, a file format
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -891,11 +892,11 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Session while all Clients are being shown.
 
     1. Test case: `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` <br>
-       Expected: Session is added to the list, and it is shown in order. Details of the added Session shown in the
+       Expected: Session is added to the list, and it is shown in order. Details of the added Session are shown in the
        status message.
     
     1. Test case: `sadd g/machoman` <br>
-       Expected: No Session is added. Error details shown in the status message.
+       Expected: No Session is added. Error details are shown in the status message.
        
     1. Other incorrect Add Session commands to try: 
         `sadd g/machoman ex/endurance at/29/09/2020 t/120` (wrong date format),
@@ -924,8 +925,8 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a Session while all Sessions are being shown
 
    1. Test case: `sdel 1 f/` <br>
-       Expected: The Session in index 1 (as shown in the Session List) will be deleted alongside all Schedules associated
-       to the Session. Details of the deleted Session is shown in the status message.
+       Expected: The Session in index 1 (as shown in the Session List) will be deleted along with all Schedules associated
+       to the Session. Details of the deleted Session are shown in the status message.
     
    1. Test case: `sdel 1` <br>
        Expected: If there are no Schedules associated to the Session in index 1 (as shown in the Session List), similar to
