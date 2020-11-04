@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.session.Session;
 
 /**
- * Deletes a Session identified using it's displayed index from the address book.
+ * Deletes a Session identified using its displayed index from the address book.
  */
 public class DeleteSessionCommand extends Command {
 
@@ -27,17 +27,18 @@ public class DeleteSessionCommand extends Command {
     public static final String MESSAGE_DELETE_SESSION_SUCCESS = "Deleted Session: %1$s";
 
     public static final String MESSAGE_FORCE_DELETE_SESSION_USAGE = COMMAND_WORD
-            + ": Cannot delete the Session identified by the index number because there are schedules tied to it.\n"
-            + "To force delete, pass in f/ as an option. BEWARE, YOU WILL LOSE ALL RELATED SCHEDULES.\n"
-            + "Parameters: INDEX (must be a positive integer) f/\n"
-            + "Example: " + COMMAND_WORD + " 1 f/";
+            + ": Cannot delete the Session identified by the index number because there are schedules associated to it."
+            + "\nTo force delete, pass in f/ as an option. BEWARE, YOU WILL LOSE ALL RELATED SCHEDULES."
+            + "\nParameters: INDEX (must be a positive integer) f/"
+            + "\nExample: " + COMMAND_WORD + " 1 f/";
 
     private final Index targetIndex;
     private final boolean isForced;
 
     /**
-     * Creates a normal mode DeleteSession to delete the Session at {@code targetIndex}
-     * @param targetIndex index of to-be deleted session
+     * Creates a normal mode DeleteSession to delete the Session at {@code targetIndex}.
+     *
+     * @param targetIndex Index of to-be deleted session.
      */
     public DeleteSessionCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -45,10 +46,11 @@ public class DeleteSessionCommand extends Command {
     }
 
     /**
-     * Creates a increased privilege mode DeleteSession to force delete the Session at {@code targetIndex}
-     * if {@code isForced} is true
-     * @param targetIndex index of to-be deleted session
-     * @param isForced true if the DeleteSession have increased privilege
+     * Creates an increased privilege mode DeleteSession to forcefully delete the Session at {@code targetIndex}
+     * if {@code isForced} is true or fallback to a normal mode DeleteSession otherwise.
+     *
+     * @param targetIndex Index of to-be deleted session.
+     * @param isForced true if the DeleteSession should have increased privilege.
      */
     public DeleteSessionCommand(Index targetIndex, boolean isForced) {
         this.targetIndex = targetIndex;
@@ -66,7 +68,7 @@ public class DeleteSessionCommand extends Command {
 
         Session sessionToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        // Do not delete session unless user use the force flag
+        // Do not delete any session unless user uses the force flag.
         if (model.hasAnyScheduleAssociatedWithSession(sessionToDelete) && !isForced) {
             return new CommandResult(MESSAGE_FORCE_DELETE_SESSION_USAGE);
         }

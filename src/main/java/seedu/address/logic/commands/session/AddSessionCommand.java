@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.session.Session;
 
 /**
- * Adds a session
+ * Adds a session to the address book.
  */
 public class AddSessionCommand extends Command {
     public static final String COMMAND_WORD = "sadd";
@@ -31,12 +31,13 @@ public class AddSessionCommand extends Command {
             + PREFIX_DURATION + "120 ";
 
     public static final String MESSAGE_SUCCESS = "New Session added: %1$s";
-    public static final String MESSAGE_DUPLICATE_SESSION = "This Session already exists in FitEgo.";
+    public static final String MESSAGE_DUPLICATE_SESSION = "This Session overlaps with an existing Session in FitEgo.\n"
+            + "A Session is considered overlapping if another Session starts before the current Session ends.";
 
     private final Session toAdd;
 
     /**
-     * Creates an AddSession to add the specified {@code Session}
+     * Creates an AddSession to add the specified {@code Session}.
      */
     public AddSessionCommand(Session session) {
         requireNonNull(session);

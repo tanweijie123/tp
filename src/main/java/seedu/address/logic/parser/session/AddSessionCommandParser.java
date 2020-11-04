@@ -20,12 +20,12 @@ import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCommand object.
  */
 public class AddSessionCommandParser implements Parser<AddSessionCommand> {
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true If none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
@@ -36,7 +36,7 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
      * Parses the given {@code String} of arguments in the context of the AddSessionCommand
      * and returns an AddSessionCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddSessionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

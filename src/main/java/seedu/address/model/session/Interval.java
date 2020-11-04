@@ -12,14 +12,14 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidInterval(int)}
  */
 public class Interval {
+    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must be a valid date and time and follows "
+            + "dd/MM/yyyy HHmm pattern";
+    public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, "
+            + "but duration must be a positive integer and " + MESSAGE_DATE_TIME_CONSTRAINTS;
+
     private static final String SIMPLE_DATE_TIME_PATTERN = "EE dd MMM uuuu";
     private static final String DATE_TIME_PATTERN = "dd/MM/uuuu HHmm";
     private static final String TIME_12HR_PATTERN = "hh:mm a";
-
-    public static final String MESSAGE_DATE_TIME_CONSTRAINTS = "Start time must be a valid date and time and follows "
-            + DATE_TIME_PATTERN + " pattern";
-    public static final String MESSAGE_CONSTRAINTS = "Intervals can start at any time, "
-            + "but duration must be a positive integer and " + MESSAGE_DATE_TIME_CONSTRAINTS;
 
     public static final DateTimeFormatter SIMPLE_DATE_TIME_PATTERN_FORMATTER = DateTimeFormatter.ofPattern(
             SIMPLE_DATE_TIME_PATTERN);
@@ -50,11 +50,13 @@ public class Interval {
     }
 
     /**
-     * Checks whether the two intervals overlaps with each other (exclusive of start and end time)
+     * Checks whether the two intervals overlaps with each other.
+     * An Interval overlaps with another Interval if either start time or end time lies strictly between the other
+     * interval's start time and end time.
      *
-     * @param first  the first of the 2 intervals to be tested
-     * @param second the second of the 2 intervals to be tested
-     * @return true if both interval overlaps with each other
+     * @param first  First interval to be tested.
+     * @param second Second interval to be tested.
+     * @return true if both interval overlaps with each other.
      */
     public static boolean isOverlap(Interval first, Interval second) {
         return first.getStart().isBefore(second.getEnd()) && second.getStart().isBefore(first.getEnd());

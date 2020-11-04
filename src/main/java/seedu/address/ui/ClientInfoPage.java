@@ -41,6 +41,10 @@ import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Interval;
 import seedu.address.model.util.WeightUnit;
 
+/**
+ * The Client Info Page. Provides an overview of the client, including personal details
+ * schedules related to the client, and a weight progress tracker.
+ */
 public class ClientInfoPage extends UiPart<AnchorPane> {
     private static final String FXML = "ClientInfoPage.fxml";
     private static final Logger logger = LogsCenter.getLogger(ClientInfoPage.class);
@@ -100,10 +104,10 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
 
     /**
      * Displays a client's profile in a separate window.
-     * It should display all the details pertaining to this {@code Client}
+     * It should display all the details pertaining to this {@code Client}.
      *
-     * @param client        The client to display
-     * @param associatedSchedules The list of schedules the client related to the client
+     * @param client        The client to display.
+     * @param associatedSchedules The list of schedules related to the client.
      */
     private ClientInfoPage(Client client, List<Schedule> associatedSchedules, WeightUnit weightUnit) {
         super(FXML);
@@ -120,6 +124,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         this.client = null;
         currentPage = this;
     }
+
     /**
      * Sets the viewing panel of tabPane using KeyCode.
      */
@@ -134,6 +139,11 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         }
     }
 
+    /**
+     * Gets the current {@code ClientInfoPage} instance.
+     *
+     * @return the current {@code ClientInfoPage} instance.
+     */
     public static ClientInfoPage getCurrentClientInfoPage() {
         if (currentPage == null) {
             currentPage = new ClientInfoPage();
@@ -142,7 +152,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
     }
 
     /**
-     * Updates the GUI with the lastest information about the client
+     * Updates the GUI with the latest information about the client
      */
     public void update(Logic logic) {
         if (this.client == null) {
