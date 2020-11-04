@@ -10,9 +10,16 @@ import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
+/**
+ * Represents an association class between Client and Session.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
+    // Identity fields
     private Client client;
     private Session session;
+
+    // Data fields
     private PaymentStatus paymentStatus;
     private Remark remark;
     private Weight weight;
@@ -82,7 +89,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     }
 
     /**
-     * Returns true if both Schedules have the same identity.
+     * Returns true if both Schedules have the same identity fields (equal @{code client} and {@session}).
      */
     @Override
     public boolean isIdentical(Schedule otherSchedule) {
@@ -98,7 +105,8 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     }
 
     /**
-     * Returns true if both Schedule have the same identity.
+     * Returns true if both Schedules have the same identity and data fields.
+     * This defines a stronger notion of equality between two Schedules.
      */
     @Override
     public boolean equals(Object other) {
