@@ -97,6 +97,12 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
+The figure above gives the overall architecture of the Model component.
+
+![Structure of the Model Component - continued](images/ModelClassDiagram2.png)
+
+The figure above gives a more detailed class diagram for each of the Client, Session and Schedule packages.
+
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 The `Model`,
@@ -171,7 +177,7 @@ The user can follow up with an optional force parameters to delete all schedules
 These delete operations are exposed in the `Model` interface as `Model#deleteSession`, `Model#deleteSessionAssociatedSchedules`
 and `Model#hasAnyScheduleAssociatedWithSession`.
 
-The following activity diagram summarizes what happens when a user executes a new `DeleteSession` command
+The following activity diagram summarizes what happens when a user executes a new `DeleteSession` command, with the assumption that the user inputs a valid command.
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
@@ -180,9 +186,18 @@ The following activity diagram summarizes what happens when a user executes a ne
     <figcaption>Figure - Delete Session Activity Diagram</figcaption>
 </figure>
 
-In the following sequence diagram, we trace the execution for when the user decides to enter the DeleteSession command 
-`sdel 1 f/` into FitEgo. For simplicity, we will refer to this command input as commandText. We also assume that
-there are currently 2 schedules associated to the first session in FitEgo.
+The following diagram shows a possible application state in FitEgo. 
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/tracing/DeleteSessionObjectDiagram.png" style="width: 75%; height: auto;"/>
+    </p>
+    <figcaption>Figure - A possible application state</figcaption>
+</figure>
+
+In the following sequence diagram, we trace the execution when the user decides to enter the DeleteSession command 
+`sdel 1 f/` into FitEgo with the above scenario, where the first session in FitEgo is the "enduranceTraining" session. 
+For simplicity, we will refer to this command input as `commandText`. 
 
 ![DeleteSessionSequenceDiagram](images/tracing/DeleteSessionSequenceDiagram.png)
 
@@ -198,9 +213,9 @@ arguments to `DeleteSessionCommandParser` to construct a `DeleteSessionCommand`.
 returned to the `LogicManager` which will then executes it with reference to the model argument.
 
 The model will first get the current `FilteredSessionList` instance to get the session to be deleted. It will then check
-whether there exist any `Schedule` associated to the session. If there exists such `Schedule` and the boolean `isForced` 
+whether there exist any `Schedule` associated to the session. As there are currently 2 schedules associated to the "enduranceTraining" session in FitEgo and the boolean `isForced` 
 is set to true, the model will remove them from `AddressBook`. It will then create a `CommandResult` to relay feedback 
-message back to the UI and return control back to `LogicManager`
+message back to the UI and return control back to `LogicManager`. It will persist these changes by saving it to the storage.
 
 #### Design Considerations
 

@@ -14,6 +14,10 @@ end box
 [-> LogicManager : execute("sdel 1 f/")
 activate LogicManager
 
+box Storage STORAGE_COLOR_T1
+participant "storage:Storage" as Storage STORAGE_COLOR
+end box
+
 LogicManager -> AddressBookParser : parseCommand("sdel 1 f/")
 activate AddressBookParser
 
@@ -60,6 +64,18 @@ DeleteSessionCommand --> LogicManager : result
 deactivate DeleteSessionCommand
 DeleteSessionCommand -[hidden]-> LogicManager : result
 destroy DeleteSessionCommand
+
+LogicManager --> Model: getAddressBook()
+activate Model
+
+Model --> LogicManager
+deactivate Model
+
+LogicManager --> Storage : saveAddressBook(addressBook)
+activate Storage
+
+Storage --> LogicManager
+deactivate Storage
 
 [<--LogicManager : result
 deactivate LogicManager
