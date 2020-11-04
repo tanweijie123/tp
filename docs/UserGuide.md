@@ -345,7 +345,7 @@ a tag with a dash.
 
 :star: **Feature:**
 
-You can add a profile picture to your client by storing their photo in a new folder named images within the data folder. You should name the photo 
+You can add a profile picture to your client by storing their photo in a new folder named `images` within the `data` folder. You should name the photo 
 as `profile-<client's full name in lowercase and separated by dash>.jpg`. <br/> For example, if your client's name is Alex Yeoh, 
 store his photo as `data/images/profile-alex-yeoh.jpg`
 </div>
