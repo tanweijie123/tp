@@ -7,6 +7,7 @@ Welcome to FitEgo! This document will serve as a user guide to the all-in-one sc
 
 Made with **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
+This User Guide document aims to showcase 
 ## Table of Contents
 
 * Table of Contents
@@ -653,7 +654,9 @@ Points to take note when adding a schedule:
 
 Example:
 
-* `schadd c/1 s/1` - Schedules the first client in the Client List with the first session in the Session List
+* `schadd c/1 s/1` - Schedules the first client in the Client List with the first session in the Session List. As you can see in the figure below, Alex Yeoh (the fifth client, marked by the red square) is added to the first session in the list (marked by the blue square).
+ <center> <img src="images/schadd_sample.png" alt="schadd command sample"/><br>
+ Figure 11 - Result of executing <code>schadd c/1 s/1</code></center><br/>
 
 ### 3.4.2 Editing a Schedule : `schedit`
 
