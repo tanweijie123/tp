@@ -321,7 +321,7 @@ You can add a client to the Client List including their details. This allows you
 
 Format: `cadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
-Points to take note when editing a client's information:
+Points to take note when adding a client's information:
 * Email is unique for each client. This means you cannot add a new client if the email specified is already used by another client.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -359,8 +359,10 @@ Points to take note when editing a client's information:
 * After performing a `cedit` command, you will see the updated client information page.
 
 Examples:
-*  `cedit 1 n/Janie Doe` Edits the name of the first client to be `Janie Doe`
-*  `cedit 1 t/` Removes all of the tags of the first client
+*  `cedit 1 t/` Removes all of the tags of the first client in the Client List
+*  `cedit 2 p/12345678 t/injured-thigh` edits the phone number and tag of the second client in the Client List. As you can see in the figure below, both fields are updated after executing the command.
+ <center> <img src="images/cedit_sample.png" alt="cedit command sample"/><br>
+ Figure 11 - Result of executing <code>cedit 2 p/12345678 t/injured-thigh</code></center><br/>
 
 ### 3.2.4 Locating Clients by Name : `cfind`
 
