@@ -7,7 +7,6 @@ Welcome to FitEgo! This document will serve as a user guide to the all-in-one sc
 
 Made with **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
 
-This User Guide document aims to showcase 
 ## Table of Contents
 
 * Table of Contents
