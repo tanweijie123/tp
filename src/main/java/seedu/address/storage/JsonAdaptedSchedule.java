@@ -14,7 +14,7 @@ import seedu.address.model.schedule.Weight;
 import seedu.address.model.session.Interval;
 
 public class JsonAdaptedSchedule {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "A schedule is missing %s!";
     public static final String START_TIME_FIELD = "session start time";
     public static final String END_TIME_FIELD = "session end time";
 

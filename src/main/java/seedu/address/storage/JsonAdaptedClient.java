@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedClient {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Client's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "A client is missing %s field!";
 
     private final String name;
     private final String phone;

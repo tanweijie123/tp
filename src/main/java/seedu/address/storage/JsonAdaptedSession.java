@@ -14,7 +14,7 @@ import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
 
 public class JsonAdaptedSession {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Session's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "A session is missing %s field!";
 
     private final String gym;
     private final String exerciseType;

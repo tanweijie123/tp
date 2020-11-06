@@ -26,11 +26,11 @@ import seedu.address.model.session.Session;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate Client(s).";
-    public static final String MESSAGE_DUPLICATE_SESSION = "Session list contains duplicate Session(s).";
-    public static final String MESSAGE_DUPLICATE_SCHEDULE = "Schedule list contains duplicate Schedule(s).";
-    public static final String CLIENT_NOT_FOUND = "Clients list is missing the expected client for Schedule(s).";
-    public static final String SESSION_NOT_FOUND = "Sessions list is missing the expected session for Schedule(s).";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "Your data file contains duplicate client(s).";
+    public static final String MESSAGE_DUPLICATE_SESSION = "Your data file contains overlapping session(s).";
+    public static final String MESSAGE_DUPLICATE_SCHEDULE = "Your data file contains duplicate schedule(s).";
+    public static final String CLIENT_NOT_FOUND = "Cannot find client with email %s that is associated to a schedule.";
+    public static final String SESSION_NOT_FOUND = "Cannot find session with interval %s that is associated to a schedule.";
 
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
     private final List<JsonAdaptedSession> sessions = new ArrayList<>();
@@ -91,9 +91,9 @@ class JsonSerializableAddressBook {
             Client client = getClientWithEmail(clientEmail, addressBook);
             Session session = getSessionWithInterval(sessionInterval, addressBook);
             if (client == null) {
-                throw new IllegalValueException(CLIENT_NOT_FOUND);
+                throw new IllegalValueException(String.format(CLIENT_NOT_FOUND, clientEmail));
             } else if (session == null) {
-                throw new IllegalValueException(SESSION_NOT_FOUND);
+                throw new IllegalValueException(String.format(SESSION_NOT_FOUND, sessionInterval));
             }
             PaymentStatus payment = jsonAdaptedSchedule.getPaymentStatus();
             Remark remark = jsonAdaptedSchedule.getRemark();
