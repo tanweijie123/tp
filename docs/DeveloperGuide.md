@@ -159,6 +159,31 @@ e.g. print the actual list instead of just its size
 Certain properties of the application can be controlled(e.g. user prefs file location, logging level), 
 through the configuration file (default: `config.json`)
 
+### Edit Session feature
+
+The proposed edit session mechanism is facilitated by `AddressBook`.
+
+These operation is exposed in the `Model` interface as `Model#setSession()`.
+
+Given below is an example usage scenario and how the edit session mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+The `AddressBook` will be initialized with the initial client, session and schedule list.
+
+Step 2. The user executes `sedit 1 g/coolgym` command to edit the 1st Session in the address book. 
+The `sedit` command calls `Model#setSession()`, causing changes to be made in the address book after the `sedit 1 g/coolgym` command executes.
+
+The following sequence diagram shows how the edit session operation works:
+
+![EditSessionSequenceDiagram](images/EditSessionSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditSessionCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the edit session command:
+
+![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
 
 ### Delete Session feature
 
@@ -359,32 +384,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `cdel`, just save the Client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-### Edit Session feature
-
-The proposed edit session mechanism is facilitated by `AddressBook`.
-
-These operation is exposed in the `Model` interface as `Model#setSession()`.
-
-Given below is an example usage scenario and how the edit session mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time.
-The `AddressBook` will be initialized with the initial client, session and schedule list.
-
-Step 2. The user executes `sedit 1 g/coolgym` command to edit the 1st Session in the address book. 
-The `sedit` command calls `Model#setSession()`, causing changes to be made in the address book after the `sedit 1 g/coolgym` command executes.
-
-The following sequence diagram shows how the edit session operation works:
-
-![EditSessionSequenceDiagram](images/EditSessionSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditSessionCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following activity diagram summarizes what happens when a user executes the edit session command:
-
-![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
 
 ### Edit Schedule feature
 
