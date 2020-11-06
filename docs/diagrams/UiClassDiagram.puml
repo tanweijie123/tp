@@ -9,6 +9,7 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
+Class SettingsWindow
 Class HelpWindow
 Class ResultDisplay
 Class ClientListPanel
@@ -64,6 +65,7 @@ CommandBox --|> UiPart
 ClientListPanel --|> UiPart
 ClientCard --|> UiPart
 StatusBarFooter --|> UiPart
+SettingsWindow --|> UiPart
 HelpWindow -down-|> UiPart
 Homepage --|> UiPart
 RightSideBar --|> UiPart
