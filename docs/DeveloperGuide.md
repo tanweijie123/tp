@@ -289,7 +289,7 @@ command is given by:
 ```schadd c/CLIENT_INDEX s/SESSION_INDEX```
 When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
 
-The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first. <br/>
+The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
 
 ![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
 
@@ -315,25 +315,14 @@ On the other hand, invoking `schadd c/1 s/1` will result in an error shown to th
 
 ### Edit Schedule feature
 
-The proposed Edit Schedule mechanism is facilitated by `AddressBook`.
+The proposed Edit Schedule mechanism is facilitated by `FitEgo`, similar to the Edit Session Command.
 
-These operation is exposed in the `Model` interface as `Model#setSchedule()`.
+This operation is exposed in the `Model` interface as `Model#setSchedule()`.
 
-Given below is an example usage scenario and how the Edit Schedule mechanism behaves at each step.
+Similar to the Edit Session mechanism, the example usage scenario below shows how Edit Schedule mechanism behaves:
 
-Step 1. The user launches the application for the first time.
-FitEgo will initialize with the sample Client, Session and Schedule Lists.
-
-Step 2. The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with first Session in the Session List and first Client in the Client List.
-The `schedit` command calls `Model#setSchedule()`, causing changes to be made after the `schedit c/1 s/1 us/2` command executes.
-
-The following sequence diagram shows how the Edit Schedule operation works:
-
-![EditScheduleSequenceDiagram](images/EditScheduleSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
+The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with Session 1 and Client 1 in the address book. 
+The `schedit` command calls `Model#setSchedule()`, causing changes to be made in the address book after the `schedit c/1 s/1 us/2` command executes.
 
 The following activity diagram summarizes what happens when a user executes the Edit schedule command:
 
@@ -545,7 +534,7 @@ Use case ends.
     * 4a1. The previous Client's profile will be closed.
     * 4a2. The current Client's profile will be displayed.
 
-      Use case ends
+      Use case ends.
       
 <br/>
 
@@ -645,6 +634,7 @@ Use case ends.
 **Extensions**
 
 - 2a. The Client index or Session index is invalid.
+
   - 2a1. FitEgo shows an error message.
   
     Use case resumes at step 2.
@@ -655,7 +645,6 @@ Use case ends.
 
     Use case resumes at step 2.
 
-<br/>
 
 **Use case: UC13 Open User Guide in Browser**
 
@@ -674,7 +663,6 @@ Use case ends.
         
 <br/>
 
-
 **Use case: UC14 Change Unit of Weight Graph**
 
 **MSS**
@@ -691,22 +679,19 @@ Use case ends.
 	
       Use case ends.
 
----
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 clients and sessions without a noticeable sluggishness in performance for typical usage.
-3.  A fitness instructor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The source code should be open source.
-5.  The application should be usable without internet connection
-6.  The user interface should be intuitive enough for users who are not IT-savvy
-7.  The product can be downloaded freely from Github.
-8.  The user should be able to read the data files.
-9.  The user should be able to modify the data files.
-10.  The user should be able to use the application on different machines just by moving the data file from your previous machine to your new machine.
-
-
+2.  Should be able to hold up to 1000 clients and sessions without a noticeable sluggishness in performance for typical usage (respond to commands within 2 seconds).
+3.  The application should be a single user product.
+4.  A fitness instructor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  The source code should be open source.
+6.  The application should be usable without internet connection
+7.  The user interface should be intuitive enough for users who are not IT-savvy
+8.  The product can be downloaded freely from Github.
+9.  The user should be able to read and modify the data files.
+10.  The user should be able to use the application on different machines just by moving the data file
+from your previous machine to your new machine.
 
 ### Glossary
 
@@ -783,8 +768,6 @@ Otherwise, the expected outcome: No changes are made. Error details shown in the
 
    1. Test case: `sdel 1 f/` <br>
        Expected: The 1st Session in the Session List will be deleted alongside all Schedules associated to the Session. Details of the deleted Session is shown in the status message.
-    
-
 
 ### Viewing Sessions within Period
 
