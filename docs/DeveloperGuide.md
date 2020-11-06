@@ -238,7 +238,7 @@ The following diagram shows a possible application state in FitEgo.
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/tracing/DeleteSessionObjectDiagram.png" style="width: auto; height: 50%;"/>
+        <img src="images/tracing/DeleteSessionObjectDiagram.png" style="width: 80%; height: auto;"/>
     </p>
     <figcaption>Figure - A possible application state</figcaption>
 </figure>
@@ -299,13 +299,14 @@ In other words, it allows user to schedule a Client to a Session.
 
 #### Implementation
 
-The add Schedule mechanism is facilitated by `AddScheduleCommand` which extends `Command`. The format of the 
+The Add Schedule mechanism is facilitated by `AddScheduleCommand` which extends `Command`. The format of the 
 command is given by: 
 
 ```schadd c/CLIENT_INDEX s/SESSION_INDEX```
 When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
 
-The following activity diagram summarizes what happens when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
+The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
+
 ![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
 
 **Example Commands**
@@ -314,13 +315,11 @@ Assume the current state of Client, Session, and Schedule is as illustrated on t
 
 ![OverlappingScheduleObjectDiagram0](images/OverlappingScheduleObjectDiagram0.png)
 
-Now, consider two cases of a Schedule Command to be invoked.
+Now, consider two cases of Add Schedule command to be invoked.
 
 **Case 1**:  `schadd c/2 s/1`
 
-Invoking `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List). This process can be traced by referring to the following simplified sequence diagram:
-
-  ![AddScheduleSequenceDiagram](images/AddScheduleSequenceDiagram.png)
+Invoking `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List).
 
 Thus, the result can be illustrated by the following object diagram, shown by a new created Schedule:
 
