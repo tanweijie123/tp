@@ -6,6 +6,11 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -169,6 +174,49 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
+        checkEmptyAddressBook(primaryStage);
+    }
+
+    /**
+     * Checks if FitEgo is starting with an empty AddressBook. If true, there might be error in reading saved file.
+     * This method will prompt for user's action to continue or exit program to review their data.
+     *
+     * @param primaryStage The main FitEgo application window
+     */
+    private void checkEmptyAddressBook(Stage primaryStage) {
+        if (model.getAddressBook().equals(new AddressBook())) {
+            //started with a blank state.
+
+            ButtonType cont = new ButtonType("Continue with Empty Data", ButtonBar.ButtonData.OK_DONE);
+            ButtonType exit = new ButtonType("Exit and Review my data file", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Alert alert = new Alert(Alert.AlertType.WARNING, "", cont, exit);
+            alert.setTitle("Empty Address Book");
+            alert.setHeaderText("FitEgo is unable to load your saved file.");
+            alert.setContentText(
+                    "It could be possible that the software was force-shut, "
+                    + "the data is manipulated or you had cleared the data on your previous use. "
+                    + "To prevent overwriting your data, you are recommended to exit now; "
+                    + "otherwise, FitEgo will be starting with a blank state."
+            );
+
+            //Deactivate focus on OK button
+            Button contButton = (Button) alert.getDialogPane().lookupButton(cont);
+            contButton.setDefaultButton(false);
+
+            //Activate focus on Exit button
+            Button exitButton = (Button) alert.getDialogPane().lookupButton(exit);
+            exitButton.setDefaultButton(true);
+
+            //Prevent alert from truncating
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+
+            //Perform user action
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.orElse(exit) == exit) { //default to exit
+                primaryStage.close();
+            }
+        }
     }
 
     @Override
