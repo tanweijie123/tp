@@ -13,6 +13,54 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+### How to interpret notations
+
+Below are a few examples of the common notations in this document in which the different backgrounds and icons represent different meanings.
+
+[comment]: <> (Copy the blocks below and edit your message)
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+Additional information that is helpful but not essential. 
+
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+[comment]: <> (This only appears in Github CSS)
+
+:bulb: **Tip:**
+
+Good to learn, but not necessary to know to use FitEgo. 
+</div>
+
+
+<div markdown="block" class="alert alert-warning">
+
+:star: **Feature:**
+
+Important to know.
+</div>
+
+<div markdown="block" class="alert alert-success">
+
+:heavy_check_mark: **Example:**
+
+An example to follow. 
+
+</div>
+
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+
+May have irreversible effect when used. Backup and caution is recommended.
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Design**
 
 ### Architecture
@@ -162,17 +210,17 @@ through the configuration file (default: `config.json`)
 
 ### Delete Session feature
 
-The delete feature allows user to cancel a session, and delete all schedules associated to the session.
+The Delete Session feature allows user to cancel a Session, and delete all Schedules associated to the Session.
 
 #### Implementation
 
-The delete session mechanism is facilitated by `DeleteSessionCommand` which extends `Command`. The format of the 
+The Delete Session mechanism is facilitated by `DeleteSessionCommand` which extends `Command`. The format of the 
 command is given by: 
 
 ```sdel INDEX [f/]```
 
-When using this command, the `INDEX` should refer to the index shown in the SessionList on the right panel.
-The user can follow up with an optional force parameters to delete all schedules associated to the session.
+When using this command, the `INDEX` should refer to the index shown in the Session List on the right panel.
+The user can follow up with an optional force parameters to delete all Schedules associated to the Session.
 
 These delete operations are exposed in the `Model` interface as `Model#deleteSession`, `Model#deleteSessionAssociatedSchedules`
 and `Model#hasAnyScheduleAssociatedWithSession`.
@@ -195,8 +243,8 @@ The following diagram shows a possible application state in FitEgo.
     <figcaption>Figure - A possible application state</figcaption>
 </figure>
 
-In the following sequence diagram, we trace the execution when the user decides to enter the DeleteSession command 
-`sdel 1 f/` into FitEgo with the above scenario, where the first session in FitEgo is the `enduranceTraining` session. 
+In the following sequence diagram, we trace the execution when the user decides to enter the Delete Session command 
+`sdel 1 f/` into FitEgo with the above scenario, where the first Session in the Session List is the `enduranceTraining` Session. 
 For simplicity, we will refer to this command input as `commandText`. 
 
 ![DeleteSessionSequenceDiagram](images/tracing/DeleteSessionSequenceDiagram.png)
@@ -212,41 +260,41 @@ command as commandText and parses it with `AddressBookParser`. It will parse the
 arguments to `DeleteSessionCommandParser` to construct a `DeleteSessionCommand`. This `DeleteSessionCommand` is 
 returned to the `LogicManager` which will then executes it with reference to the model argument.
 
-The model will first get the current `FilteredSessionList` instance to get the session to be deleted. It will then check
-whether there exist any `Schedule` associated to the session. As there are currently 2 schedules associated to the "enduranceTraining" session in FitEgo and the boolean `isForced` 
+The model will first get the current `FilteredSessionList` instance to get the Session to be deleted. It will then check
+whether there exist any `Schedule` associated to the Session. As there are currently 2 schedules associated to the "enduranceTraining" session in FitEgo and the boolean `isForced` 
 is set to true, the model will remove them from `AddressBook`. It will then create a `CommandResult` to relay feedback 
 message back to the UI and return control back to `LogicManager`. It will persist these changes by saving it to the storage.
 
 #### Design Considerations
 
-In designing this feature, we had to consider several alternative ways in which we can choose to handle session deletion
+In designing this feature, we had to consider several alternative ways in which we can choose to handle session deletion.
 
-- **Alternative 1 (current choice):** Delete session only after all associated schedules are deleted.
+- **Alternative 1 (current choice):** Delete Session only after all associated Schedules are deleted.
     
     - Pros: 
         1. Easier to maintain data integrity.
     - Cons:
         1. Extra logic inside the method implementation.
-        2. May have performance issues in terms of response time if there are a lot of schedules or sessions stored in FitEgo.
+        2. May have performance issues in terms of response time if there are a lot of Schedules or Sessions stored in FitEgo.
     
-- **Alternative 2:** Mark session as deleted and treat schedules with deleted session as invalid
+- **Alternative 2:** Mark Session as deleted and treat Schedules with deleted Session as invalid
     
     - Pros: 
         1. Easier to implement the method. 
         2. No need to handle additional force flag option.
     - Cons: 
-        1. We must keep track of deleted sessions, which might bloat up the application over time.
+        1. We must keep track of deleted Sessions, which might bloat up the application over time.
         2. Harder to maintain data integrity over time.
         
-- **Alternative 3:** Delete the session without checking for associated schedules
+- **Alternative 3:** Delete the Session without checking for associated Schedules
 
     - Pros: Easy to implement.
-    - Cons: A schedule might have invalid session, breaking data integrity.
+    - Cons: A Schedule might have invalid Session, breaking data integrity.
 
 
 ### Add Schedule feature
 
-The add schedule feature allows user to create a Schedule associated with a Client and a Session. 
+The Add Schedule feature allows user to create a Schedule associated with a Client and a Session. 
 In other words, it allows user to schedule a Client to a Session.
 
 #### Implementation
@@ -282,99 +330,21 @@ Thus, the result can be illustrated by the following object diagram, shown by a 
 
 On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as there is an overlapping Schedule (John is already scheduled to endurance training from 12/12/2020 1400 - 1600).
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `cdel 5` command to delete the 5th Client in the address book. The `cdel` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `cdel 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `cadd n/David …​` to add a new Client. The `cadd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the Client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `clist`. Commands that do not modify the address book, such as `clist`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `cadd n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-#### Design consideration:
-
-##### Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `cdel`, just save the Client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
 ### Edit Session feature
 
-The proposed edit session mechanism is facilitated by `AddressBook`.
+The proposed Edit Session mechanism is facilitated by `AddressBook`.
 
 These operation is exposed in the `Model` interface as `Model#setSession()`.
 
-Given below is an example usage scenario and how the edit session mechanism behaves at each step.
+Given below is an example usage scenario and how the Edit Session mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
-The `AddressBook` will be initialized with the initial client, session and schedule list.
+FitEgo will initialize with the sample Client, Session and Schedule Lists.
 
-Step 2. The user executes `sedit 1 g/coolgym` command to edit the 1st Session in the address book. 
-The `sedit` command calls `Model#setSession()`, causing changes to be made in the address book after the `sedit 1 g/coolgym` command executes.
+Step 2. The user executes `sedit 1 g/coolgym` command to edit the first Session in the Session List. 
+The `sedit` command calls `Model#setSession()`, causing changes to be made in the Session List after the `sedit 1 g/coolgym` command executes.
 
-The following sequence diagram shows how the edit session operation works:
+The following sequence diagram shows how the Edit Session operation works:
 
 ![EditSessionSequenceDiagram](images/EditSessionSequenceDiagram.png)
 
@@ -382,25 +352,25 @@ The following sequence diagram shows how the edit session operation works:
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes the edit session command:
+The following activity diagram summarizes what happens when a user executes the Edit Session command:
 
 ![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
 
 ### Edit Schedule feature
 
-The proposed edit schedule mechanism is facilitated by `AddressBook`.
+The proposed Edit Schedule mechanism is facilitated by `AddressBook`.
 
 These operation is exposed in the `Model` interface as `Model#setSchedule()`.
 
-Given below is an example usage scenario and how the edit schedule mechanism behaves at each step.
+Given below is an example usage scenario and how the Edit Schedule mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
-The `AddressBook` will be initialized with the initial client, session and schedule list.
+FitEgo will initialize with the sample Client, Session and Schedule Lists.
 
-Step 2. The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with Session 1 and Client 1 in the address book. 
-The `schedit` command calls `Model#setSchedule()`, causing changes to be made in the address book after the `schedit c/1 s/1 us/2` command executes.
+Step 2. The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with first Session in the Session List and first Client in the Client List.
+The `schedit` command calls `Model#setSchedule()`, causing changes to be made after the `schedit c/1 s/1 us/2` command executes.
 
-The following sequence diagram shows how the edit schedule operation works:
+The following sequence diagram shows how the Edit Schedule operation works:
 
 ![EditScheduleSequenceDiagram](images/EditScheduleSequenceDiagram.png)
 
@@ -408,7 +378,7 @@ The following sequence diagram shows how the edit schedule operation works:
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes the edit schedule command:
+The following activity diagram summarizes what happens when a user executes the Edit schedule command:
 
 ![EditScheduleActivityDiagram](images/EditScheduleActivityDiagram.png)
 
@@ -465,7 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new trainer                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | trainer                                       | add a new client               |                                                                        |
 | `* * *`  | trainer                                       | edit a client                  | change the details of a client                                         |
-| `* * *`  | trainer                                       | view a Client's detail         | view at all of the client's details at a glance                        |
+| `* * *`  | trainer                                       | view a client's detail         | view at all of the client's details at a glance                        |
 | `* * *`  | trainer                                       | delete a client                | remove entries that I no longer need                                   |
 | `* * *`  | trainer                                       | find a client by name          | locate details of clients without having to go through the entire list |
 | `* * *`  | trainer                                       | tag my client         | I know their allergy / injury history and can advise them an appropriate training / diet schedule |
@@ -473,7 +443,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | trainer                                       | edit a session                 | change the details of a session                                        |
 | `* * *`  | trainer                                       | view a session's detail        | view at all of the session's details at a glance                       |
 | `* * *`  | busy fitness trainer                          | filter sessions by time        | view only the upcoming or other important sessions                             |
-| `* * *`  | trainer                                       | delete a Session               | cancel all schedules if there is an urgent need                        |
+| `* * *`  | trainer                                       | delete a session               | cancel all schedules if there is an urgent need                        |
 | `* * *`  | trainer                                       | add a new schedule             |                                                                        |
 | `* * *`  | trainer                                       | edit a schedule                | change the details of a schedule                                       |
 | `* * *`  | trainer                                       | view a schedule's detail       | view at all of the schedule's details at a glance                      |
@@ -493,25 +463,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `FitEgo` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: Add a Client**
+**Use case: UC01 Add a Client**
 
 **MSS**
 
-1.  User requests to add a specific Client in the list.
-2.  FitEgo adds the Client.
+ 1.  User requests to add a specific Client in the list
+ 2.  FitEgo adds the Client.
+Use case ends.
+    
+**Extensions**
 
-    Use case ends.
+* 1a. The client is within the list.
+    
+    * 1a1. FitEgo shows an error message.
 
-**Use case: Edit a Client**
+      Use case ends.
+      
+* 1b. The Session is missing some required details.
+
+    * 1b1. FitEgo shows an error message.
+    
+       Use case ends.
+       
+
+<br/>
+
+**Use case: UC02 Edit a Client**
 
 **MSS**
 
-1.  User requests to list Clients.
-2.  FitEgo shows a list of Clients.
-3.  User requests to edit a specific Client in the list.
-4.  FitEgo edits the Client according to the specified details.
-
-    Use case ends.
+ 1.  User requests to list Clients
+ 2.  FitEgo shows a list of Clients
+ 3.  User requests to edit a specific Client in the list
+ 4.  FitEgo edits the Client according to the specified details
+Use case ends.
 
 **Extensions**
 
@@ -524,17 +509,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
+<br/>
 
-**Use case: Delete a Client**
+**Use case: UC03 Delete a Client**
 
 **MSS**
 
-1.  User requests to list Clients.
-2.  FitEgo shows a list of Clients.
-3.  User requests to delete a specific Client in the list.
-4.  FitEgo deletes the Client.
-
-    Use case ends.
+ 1.  User requests to list Clients
+ 2.  FitEgo shows a list of Clients
+ 3.  User requests to delete a specific Client in the list
+ 4.  FitEgo deletes the Client
+Use case ends.
 
 **Extensions**
 
@@ -542,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
   
-* 2b. User requests to force delete a specific Client in the Client List.
+* 2b. User requests to force delete a specific Client in the list.
 
     * 2b1. FitEgo force deletes the Client and its associated Schedules.
   
@@ -560,38 +545,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case resumes at step 2.
       
-      
+<br/>
 
-**Use case: Tag a Client**
-
-**MSS**
-
-1.  User requests to list Clients.
-2.  FitEgo shows a list of Clients.
-3.  User requests to tag a specific Client from the list.
-4.  FitEgo changes the Client's current tag(s) according to the specified details.
-    Use case ends.
-
-**Extensions**
-
-* 2a. No tag is defined.
-
-  Use case ends.
-
-* 3a. The given tag is invalid.
-
-    * 3a1. FitEgo shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Find Clients**
+**Use case:  UC04 Find Clients**
 
 **MSS**
 
-1.  User requests to find some Client based on keyword or text.
-2.  FitEgo displays the Client's whose name matches the keyword or text.
-
-    Use case ends.
+ 1.  User requests to find some Client based on keyword or text.
+ 2.  FitEgo displays the Client's whose name matches the keyword or text.
+Use case ends.
 
 **Extensions**
 
@@ -599,17 +561,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     2a1. FitEgo displays no clients found.
 
   Use case ends.
+<br/>
 
-**Use case: View a Client**
+**Use case: UC05 View a Client**
 
 **MSS**
 
-1.  User requests to list Clients.
-2.  FitEgo shows a list of Clients.
-3.  User requests to view a specific Client in the list.
-4.  FitEgo opens the Client's profile in a new window.
-
-    Use case ends.
+ 1.  User requests to list Clients.
+ 2.  FitEgo shows a list of Clients.
+ 3.  User requests to view a specific Client in the list
+ 4.  FitEgo opens the Client's profile in a new window.
+Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
@@ -626,94 +588,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. The previous Client's profile will be closed.
     * 4a2. The current Client's profile will be displayed.
 
-      Use case ends.
+      Use case ends
       
+<br/>
+
+**Use case: UC06 Add a Session**
+
+Similar to <u>UC01 (Add a Client)</u>, but replace Client with Session.
+<br>
       
-**Use case: Add a Session**
+**Use case: UC07 Edit a Session**
 
-**MSS**
-1.  User requests to add a specific session and provides details.
-2.  FitEgo adds the Session to the Session List.
+Similar to <u>UC02 (Edit a Client)</u>, but replace Client with Session.
+<br>
 
-    Use case ends.
-    
-**Extensions**
+**Use case: UC08 Delete a Session**
+Similar to <u>UC03 (Delete a Client)</u>, but replace Client with Session.
+<br/>
 
-* 1a. The session overlaps with an existing Session.
-
-    * 1a1. FitEgo shows an error message.
-
-      Use case ends.
-      
-* 1b. The session is missing some required details.
-
-    * 1b1. FitEgo shows an error message.
-    
-       Use case ends.
-      
-      
-**Use case: Edit a Session**
+**Use case: UC09 View Session within time period**
 
 **MSS**
 
-1.  FitEgo shows a list of Sessions.
-2.  User requests to edit a specific Session in the list (i.e. gym, exercise type, start time and duration).
-3.  FitEgo edits the Session according to the specified details.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
-
-* 2a. The given index is invalid or request to edit is absent.
-
-    * 2a1. FitEgo shows an error message.
-
-      Use case resumes at step 2.
-      
-      
-**Use case: Deleting a Session**
-
-**MSS**
-
-1.  User requests to list Sessions.
-2.  FitEgo shows a list of Sessions.
-3.  User requests to delete a specific Session in the Session List.
-4.  FitEgo deletes the Session.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. FitEgo shows an error message.
-
-      Use case resumes at step 2.
-
-*  3b. The Session has schedules associated to it.
-    
-    * 3b1. FitEgo shows a help message.
-    
-       Use case resumes at step 2.     
-      
-
-**Use case: View Session within time period**
-
-**MSS**
-
-1.  FitEgo shows a list of Sessions
-2.  User requests to filter the Session List by a period
-3.  FitEgo filters the Session List according to the specified period and updates its title.
-
-    Use case ends.
+ 1.  FitEgo shows a list of Sessions.
+ 2.  User requests to filter the Session List by a period.
+ 3.  FitEgo filters the Session List according to the specified period and updates its title.
+Use case ends.
 
 **Extensions**
 
@@ -726,16 +626,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.     
+<br/>
 
-**Use case: Add a Schedule**
+**Use case: UC10 Add a Schedule**
 
 **MSS**
 
-1. FitEgo shows a list of Clients and list of Sessions.
-2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List.
-3. FitEgo adds the Schedule.
-
-   Use case ends.
+ 1. FitEgo shows a list of Clients and list of Sessions.
+ 2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List.
+ 3. FitEgo adds the Schedule.
+Use case ends.
 
 **Extensions**
 
@@ -750,16 +650,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2b1. FitEgo shows an error message.
 
     Use case resumes at step 2.
-    
-**Use case: Edit a Schedule**
+<br/>
+
+**Use case: UC11 Edit a Schedule**
 
 **MSS**
 
-1.  FitEgo shows a list of Schedule.
-2.  User requests to edit a specific Schedule in the list (i.e. updated Session index, update payment, update weight).
-3.  FitEgo edits the Schedule according to the specified details.
+ 1.  FitEgo shows a list of Schedule
+ 2.  User requests to edit a specific Schedule in the list (i.e. updated Session index, update payment, update weight)
+ 3.  FitEgo edits the Schedule according to the specified details
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -767,29 +668,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index is invalid or requested Schedule does not exist.
+* 2a. The given index is invalid or request to schedule is absent.
 
     * 2a1. FitEgo shows an error message.
 
       Use case resumes at step 2.
       
+<br/>
 
-**Use case: Delete a Schedule**
+**Use case: UC12 Delete a Schedule**
 
 **MSS**
 
-1. FitEgo shows a list of Clients and list of Sessions.
-2. User requests to delete a Schedule asssociated with a specified Client from the Client List and Session from the Session List.
-3. FitEgo deletes the Schedule.
-
-   Use case ends.
+ 1. FitEgo shows a list of Clients and list of Sessions.
+ 2. User requests to delete a Schedule associated with a specified Client from the Client List and Session from the Session List.
+ 3. FitEgo deletes the Schedule.
+Use case ends.
 
 **Extensions**
 
 - 2a. The Client index or Session index is invalid.
-
   - 2a1. FitEgo shows an error message.
-
+  
     Use case resumes at step 2.
 
 - 2b. There are no schedules with the specified Client and Session.
@@ -798,60 +698,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
+<br/>
 
-**Use case: Open User Guide in Browser**
+**Use case: UC13 Open User Guide in Browser**
 
 **MSS**
-1.  User requests to view Help window. 
-2.  FitEgo displays Help window with the User Guide link.
-3.  User selects the link to access the User Guide. 
-4.  FitEgo opens the User Guide. 
-
-    Use case ends.
+ 1.  User requests to view Help Window. 
+ 2.  FitEgo displays Help Window with the User Guide link.
+ 3.  User selects the link to access the User Guide. 
+ 4.  FitEgo opens the User Guide in user's default browser. 
+Use case ends.
 
 **Extensions**
-* 3a. User closes the Help window. 
-    * 3a1. FitEgo closes the Help window.
+ - 3a. User closes the Help Window. 
+    * 3a1. FitEgo closes the Help Window
 	
       Use case ends.
-      
-**Use case: Change Unit of Weight Graph**
+        
+<br/>
+
+
+**Use case: UC14 Change Unit of Weight Graph**
 
 **MSS**
-1.  User requests to view Settings window. 
-2.  FitEgo displays Settings window.
+1.  User requests to view Settings Window. 
+2.  FitEgo displays Settings Window.
 3.  User makes changes to settings. 
 4.  FitEgo saves changes to settings. 
 
     Use case ends.
 
 **Extensions**
-* 2a. User closes the Settings window. 
-    * 2a1. FitEgo closes the Settings window.
+* 2a. User closes the Settings Window. 
+    * 2a1. FitEgo closes the Settings Window.
 	
       Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 clients and sessions without a noticeable sluggishness in performance for typical usage (respond to commands within 2 seconds).
-3.  The application should be a single user product.
+2.  Should be able to hold up to 1000 clients and sessions without a noticeable sluggishness in performance for typical usage.
 3.  A fitness instructor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The source code should be open source.
 5.  The application should be usable without internet connection
 6.  The user interface should be intuitive enough for users who are not IT-savvy
 7.  The product can be downloaded freely from Github.
-8.  The user should be able to read and modify the data files.
-10.  The user should be able to use the application on different machines just by moving the data file
-from your previous machine to your new machine.
+8.  The user should be able to read the data files.
+9.  The user should be able to modify the data files.
+10.  The user should be able to use the application on different machines just by moving the data file from your previous machine to your new machine.
+
+
 
 ### Glossary
 
 * **API**: Application Programming Interface
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **CLI**: Command-Line Interface
-* **GUI**: Graphical User Interface
-* **json**: JavaScript Object Notation, a file format
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -868,7 +771,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -879,6 +782,11 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
+<div markdown="span" class="alert alert-info"> 
+:information_source: **Note:** All index-based commands mentioned in the test cases below require the index to be greater than zero and smaller than the list size.
+
+Otherwise, the expected outcome: No changes are made. Error details shown in the status message.
+</div>
 
 ### Adding a Client
 
@@ -887,73 +795,40 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `cadd n/David …` <br>
       Expected: First contact is added to the list. Details of the added contact shown in the status message.
 
-### Deleting a Client
-
-1. Deleting a Client while all Clients are being shown
-
-   1. Prerequisites: List all Clients using the `clist` command. Multiple Clients in the list.
-
-   1. Test case: `cdel 1`<br>
-      Expected: The Client of index 1 is deleted from the list. Details of the deleted contact shown in the status message.
-
-   1. Test case: `cdel 0`<br>
-      Expected: No Client is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect Delete Client commands to try: `cdel`, `cdel x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
 
 ### Adding a Session
 
 1. Adding a Session while all Clients are being shown.
 
     1. Test case: `sadd g/Machoman Gym ex/Endurance at/29/09/2020 1600 t/120` <br>
-       Expected: Session is added to the list, and it is shown in order. Details of the added Session are shown in the
-       status message.
-    
-    1. Test case: `sadd g/machoman` <br>
-       Expected: No Session is added. Error details are shown in the status message.
+       Expected: Session is added to the list, and it is shown in order. Details of the added Session shown in the status message.
        
     1. Other incorrect Add Session commands to try: 
         `sadd g/machoman ex/endurance at/29/09/2020 t/120` (wrong date format),
         `sadd g/machoman ex/endurance at/29/09/2020 1600 t/0` (invalid duration) <br>
-       Expected: Similar to previous.
+       Expected: Session is not added. Error details are shown in the status message.
 
 ### Editing a Session
 
-1. Editing a Session while all Sessions are being shown
+1. Editing a Session while all Sessions are being shown.
 
    1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
     
-   1. Test case: `sedit 1 g/Machoman`<br>
-      Expected: First Session's gym location is edited.
-      Details of the edited Session is shown in the status message.
-
-   1. Test case: `sedit 1 at/29/09/2020 1600 t/120`<br>
-      Expected: First Session timing is edited.
-      Details of the edited Session is shown in the status message.
-
-   1. Other incorrect Edit Session commands to try: `sedit`, `sedit x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `sedit 1 g/Machoman at/29/09/2020 1600 t/120`<br>
+      Expected: First Session's gym location and timing is edited. Details of the edited Session is shown in the status message.
       
 ### Deleting a Session
 
-1. Deleting a Session while all Sessions are being shown
+1. Deleting a Session while all Sessions are being shown.
 
    1. Test case: `sdel 1 f/` <br>
-       Expected: The Session in index 1 (as shown in the Session List) will be deleted along with all Schedules associated
-       to the Session. Details of the deleted Session are shown in the status message.
+       Expected: The 1st Session in the Session List will be deleted alongside all Schedules associated to the Session. Details of the deleted Session is shown in the status message.
     
-   1. Test case: `sdel 1` <br>
-       Expected: If there are no Schedules associated to the Session in index 1 (as shown in the Session List), similar to
-       previous. Else, it will not delete the Session and error message will be shown in the status message
-       
-   1. Other incorrect Delete Session commands to try: `sdel`, `sdel x` (where x is larger than the list size)<br>
-       Expected: It will not delete the Session and error message will be shown in the status message.
 
 
 ### Viewing Sessions within Period
 
-1. Viewing Sessions within Period while the Session List is non-empty
+1. Viewing Sessions within Period while the Session List is non-empty.
 
    1. Prerequisites: Multiple Sessions in the list can be viewed on the right panel of the GUI.
 
@@ -961,89 +836,50 @@ testers are expected to do more *exploratory* testing.
       Expected: The right panel only displays Sessions with start time from 0000hrs today to 2359hrs the next day.
       Indication that Session List has been successfully updated is shown in the status message.
 
-   1. Test case: `sview p/past`<br>
-      Expected: The right panel only displays Sessions that have already ended before time of execution.
-      Indication that Session List has been successfully updated is shown in the status message.
-
    1. Other incorrect View Session commands to try: `sview`, `sview p/+2s` (where unit of time is not d/m/y), `...` <br>
-      Expected: Similar to previous.
+      Expected: View of Session List is unchanged. Error details shown in the status message.
       
 ### Adding a Schedule
 
-1. Adding a Schedule while all Clients and Sessions are being shown
+1. Adding a Schedule while all Clients and Sessions are being shown.
 
    1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
    
    1. Test case: `schadd c/1 s/1`<br>
-      Expected: Add a Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
+      Expected: Add a Schedule associated with the first Client in the Client List and first Session in the Session List.
       Details of the added Schedule is shown in the status message.
       
-   1. Test case: `schadd s/1 c/2`<br>
-      Expected: Add a Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
-      Details of the added Schedule is shown in the status message.
-      
-   1. Other incorrect Add Schedule commands to try: `schadd c/1`, `schadd c/0 s/2`, `schadd c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
-      Expected: No Schedule is added. Error details shown in the status message.
 
 ### Editing a Schedule
 
-1. Editing a Schedule while all Schedules are being shown
+1. Editing a Schedule while all Schedules are being shown.
 
    1. Prerequisites: Multiple Schedules in the list can be viewed on the main panel of the GUI.
 
-   1. Test case: `schedit c/1 s/1 us/2`<br>
-      Expected: Edit Schedule with Client index 1 and Session index 1 is edited to Session index 2.
+   1. Test case: `schedit c/1 s/1 us/2 pd/paid r/text`<br>
+      Expected: Edit Schedule with the first Client and first Session is edited to second Session in the Session List, with payment updated to paid and remarks updated to text.
       Details of the edited Schedule is shown in the status message.
 
-   1. Test case: `schedit c/2 s/1 us/2`<br>
-      Expected: Edit Schedule with Client index 2 and Session index 1 is edited to Session index 2.
-      Details of the edited Schedule is shown in the status message.
-      
-   1. Test case: `schedit c/1 s/1 pd/paid`<br>
-     Expected: Edit Schedule with Client index 1 and Session index 1 payment update to be paid. 
-     In the right panel, the Client's name in the related Session will be indicated as green. 
-     Details of the edited Schedule is shown in the status message.
-         
-   1. Test case: `schedit c/1 s/1 pd/unpaid`<br>
-    Expected: Edit Schedule with Client index 1 and Session index 1 payment update to be unpaid. 
-    In the right panel, the Client's name in the related Session will be indicated as red. 
-    Details of the edited Schedule is shown in the status message.
-    
-   1. Test case: `schedit c/1 s/1 r/text`<br>
-       Expected: Edit Schedule with Client index 1 and Session index 1 remark to "text". 
-       In the right panel, the Client's name in the related Session will be indicated as red. 
-       Details of the edited Schedule is shown in the status message.
-
-   1. Other incorrect Edit Schedule commands to try: `schedit c/1`, `schedit c/1 s/2`, `schedit c/x s/y us/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
-      Expected: Similar to previous.
 
 ### Deleting a Schedule
 
-1. Deleting a Schedule while all Clients and Sessions are being shown
+1. Deleting a Schedule while all Clients and Sessions are being shown.
 
    1. Prerequisites: Multiple Clients and Sessions in the list can be viewed on the left and right panel of the GUI respectively.
    
    1. Test case: `schdel c/1 s/1`<br>
-      Expected: Delete the Schedule associated with Client of index 1 in the Client List and Session of index 1 in the Session List.
+      Expected: Delete the Schedule associated with first Client in the Client List and first Session in the Session List.
       Details of the deleted Schedule is shown in the status message.
-      
-   1. Test case: `schdel s/1 c/2`<br>
-      Expected: Delete the Schedule associated with Client of index 2 in the Client List and Session of index 1 in the Session List.
-      Details of the added Schedule is shown in the status message.
-      
-   1. Other incorrect Delete Schedule commands to try: `schdel c/1`, `schdel c/0 s/2`, `schdel c/x s/y`, `...` (where x is larger than the Client List size or y is larger than the Session List size)<br>
-      Expected: No Schedule is deleted. Error details shown in the status message.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. Test case: Open `data/addressbook.json` and change one of the Schedule's `clientEmail` to an email that 
-      does not exist inside the Client List.
+      does not exist inside the `clients` list.
       Expected: FitEgo notices an invalid storage format and start with an empty addressbook.
       
    2. Test case: Open `data/addressbook.json` and change one of the Schedule's `startTime` or `endTime` so that the
       resulting interval does not exist inside the Session List.
-      Expected: Similar as previous
-    
+      Expected: Similar to previous.
     
