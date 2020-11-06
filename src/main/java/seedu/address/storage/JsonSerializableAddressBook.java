@@ -30,7 +30,8 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_SESSION = "Your data file contains overlapping session(s).";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "Your data file contains duplicate schedule(s).";
     public static final String CLIENT_NOT_FOUND = "Cannot find client with email %s that is associated to a schedule.";
-    public static final String SESSION_NOT_FOUND = "Cannot find session with interval %s that is associated to a schedule.";
+    public static final String SESSION_NOT_FOUND =
+            "Cannot find session with interval %s that is associated to a schedule.";
 
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
     private final List<JsonAdaptedSession> sessions = new ArrayList<>();
