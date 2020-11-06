@@ -313,32 +313,6 @@ Thus, the result can be illustrated by the following object diagram, shown by a 
 
 On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as there is an overlapping Schedule (John is already scheduled to endurance training from 12/12/2020 1400 - 1600).
 
-### Edit Session feature
-
-The proposed Edit Session mechanism is facilitated by `AddressBook`.
-
-These operation is exposed in the `Model` interface as `Model#setSession()`.
-
-Given below is an example usage scenario and how the Edit Session mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time.
-FitEgo will initialize with the sample Client, Session and Schedule Lists.
-
-Step 2. The user executes `sedit 1 g/coolgym` command to edit the first Session in the Session List. 
-The `sedit` command calls `Model#setSession()`, causing changes to be made in the Session List after the `sedit 1 g/coolgym` command executes.
-
-The following sequence diagram shows how the Edit Session operation works:
-
-![EditSessionSequenceDiagram](images/EditSessionSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditSessionCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following activity diagram summarizes what happens when a user executes the Edit Session command:
-
-![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
-
 ### Edit Schedule feature
 
 The proposed Edit Schedule mechanism is facilitated by `AddressBook`.
@@ -868,4 +842,5 @@ Otherwise, the expected outcome: No changes are made. Error details shown in the
    2. Test case: Open `data/addressbook.json` and change one of the Schedule's `startTime` or `endTime` so that the
       resulting interval does not exist inside the Session List.
       Expected: Similar to previous.
-    
+   
+   
