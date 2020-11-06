@@ -193,7 +193,7 @@ through the configuration file (default: `config.json`)
 
 ### Edit Session feature
 
-The proposed edit session mechanism is facilitated by `AddressBook`.
+The proposed Edit Session mechanism is facilitated by `Addressbook`.
 
 These operation is exposed in the `Model` interface as `Model#setSession()`.
 
@@ -340,7 +340,7 @@ On the other hand, invoking `schadd c/1 s/1` will result in an error shown to th
 
 ### Edit Schedule feature
 
-The proposed Edit Schedule mechanism is facilitated by `FitEgo`, similar to the Edit Session Command.
+The proposed Edit Schedule mechanism is facilitated by `Addressbook`, similar to the Edit Session Command.
 
 This operation is exposed in the `Model` interface as `Model#setSchedule()`.
 
