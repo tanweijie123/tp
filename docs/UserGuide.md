@@ -481,7 +481,7 @@ of session view using [<code>sview</code>](#334-viewing-sessions-within-period--
 
 ### 3.3.1 Adding a Session : `sadd`
 
-You can create a session with its relevant details. It will show up on the Session List panel on the right side of the UI.
+You can create a session with its relevant details. If the new session is within the [viewing period](#334-viewing-sessions-within-period--sview) of the Session List, it will be displayed on the right panel of the UI.
 This provides you with an easy reference to the periods in which you have session(s) scheduled and the location of each session.
 
 Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
@@ -490,7 +490,7 @@ Points to take note when adding a session to the Session List:
 * Start time should be of format "dd/MM/yyyy HHmm" (date/month/year Hour minutes in 24 hr format).
 * Duration is in minutes.
 * Duration should be a positive integer (larger than 0).
-* If you want to schedule a session with a client, you need to make sure the session exists in FitEgo, then create a schedule (`schadd`) that references the client and the session.
+* If you want to schedule a session with a client, you need to make sure the session exists in FitEgo, then [create a schedule (`schadd`)](#341-adding-a-schedule--schadd) that references the client and the session.
 
 <div markdown="block" class="alert alert-info"> 
 
@@ -511,7 +511,6 @@ This helps to prevent you from accidentally agreeing to 2 sessions that overlaps
 
 Examples:
 * `sadd g/New Gym ex/Endurance at/06/11/2020 0900 t/65` adds a session at gym `New Gym` with exercise type `Endurance` at `06/11/2020 0900hrs` that lasts for `65` minutes. 
-If the session is within the [viewing period](#334-viewing-sessions-within-period-sview) of the Session List, it will be displayed on the right panel of the UI.
 
 
 ### 3.3.2 Editing a Session : `sedit`
