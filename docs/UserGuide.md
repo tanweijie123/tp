@@ -712,17 +712,17 @@ Examples:
 
 # 4 FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FitEgo home folder.
+**Q**: How do I transfer my data to another Computer?
+**A**: Install the app in the other computer and overwrite the empty `data` folder it creates with your previous FitEgo `data` folder.
 
-**Q**: I would like to contribute to this project. May I know who do I reach out to?  
+**Q**: I have encountered difficulties with FitEgo. May I know who do I reach out to for assistance?  
 **A**: To get in touch with us, you may post an issue [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/issues/new), and we will get back to you as soon as possible.
 
 **Q**: Am I able to mark multiple schedules as paid or unpaid with one command?  
 **A**: Currently, you are only able to mark only one schedule as paid or unpaid per command. This is a feature we are aiming to implement in the future.
 
 **Q**: Is my data backed up to the internet?  
-**A**: No, your data in FitEgo are saved in the hard disk. You will have to transfer the file, which contains your data, to whichever device you wish to continue using FitEgo on.
+**A**: No, your data in FitEgo are saved in the hard disk. You will have to transfer the `data` folder, to whichever device you wish to continue using FitEgo on.
 
 --------------------------------------------------------------------------------------------------------------------
 

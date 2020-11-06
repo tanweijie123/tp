@@ -2,6 +2,13 @@
 layout: page
 title: Developer Guide
 ---
+
+Welcome to FitEgo! This document will serve as a developer guide to the all-in-one scheduling application. This is to encourage and guide interested parties who wish to extend FitEgo and improve its features.
+
+Made with **fitness instructors** in mind, **FitEgo** is a **desktop program** that helps them **manage their clients and schedules**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **FitEgo** can get your client management tasks done faster than traditional GUI apps.
+
+## Table of Contents
+
 * Table of Contents
 {:toc}
 
@@ -34,29 +41,6 @@ Additional information that is helpful but not essential.
 :bulb: **Tip:**
 
 Good to learn, but not necessary to know to use FitEgo. 
-</div>
-
-
-<div markdown="block" class="alert alert-warning">
-
-:star: **Feature:**
-
-Important to know.
-</div>
-
-<div markdown="block" class="alert alert-success">
-
-:heavy_check_mark: **Example:**
-
-An example to follow. 
-
-</div>
-
-<div markdown="block" class="alert alert-danger">
-
-:warning: **Warning:**
-
-May have irreversible effect when used. Backup and caution is recommended.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -305,7 +289,7 @@ command is given by:
 ```schadd c/CLIENT_INDEX s/SESSION_INDEX```
 When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
 
-The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
+The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first. <br/>
 
 ![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
 
@@ -754,6 +738,9 @@ Use case ends.
 
 * **API**: Application Programming Interface
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **CLI**: Command-Line Interface
+* **GUI**: Graphical User Interface
+* **json**: JavaScript Object Notation, a file format
 
 --------------------------------------------------------------------------------------------------------------------
 
