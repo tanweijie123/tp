@@ -1,0 +1,47 @@
+---
+layout: page
+title: Bennett Clement's Project Portfolio Page
+---
+
+## Project: FitEgo
+
+FitEgo is a desktop application for fitness instructors to schedule, and keep track of his/her customers' progress in one place.
+
+Given below are my contributions to the project.
+
+* **New Feature**: Added the ability to add and delete schedules.
+  * What it does: allows the user to create and delete schedules. A schedule contains information about a client and the attended session. Therefore, adding a schedule means specifying that the specified client will attend the specified session. 
+  * Justification: This feature is core to the product because the user needs to be able to associate a client to a session. This allow us later in the project: we can keep track of the record of the sessions attended by the client and which clients will attend the session.
+  * Highlights: When implementing the Schedule model and how it should be stored in the storage, in-depth design analysis and discussion with other members were needed.
+
+* **New Feature**: Added the payment tracking feature
+  * What it does: Associate each schedule (which contains a client and session) to a payment status (either paid or unpaid) such that the user can easily spot whether a client has paid for a particular session.
+  * Justification: This feature helps the user to easily keep track of his clients' payment record
+  * Highlights: The implementation requires a good understanding in CSS and how it relates to the logic as in both Session List panel and client detail's table, different color will be displayed depending on the payment status.
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=dhafinrazaq&tabRepo=AY2021S1-CS2103T-T13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=test-code)
+
+* **Project management or team-based tasks**:
+  * Contributed to `v1.3` demo for tutorial
+  * Maintained issue tracker
+
+* **Enhancements to existing features**:
+  * Wrote tests for Schedule model (Pull requests [\#140](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/140))
+  * Modified and enhanced `cedit` from `edit` command (Pull requests [#53](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/53), [\#165](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/165))
+
+* **Documentation**:
+  * User Guide:
+    * Added documentation for the features `schadd` and `schdel` [\#143](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/143)
+    * Added documentation for the feature `cedit` [\#143](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/143)
+    * Added necessary information in FitEgo User Guide [\#139](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/139)
+  * Developer Guide:
+    * Added implementation details of the `schadd` feature. [\#149](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/149)
+    * Updated the diagram of the Storage component.
+
+* **Review/mentoring contributions**:
+  * Discuss design and implementation details with group mates.
+  * Help others debug and find solution during team meeting.
+  * Post bugs and proposals on issue tracker
+  * Review and comment on PRs regarding code quality, implementation bug, and other improvements. (PR examples: )
+  * Reported bugs and suggestion for other team (examples: [188](https://github.com/AY2021S1-CS2103T-W17-3/tp/issues/188))
+  
