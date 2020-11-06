@@ -28,7 +28,7 @@ If this is your first time, here are some quick tips to get started.
    ![Ui](images/Ui.png)
    <center>Figure 1 - Sample screenshot of our Ui</center>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press "Enter" key to execute it. e.g. typing **`help`** and pressing "Enter" key will open the help window.<br>
   Some example commands you can try:
 
    * **[`clist`](#321-listing-all-clients--clist)** : Lists all clients stored in **FitEgo**.
@@ -178,16 +178,21 @@ In this section, you can find all the keywords that will help you fully utilize 
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters that you need to provide.<br>
+* Items are pairs of prefix and parameter.
+  e.g. `n/NAME` is an item comprising prefix `n/` and parameter `NAME`.
+
+* Words in `UPPER_CASE` are the parameters that you need to provide.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional parameters.<br>
+* Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/injured-thigh` or as `n/John Doe`.
+
+* If a command only expects one item but receives multiple items of the same prefix, FitEgo will accept the last item.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/injured-thigh`, `t/injured-thigh t/allergy-dairy` etc.
 
-* Parameters can be in any order.<br>
+* Items can be in any order. 
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 </div>
@@ -280,7 +285,7 @@ Your data in FitEgo are saved in the hard disk automatically after any command t
 
 ## 3.2 Client-related Keywords
 
-In this section, we will describe client-related keywords. Before that, let's define what we mean by `client`.
+In this section, we will describe client-related keywords. Before that, let's define what we mean by client.
   
 <div markdown="block" class="alert alert-info"> 
 
@@ -301,7 +306,7 @@ Client-related commands will interact with the Client List which is located on t
 
 :information_source: **Note:**
 
-The `Next Session` field below each Client shows you the earliest upcoming session. It is not updated in real-time but after FitEgo executes a command.
+The Next Session field below each Client shows you the earliest upcoming session. It is not updated in real-time but after FitEgo executes a command.
 
 </div>
 
@@ -325,8 +330,8 @@ Points to take note when adding a client's information:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0). Each tag can include
-alphanumeric characters or dash (`-`), but you are not allowed to start or end
-a tag with a dash. 
+alphanumeric characters or hyphen (`-`), but you are not allowed to start or end
+a tag with a hyphen. 
 </div>
 
 <div markdown="block" class="alert alert-warning">
@@ -334,13 +339,13 @@ a tag with a dash.
 :star: **Feature:**
 
 You can add a profile picture to your client by storing their photo in a new folder named `images` within the `data` folder. You should name the photo 
-as `profile-<client's full name in lowercase and separated by dash>.jpg`. <br/> For example, if your client's name is Alex Yeoh, 
+as `profile-<client's full name in lowercase and separated by hyphen>.jpg`. <br/> For example, if your client's name is Alex Yeoh, 
 store his photo as `data/images/profile-alex-yeoh.jpg`
 </div>
 
 Examples:
-* `cadd n/Jane Doe p/91234567 e/jane@gmail.com a/311, Clementi Ave 2, #02-25`
-* `cadd n/John Doe p/91231367 e/jojo@gmail.com a/311, Clementi Ave 2, #02-25 t/injured-thigh`
+* `cadd n/Jane Doe p/91234567 e/jane@gmail.com a/311, Clementi Ave 2, #02-25` adds a client with the specified name, phone number, email and address.
+* `cadd n/John Doe p/91231367 e/jojo@gmail.com a/311, Clementi Ave 2, #02-25 t/injured-thigh` adds a client with the specified name, phone number, email, address and tag.
 
 ### 3.2.3 Editing a Client : `cedit`
 
@@ -422,7 +427,7 @@ Any string after the force flag (`f/`) will be ignored.
 
 You can view the full details of a client from the Client List. 
 
-You can easily look up the following information about the client in the central panel:
+You can easily look up the following information about the client in the Main Window:
 * Your client's name, email, address, phone, tags
 * Your client's weight history in line graph form
 * A list of schedules associated with your client, together with the interval, exercise type and remark
@@ -430,11 +435,11 @@ You can easily look up the following information about the client in the central
 Format: `cview INDEX`
 
 Points to take note when viewing clients from the Client List:
-* Views the client at the specified `INDEX`. The selected client will be displayed in the main window. 
+* Views the client at the specified `INDEX`. The selected client will be displayed in the Main Window. 
 * The index refers to the index number shown in the displayed Client List.
 * The index **must be a positive integer** 1, 2, 3, ...
-* You can use `F3` to view your client's list of schedules, and `F4` to view your client's weight progression.
-* You can sort the list of schedules by the interval's start time, payment status or exercise type.
+* You can press "F3" key to view your client's list of schedules, and "F4" key to view your client's weight progression.
+* You can sort the list of schedules in the client's profile by the interval's start time, payment status or exercise type.
 
 Examples:
 * `cview 2` opens the second client in FitEgo
@@ -452,7 +457,7 @@ The result of these commands is shown in the figure below
 
 ## 3.3 Session-related Keywords 
 
-We will describe all session-related keywords in this section. Before that, let's define what we mean by `session`.
+We will describe all session-related keywords in this section. Before that, let's define what we mean by session.
 
 <div markdown="block" class="alert alert-info"> 
 
@@ -481,7 +486,7 @@ of session view using [<code>sview</code>](#334-viewing-sessions-within-period--
 
 ### 3.3.1 Adding a Session : `sadd`
 
-You can create a session with its relevant details. If the new session is within the [viewing period](#334-viewing-sessions-within-period--sview) of the Session List, it will be displayed on the right panel of the UI.
+You can create a session with its relevant details. If the new session is within the [viewing period](#334-viewing-sessions-within-period--sview) of the Session List, the addition will be reflected in the Session List.
 This provides you with an easy reference to the periods in which you have session(s) scheduled and the location of each session.
 
 Format: `sadd g/GYM_NAME ex/EXERCISE_TYPE at/START_TIME t/DURATION`
@@ -616,7 +621,7 @@ the Session List will still be showing Friday's sessions at that point of time. 
 
 ## 3.4 Schedule-related Keywords 
 
-In this section, we will describe all schedule-related keywords. Before that, let's define what we mean by `schedule`.
+In this section, we will describe all schedule-related keywords. Before that, let's define what we mean by schedule.
 
 <div markdown="block" class="alert alert-info"> 
 
@@ -712,17 +717,17 @@ Examples:
 
 # 4 FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FitEgo home folder.
+**Q**: How do I transfer my data to another Computer?
+**A**: Install the app in the other computer and overwrite the empty `data` folder it creates with your previous FitEgo `data` folder.
 
-**Q**: I would like to contribute to this project. May I know who do I reach out to?  
+**Q**: I have encountered difficulties with FitEgo. May I know who do I reach out to for assistance?  
 **A**: To get in touch with us, you may post an issue [here](https://github.com/AY2021S1-CS2103T-T13-3/tp/issues/new), and we will get back to you as soon as possible.
 
 **Q**: Am I able to mark multiple schedules as paid or unpaid with one command?  
 **A**: Currently, you are only able to mark only one schedule as paid or unpaid per command. This is a feature we are aiming to implement in the future.
 
 **Q**: Is my data backed up to the internet?  
-**A**: No, your data in FitEgo are saved in the hard disk. You will have to transfer the file, which contains your data, to whichever device you wish to continue using FitEgo on.
+**A**: No, your data in FitEgo are saved in the hard disk. You will have to transfer the `data` folder, to whichever device you wish to continue using FitEgo on.
 
 --------------------------------------------------------------------------------------------------------------------
 
