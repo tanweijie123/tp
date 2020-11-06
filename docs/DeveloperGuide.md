@@ -842,5 +842,4 @@ Otherwise, the expected outcome: No changes are made. Error details shown in the
    2. Test case: Open `data/addressbook.json` and change one of the Schedule's `startTime` or `endTime` so that the
       resulting interval does not exist inside the Session List.
       Expected: Similar to previous.
-   
-   
+
