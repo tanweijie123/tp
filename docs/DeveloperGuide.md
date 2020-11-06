@@ -507,6 +507,7 @@ Use case ends.
     2a1. FitEgo displays no clients found.
 
   Use case ends.
+
 <br/>
 
 **Use case: UC05 View a Client**
@@ -541,15 +542,19 @@ Use case ends.
 **Use case: UC06 Add a Session**
 
 Similar to <u>UC01 (Add a Client)</u>, but replace Client with Session.
+
 <br>
       
 **Use case: UC07 Edit a Session**
 
 Similar to <u>UC02 (Edit a Client)</u>, but replace Client with Session.
+
 <br>
 
 **Use case: UC08 Delete a Session**
+
 Similar to <u>UC03 (Delete a Client)</u>, but replace Client with Session.
+
 <br/>
 
 **Use case: UC09 View Session within time period**
@@ -595,7 +600,7 @@ Use case ends.
 
   - 2b1. FitEgo shows an error message.
 
-    Use case resumes at step 2.
+    Use case resumes at step 2.  
 <br/>
 
 **Use case: UC11 Edit a Schedule**
@@ -643,8 +648,8 @@ Use case ends.
 
   - 2b1. FitEgo shows an error message.
 
-    Use case resumes at step 2.
-
+    Use case resumes at step 2.  
+<br/>
 
 **Use case: UC13 Open User Guide in Browser**
 
