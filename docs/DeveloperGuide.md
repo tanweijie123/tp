@@ -454,7 +454,7 @@ Use case ends.
 
     * 3a1. FitEgo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 2.  
 <br/>
 
 **Use case: UC03 Delete a Client**
