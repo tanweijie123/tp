@@ -12,21 +12,21 @@ and it has a GUI created with JavaFX.
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to auto-complete commands while the user is typing. (Pull requests [\#99](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/99))
-  * What it does: allows the user to view the commands available in FitEgo during mid-typing, so that forgetful users can reference to it. Advanced users can also use the "TAB" key to lessen the typing. 
-  * Justification: This feature make it user-friendly because new users are guided to available commands, and advanced users can type lesser. 
+  * What it does: allows the user to view the commands available in FitEgo during mid-typing, so that forgetful users can refer to it. Advanced users can also use the "TAB" key to lessen the typing. 
+  * Justification: This feature makes it user-friendly because new users are guided to available commands, and advanced users can type lesser. 
   * Credits: ControlsFX library was used to display the available commands in a table-list format. 
 
-* **New Feature**: Added the ability to warn users if their data file is not in correct format (Pull requests [\#251](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/251))
-  * What it does: warns the user if FitEgo is unable to parse the data from the data file. Allows user to exit immediately to prevent data file being overwritten. 
-  * Justification: This feature protects the user's important data file and prevents unrecoverable damages. 
+* **New Feature**: Added the ability to warn users if their data file is not in the correct format (Pull requests [\#251](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/251))
+  * What it does: warns the user if FitEgo is unable to parse the data from the data file. Allows the user to exit immediately to prevent data file being overwritten. 
+  * Justification: This feature protects the user's data file and prevents unrecoverable damages. 
 
 * **New Feature**: Added the feature to track weight for every schedule (Pull requests [\#159](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/159))
-  * What it does: allows the user to store weight for every schedule. Then, the user is able to view the weight over time using a line-chart. 
+  * What it does: allows the user to store weight for every schedule. Then, the user can view the weight over time using a line chart. 
 
 * **New Feature**: Added the feature to view client's full information (Pull requests [\#60](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/60), [\#77](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/77), [\#159](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/159))
   * What it does: allows the user to view the client's profile, schedules, and weight over time. 
-  * Justification: This feature allows the user to track the client's progress, so that he does not have to utilise another software or perform calculations manually. 
-  * Credits: With the help of Kelvin (adding different weight units) and Bennett (displaying all schedule related to the clients in a table), I had managed to integrate both of their work into a tab pane. 
+  * Justification: This feature allows the user to track the client's progress so that he does not have to utilise another software or perform calculations manually. 
+  * Credits: With the help of Kelvin (adding different weight units) and Bennett (displaying all schedule related to the clients in a table), I had managed to integrate both of their work into a tab-pane. 
 
 [comments]: <> (Added a history command that allows the user to navigate to previous commands using up/down keys. - PR#99)
 
@@ -56,7 +56,7 @@ Given below are my contributions to the project.
 
 * **Community**:
   * Assisted Kelvin with `sview` to provide flexible view range for users. 
-  * With the help of Kelvin and Bennett, we integrated the weight and schedule related to clients into a tab pane. 
+  * With the help of Kelvin and Bennett, we integrated the weight and schedule related to clients into a tab-pane. 
   * Reported bugs and suggestions for other team members during weekly team meetings. 
 
 * **Tools**:
