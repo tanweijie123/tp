@@ -44,4 +44,3 @@ Given below are my contributions to the project.
   * Discuss bugs and proposals during team meeting or via issues (example: [issue \#141](https://github.com/AY2021S1-CS2103T-T13-3/tp/issues/141), [issue \#174](https://github.com/AY2021S1-CS2103T-T13-3/tp/issues/174)).
   * Review and comment on PRs regarding code quality (PR [#91](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/91)), implementation bug (PR [#226](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/226)), and other improvements.
   * Beyond this team: reported bugs and suggestion for other team (examples: PR [#188](https://github.com/AY2021S1-CS2103T-W17-3/tp/issues/188))
-  
