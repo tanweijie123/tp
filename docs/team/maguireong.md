@@ -22,6 +22,8 @@ Given below are my contributions to the project.
                 However, the implementation too was slightly different form the edit session feature, therefore more time was required to create this feature.
   * Credits: {Credits to teammates Bennett and Dhafin for adding additional parameters that can be edited in the feature}
 
+<div style="page-break-after: always;"></div>
+
 * **New Feature**: Added a dynamic header on the right side panel.
   * What it does: Allows the user to have a better idea of the time period searched for when using the “Session View” function.
   * Justification: This feature improves the product significantly because a user can better identify which time period it is referring to.
