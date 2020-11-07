@@ -30,7 +30,7 @@ Below are a few examples of the common notations in this document in which the d
 
 :information_source: **Note:**
 
-Additional information that is helpful but not essential. 
+Important to know. 
 
 </div>
 
@@ -40,7 +40,7 @@ Additional information that is helpful but not essential.
 
 :bulb: **Tip:**
 
-Good to learn, but not necessary to know to use FitEgo. 
+Additional information. 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -443,6 +443,88 @@ In designing this weight tracking feature, we had considered several alternative
   * Pros: Do not require a schedule in order to track weight. 
   * Cons: Lesser information about the weight (schedule's exercise, remarks, time, etc) is stored.  
 
+### View Session by period feature
+
+The View Session by period feature allows users to filter the Session List to show only those within the requested time period.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The Ui component RightSideBar comprises a ListView of 
+ Session List and a title that reflects the latest filter on Session List resulting from ViewSessionCommand. 
+ Session List's list and Ui-related operations are handled by <code>Model</code> and RightSideBar respectively.
+</div>
+
+The View Session mechanism is facilitated by `ViewSessionCommand` which extends `Command`. The format of the 
+command is given by: 
+
+```sview p/PERIOD```
+
+When using this command, `PERIOD` should refer to either a variable period or fixed period
+that returns true after running `ViewSessionCommand#isValidPeriod`. Fixed periods are found in `ViewSessionCommand#PREDICATE_HASH_MAP`, whereas variable periods
+must follow the format `(+/-)#(D/W/M/Y)`.
+
+Its operations are exposed in the `Model` interface as `Model#updateFilteredSessionList` and `Model#getFilteredSessionList`.
+
+The following activity diagram summarizes what happens when a user executes a new View Session command.
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ViewSessionActivityDiagram.png" style="width: 50%; height: auto;"/>
+    </p>
+    <figcaption>Figure - View Session Activity Diagram</figcaption>
+</figure>
+
+In the following sequence diagram, we trace the execution when the user decides to enter the View Session command 
+`sview p/week` into FitEgo.
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ViewSessionSequenceDiagram.png" alt="ViewSessionSequenceDiagram" style="align-content: center" />
+    </p>
+    <figcaption>Figure - View Session Sequence Diagram</figcaption>
+</figure>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ViewSessionCommandParser` and `ViewSessionCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+1. After the user enters an input to view session for the week, the input is sent to `LogicManager` to be executed. The `AddressBookParser` identifies the command type and constructs a `ViewSessionCommandParser`.
+
+1. The `ViewSessionCommandParser` then parses for the period and constructs a `ViewSessionCommand` with the period.
+
+1. The `ViewSessionCommand` is returned to the `LogicManager` which will then execute it.
+
+1. During execution of `ViewSessionCommand`, a predicate is created (refer to Activity Diagram above for details). The Session List in `Model` is then filtered by this predicate.
+
+1. Command result is passed to `MainWindow` to indicate a successful execution. `MainWindow` will then update the `RightSideBar`.
+[comment]: Added 4 whitespaces below to indent content between numbered bullet points. Do not remove.
+
+    <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ViewSessionUpdateRightSideBarRef.png" alt="ViewSessionUpdateRightSideBarRefSequenceDiagram" style="align-content: center" />
+    </p>
+    <figcaption>Figure - View Session Update RightSideBar Ref Sequence Diagram</figcaption>
+    </figure>
+
+1. The `RightSideBar` retrieves the latest period "WEEK" from the command result and text. `Title` is set to "Week". It then retrieves the filtered Session List from `LogicManager` and updates `SessionListView` with it.
+
+#### Design Considerations
+
+In designing this feature, we had to consider several alternative ways in which we can choose to handle viewing session by period.
+
+- **Alternative 1 (current choice):** Update title of `RightSideBar` based on command result.
+    
+    - Pros: 
+        1. Does not lower maintainability and requires the least changes to existing implementation and test code. 
+    - Cons:
+        1. Violates Separation of Concerns principle as RightSideBar has to check whether command result is from ViewSessionCommand.
+    
+- **Alternative 2:** Using Observer pattern to update title of `RightSideBar`.
+    
+    - Pros: 
+        1. Reduces coupling between Ui and Logic.
+    - Cons: 
+        1. `RightSideBar` is only updated when ViewSessionCommand is run. `RightSideBar`'s default session view cannot be customised and must be all sessions.
+        2. Violates YAGNI principle as making `Command` implement Observer interface requires addition of notify and add observer methods for all commands. This also increases chances of errors made in implementation.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -664,7 +746,7 @@ Similar to <u>UC03 (Delete a Client)</u>, but replace Client with Session.
 
  1.  FitEgo shows a list of Sessions.
  2.  User requests to filter the Session List by a period.
- 3.  FitEgo filters the Session List according to the specified period and updates its title.
+ 3.  FitEgo filters the Session List according to the specified period and updates the title displayed.
 Use case ends.
 
 **Extensions**
