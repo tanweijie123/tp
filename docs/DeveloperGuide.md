@@ -316,13 +316,23 @@ When using this command, the `CLIENT_INDEX` should refer to the index shown in t
 
 The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
 
-![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/AddScheduleActivityDiagram.png" style="width: 50%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Add Schedule activity diagram</figcaption>
+ </figure>
 
 **Example Commands**
 
 Assume the current state of Client, Session, and Schedule is as illustrated on the following simplified object diagram:
 
-![OverlappingScheduleObjectDiagram0](images/OverlappingScheduleObjectDiagram0.png)
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/OverlappingScheduleObjectDiagram0.png" style="width: 50%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Sample current state of Add Schedule</figcaption>
+ </figure>
 
 Now, consider two cases of Add Schedule command to be invoked.
 
@@ -332,7 +342,12 @@ Invoking `schadd c/2 s/1` will add a Schedule associated with Andy (the second C
 
 Thus, the result can be illustrated by the following object diagram, shown by a new created Schedule:
 
-![OverlappingScheduleObjectDiagram1](images/OverlappingScheduleObjectDiagram1.png)
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/OverlappingScheduleObjectDiagram1.png" style="width: 50%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Result of invoking <code>schadd c/2 s/1</code></figcaption>
+ </figure>
 
 **Case 2:** `schadd c/1 s/1`
 
