@@ -314,7 +314,7 @@ command is given by:
 ```schadd c/CLIENT_INDEX s/SESSION_INDEX```
 When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
 
-The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
+The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command.
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
@@ -323,7 +323,13 @@ The following activity diagram summarizes the decision making process when a use
      <figcaption>Figure - Add Schedule activity diagram</figcaption>
  </figure>
 
-**Example Commands**
+The mechanism of "Get the specified Client and Session" is similar to how [Delete Session command](#Delete-Session-feature) get its Session instance, i.e. the Client instance is from the filtered Client List, while the Session instance is from the filtered Session List.
+
+After getting the specified Client and Session, it checks whether a Schedule object associated with the client and session already exists in `AddressBook`.
+ 
+If there is none, then "Add Schedule" by calling `Model#addSchedule()`.
+
+**Command Usage Examples**
 
 Assume the current state of Client, Session, and Schedule is as illustrated on the following simplified object diagram:
 
@@ -351,7 +357,7 @@ Thus, the result can be illustrated by the following object diagram, shown by a 
 
 **Case 2:** `schadd c/1 s/1`
 
-On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as there is an overlapping Schedule (John is already scheduled to endurance training from 12/12/2020 1400 - 1600).
+On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as an identical Schedule (Schedule that consists of the same Client and Session) already exists. Here, John is already scheduled to the endurance training from 12/12/2020 1400 - 1600.
 
 ### Edit Schedule feature
 

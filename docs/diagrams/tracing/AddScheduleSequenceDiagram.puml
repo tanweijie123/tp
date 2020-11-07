@@ -39,18 +39,28 @@ deactivate AddressBookParser
 LogicManager -> AddScheduleCommand : execute(model)
 activate AddScheduleCommand
 
-AddScheduleCommand -> Model: hasAnyScheduleAssociatedWithClientAndSession(2, 1)
+AddScheduleCommand -> Model: get client of index 2
 activate Model
 
-Model --> AddScheduleCommand: hasOverlappingSchedule
+AddScheduleCommand --> Model : client
 deactivate Model
 
-opt no overlapping Schedule
+AddScheduleCommand -> Model: get session of index 1
+activate Model
+
+Model --> AddScheduleCommand : session
+deactivate Model
+
+AddScheduleCommand -> Model: hasAnyScheduleAssociatedWithClientAndSession(client, session)
+
+activate Model
+
+deactivate Model
 
 create Schedule
-AddScheduleCommand -> Schedule : Schedule(2, 1)
+AddScheduleCommand -> Schedule : Schedule(client, session)
 activate Schedule
-Schedule --> AddScheduleCommand : s
+Schedule --> AddScheduleCommand : schedule
 deactivate Schedule
 
 AddScheduleCommand -> Model: addSchedule(s)
@@ -59,7 +69,6 @@ activate Model
 Model --> AddScheduleCommand
 deactivate Model
 
-end
 create CommandResult
 AddScheduleCommand -> CommandResult: CommandResult(String)
 activate CommandResult
