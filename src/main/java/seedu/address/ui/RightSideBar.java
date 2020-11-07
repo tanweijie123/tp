@@ -39,12 +39,12 @@ public class RightSideBar extends UiPart<AnchorPane> {
         this.title.setAlignment(Pos.CENTER);
         sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new RightSideBar.SessionListViewCell());
-        title.setText(latestPeriod);
+        updateTitle();
         logic.updateFilteredSessionList(PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS);
     }
 
     /**
-     * Updates the content of the Session ListView
+     * Updates the title and content of the Session ListView.
      */
     public void update(CommandResult commandResult, String commandText) {
         updateLatestPeriod(commandResult, commandText);
