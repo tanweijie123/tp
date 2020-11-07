@@ -14,7 +14,7 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/dhafinrazaq.png" width="200px">
 
-[[github](https://github.com/dhafinrazaq)]
+[[github](https://github.com/dhafinrazaq)] [[PPP](team/dhafinrazaq.md)]
 
 #### Developer & Deliverables in-charge
 
