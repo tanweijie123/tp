@@ -63,7 +63,7 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/tanweijie123.png" width="200px">
 
-[[github](http://github.com/tanweijie123), [PPP](team/tanweijie123.md)]
+[[github](http://github.com/tanweijie123), [PPP](team/tanweijie123)]
 
 #### Developer & UI in-charge
 
