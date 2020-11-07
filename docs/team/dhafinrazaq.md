@@ -40,6 +40,6 @@ Given below are my contributions to the project.
 * **Review or mentoring contributions**:
   * Discuss design and implementation details with group mates.
   * Post bugs (example: [issue \#141](https://github.com/AY2021S1-CS2103T-T13-3/tp/issues/141)) and proposals (example: [issue \#174](https://github.com/AY2021S1-CS2103T-T13-3/tp/issues/174)).
-  * Review and comment on PRs regarding code quality (PR [#91](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/91), implementation bug (PR [#226](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/226)), and other improvements.
+  * Review and comment on PRs regarding code quality, implementation bug, and other improvements. Example PRs: [#91](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/91), [#226](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/226).
   * Reported bugs and suggestion for other team (examples: PR [#188](https://github.com/AY2021S1-CS2103T-W17-3/tp/issues/188))
   
