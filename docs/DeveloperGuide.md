@@ -217,7 +217,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/EditSessionActivityDiagram.png" style="width: 50%; height: auto;"/>
+        <img src="images/EditSessionActivityDiagram.png" style="width: 80%; height: auto;"/>
     </p>
     <figcaption>Figure - Edit Session Activity Diagram</figcaption>
 </figure>
@@ -358,7 +358,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/EditScheduleActivityDiagram.png" style="width: 50%; height: auto;"/>
+        <img src="images/EditScheduleActivityDiagram.png" style="width: 80%; height: auto;"/>
     </p>
     <figcaption>Figure - Edit Schedule Activity Diagram</figcaption>
 </figure>
