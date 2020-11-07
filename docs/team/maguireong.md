@@ -39,8 +39,8 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   *	User Guide:
-    * Added documentation for the features Add Client [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45), Edit Session and Edit Schedule features. [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
-    * Reformat User Guide to ensure consistency.
+        * Added documentation for the features Add Client [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45), Edit Session and Edit Schedule features. [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
+        * Reformat User Guide & Developer Guide to ensure consistency.
     
   * Developer Guide:
     * Added implementation details of the Add Client [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45), Edit Session and Edit Schedule features. [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
