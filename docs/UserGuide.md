@@ -369,7 +369,7 @@ Examples:
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/cedit_sample.png" style="width: 50%; height: auto;"/>
+        <img src="images/cedit_sample.png" style="width: 100%; height: auto;"/>
     </p>
     <figcaption>Figure - Result of executing <code>cedit 2 p/12345678 t/injured-thigh</code></figcaption>
 </figure>
@@ -681,7 +681,7 @@ Example:
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/schadd_sample.png" style="width: 50%; height: auto;"/>
+         <img src="images/schadd_sample.png" style="width: 100%%; height: auto;"/>
      </p>
      <figcaption>Figure - Result of executing <code>schadd c/1 s/1</code></figcaption>
  </figure>
