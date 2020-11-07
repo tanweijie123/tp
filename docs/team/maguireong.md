@@ -20,6 +20,7 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because a user may have changes made to his schedules, therefore the app should provide a way to make update the changes to the schedule.
   * Highlights: This enhancement was similar to the edit session feature, therefore I had less trouble trying to create this feature. 
                 However, the implementation too was slightly different form the edit session feature, therefore more time was required to create this feature.
+  * Credits: {Credits to teammates Bennett and Dhafin for adding additional parameters that can be edited in the feature}
 
 * **New Feature**: Added a dynamic header on the right side panel.
   * What it does: Allows the user to have a better idea of the time period searched for when using the “Session View” function.
