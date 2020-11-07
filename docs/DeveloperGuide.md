@@ -317,30 +317,25 @@ The Add Schedule mechanism is facilitated by `AddScheduleCommand` which extends 
 command is given by: 
 
 ```schadd c/CLIENT_INDEX s/SESSION_INDEX```
+
 When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
 
 The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command.
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/AddScheduleActivityDiagram.png" style="width: 110%; height: auto;"/>
+         <img src="images/AddScheduleActivityDiagram.png" style="width: 100%; height: auto;"/>
      </p>
      <figcaption>Figure - Add Schedule activity diagram</figcaption>
  </figure>
 
-The mechanism of "Get the specified Client and Session" is similar to how [Delete Session command](#delete-session-feature) get its Session instance, i.e. the Client instance is from the filtered Client List, while the Session instance is from the filtered Session List.
+#### Command Usage Examples
 
-After getting the specified Client and Session, it checks whether a Schedule object associated with the Client and Session already exists in `AddressBook`.
- 
-If there is none, then "Add Schedule" by calling `Model#addSchedule()`.
-
-**Command Usage Examples**
-
-Assume the current state of Client, Session, and Schedule is as illustrated on the following simplified object diagram:
+Assume the current state of the displayed Client List, displayed Session List, and Schedules (all Schedules in FitEgo) are as illustrated on the following simplified object diagram:
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/OverlappingScheduleObjectDiagram0.png" style="width: 110%; height: auto;"/>
+         <img src="images/OverlappingScheduleObjectDiagram0.png" style="width: 95%; height: auto;"/>
      </p>
      <figcaption>Figure - Sample current state of Add Schedule</figcaption>
  </figure>
@@ -349,20 +344,38 @@ Now, consider two cases of Add Schedule command to be invoked.
 
 **Case 1**:  `schadd c/2 s/1`
 
-Invoking `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List).
+Here is what happens when `schadd c/2 s/1` is invoked.
 
-Thus, the result can be illustrated by the following object diagram, shown by a new created Schedule:
+The overall mechanism is similar to [Delete Session](#delete-session-feature), but mainly differs on the method call `parseCommand` and `DeleteSessionCommand#execute(model)`.
+
+`parseCommand` method call:
+Instead of using `DeleteSessionCommandParser`, it uses `AddScheduleCommandParser` such that it returns an `AddScheduleCommand` object called `a` with Client index `2` and Session index `1`.
+
+`AddScheduleCommand#execute(model)` will be called instead of `DeleteSessionCommand#execute(model)`:
+This method call can be traced by the following sequence diagram snippet.
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/OverlappingScheduleObjectDiagram1.png" style="width: 110%; height: auto;"/>
+         <img src="images/AddScheduleExecuteRef.png" style="width: 95%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Sequence diagram snippet for <code>AddScheduleCommand#execute(model)</code></figcaption>
+ </figure>
+ 
+As shown in the figure above, first it gets the Client and Session from the filtered (displayed) lists. Then, it checks for existing identical Schedule (Schedule that consists of the same Client and Session) using `hasAnyScheduleAssociatedWithClientAndSession()`. 
+Since for this case it is not found, then create a new Schedule object and add it into the Model using `Model#addSchedule()`. Finally, return the CommandResult to indicate a success.
+
+Thus, `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List). The result can be illustrated by the following object diagram, which creates a new Schedule:
+
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/OverlappingScheduleObjectDiagram1.png" style="width: 95%; height: auto;"/>
      </p>
      <figcaption>Figure - Result of invoking <code>schadd c/2 s/1</code></figcaption>
  </figure>
 
 **Case 2:** `schadd c/1 s/1`
 
-On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as an identical Schedule (Schedule that consists of the same Client and Session) already exists. Here, John is already scheduled to the endurance training from 12/12/2020 1400 - 1600.
+On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as an identical Schedule already exists. Here, John is already scheduled to the endurance training Session from 12/12/2020 1400 - 1600.
 
 ### Edit Schedule feature
 
