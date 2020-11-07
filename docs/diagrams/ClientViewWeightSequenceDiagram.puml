@@ -24,8 +24,9 @@ activate Logic
 Logic --> MainWindow : result
 
 note right
-Logic returns a CommandResult with a supplier
-to get the associated client and schedule list.
+Logic returns a CommandResult
+with a Supplier to get the
+associated client and schedule list.
 end note
 
 deactivate Logic

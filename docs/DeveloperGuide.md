@@ -384,7 +384,7 @@ In the following sequence diagram, we trace the execution starting from when the
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/ClientViewWeightSequenceDiagram.png" alt="ClientViewWeightSequenceDiagram" style="width: 50%; height: auto;"/>
+        <img src="images/ClientViewWeightSequenceDiagram.png" alt="ClientViewWeightSequenceDiagram" style="align-content: center" />
     </p>
     <figcaption>Figure - Client View Weight Generate Sequence Diagram</figcaption>
 </figure>
