@@ -364,6 +364,19 @@ Thus, the result can be illustrated by the following object diagram, shown by a 
 
 On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as an identical Schedule (Schedule that consists of the same Client and Session) already exists. Here, John is already scheduled to the endurance training from 12/12/2020 1400 - 1600.
 
+#### Design Considerations
+
+##### Aspect: How the user specifies Add Schedule parameters
+
+* **Alternative 1 (current choice):** Use parameters with prefix: `schadd c/CLIENT_INDEX s/SESSION_INDEX`
+  * Pros: The user can input the two parameters in any order.
+  * Cons: Easier to implement as the value of a certain prefix can be easily retrieved.
+
+* **Alternative 2:** Use preamble (parameters without prefix): `schadd CLIENT_INDEX SESSION_INDEX`
+  * Pros: For the user, it is more efficient to type and the user does not need to remember the prefixes.
+  * Cons: Implementation is harder since there will be two preambles. There will be a need to further process the preamble (such as separating the preamble value before and after a space). 
+
+
 ### Edit Schedule feature
 
 The proposed Edit Schedule mechanism is facilitated by `Addressbook`, similar to the Edit Session Command.
