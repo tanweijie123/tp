@@ -139,8 +139,13 @@ You can refer to the table and the figure below to familiarize yourself with the
 
 [comment]: <> (Why cant you figure out yourself?)
 
-![AnnotatedUi](images/AnnotatedUi.png)
-<center> Figure 2 - Callouts of the various UI components</center><br/>
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/AnnotatedUi.png" style="width: 100%%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Callouts of the various UI components</figcaption>
+ </figure>
+ 
 <center> Table 1 - Functions of UI Components </center>
 From the figure above, the GUI is made up of several components. 
 
@@ -299,8 +304,12 @@ Each client must have a unique email.
 
 Client-related commands will interact with the Client List which is located on the [left of the UI](#2-ui-orientation). 
 
-<center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
-<br/>Figure 6 - Sample of Client List</center>
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/ClientPanel.png" style="width: 100%%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Sample of Client List</figcaption>
+ </figure>
 
 <div markdown="block" class="alert alert-info"> 
 
@@ -369,7 +378,7 @@ Examples:
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/cedit_sample.png" style="width: 50%; height: auto;"/>
+        <img src="images/cedit_sample.png" style="width: 100%; height: auto;"/>
     </p>
     <figcaption>Figure - Result of executing <code>cedit 2 p/12345678 t/injured-thigh</code></figcaption>
 </figure>
@@ -658,8 +667,12 @@ The table below shows an example of schedules. The session at Machoman Gym is at
 
 To check if you have scheduled a session with a client, you can check if the session in the Session List contains the client's name. 
 
-<center> <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" /><br>
-Figure 14 - Alternate sample of Session List</center><br/>
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/SchedulePanel.png" style="width: 100%%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Alternate sample of Session List</figcaption>
+ </figure>
 
 The figure above shows the Session List, in which for each session, there is a list of clients attending the session. Clients who have paid for a session will have their name shown in <span style="color:green; font-weight: bold;">green</span>, while those who have not  will have their name shown in <span style="color:red; font-weight: bold;">red</span>.
 
@@ -681,7 +694,7 @@ Example:
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/schadd_sample.png" style="width: 50%; height: auto;"/>
+         <img src="images/schadd_sample.png" style="width: 100%%; height: auto;"/>
      </p>
      <figcaption>Figure - Result of executing <code>schadd c/1 s/1</code></figcaption>
  </figure>

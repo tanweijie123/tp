@@ -323,12 +323,12 @@ The following activity diagram summarizes the decision making process when a use
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/AddScheduleActivityDiagram.png" style="width: 50%; height: auto;"/>
+         <img src="images/AddScheduleActivityDiagram.png" style="width: 110%; height: auto;"/>
      </p>
      <figcaption>Figure - Add Schedule activity diagram</figcaption>
  </figure>
 
-The mechanism of "Get the specified Client and Session" is similar to how [Delete Session command](#Delete-Session-feature) get its Session instance, i.e. the Client instance is from the filtered Client List, while the Session instance is from the filtered Session List.
+The mechanism of "Get the specified Client and Session" is similar to how [Delete Session command](#delete-session-feature) get its Session instance, i.e. the Client instance is from the filtered Client List, while the Session instance is from the filtered Session List.
 
 After getting the specified Client and Session, it checks whether a Schedule object associated with the Client and Session already exists in `AddressBook`.
  
@@ -340,7 +340,7 @@ Assume the current state of Client, Session, and Schedule is as illustrated on t
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/OverlappingScheduleObjectDiagram0.png" style="width: 50%; height: auto;"/>
+         <img src="images/OverlappingScheduleObjectDiagram0.png" style="width: 110%; height: auto;"/>
      </p>
      <figcaption>Figure - Sample current state of Add Schedule</figcaption>
  </figure>
@@ -355,7 +355,7 @@ Thus, the result can be illustrated by the following object diagram, shown by a 
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/OverlappingScheduleObjectDiagram1.png" style="width: 50%; height: auto;"/>
+         <img src="images/OverlappingScheduleObjectDiagram1.png" style="width: 110%; height: auto;"/>
      </p>
      <figcaption>Figure - Result of invoking <code>schadd c/2 s/1</code></figcaption>
  </figure>
