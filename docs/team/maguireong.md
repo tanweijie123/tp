@@ -27,24 +27,24 @@ Given below are my contributions to the project.
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of JavaFX.
                 The implementation too was challenging enough as a new user to JavaFX.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=maguireong)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=maguireong&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=maguireong&tabRepo=AY2021S1-CS2103T-T13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
 * **Project management**:
-  *	Necessary general code enhancements e.g. Code Refactoring
-  *	Maintain issue tracker
+  *	Necessary general code enhancements. e.g. Code Refactoring
+  *	Maintain issue tracker.
 
 * **Enhancements to existing features**:
-  * Refactored code from Person to Client (Pull request [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45))
+  * Refactored code from Person to Client. (Pull request [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45))
 
 * **Documentation**:
   *	User Guide:
-    * Added documentation for the features Add Client [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45), Edit Session and Edit Schedule [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
-    * Reformatting User Guide to ensure consistency
+    * Added documentation for the features Add Client [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45), Edit Session and Edit Schedule features. [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
+    * Reformat User Guide to ensure consistency.
+    
   * Developer Guide:
-    * Added implementation details of the Add Client [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45), Edit Session and Edit Schedule [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
+    * Added implementation details of the Add Client [\#45](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/45), Edit Session and Edit Schedule features. [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#96](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/96), [\#139](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/139), 
-                                                    [\#137](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/137), [\#97](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/97), 
-                                                    [\#96](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/96), [\#42](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/42), [\#24](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/24)
-  * Reported bugs and suggestions for Group [\CS2103T-W12](https://ay2021s1-cs2103t-w12-2.github.io/tp/UserGuide.html) on CATcher
+                                                    [\#137](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/137), [\#97](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/97)
+  * Reported bugs and suggestions for Group [CS2103T-W12](https://ay2021s1-cs2103t-w12-2.github.io/tp/UserGuide.html) on CATcher.
