@@ -197,15 +197,15 @@ The proposed Edit Session mechanism is facilitated by `Addressbook`.
 
 These operation is exposed in the `Model` interface as `Model#setSession()`.
 
-Given below is an example usage scenario and how the edit session mechanism behaves at each step.
+Given below is an example usage scenario and how the Edit Session mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
 The `AddressBook` will be initialized with the initial client, session and schedule list.
 
-Step 2. The user executes `sedit 1 g/coolgym` command to edit the 1st Session in the address book. 
+Step 2. The user executes `sedit 1 g/coolgym` command to edit the first Session in the address book. 
 The `sedit` command calls `Model#setSession()`, causing changes to be made in the address book after the `sedit 1 g/coolgym` command executes.
 
-The following sequence diagram shows how the edit session operation works:
+The following sequence diagram shows how the Edit Session operation works:
 
 ![EditSessionSequenceDiagram](images/EditSessionSequenceDiagram.png)
 
@@ -213,9 +213,14 @@ The following sequence diagram shows how the edit session operation works:
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes the edit session command:
+The following activity diagram summarizes what happens when a user executes a new `EditSession` command, with the assumption that the user inputs a valid command:
 
-![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/EditSessionActivityDiagram.png" style="width: 25%; height: auto;"/>
+    </p>
+    <figcaption>Figure - Edit Session Activity Diagram</figcaption>
+</figure>
 
 ### Delete Session feature
 
@@ -367,19 +372,24 @@ This operation is exposed in the `Model` interface as `Model#setSchedule()`.
 
 Similar to the Edit Session mechanism, the example usage scenario below shows how Edit Schedule mechanism behaves:
 
-The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with Session 1 and Client 1 in the address book. 
+The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with the first Session and first Client in the address book. 
 The `schedit` command calls `Model#setSchedule()`, causing changes to be made in the address book after the `schedit c/1 s/1 us/2` command executes.
 
-The following activity diagram summarizes what happens when a user executes the Edit schedule command:
+The following activity diagram summarizes what happens when a user executes a new `EditSchedule` command, with the assumption that the user inputs a valid command:
 
-![EditScheduleActivityDiagram](images/EditScheduleActivityDiagram.png)
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/EditScheduleActivityDiagram.png" style="width: 25%; height: auto;"/>
+    </p>
+    <figcaption>Figure - Edit Schedule Activity Diagram</figcaption>
+</figure>
 
 #### Design consideration:
 
 ##### Aspect: How edit schedule executes
 
 * **Alternative 1 (current choice):** Retrieve Schedule using Client and Session Index.
-  * Pros: More troublesome to implement. Clearer to retrieve.
+  * Pros: Clearer to retrieve.
   * Cons: Require user to know the Client and Session Index separately.
 
 * **Alternative 2:** Retrieve Schedule using Schedule Index
@@ -387,6 +397,51 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Easier to retrieve.
   * Cons: Implementation is more confusing as User there's a conflict between Index and user-typed String index.
 
+
+### View Client's Weight feature
+
+The viewing of client's weight feature allows the user to check in on a Client's progress after multiple Sessions.
+This data is important because it allows the user to check the effectiveness of his training schedule and customise the training 
+based on the remarks and weight progress. 
+
+Viewing of Client's Weight is accessible when the user calls `cview [INDEX]` followed by activating the `Weight` tab pane. 
+
+#### Implementation
+
+The recording of weight is stored in `Schedule` class. This is because we believe that trainer would optionally take a weight measurement
+at the start of every session. Thus, to get the weight change over time, a list of schedules related to the `Client` has to be extracted. 
+
+In the following sequence diagram, we trace the execution starting from when the user calls `cview 1` until when the UI is updated with Client View.
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ClientViewWeightSequenceDiagram.png" alt="ClientViewWeightSequenceDiagram" style="align-content: center" />
+    </p>
+    <figcaption>Figure - Client View Weight Generate Sequence Diagram</figcaption>
+</figure>
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+The steps used to create CommandResult is omitted in the sequence diagram for clarity of diagram. The return object of `logic.execute("cview 1")`
+is a CommandResult object, within which, contains a Supplier which returns a Pane for MainWindow to display when activated.
+
+</div>
+
+As shown in the "alt" frame, the chart is added into the tab pane if there are associated schedule and the weight (if present within the `Schedule` object)
+will be added into the line chart. Otherwise, the `Weight` tab will be removed instead of showing an empty chart.  
+
+#### Design Considerations
+In designing this weight tracking feature, we had considered several alternative ways in which we can store and retreive the weight. 
+
+* **Alternative 1 (current choice):** Stores the `Weight` within the `Schedule` object
+  * Pros: The user can track the weight against each session attended. 
+  * Cons: Multiple weight measurement during a session, and weight measurement without a session cannot be entered. 
+  
+* **Alternative 2:** Stores a list of `Weight` within the `Client` object
+  * Pros: Do not require a schedule in order to track weight. 
+  * Cons: Lesser information about the weight (schedule's exercise, remarks, time, etc) is stored.  
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -680,6 +735,7 @@ Use case ends.
  1. FitEgo shows a list of Clients and list of Sessions.
  2. User requests to delete a Schedule associated with a specified Client from the Client List and Session from the Session List.
  3. FitEgo deletes the Schedule.
+ 
 Use case ends.
 
 **Extensions**
@@ -703,7 +759,8 @@ Use case ends.
  1.  User requests to view Help Window. 
  2.  FitEgo displays Help Window with the User Guide link.
  3.  User selects the link to access the User Guide. 
- 4.  FitEgo opens the User Guide in user's default browser. 
+ 4.  FitEgo opens the User Guide in user's default browser.
+ 
 Use case ends.
 
 **Extensions**
