@@ -63,8 +63,8 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/tanweijie123.png" width="200px">
 
-[[github](http://github.com/tanweijie123)]
+[[github](http://github.com/tanweijie123), [PPP](team/tanweijie123.md)]
 
-#### Developer & Testing in-charge
+#### Developer & UI in-charge
 
-* Ensures the testing of the project is done properly and on time.
+* Ensures the UI is designed and integrated properly. 
