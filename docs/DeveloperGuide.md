@@ -325,7 +325,7 @@ The following activity diagram summarizes the decision making process when a use
 
 The mechanism of "Get the specified Client and Session" is similar to how [Delete Session command](#Delete-Session-feature) get its Session instance, i.e. the Client instance is from the filtered Client List, while the Session instance is from the filtered Session List.
 
-After getting the specified Client and Session, it checks whether a Schedule object associated with the client and session already exists in `AddressBook`.
+After getting the specified Client and Session, it checks whether a Schedule object associated with the Client and Session already exists in `AddressBook`.
  
 If there is none, then "Add Schedule" by calling `Model#addSchedule()`.
 
