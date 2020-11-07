@@ -367,6 +367,51 @@ The following activity diagram summarizes what happens when a user executes the 
   * Cons: Implementation is more confusing as User there's a conflict between Index and user-typed String index.
 
 
+### Viewing Client's Weight feature
+
+The viewing of client's weight feature allows the user to check in on a Client's progress after multiple Sessions.
+This data is important because it allows the user to check the effectiveness of his training schedule and customise the training 
+based on the remarks and weight progress. 
+
+Viewing of Client's Weight is accessible when the user calls `cview [INDEX]` followed by activating the `Weight` tab pane. 
+
+#### Implementation
+
+The recording of weight is stored in `Schedule` class. This is because we believe that trainer would optionally take a weight measurement
+at the start of every session. Thus, to get the weight change over time, a list of schedules related to the `Client` has to be extracted. 
+
+In the following sequence diagram, we trace the execution starting from when the user calls `cview 1` until when the UI is updated with Client View.
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ClientViewWeightSequenceDiagram.png" alt="ClientViewWeightSequenceDiagram" style="width: 50%; height: auto;"/>
+    </p>
+    <figcaption>Figure - Client View Weight Generate Sequence Diagram</figcaption>
+</figure>
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+The steps used to create CommandResult is omitted in the sequence diagram for clarity of diagram. The return object of `logic.execute("cview 1")`
+is a CommandResult object, within which, contains a Supplier which returns a Pane for MainWindow to display when activated.
+
+</div>
+
+As shown in the "alt" frame, the chart is added into the tab pane if there are associated schedule and the weight (if present within the `Schedule` object)
+will be added into the line chart. Otherwise, the `Weight` tab will be removed instead of showing an empty chart.  
+
+#### Design Considerations
+In designing this weight tracking feature, we had considered several alternative ways in which we can store and retreive the weight. 
+
+* **Alternative 1 (current choice):** Stores the `Weight` within the `Schedule` object
+  * Pros: The user can track the weight against each session attended. 
+  * Cons: Multiple weight measurement during a session, and weight measurement without a session cannot be entered. 
+  
+* **Alternative 2:** Stores a list of `Weight` within the `Client` object
+  * Pros: Do not require a schedule in order to track weight. 
+  * Cons: Lesser information about the weight (schedule's exercise, remarks, time, etc) is stored.  
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
