@@ -48,11 +48,15 @@ public class RightSideBar extends UiPart<AnchorPane> {
      */
     public void update(CommandResult commandResult, String commandText) {
         updateLatestPeriod(commandResult, commandText);
-        title.setText(latestPeriod);
+        updateTitle();
 
         sessionListView.setItems(null);
         sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new SessionListViewCell());
+    }
+
+    private void updateTitle() {
+        title.setText(latestPeriod);
     }
 
     /**

@@ -60,6 +60,7 @@ public class ViewSessionCommand extends Command {
     private String period;
 
     public ViewSessionCommand(String period) {
+        assert(isValidPeriod(period));
         this.period = period;
     }
 
