@@ -367,7 +367,7 @@ The following activity diagram summarizes what happens when a user executes the 
   * Cons: Implementation is more confusing as User there's a conflict between Index and user-typed String index.
 
 
-### Viewing Client's Weight feature
+### View Client's Weight feature
 
 The viewing of client's weight feature allows the user to check in on a Client's progress after multiple Sessions.
 This data is important because it allows the user to check the effectiveness of his training schedule and customise the training 
@@ -704,6 +704,7 @@ Use case ends.
  1. FitEgo shows a list of Clients and list of Sessions.
  2. User requests to delete a Schedule associated with a specified Client from the Client List and Session from the Session List.
  3. FitEgo deletes the Schedule.
+ 
 Use case ends.
 
 **Extensions**
@@ -727,7 +728,8 @@ Use case ends.
  1.  User requests to view Help Window. 
  2.  FitEgo displays Help Window with the User Guide link.
  3.  User selects the link to access the User Guide. 
- 4.  FitEgo opens the User Guide in user's default browser. 
+ 4.  FitEgo opens the User Guide in user's default browser.
+ 
 Use case ends.
 
 **Extensions**
