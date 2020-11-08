@@ -37,7 +37,8 @@ Given below are my contributions to the project.
   * Changed `UniqueClientList` into generics (Pull requests [\#75](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/75))
   * Modify `find` to include partial substring (Pull requests [\#54](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/54))
   * Modify saving to storage to include `Session` objects (Pull requests [\#70](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/70), [\#71](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/71), [\#73](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/73))
-
+  * Modify sample data initialisation to use dynamic dates (Pull requests [\#159](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/159))
+  
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=T13-3&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=functional-code&tabOpen=true&tabType=authorship&tabAuthor=tanweijie123&tabRepo=AY2021S1-CS2103T-T13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
@@ -52,6 +53,7 @@ Given below are my contributions to the project.
     
   * Developer Guide:
     * Updated the UI class diagram 
+    * Added "View Client Weight's feature" 
     * Added user stories 
 
 * **Community**:

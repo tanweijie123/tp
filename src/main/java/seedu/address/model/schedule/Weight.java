@@ -62,6 +62,9 @@ public class Weight {
         return isValidWeight(weight.getWeight());
     }
 
+    /**
+     * Returns a {@code: Weight} object initialised to 0kg.
+     */
     public static Weight getDefaultWeight() {
         return new Weight();
     }

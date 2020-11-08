@@ -311,9 +311,8 @@ public class MainWindow extends UiPart<Stage> implements UiObserver {
      */
     private void addDynamicGridPaneChange(Scene scene) {
         scene.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            System.out.println("Width changed! old=" + oldWidth + "; new=" + newWidth);
 
-            //if width < 800, change to 2 grid-style
+            //if width < 900, change to 2 grid-style
             if (newWidth.doubleValue() < 900.0 && oldWidth.doubleValue() >= 900.0) {
                 this.gPaneRight.setPercentWidth(0);
                 this.gPaneCentre.setPercentWidth(75);
