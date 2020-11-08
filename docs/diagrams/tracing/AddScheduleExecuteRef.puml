@@ -27,7 +27,7 @@ activate Model
 Model --> AddScheduleCommand : filteredSessionList
 deactivate Model
 
-note over AddScheduleCommand, Model: Get Client of index 2 from filteredClientList and Session of index 1 from filteredSessionList
+note over AddScheduleCommand, Model: Get second Client from filteredClientList and first Session from filteredSessionList
 
 AddScheduleCommand -> Model: hasAnyScheduleAssociatedWithClientAndSession(client2, session1)
 

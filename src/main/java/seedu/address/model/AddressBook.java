@@ -170,7 +170,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a Schedule with the same identity as {@code Schedule} exists in the address book.
+     * Returns true if a Schedule with the same identity as {@code Schedule} exists in the Schedule List.
      */
     public boolean hasSchedule(Schedule schedule) {
         requireNonNull(schedule);
@@ -179,7 +179,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a Schedule to the schedule list.
-     * The Schedule must not already exist in the schedule list.
+     * The Schedule must not already exist in the Schedule List.
      */
     public void addSchedule(Schedule schedule) {
         schedules.add(schedule);
@@ -231,7 +231,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a Schedule with the same client as {@code client} exists in the AddressBook.
+     * Returns true if a Schedule with the same client as {@code client} exists in the Schedule List.
      */
     public boolean hasAnyScheduleAssociatedWithClient(Client client) {
         requireNonNull(client);
