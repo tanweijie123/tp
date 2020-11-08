@@ -294,6 +294,7 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
                         super.updateItem(item, isEmpty);
                         if (!isEmpty()) {
                             text = new Text(item.toString());
+
                             if (item.isPaid()) {
                                 text.setStyle("-fx-stroke: #00FF00; -fx-stroke-width: 0.5; -fx-padding: 10px;");
                             } else {

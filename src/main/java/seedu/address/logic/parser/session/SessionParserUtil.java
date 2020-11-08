@@ -17,6 +17,10 @@ import seedu.address.model.session.Interval;
  * Contains utility methods used for parsing strings in the various *SessionParser classes.
  */
 public class SessionParserUtil extends ParserUtil {
+    private static String MESSAGE_START_TIME_CONSTRAINTS = "Start time must be a valid date and time and follows "
+            + "dd/MM/yyyy HHmm pattern";
+    private static String MESSAGE_END_TIME_CONSTRAINTS = "End time must be a valid date and time and follows "
+            + "dd/MM/yyyy HHmm pattern";
 
     /**
      * Parses a {@code String gym} into a {@code Gym}.
@@ -88,22 +92,25 @@ public class SessionParserUtil extends ParserUtil {
      */
     public static Interval parseIntervalFromStartAndEnd(String startTime, String endTime) throws ParseException {
         requireNonNull(startTime, endTime);
+
         if (isInvalidDateTime(startTime)) {
-            throw new ParseException(Interval.MESSAGE_DATE_TIME_CONSTRAINTS);
+            throw new ParseException(MESSAGE_START_TIME_CONSTRAINTS);
         }
 
         if (isInvalidDateTime(endTime)) {
-            throw new ParseException(Interval.MESSAGE_DATE_TIME_CONSTRAINTS);
+            throw new ParseException(MESSAGE_END_TIME_CONSTRAINTS);
         }
 
         LocalDateTime start = parseStringToDateTime(startTime);
         LocalDateTime end = parseStringToDateTime(endTime);
 
-        int dur = (int) Duration.between(start, end).toMinutes();
-        if (!Interval.isValidInterval(dur)) {
+        int duration = (int) Duration.between(start, end).toMinutes();
+
+        if (!Interval.isValidInterval(duration)) {
             throw new ParseException(Interval.MESSAGE_CONSTRAINTS);
         }
-        return new Interval(start, dur);
+
+        return new Interval(start, duration);
     }
 
     /**
