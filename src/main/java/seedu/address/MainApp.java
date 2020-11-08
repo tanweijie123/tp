@@ -200,7 +200,7 @@ public class MainApp extends Application {
 
         //get the first window and request focus
         //if there is an error dialog, it will be focused, otherwise, FitEgo app will be focused.
-        Stage.getWindows().stream().filter(Window::isShowing).limit(1).forEach(x -> x.requestFocus());
+        Stage.getWindows().stream().filter(Window::isShowing).limit(1).forEach(Window::requestFocus);
     }
 
     /**
@@ -236,7 +236,7 @@ public class MainApp extends Application {
         if (result.orElse(exit) == exit) { //default to exit
             Platform.exit();
         } else if (result.get() == exceptionMessage) {
-            displayErrorStackTrace(e);
+            createExceptionDialog(e);
             createAlertWithErrorMessage(title, headerText, contentText, e); //re-open dialog. potential stack overflow
         }
     }
@@ -244,7 +244,7 @@ public class MainApp extends Application {
     /**
      * Displays an Error Dialog with the given exception.
      */
-    private void displayErrorStackTrace(Exception e) {
+    private void createExceptionDialog(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Exception Dialog");
         alert.setHeaderText(e.getClass().getSimpleName());
