@@ -19,6 +19,8 @@ import seedu.address.model.session.Session;
 public class SessionCard extends UiPart<Region> {
 
     private static final String FXML = "SessionListCard.fxml";
+    private static final String PAID_CLIENT_CSS_ID = "paidClient";
+    private static final String NOT_PAID_CLIENT_CSS_ID = "notPaidClient";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -54,16 +56,19 @@ public class SessionCard extends UiPart<Region> {
         sessionTime.setText(session.getInterval().getAdjustedStartDateTime());
         gymName.setText(session.getGym().toString());
         dayOfWeek.setText(session.getInterval().getFormattedStartDateTime(SIMPLE_DATE_TIME_PATTERN_FORMATTER));
-        if (schedules != null && schedules.size() > 0) {
+
+        if (schedules != null && !schedules.isEmpty()) {
+            // Add the Clients' name with the color adjusted depending on whether paid or not
             schedules.forEach(schedule -> {
-                Label clientLabel = new Label(schedule.getClient().getName().toString());
+                Label clientLabel = new Label(schedule.getClientName().toString());
+
                 if (schedule.isPaid()) {
-                    clientLabel.setId("paidClient");
+                    clientLabel.setId(PAID_CLIENT_CSS_ID);
                 } else {
-                    clientLabel.setId("notPaidClient");
+                    clientLabel.setId(NOT_PAID_CLIENT_CSS_ID);
                 }
-                associatedClient.getChildren().add(
-                        clientLabel);
+
+                associatedClient.getChildren().add(clientLabel);
                 }
             );
         }

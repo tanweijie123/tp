@@ -8,6 +8,7 @@ import java.util.Objects;
 import seedu.address.model.CheckExisting;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
@@ -54,6 +55,10 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
 
     public Client getClient() {
         return client;
+    }
+
+    public Name getClientName() {
+        return getClient().getName();
     }
 
     public Email getClientEmail() {

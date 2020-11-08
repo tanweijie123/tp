@@ -90,10 +90,13 @@ public class RightSideBar extends UiPart<AnchorPane> {
                 setText(null);
             } else {
                 List<Schedule> associatedSchedules = logic.getAssociatedScheduleList(session);
-                if (associatedSchedules.size() > 0) {
-                    setGraphic(new SessionCard(session, getIndex() + 1, associatedSchedules).getRoot());
+                int zeroBasedIndex = getIndex();
+                int oneBasedIndex = zeroBasedIndex + 1;
+
+                if (!associatedSchedules.isEmpty()) {
+                    setGraphic(new SessionCard(session, oneBasedIndex, associatedSchedules).getRoot());
                 } else {
-                    setGraphic(new SessionCard(session, getIndex() + 1, null).getRoot());
+                    setGraphic(new SessionCard(session, oneBasedIndex, null).getRoot());
                 }
             }
         }
