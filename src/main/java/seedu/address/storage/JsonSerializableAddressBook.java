@@ -86,20 +86,22 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedSchedule jsonAdaptedSchedule : this.schedules) {
             Email clientEmail = jsonAdaptedSchedule.getClientEmail();
-            Interval sessionInterval = jsonAdaptedSchedule.getSessionInterval();
-
             Client client = getClientWithEmail(clientEmail, addressBook);
-            Session session = getSessionWithInterval(sessionInterval, addressBook);
             if (client == null) {
                 throw new IllegalValueException(CLIENT_NOT_FOUND);
-            } else if (session == null) {
+            }
+
+            Interval sessionInterval = jsonAdaptedSchedule.getSessionInterval();
+            Session session = getSessionWithInterval(sessionInterval, addressBook);
+            if (session == null) {
                 throw new IllegalValueException(SESSION_NOT_FOUND);
             }
-            PaymentStatus payment = jsonAdaptedSchedule.getPaymentStatus();
+
+            PaymentStatus paymentStatus = jsonAdaptedSchedule.getPaymentStatus();
             Remark remark = jsonAdaptedSchedule.getRemark();
             Weight weight = jsonAdaptedSchedule.getWeight();
 
-            Schedule schedule = new Schedule(client, session, payment, remark, weight);
+            Schedule schedule = new Schedule(client, session, paymentStatus, remark, weight);
             if (addressBook.hasSchedule(schedule)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
             }

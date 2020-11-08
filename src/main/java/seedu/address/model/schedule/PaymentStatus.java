@@ -45,8 +45,8 @@ public class PaymentStatus {
     /**
      * Returns true if a given string is a valid payment status value ("paid" or "unpaid", case insensitive).
      */
-    public static boolean isValidPaymentStatus(String test) {
-        return test.toLowerCase().equals(VALUE_PAID) || test.toLowerCase().equals(VALUE_UNPAID);
+    public static boolean isValidPaymentStatus(String stringToTest) {
+        return stringToTest.toLowerCase().equals(VALUE_PAID) || stringToTest.toLowerCase().equals(VALUE_UNPAID);
     }
 
 

@@ -55,29 +55,26 @@ public class DeleteScheduleCommand extends Command {
 
         // Get the Client and Session from the filtered list
         List<Client> lastShownClientList = model.getFilteredClientList();
-
         if (clientIndex.getZeroBased() >= lastShownClientList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
+        Client client = lastShownClientList.get(clientIndex.getZeroBased());
 
         List<Session> lastShownSessionList = model.getFilteredSessionList();
-
         if (sessionIndex.getZeroBased() >= lastShownSessionList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
-
-        Client client = lastShownClientList.get(clientIndex.getZeroBased());
-
         Session session = lastShownSessionList.get(sessionIndex.getZeroBased());
 
         // Delete the Schedule associated with the Client and Session if found in address book
-        if (model.hasAnyScheduleAssociatedWithClientAndSession(client, session)) {
-            Schedule scheduleToDelete = model.findScheduleByClientAndSession(client, session);
-            model.deleteSchedule(scheduleToDelete);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, scheduleToDelete));
+        if (!model.hasAnyScheduleAssociatedWithClientAndSession(client, session)) {
+            throw new CommandException(String.format(MESSAGE_SCHEDULE_NOT_FOUND, client, session));
         }
 
-        throw new CommandException(String.format(MESSAGE_SCHEDULE_NOT_FOUND, client, session));
+        Schedule scheduleToDelete = model.findScheduleByClientAndSession(client, session);
+        model.deleteSchedule(scheduleToDelete);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, scheduleToDelete));
     }
 
     @Override

@@ -47,9 +47,9 @@ public class JsonAdaptedSchedule {
      * Converts a given {@code Schedule} into this class for Jackson use.
      */
     public JsonAdaptedSchedule(Schedule source) {
-        clientEmail = source.getClient().getEmail().toString();
-        start = SessionParserUtil.parseDateTimeToString(source.getSession().getStartTime());
-        end = SessionParserUtil.parseDateTimeToString(source.getSession().getEndTime());
+        clientEmail = source.getClientEmail().toString();
+        start = SessionParserUtil.parseDateTimeToString(source.getStartTime());
+        end = SessionParserUtil.parseDateTimeToString(source.getEndTime());
         paymentStatus = source.getPaymentStatus().getValue();
         remark = source.getRemark().value;
         weight = String.valueOf(source.getWeight().getWeight());
@@ -61,7 +61,6 @@ public class JsonAdaptedSchedule {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Email.
      */
     public Email getClientEmail() throws IllegalValueException {
-
         if (clientEmail == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Email.class.getSimpleName()));

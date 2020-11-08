@@ -35,10 +35,10 @@ public class DeleteScheduleCommandParser implements Parser<DeleteScheduleCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteScheduleCommand parse(String args) throws ParseException {
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX);
 
+        // Client index and Session index are necessary and will be used to create the DeleteScheduleCommand
         if (!arePrefixesPresent(argMultimap, PREFIX_CLIENT_INDEX, PREFIX_SESSION_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -55,7 +55,6 @@ public class DeleteScheduleCommandParser implements Parser<DeleteScheduleCommand
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteScheduleCommand.MESSAGE_USAGE), pe);
         }
-
 
         return new DeleteScheduleCommand(clientIndex, sessionIndex);
     }

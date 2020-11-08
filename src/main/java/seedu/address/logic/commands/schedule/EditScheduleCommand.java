@@ -38,10 +38,10 @@ public class EditScheduleCommand extends Command {
             + ": schedules a client with another session. \n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + PREFIX_CLIENT_INDEX + "CLIENT (must be a positive integer) "
-            + PREFIX_SESSION_INDEX + "SESSION (must be a positive integer) "
-            + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED SESSION] "
-            + "[" + PREFIX_PAYMENT_STATUS + "PAID OR UNPAID?] "
+            + PREFIX_CLIENT_INDEX + "CLIENT_INDEX (must be a positive integer) "
+            + PREFIX_SESSION_INDEX + "SESSION_INDEX (must be a positive integer) "
+            + "[" + PREFIX_UPDATED_SESSION_INDEX + "UPDATED_SESSION_INDEX] "
+            + "[" + PREFIX_PAYMENT_STATUS + "PAYMENT_STATUS (paid or unpaid)] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_WEIGHT + "WEIGHT[kg/lb]]\n"
             + "Example: " + COMMAND_WORD + " "
@@ -91,9 +91,11 @@ public class EditScheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
 
+        // Get the Schedule associated with the Client and Session
         Client client = lastShownClientList.get(clientIndex.getZeroBased());
         Session session = lastShownSessionList.get(sessionIndex.getZeroBased());
         Schedule scheduleToEdit;
+
         if (model.hasAnyScheduleAssociatedWithClientAndSession(client, session)) {
             scheduleToEdit = model.findScheduleByClientAndSession(client, session);
         } else {
@@ -124,6 +126,7 @@ public class EditScheduleCommand extends Command {
 
         Client client = scheduleToEdit.getClient();
         Session session = scheduleToEdit.getSession();
+
         try {
             if (editScheduleDescriptor.getUpdatedSessionIndex().isPresent()) {
                 if (editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased()
@@ -136,6 +139,7 @@ public class EditScheduleCommand extends Command {
         } catch (NoSuchElementException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
+
         // get new PaymentStatus else return previous PaymentStatus
         PaymentStatus updatedPayment = editScheduleDescriptor
                 .getPaymentStatus().orElse(scheduleToEdit.getPaymentStatus());

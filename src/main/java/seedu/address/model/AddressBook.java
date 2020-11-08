@@ -162,14 +162,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     //=============================== SCHEDULE-RELATED ===========================================
 
     /**
-     * Replaces the contents of the Schedule list with {@code Schedule}.
+     * Replaces the contents of the Schedule list with {@code schedules}.
      * {@code Schedule} must not contain duplicate Schedules.
      */
     public void setSchedules(List<Schedule> schedules) {
         this.schedules.setAll(schedules);
     }
-
-    //// Client-level operations
 
     /**
      * Returns true if a Schedule with the same identity as {@code Schedule} exists in the address book.
