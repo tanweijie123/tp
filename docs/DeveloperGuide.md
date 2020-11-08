@@ -331,7 +331,7 @@ The following activity diagram summarizes the decision making process when a use
 
 #### Command Usage Examples
 
-Assume the current state of the displayed Client List, displayed Session List, and Schedules (all Schedules in FitEgo) are as illustrated on the following simplified object diagram:
+Assume the current state of the displayed Client List, displayed Session List, and Schedules (all Schedules in FitEgo) are as illustrated in the following simplified object diagram:
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
@@ -346,13 +346,12 @@ Now, consider two cases of Add Schedule command to be invoked.
 
 Here is what happens when `schadd c/2 s/1` is invoked.
 
-The overall mechanism is similar to [Delete Session](#delete-session-feature), but mainly differs on the method call `parseCommand` and `DeleteSessionCommand#execute(model)`.
+To some extent, the mechanism (on how it involves `LogicManager`, `AddressBookParser`, and saving the changes to `Storage`) is similar to that of [Delete Session](#delete-session-feature), as illustrated in [Delete Session](#delete-session-feature)'s sequence diagram. The main differences are on the method call `parseCommand()` and `DeleteSessionCommand#execute(model)`.
 
-`parseCommand` method call:
-Instead of using `DeleteSessionCommandParser`, it uses `AddScheduleCommandParser` such that it returns an `AddScheduleCommand` object called `a` with Client index `2` and Session index `1`.
+`parseCommand()` method call:
+Instead of using `DeleteSessionCommandParser`, it uses `AddScheduleCommandParser` to parse the argument `c/2 s/1` such that it returns an `AddScheduleCommand` object called `a` with Client index `2` and Session index `1`.
 
-`AddScheduleCommand#execute(model)` will be called instead of `DeleteSessionCommand#execute(model)`:
-This method call can be traced by the following sequence diagram snippet.
+`AddScheduleCommand#execute(model)` will be called instead of `DeleteSessionCommand#execute(model)`. For this particular case, the method call `AddScheduleCommand#execute(model)` can be traced using the following sequence diagram snippet.
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
@@ -362,9 +361,9 @@ This method call can be traced by the following sequence diagram snippet.
  </figure>
  
 As shown in the figure above, first it gets the Client and Session from the filtered (displayed) lists. Then, it checks for existing identical Schedule (Schedule that consists of the same Client and Session) using `hasAnyScheduleAssociatedWithClientAndSession()`. 
-Since for this case it is not found, then create a new Schedule object and add it into the Model using `Model#addSchedule()`. Finally, return the CommandResult to indicate a success.
+Since for this case no identical Schedule is not found, a new Schedule object is created and added into the Model using `Model#addSchedule()`. Finally, it returns the CommandResult to indicate a success.
 
-Thus, `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List). The result can be illustrated by the following object diagram, which creates a new Schedule:
+Thus, `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List). The result can be illustrated by the following object diagram, which shows a new is created.
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
