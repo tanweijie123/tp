@@ -90,7 +90,7 @@ class JsonSerializableAddressBook {
             Client client = getClientWithEmail(clientEmail, addressBook);
             if (client == null) {
                 throw new IllegalValueException(String.format(CLIENT_NOT_FOUND, clientEmail));
-            } 
+            }
 
             Interval sessionInterval = jsonAdaptedSchedule.getSessionInterval();
             Session session = getSessionWithInterval(sessionInterval, addressBook);
