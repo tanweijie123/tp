@@ -242,18 +242,18 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns true if a Schedule with the same client as {@code Client} exists in the Schedule List.
+     * Returns true if a Schedule with the same client as {@code client} exists in the Schedule List.
      */
-    public boolean hasAnyScheduleAssociatedWithClient(Client clientToEdit) {
-        requireNonNull(clientToEdit);
+    public boolean hasAnyScheduleAssociatedWithClient(Client client) {
+        requireNonNull(client);
         return addressBook.getScheduleList()
                 .stream()
                 .map(Schedule::getClient)
-                .anyMatch(clientToEdit::isIdentical);
+                .anyMatch(client::isIdentical);
     }
 
     /**
-     * Edits every Schedule with the same client as {@code client}.
+     * Edits every Schedule with the same client as {@code toEdit} to be associated with {@code editedClient} instead.
      */
     public void editSchedulesAssociatedWithClient(Client clientToEdit, Client editedClient) {
         requireAllNonNull(clientToEdit, editedClient);
@@ -280,7 +280,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Edits every Schedule with the same session as {@code sessionToEdit} into {@code editedSession}.
+     * Edits every Schedule with the same session as {@code sessionToEdit} to be associated with {@code editedSession}
+     * instead.
      */
     public void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession) {
         requireAllNonNull(sessionToEdit, editedSession);
@@ -297,7 +298,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns true if a Schedule with the same client as {@code client} and schedule as
-     * {@code schedule} exists in the Schedule List.
+     * {@code session} exists in the Schedule List.
      */
     public boolean hasAnyScheduleAssociatedWithClientAndSession(Client client, Session session) {
         requireAllNonNull(client, session);
