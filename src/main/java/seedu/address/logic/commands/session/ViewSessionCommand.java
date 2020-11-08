@@ -59,12 +59,17 @@ public class ViewSessionCommand extends Command {
     }
     private String period;
 
+    /** Creates a ViewSessionCommand.
+     *
+     * @param period non-empty string that represents a valid period
+     */
     public ViewSessionCommand(String period) {
+        assert(isValidPeriod(period));
         this.period = period;
     }
 
     /**
-     * Checks if a period provided by the user is recognised
+     * Checks if a string provided by the user is recognised as a period
      *
      * @param period a String to check whether if it is a valid period.
      * @return true if period is valid, false otherwise.

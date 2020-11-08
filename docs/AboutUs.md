@@ -14,7 +14,7 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/dhafinrazaq.png" width="200px">
 
-[[github](https://github.com/dhafinrazaq)] [[Project Portfolio Page (PPP)](team/dhafinrazaq.md)]
+[[github](https://github.com/dhafinrazaq)][[Project Portfolio Page (PPP)](team/dhafinrazaq)]
 
 #### Developer & Deliverables in-charge
 
@@ -26,7 +26,7 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/benclmnt.png" width="200px">
 
-[[github](https://github.com/benclmnt)]
+[[github](https://github.com/benclmnt)][[Project Portfolio Page (PPP)](team/benclmnt)]
 
 #### Developer & Code Quality in-charge
 
@@ -38,7 +38,7 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/maguireong.png" width="200px">
 
-[[github](http://github.com/maguireong)]
+[[github](http://github.com/maguireong)][[Project Portfolio Page (PPP)](team/maguireong)]
 
 #### Developer & Integration in-charge
 
@@ -50,8 +50,7 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/kelvinvin.png" width="200px">
 
-[[github](http://github.com/kelvinvin)]
-[[portfolio](https://github.com/kelvinvin?tab=repositories)]
+[[github](http://github.com/kelvinvin)][[Project Portfolio Page (PPP)](team/kelvinvin)]
 
 #### Developer & Documentation in-charge
 
@@ -63,7 +62,7 @@ You can reach our supervisor at `damithc[at]comp.nus.edu.sg`
 
 <img src="images/tanweijie123.png" width="200px">
 
-[[github](http://github.com/tanweijie123), [PPP](team/tanweijie123)]
+[[github](http://github.com/tanweijie123), [Project Portfolio Page (PPP)](team/tanweijie123)]
 
 #### Developer & UI in-charge
 
