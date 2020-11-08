@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.session.ViewSessionCommand.PREDICATE_
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_PERIOD;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -19,9 +20,11 @@ import seedu.address.model.session.Session;
 
 public class RightSideBar extends UiPart<AnchorPane> {
     private static final String FXML = "RightSideBar.fxml";
+    private static final String DEFAULT_VIEW = "WEEK";
+    private static final Predicate<Session> DEFAULT_PREDICATE = PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS;
     private final MainWindow mainWindow;
     private final Logic logic;
-    private String latestPeriod = "WEEK";
+    private String latestPeriod;
 
     @FXML
     private ListView<Session> sessionListView;
@@ -36,11 +39,13 @@ public class RightSideBar extends UiPart<AnchorPane> {
         super(FXML);
         this.mainWindow = mainWindow;
         this.logic = logic;
+        this.latestPeriod = DEFAULT_VIEW;
         this.title.setAlignment(Pos.CENTER);
         sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new RightSideBar.SessionListViewCell());
+
         updateTitle();
-        logic.updateFilteredSessionList(PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS);
+        logic.updateFilteredSessionList(DEFAULT_PREDICATE);
     }
 
     /**
