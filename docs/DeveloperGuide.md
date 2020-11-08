@@ -513,7 +513,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 1. During execution of `ViewSessionCommand`, a predicate for sessions within the upcoming week is created (refer to Activity Diagram above for details on flow). The Session List in `Model` is then filtered by this predicate.
 
 1. Command result is passed to `MainWindow` to indicate a successful execution. `MainWindow` will then update the `RightSideBar`.
-[comment]: Added 4 whitespaces below to indent content between numbered bullet points. Do not remove.
 
     <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
