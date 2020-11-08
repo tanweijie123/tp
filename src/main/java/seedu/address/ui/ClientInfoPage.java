@@ -174,6 +174,9 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         return new ClientInfoPage(client, associatedSchedules, weightUnit);
     }
 
+    /**
+     * Updates / Set up the UI Profile component.
+     */
     private void initializeProfile() {
         this.lblName.setText(client.getName().fullName);
         this.lblPhone.setText(client.getPhone().value);
@@ -202,6 +205,10 @@ public class ClientInfoPage extends UiPart<AnchorPane> {
         return new Image("file:data/images/profile-" + sluggedName + ".jpg");
     }
 
+    /**
+     * Updates the line chart with the given schedule list. Schedules with Weight present and associated to the client
+     *     will be included into the line chart.
+     */
     @SuppressWarnings("unchecked")
     private void initializeChart(WeightUnit weightUnit, List<Schedule> associatedSchedules) {
         //x is date (at the bottom)
