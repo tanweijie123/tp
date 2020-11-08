@@ -527,18 +527,14 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 In designing this feature, we had to consider several alternative ways in which we can choose to handle viewing session by period.
 
-- **Alternative 1 (current choice):** Update title of `RightSideBar` based on command result.
+* **Alternative 1 (current choice):** Update title of `RightSideBar` based on command result.
+    * Pros: Does not lower maintainability and requires the least changes to existing implementation and test code. 
+    * Cons: Violates Separation of Concerns principle as RightSideBar has to check whether command result is from ViewSessionCommand.
     
-    - Pros: 
-        1. Does not lower maintainability and requires the least changes to existing implementation and test code. 
-    - Cons:
-        1. Violates Separation of Concerns principle as RightSideBar has to check whether command result is from ViewSessionCommand.
-    
-- **Alternative 2:** Using Observer pattern (Observer RightSideBar, Observable Command) to update title of `RightSideBar`.
-    
-    - Pros: 
-        1. Reduces coupling between Ui and Logic.
-    - Cons: 
+
+* **Alternative 2:** Using Observer pattern (Observer RightSideBar, Observable Command) to update title of `RightSideBar`.
+    * Pros: Reduces coupling between Ui and Logic.
+    * Cons: 
         1. `RightSideBar` would only be updated when ViewSessionCommand is run. 
         If we set the default session view to Week when Logic is initialised, all sessions in existing test cases will need to start within 7 days of current date, which introduces additional complexity.
         Hence, we would not customise `RightSideBar`'s default session view.
