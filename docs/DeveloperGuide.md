@@ -782,6 +782,7 @@ Use case ends.
  1. FitEgo shows a list of Clients and list of Sessions.
  2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List.
  3. FitEgo adds the Schedule.
+ 
 Use case ends.
 
 **Extensions**
@@ -792,7 +793,7 @@ Use case ends.
 
     Use case resumes at step 2.
   
-- 2b. The Schedule to be added is overlapping with another Schedule.
+- 2b. The Schedule to be added already exists.
 
   - 2b1. FitEgo shows an error message.
 
@@ -841,7 +842,7 @@ Use case ends.
   
     Use case resumes at step 2.
 
-- 2b. There are no schedules with the specified Client and Session.
+- 2b. There is no Schedule associated with the specified Client and Session.
 
   - 2b1. FitEgo shows an error message.
 
