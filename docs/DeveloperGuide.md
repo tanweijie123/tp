@@ -461,8 +461,6 @@ When using this command, `PERIOD` should refer to either a variable period or fi
 that returns true after running `ViewSessionCommand#isValidPeriod`. Fixed periods are found in `ViewSessionCommand#PREDICATE_HASH_MAP`, whereas variable periods
 must follow the format `(+/-)#(D/W/M/Y)`.
 
-Its operations are exposed in the `Model` interface as `Model#updateFilteredSessionList` and `Model#getFilteredSessionList`.
-
 The following activity diagram summarizes what happens when a user executes a new View Session command.
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
@@ -504,7 +502,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
     <figcaption>Figure - View Session Update RightSideBar Ref Sequence Diagram</figcaption>
     </figure>
 
-1. The `RightSideBar` retrieves the latest period "WEEK" from the command result and text. `Title` is set to "Week". It then retrieves the filtered Session List from `LogicManager` and updates `SessionListView` with it.
+1. The `RightSideBar` retrieves the latest period "WEEK" from the command result and text. `Title` is set to "WEEK". It then retrieves the filtered Session List from `LogicManager` and updates the items in `SessionListView`.
 
 #### Design Considerations
 
@@ -517,13 +515,16 @@ In designing this feature, we had to consider several alternative ways in which 
     - Cons:
         1. Violates Separation of Concerns principle as RightSideBar has to check whether command result is from ViewSessionCommand.
     
-- **Alternative 2:** Using Observer pattern to update title of `RightSideBar`.
+- **Alternative 2:** Using Observer pattern (Observer RightSideBar, Observable Command) to update title of `RightSideBar`.
     
     - Pros: 
         1. Reduces coupling between Ui and Logic.
     - Cons: 
-        1. `RightSideBar` is only updated when ViewSessionCommand is run. `RightSideBar`'s default session view cannot be customised and must be all sessions.
-        2. Violates YAGNI principle as making `Command` implement Observer interface requires addition of notify and add observer methods for all commands. This also increases chances of errors made in implementation.
+        1. `RightSideBar` would only be updated when ViewSessionCommand is run. 
+        If we set the default session view to Week when Logic is initialised, all sessions in existing test cases will need to start within 7 days of current date, which introduces additional complexity.
+        Hence, we would not customise `RightSideBar`'s default session view.
+        2. Violates YAGNI principle as making `Command` implement Observable interface requires addition of notify and add observer methods for all commands.
+         This also increases chances of errors made in implementation.
 
 --------------------------------------------------------------------------------------------------------------------
 
