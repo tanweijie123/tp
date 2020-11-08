@@ -69,7 +69,7 @@ public class Homepage extends UiPart<AnchorPane> {
     }
 
     /**
-     * {@inheritDoc}
+     * Updates the different components within this Ui.
      */
     public void update() {
         updateStatistics();

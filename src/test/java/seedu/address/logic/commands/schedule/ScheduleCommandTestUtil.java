@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.schedule.CliSyntax.PREFIX_REMARK;
@@ -21,7 +20,6 @@ import static seedu.address.testutil.TypicalSchedules.TEST_WEIGHT2;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,7 +27,6 @@ import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDes
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.schedule.Remark;
-import seedu.address.model.schedule.SameSchedulePredicate;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
 
@@ -60,19 +57,6 @@ public class ScheduleCommandTestUtil {
             .withClientIndex(INDEX_FIRST_CLIENT)
             .withSessionIndex(INDEX_SECOND_SESSION)
             .build();
-
-    /**
-     * Updates {@code model}'s filtered list to show only the Schedule at the given {@code targetIndex} in the
-     * {@code model}'s address book.
-     */
-    public static void showScheduleAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredScheduleList().size());
-
-        Schedule schedule = model.getFilteredScheduleList().get(targetIndex.getZeroBased());
-        model.updateFilteredScheduleList(new SameSchedulePredicate(schedule));
-
-        assertEquals(1, model.getFilteredScheduleList().size());
-    }
 
     /**
      * Executes the given {@code command}, confirms that <br>

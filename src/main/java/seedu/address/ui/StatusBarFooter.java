@@ -29,7 +29,6 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     public StatusBarFooter(Path saveLocation) {
         super(FXML);
-        //saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
         this.displayString = null;
         initTiming();
     }
@@ -53,6 +52,9 @@ public class StatusBarFooter extends UiPart<Region> {
         this.displayString = new Pair<>(display, LocalDateTime.now().plusSeconds(seconds));
     }
 
+    /**
+     * Initialises the clock animation.
+     */
     private void initTiming() {
         //Reference: https://stackoverflow.com/questions/42383857/javafx-live-time-and-date/42384436
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
@@ -69,6 +71,9 @@ public class StatusBarFooter extends UiPart<Region> {
         clock.play();
     }
 
+    /**
+     * Checks if the displayed text has expired. Remove it if it is.
+     */
     private void checkDisplayValidity() {
         if (displayString != null) {
             if (displayString.getValue().isBefore(LocalDateTime.now())) {

@@ -152,7 +152,7 @@ public interface Model {
     void updateFilteredSessionList(Predicate<Session> predicate);
 
     /**
-     * Returns true if a Schedule with the same identity as {@code Schedule} exists in the Schedule List.
+     * Returns true if a Schedule with the same identity as {@code schedule} exists in the Schedule List.
      */
     boolean hasSchedule(Schedule schedule);
 
@@ -162,23 +162,24 @@ public interface Model {
     boolean hasAnyScheduleAssociatedWithSession(Session session);
 
     /**
-     * Edits every Schedule with the same session as {@code sessionToEdit} into {@code editedSession}.
+     * Edits every Schedule with the same session as {@code sessionToEdit} to be associated with {@code editedSession}
+     * instead.
      */
     void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession);
 
     /**
-     * Returns true if a Schedule with the same client as {@code Client} exists in the Schedule List.
+     * Returns true if a Schedule with the same client as {@code client} exists in the Schedule List.
      */
-    boolean hasAnyScheduleAssociatedWithClient(Client toEdit);
+    boolean hasAnyScheduleAssociatedWithClient(Client client);
 
     /**
-     * Edits every Schedule with the same client as {@code client}.
+     * Edits every Schedule with the same client as {@code toEdit} to be associated with {@code editedClient} instead.
      */
     void editSchedulesAssociatedWithClient(Client toEdit, Client editedClient);
 
     /**
-     * Returns true if a Schedule with the same client as {@code client} and schedule as
-     * {@code schedule} exists in the Schedule List.
+     * Returns true if a Schedule with the same client as {@code client} and session as
+     * {@code session} exists in the Schedule List.
      */
     boolean hasAnyScheduleAssociatedWithClientAndSession(Client client, Session session);
 

@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.session.ViewSessionCommand.PREDICATE_
 import static seedu.address.logic.parser.session.CliSyntax.PREFIX_PERIOD;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -19,9 +20,11 @@ import seedu.address.model.session.Session;
 
 public class RightSideBar extends UiPart<AnchorPane> {
     private static final String FXML = "RightSideBar.fxml";
+    private static final String DEFAULT_VIEW = "WEEK";
+    private static final Predicate<Session> DEFAULT_PREDICATE = PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS;
     private final MainWindow mainWindow;
     private final Logic logic;
-    private String latestPeriod = "WEEK";
+    private String latestPeriod;
 
     @FXML
     private ListView<Session> sessionListView;
@@ -36,23 +39,29 @@ public class RightSideBar extends UiPart<AnchorPane> {
         super(FXML);
         this.mainWindow = mainWindow;
         this.logic = logic;
+        this.latestPeriod = DEFAULT_VIEW;
         this.title.setAlignment(Pos.CENTER);
         sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new RightSideBar.SessionListViewCell());
-        title.setText(latestPeriod);
-        logic.updateFilteredSessionList(PREDICATE_SHOW_UPCOMING_WEEK_SESSIONS);
+
+        updateTitle();
+        logic.updateFilteredSessionList(DEFAULT_PREDICATE);
     }
 
     /**
-     * Updates the content of the Session ListView
+     * Updates the title and content of the Session ListView.
      */
     public void update(CommandResult commandResult, String commandText) {
         updateLatestPeriod(commandResult, commandText);
-        title.setText(latestPeriod);
+        updateTitle();
 
         sessionListView.setItems(null);
         sessionListView.setItems(logic.getFilteredSessionList());
         sessionListView.setCellFactory(listView -> new SessionListViewCell());
+    }
+
+    private void updateTitle() {
+        title.setText(latestPeriod);
     }
 
     /**
@@ -90,10 +99,13 @@ public class RightSideBar extends UiPart<AnchorPane> {
                 setText(null);
             } else {
                 List<Schedule> associatedSchedules = logic.getAssociatedScheduleList(session);
-                if (associatedSchedules.size() > 0) {
-                    setGraphic(new SessionCard(session, getIndex() + 1, associatedSchedules).getRoot());
+                int zeroBasedIndex = getIndex();
+                int oneBasedIndex = zeroBasedIndex + 1;
+
+                if (!associatedSchedules.isEmpty()) {
+                    setGraphic(new SessionCard(session, oneBasedIndex, associatedSchedules).getRoot());
                 } else {
-                    setGraphic(new SessionCard(session, getIndex() + 1, null).getRoot());
+                    setGraphic(new SessionCard(session, oneBasedIndex, null).getRoot());
                 }
             }
         }

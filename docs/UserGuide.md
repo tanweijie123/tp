@@ -139,8 +139,13 @@ You can refer to the table and the figure below to familiarize yourself with the
 
 [comment]: <> (Why cant you figure out yourself?)
 
-![AnnotatedUi](images/AnnotatedUi.png)
-<center> Figure 2 - Callouts of the various UI components</center><br/>
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/AnnotatedUi.png" style="width: 100%%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Callouts of the various UI components</figcaption>
+ </figure>
+ 
 <center> Table 1 - Functions of UI Components </center>
 From the figure above, the GUI is made up of several components. 
 
@@ -242,7 +247,7 @@ Alternatively, you may press the "ESC" key to close this window.
 You can ask FitEgo to open a window to change user settings.
 
 <center><img src="images/settingsWindow.png" alt="settingsWindow"/></center>
-<center> Figure - Settings Window </center>
+<center> Figure 6 - Settings Window </center>
 
 Format: `settings`
 
@@ -299,8 +304,12 @@ Each client must have a unique email.
 
 Client-related commands will interact with the Client List which is located on the [left of the UI](#2-ui-orientation). 
 
-<center><img src="images/ClientPanel.png" alt="client_panel" width="250" height="400" />
-<br/>Figure 6 - Sample of Client List</center>
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/ClientPanel.png" style="width: 100%%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Sample of Client List</figcaption>
+ </figure>
 
 <div markdown="block" class="alert alert-info"> 
 
@@ -366,8 +375,13 @@ Examples:
 
 *  `cedit 1 t/` removes all of the tags of the first client in the Client List
 *  `cedit 2 p/12345678 t/injured-thigh` edits the phone number and tag of the second client in the Client List. As you can see in the figure below, both fields are updated after executing the command.
- <center> <img src="images/cedit_sample.png" alt="cedit command sample"/><br>
- Figure 11 - Result of executing <code>cedit 2 p/12345678 t/injured-thigh</code></center><br/>
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/cedit_sample.png" style="width: 100%; height: auto;"/>
+    </p>
+    <figcaption>Figure - Result of executing <code>cedit 2 p/12345678 t/injured-thigh</code></figcaption>
+</figure>
 
 
 ### 3.2.4 Locating Clients by Name : `cfind`
@@ -389,7 +403,7 @@ Examples:
 * `cfind alex david` returns `Alex Yeoh`, `David Li` as shown in the figure below <br>
 
 <center><img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="400" height="400" /></center>
-<center> Figure 7 - Result of finding clients by name </center>
+<center> Figure 8 - Result of finding clients by name </center>
 
 
 ### 3.2.5 Deleting a Client : `cdel`
@@ -451,7 +465,7 @@ The result of these commands is shown in the figure below
 
 <center><img src="images/cview_sample.png" alt="result for 'cview 1'" width="100%"/></center>
 
-<center>Figure 8 - Client View with Schedules </center>
+<center>Figure 9 - Client View with Schedules </center>
 
 ---
 
@@ -472,7 +486,7 @@ Each session can be scheduled with multiple clients, to model a trainer instruct
 Session-related commands will interact with the Session List which is located on the [right of the UI](#2-ui-orientation). The figure below shows how it looks like.
 
 <center><img src="images/SessionPanel.png" alt="session_panel" width="250" height="450" /><br/>
-Figure 9 - Sample of Session List</center><br/>
+Figure 10 - Sample of Session List</center><br/>
 The `ALL` at the top of this Session List panel represents the current period of session view. 
 
 <div markdown="span" class="alert alert-primary">
@@ -507,11 +521,11 @@ This helps to prevent you from accidentally agreeing to 2 sessions that overlaps
 
 </div>
 
-<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+<figure style="width:auto; text-align:center; padding:0.5em; font-size: smaller;">
     <p>
         <img src="images/sadd_sample.png" style="width: 100%; height: auto;"/>
     </p>
-    <figcaption>Figure - Result of executing <code>sadd g/New Gym ex/Endurance at/06/11/2020 0900 t/65</code></figcaption>
+    <figcaption>Figure 11 - Result of executing <code>sadd g/New Gym ex/Endurance at/06/11/2020 0900 t/65</code></figcaption>
 </figure>
 
 Examples:
@@ -532,9 +546,12 @@ Points to take note when editing a session's details from the Session List:
 * Existing values will be updated to the input values.
 
 Examples:
-*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120 ` edits the gym of the first session to be `Machoman` and the start time and duration to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
-*  `sedit 2 at/29/09/2020 1600 t/120 ` edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
+*  `sedit 1 g/Machoman at/29/09/2020 1600 t/120` edits the gym of the first session to be `Machoman` and the start time and duration to be `29/09/2020 1600 with a duration of 120  minutes` while keeping all other fields the same
+*  `sedit 2 at/29/09/2020 1600 t/120` edits the start time and duration of the second session to be `29/09/2020 1600 with a duration of 120 minutes` while keeping all other fields the same
 
+
+ <center> <img src="images/sedit_sample.png" alt="sedit command sample"/><br>
+ Figure 12 - Result of executing <code>sedit 1 g/Machoman at/29/09/2020 1600 t/120</code></center><br/>
 
 ### 3.3.3 Deleting a Session : `sdel`
 
@@ -597,7 +614,7 @@ Points to take note when viewing session from the Session List:
  | y / Y| year |
   
 <center><img src="images/sview_sample.png" alt="result for 'sview p/+2w'"/><br>
-Figure 10 - Result of running <code>sview p/+2w</code> </center>
+Figure 13 - Result of running <code>sview p/+2w</code> </center>
 
 Examples:
  
@@ -650,8 +667,12 @@ The table below shows an example of schedules. The session at Machoman Gym is at
 
 To check if you have scheduled a session with a client, you can check if the session in the Session List contains the client's name. 
 
-<center> <img src="images/SchedulePanel.png" alt="schedule_panel" width="250" height="450" /><br>
-Figure 11 - Alternate sample of Session List</center><br/>
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/SchedulePanel.png" style="width: 100%%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Alternate sample of Session List</figcaption>
+ </figure>
 
 The figure above shows the Session List, in which for each session, there is a list of clients attending the session. Clients who have paid for a session will have their name shown in <span style="color:green; font-weight: bold;">green</span>, while those who have not  will have their name shown in <span style="color:red; font-weight: bold;">red</span>.
 
@@ -670,8 +691,13 @@ Points to take note when adding a schedule:
 Example:
 
 * `schadd c/1 s/1` schedules the first client in the Client List with the first session in the Session List. As you can see in the figure below, Alex Yeoh (the fifth client, marked by the red square) is added to the first session in the list (marked by the blue square).
- <center> <img src="images/schadd_sample.png" alt="schadd command sample"/><br>
- Figure 11 - Result of executing <code>schadd c/1 s/1</code></center><br/>
+
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/schadd_sample.png" style="width: 100%%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Result of executing <code>schadd c/1 s/1</code></figcaption>
+ </figure>
 
 ### 3.4.2 Editing a Schedule : `schedit`
 
@@ -696,6 +722,10 @@ Examples:
 *  `schedit c/1 s/1 r/did 5 pushups` edits the schedule containing client index 1 and session index 1 to have remark of doing 5 pushups while keeping all other fields the same
 *  `schedit c/1 s/1 w/70` edits the schedule containing client index 1 and session index 1 to a weight of 70kg while keeping all other fields the same
 * `schedit c/1 s/1 r/` clears the schedule containing client index 1 and session index 1 remarks while keeping all other fields the same
+
+ <center> <img src="images/schedit_sample.png" alt="schedit command sample"/><br>
+ Figure 16 - Result of executing <code>schedit c/1 s/2 us/1</code></center><br/>
+
 
 ### 3.4.3 Deleting a Schedule : `schdel`
 

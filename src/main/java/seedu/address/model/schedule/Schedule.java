@@ -2,10 +2,13 @@ package seedu.address.model.schedule;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.model.CheckExisting;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
 import seedu.address.model.session.ExerciseType;
 import seedu.address.model.session.Interval;
 import seedu.address.model.session.Session;
@@ -54,6 +57,14 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         return client;
     }
 
+    public Name getClientName() {
+        return client.getName();
+    }
+
+    public Email getClientEmail() {
+        return client.getEmail();
+    }
+
     public Session getSession() {
         return session;
     }
@@ -82,6 +93,14 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
         return session.getInterval();
     }
 
+    public LocalDateTime getStartTime() {
+        return getInterval().getStart();
+    }
+
+    public LocalDateTime getEndTime() {
+        return getInterval().getEnd();
+    }
+
     public Schedule setClient(Client newClient) {
         return new Schedule(newClient, this.session, this.paymentStatus, this.remark, this.weight);
     }
@@ -91,7 +110,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     }
 
     /**
-     * Returns true if both Schedules have the same identity fields (equal @{code client} and {@session}).
+     * Returns true if both Schedules have the same identity fields (equal {@code client} and {@code session}).
      */
     @Override
     public boolean isIdentical(Schedule otherSchedule) {

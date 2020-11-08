@@ -30,7 +30,7 @@ Below are a few examples of the common notations in this document in which the d
 
 :information_source: **Note:**
 
-Additional information that is helpful but not essential. 
+Important to know. 
 
 </div>
 
@@ -40,7 +40,7 @@ Additional information that is helpful but not essential.
 
 :bulb: **Tip:**
 
-Good to learn, but not necessary to know to use FitEgo. 
+Additional information. 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -197,15 +197,15 @@ The proposed Edit Session mechanism is facilitated by `Addressbook`.
 
 These operation is exposed in the `Model` interface as `Model#setSession()`.
 
-Given below is an example usage scenario and how the edit session mechanism behaves at each step.
+Given below is an example usage scenario and how the Edit Session mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
 The `AddressBook` will be initialized with the initial client, session and schedule list.
 
-Step 2. The user executes `sedit 1 g/coolgym` command to edit the 1st Session in the address book. 
+Step 2. The user executes `sedit 1 g/coolgym` command to edit the first Session in the address book. 
 The `sedit` command calls `Model#setSession()`, causing changes to be made in the address book after the `sedit 1 g/coolgym` command executes.
 
-The following sequence diagram shows how the edit session operation works:
+The following sequence diagram shows how the Edit Session operation works:
 
 ![EditSessionSequenceDiagram](images/EditSessionSequenceDiagram.png)
 
@@ -213,9 +213,14 @@ The following sequence diagram shows how the edit session operation works:
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes the edit session command:
+The following activity diagram summarizes what happens when a user executes a new `EditSession` command, with the assumption that the user inputs a valid command:
 
-![EditSessionActivityDiagram](images/EditSessionActivityDiagram.png)
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/EditSessionActivityDiagram.png" style="width: 25%; height: auto;"/>
+    </p>
+    <figcaption>Figure - Edit Session Activity Diagram</figcaption>
+</figure>
 
 ### Delete Session feature
 
@@ -312,31 +317,64 @@ The Add Schedule mechanism is facilitated by `AddScheduleCommand` which extends 
 command is given by: 
 
 ```schadd c/CLIENT_INDEX s/SESSION_INDEX```
+
 When using this command, the `CLIENT_INDEX` should refer to the index shown in the Client List on the left panel, and is used to specify the Client. The `SESSION_INDEX` should refer to the index shown in the Session List on the right panel, and is used to specify the Session.
 
-The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command. Notice how it checks for overlapping Schedule first.
+The following activity diagram summarizes the decision making process when a user executes a new `AddSchedule` command.
 
-![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/AddScheduleActivityDiagram.png" style="width: 70%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Add Schedule activity diagram</figcaption>
+ </figure>
 
-**Example Commands**
+#### Command Usage Examples
 
-Assume the current state of Client, Session, and Schedule is as illustrated on the following simplified object diagram:
+Assume the current state of the displayed Client List, displayed Session List, and Schedules (all Schedules in FitEgo) are as illustrated in the following simplified object diagram:
 
-![OverlappingScheduleObjectDiagram0](images/OverlappingScheduleObjectDiagram0.png)
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/OverlappingScheduleObjectDiagram0.png" style="width: 95%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Sample current state of Add Schedule</figcaption>
+ </figure>
 
 Now, consider two cases of Add Schedule command to be invoked.
 
 **Case 1**:  `schadd c/2 s/1`
 
-Invoking `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List).
+Here is what happens when `schadd c/2 s/1` is invoked.
 
-Thus, the result can be illustrated by the following object diagram, shown by a new created Schedule:
+To some extent, the mechanism (on how it involves `LogicManager`, `AddressBookParser`, and saving the changes to `Storage`) is similar to that of [Delete Session](#delete-session-feature), as illustrated in [Delete Session](#delete-session-feature)'s sequence diagram. The main differences are on the method call `parseCommand()` and `DeleteSessionCommand#execute(model)`.
 
-![OverlappingScheduleObjectDiagram1](images/OverlappingScheduleObjectDiagram1.png)
+`parseCommand()` method call:
+Instead of using `DeleteSessionCommandParser`, it uses `AddScheduleCommandParser` to parse the argument `c/2 s/1` such that it returns an `AddScheduleCommand` object called `a` with Client index `2` and Session index `1`.
+
+`AddScheduleCommand#execute(model)` will be called instead of `DeleteSessionCommand#execute(model)`. For this particular case, the method call `AddScheduleCommand#execute(model)` can be traced using the following sequence diagram snippet.
+
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/AddScheduleExecuteRef.png" style="width: 95%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Sequence diagram snippet for <code>AddScheduleCommand#execute(model)</code></figcaption>
+ </figure>
+ 
+As shown in the figure above, first it gets the Client and Session from the filtered (displayed) lists. Then, it checks for existing identical Schedule (Schedule that consists of the same Client and Session) using `hasAnyScheduleAssociatedWithClientAndSession()`. 
+Since for this case no identical Schedule is not found, a new Schedule object is created and added into the Model using `Model#addSchedule()`. Finally, it returns the CommandResult to indicate a success.
+
+Thus, `schadd c/2 s/1` will add a Schedule associated with Andy (the second Client in the Client List) and endurance training from 12/12/2020 1400 - 1600 (the first Session in the Session List). The result can be illustrated by the following object diagram, which shows a new is created.
+
+ <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+     <p>
+         <img src="images/OverlappingScheduleObjectDiagram1.png" style="width: 95%; height: auto;"/>
+     </p>
+     <figcaption>Figure - Result of invoking <code>schadd c/2 s/1</code></figcaption>
+ </figure>
 
 **Case 2:** `schadd c/1 s/1`
 
-On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as there is an overlapping Schedule (John is already scheduled to endurance training from 12/12/2020 1400 - 1600).
+On the other hand, invoking `schadd c/1 s/1` will result in an error shown to the user as an identical Schedule already exists. Here, John is already scheduled to the endurance training Session from 12/12/2020 1400 - 1600.
 
 ### Edit Schedule feature
 
@@ -346,19 +384,24 @@ This operation is exposed in the `Model` interface as `Model#setSchedule()`.
 
 Similar to the Edit Session mechanism, the example usage scenario below shows how Edit Schedule mechanism behaves:
 
-The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with Session 1 and Client 1 in the address book. 
+The user executes `schedit c/1 s/1 us/2` command to edit the Schedule with the first Session and first Client in the address book. 
 The `schedit` command calls `Model#setSchedule()`, causing changes to be made in the address book after the `schedit c/1 s/1 us/2` command executes.
 
-The following activity diagram summarizes what happens when a user executes the Edit schedule command:
+The following activity diagram summarizes what happens when a user executes a new `EditSchedule` command, with the assumption that the user inputs a valid command:
 
-![EditScheduleActivityDiagram](images/EditScheduleActivityDiagram.png)
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/EditScheduleActivityDiagram.png" style="width: 25%; height: auto;"/>
+    </p>
+    <figcaption>Figure - Edit Schedule Activity Diagram</figcaption>
+</figure>
 
 #### Design consideration:
 
 ##### Aspect: How edit schedule executes
 
 * **Alternative 1 (current choice):** Retrieve Schedule using Client and Session Index.
-  * Pros: More troublesome to implement. Clearer to retrieve.
+  * Pros: Clearer to retrieve.
   * Cons: Require user to know the Client and Session Index separately.
 
 * **Alternative 2:** Retrieve Schedule using Schedule Index
@@ -366,6 +409,136 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Easier to retrieve.
   * Cons: Implementation is more confusing as User there's a conflict between Index and user-typed String index.
 
+
+### View Client's Weight feature
+
+The viewing of client's weight feature allows the user to check in on a Client's progress after multiple Sessions.
+This data is important because it allows the user to check the effectiveness of his training schedule and customise the training 
+based on the remarks and weight progress. 
+
+Viewing of Client's Weight is accessible when the user calls `cview [INDEX]` followed by activating the `Weight` tab pane. 
+
+#### Implementation
+
+The recording of weight is stored in `Schedule` class. This is because we believe that trainer would optionally take a weight measurement
+at the start of every session. Thus, to get the weight change over time, a list of schedules related to the `Client` has to be extracted. 
+
+In the following sequence diagram, we trace the execution starting from when the user calls `cview 1` until when the UI is updated with Client View.
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ClientViewWeightSequenceDiagram.png" alt="ClientViewWeightSequenceDiagram" style="align-content: center" />
+    </p>
+    <figcaption>Figure - Client View Weight Generate Sequence Diagram</figcaption>
+</figure>
+
+<div markdown="block" class="alert alert-info"> 
+
+:information_source: **Note:**
+
+The steps used to create CommandResult is omitted in the sequence diagram for clarity of diagram. The return object of `logic.execute("cview 1")`
+is a CommandResult object, within which, contains a Supplier which returns a Pane for MainWindow to display when activated.
+
+</div>
+
+As shown in the "alt" frame, the chart is added into the tab pane if there are associated schedule and the weight (if present within the `Schedule` object)
+will be added into the line chart. Otherwise, the `Weight` tab will be removed instead of showing an empty chart.  
+
+#### Design Considerations
+In designing this weight tracking feature, we had considered several alternative ways in which we can store and retreive the weight. 
+
+* **Alternative 1 (current choice):** Stores the `Weight` within the `Schedule` object
+  * Pros: The user can track the weight against each session attended. 
+  * Cons: Multiple weight measurement during a session, and weight measurement without a session cannot be entered. 
+  
+* **Alternative 2:** Stores a list of `Weight` within the `Client` object
+  * Pros: Do not require a schedule in order to track weight. 
+  * Cons: Lesser information about the weight (schedule's exercise, remarks, time, etc) is stored.  
+
+### View Session by period feature
+
+The View Session by period feature allows users to filter the Session List to show only those within the requested time period.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The Ui component RightSideBar comprises a ListView of 
+ Session List and a title that reflects the latest filter on Session List resulting from ViewSessionCommand. 
+ Session List's list and Ui-related operations are handled by <code>Model</code> and RightSideBar respectively.
+</div>
+
+The View Session mechanism is facilitated by `ViewSessionCommand` which extends `Command`. The format of the 
+command is given by: 
+
+```sview p/PERIOD```
+
+When using this command, `PERIOD` should refer to either a variable period or fixed period
+that returns true after running `ViewSessionCommand#isValidPeriod`. Fixed periods are found in `ViewSessionCommand#PREDICATE_HASH_MAP`, whereas variable periods
+must follow the format `(+/-)#(D/W/M/Y)`.
+
+The following activity diagram summarizes what happens when a user executes a new View Session command.
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ViewSessionActivityDiagram.png" style="height: auto;"/>
+    </p>
+    <figcaption>Figure - View Session Activity Diagram</figcaption>
+</figure>
+
+In the following sequence diagram, we trace the execution when the user decides to enter the View Session command 
+`sview p/week` into FitEgo.
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ViewSessionSequenceDiagram.png" alt="ViewSessionSequenceDiagram" style="align-content: center" />
+    </p>
+    <figcaption>Figure - View Session Sequence Diagram</figcaption>
+</figure>
+
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ViewSessionParserRef.png" alt="ViewSessionParserRef" style="align-content: center" />
+    </p>
+    <figcaption>Figure - View Session Parser Ref Sequence Diagram</figcaption>
+</figure>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ViewSessionCommandParser` and `ViewSessionCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+1. After the user enters an input to view session for the week, the input is sent to `LogicManager` to be executed. The `AddressBookParser` identifies the command type and constructs a `ViewSessionCommandParser`.
+
+1. The `ViewSessionCommandParser` then parses for the period and constructs a `ViewSessionCommand` with the period.
+
+1. The `ViewSessionCommand` is returned to the `LogicManager` which will then execute it.
+
+1. During execution of `ViewSessionCommand`, a predicate for sessions within the upcoming week is created (refer to Activity Diagram above for details on flow). The Session List in `Model` is then filtered by this predicate.
+
+1. Command result is passed to `MainWindow` to indicate a successful execution. `MainWindow` will then update the `RightSideBar`.
+
+    <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ViewSessionUpdateRightSideBarRef.png" alt="ViewSessionUpdateRightSideBarRefSequenceDiagram" style="align-content: center" />
+    </p>
+    <figcaption>Figure - View Session Update RightSideBar Ref Sequence Diagram</figcaption>
+    </figure>
+
+1. The `RightSideBar` retrieves the latest period "WEEK" from the command result and text. `Title` is set to "WEEK". It then retrieves the filtered Session List from `LogicManager` and updates the items in `SessionListView`.
+
+#### Design Considerations
+
+In designing this feature, we had to consider several alternative ways in which we can choose to handle viewing session by period.
+
+* **Alternative 1 (current choice):** Update title of `RightSideBar` based on command result.
+    * Pros: Does not lower maintainability and requires the least changes to existing implementation and test code. 
+    * Cons: Violates Separation of Concerns principle as RightSideBar has to check whether command result is from ViewSessionCommand.
+    
+
+* **Alternative 2:** Using Observer pattern (Observer RightSideBar, Observable Command) to update title of `RightSideBar`.
+    * Pros: Reduces coupling between Ui and Logic.
+    * Cons: 
+        1. `RightSideBar` would only be updated when ViewSessionCommand is run. 
+        If we set the default session view to Week when Logic is initialised, all sessions in existing test cases will need to start within 7 days of current date, which introduces additional complexity.
+        Hence, we would not customise `RightSideBar`'s default session view.
+        2. Violates YAGNI principle as making `Command` implement Observable interface requires addition of notify and add observer methods for all commands.
+         This also increases chances of errors made in implementation.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -588,7 +761,7 @@ Similar to <u>UC03 (Delete a Client)</u>, but replace Client with Session.
 
  1.  FitEgo shows a list of Sessions.
  2.  User requests to filter the Session List by a period.
- 3.  FitEgo filters the Session List according to the specified period and updates its title.
+ 3.  FitEgo filters the Session List according to the specified period and updates the title displayed.
 Use case ends.
 
 **Extensions**
@@ -611,6 +784,7 @@ Use case ends.
  1. FitEgo shows a list of Clients and list of Sessions.
  2. User requests to add a specific Schedule between a specified Client from Client List and Session from Session List.
  3. FitEgo adds the Schedule.
+ 
 Use case ends.
 
 **Extensions**
@@ -621,7 +795,7 @@ Use case ends.
 
     Use case resumes at step 2.
   
-- 2b. The Schedule to be added is overlapping with another Schedule.
+- 2b. The Schedule to be added already exists.
 
   - 2b1. FitEgo shows an error message.
 
@@ -659,6 +833,7 @@ Use case ends.
  1. FitEgo shows a list of Clients and list of Sessions.
  2. User requests to delete a Schedule associated with a specified Client from the Client List and Session from the Session List.
  3. FitEgo deletes the Schedule.
+ 
 Use case ends.
 
 **Extensions**
@@ -669,7 +844,7 @@ Use case ends.
   
     Use case resumes at step 2.
 
-- 2b. There are no schedules with the specified Client and Session.
+- 2b. There is no Schedule associated with the specified Client and Session.
 
   - 2b1. FitEgo shows an error message.
 
@@ -682,7 +857,8 @@ Use case ends.
  1.  User requests to view Help Window. 
  2.  FitEgo displays Help Window with the User Guide link.
  3.  User selects the link to access the User Guide. 
- 4.  FitEgo opens the User Guide in user's default browser. 
+ 4.  FitEgo opens the User Guide in user's default browser.
+ 
 Use case ends.
 
 **Extensions**

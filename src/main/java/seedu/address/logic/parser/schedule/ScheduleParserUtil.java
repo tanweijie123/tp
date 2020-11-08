@@ -2,8 +2,6 @@ package seedu.address.logic.parser.schedule;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.schedule.PaymentStatus.MESSAGE_INVALID_PAYMENT_STATUS;
-import static seedu.address.model.schedule.PaymentStatus.VALUE_PAID;
-import static seedu.address.model.schedule.PaymentStatus.VALUE_UNPAID;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,13 +24,12 @@ public class ScheduleParserUtil extends ParserUtil {
     public static PaymentStatus parsePaymentStatus(String status) throws ParseException {
         requireNonNull(status);
         String trimmedPaymentStatus = status.trim().toLowerCase();
-        if (trimmedPaymentStatus.equals(VALUE_PAID)) {
-            return new PaymentStatus(VALUE_PAID);
-        } else if (trimmedPaymentStatus.equals(VALUE_UNPAID)) {
-            return new PaymentStatus(VALUE_UNPAID);
-        } else {
+
+        if (!PaymentStatus.isValidPaymentStatus(trimmedPaymentStatus)) {
             throw new ParseException(MESSAGE_INVALID_PAYMENT_STATUS);
         }
+
+        return new PaymentStatus(trimmedPaymentStatus);
     }
 
     /**

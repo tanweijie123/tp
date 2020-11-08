@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.schedule.DeleteScheduleCommand.MESSAGE_SCHEDULE_NOT_FOUND;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.schedule.ScheduleCommandTestUtil.showScheduleAtIndex;
 import static seedu.address.testutil.TypicalClients.getTypicalClients;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
@@ -75,23 +74,6 @@ public class DeleteScheduleCommandTest {
         DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_CLIENT, outOfBoundIndex);
 
         assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() {
-        showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
-
-        Schedule scheduleToDelete = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
-        DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(INDEX_FIRST_CLIENT,
-                INDEX_FIRST_SESSION);
-
-        String expectedMessage = String.format(DeleteScheduleCommand.MESSAGE_SUCCESS, scheduleToDelete);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteSchedule(scheduleToDelete);
-        showNoSchedule(expectedModel);
-
-        assertCommandSuccess(deleteScheduleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

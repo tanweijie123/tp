@@ -31,20 +31,20 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Added wrap text to increase text readability for small resolutions. [\#218](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/218)
-  * Refactored Delete and List commands to equivalent Client commands.
+  * Refactored Delete and List commands to equivalent Client commands. [\#56](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/56), [\#55](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/55)
   
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `sview`, `cdel` and `settings` [\#229](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/229) [\#171](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/171) [\#159](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/159) 
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-    * Ensured accurate grammar and consistency of commonly used terms [\#157](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/157) [\#23](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/23)
+    * Added documentation for the features `sview`, `cdel` and `settings` [\#229](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/229), [\#171](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/171), [\#159](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/159) 
+    * Made cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#157](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/157)
+    * Ensured accurate grammar and consistency of commonly used terms [\#157](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/157), [\#23](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/23)
     * Created an annotated diagram of Ui components.
 
   * Developer Guide:
-    * Added implementation details of the `cdel` feature.
+    * Added implementation details of the `cdel` and `sview` features.
     * Updated diagrams and description of the Logic component.
     * Increased readability by rephrasing sections and improved consistency in punctuation and grammar. [\#227](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/227), [\#218](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/218)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#159](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/159), [\#149](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/149), [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
+  * PRs reviewed (with non-trivial review comments): [\#233](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/233), [\#159](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/159), [\#149](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/149), [\#153](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/153)
   * Reported bugs and suggestions for other teams in the class (examples: [138](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/138))
