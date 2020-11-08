@@ -493,6 +493,13 @@ In the following sequence diagram, we trace the execution when the user decides 
     <figcaption>Figure - View Session Sequence Diagram</figcaption>
 </figure>
 
+<figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
+    <p>
+        <img src="images/ViewSessionParserRef.png" alt="ViewSessionParserRef" style="align-content: center" />
+    </p>
+    <figcaption>Figure - View Session Parser Ref Sequence Diagram</figcaption>
+</figure>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ViewSessionCommandParser` and `ViewSessionCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>

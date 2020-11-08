@@ -3,7 +3,6 @@
 
 Actor User as user USER_COLOR
 
-
 box Ui UI_COLOR_T1
 participant ":MainWindow" as MainWindow UI_COLOR
 participant ":RightSideBar" as RightSideBar UI_COLOR
@@ -11,9 +10,7 @@ end box
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":ViewSessionCommandParser" as ViewSessionCommandParser LOGIC_COLOR
-participant "d:ViewSessionCommand" as ViewSessionCommand LOGIC_COLOR
+participant "command:ViewSessionCommand" as ViewSessionCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -27,34 +24,7 @@ activate MainWindow
 MainWindow-> LogicManager : execute("sview p/week")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("sview p/week")
-activate AddressBookParser
-
-create ViewSessionCommandParser
-AddressBookParser -> ViewSessionCommandParser
-activate ViewSessionCommandParser
-
-ViewSessionCommandParser --> AddressBookParser
-deactivate ViewSessionCommandParser
-
-AddressBookParser -> ViewSessionCommandParser : parse("week")
-activate ViewSessionCommandParser
-
-create ViewSessionCommand
-ViewSessionCommandParser -> ViewSessionCommand
-activate ViewSessionCommand
-
-ViewSessionCommand --> ViewSessionCommandParser : d
-deactivate ViewSessionCommand
-
-ViewSessionCommandParser --> AddressBookParser : d
-deactivate ViewSessionCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-ViewSessionCommandParser -[hidden]-> AddressBookParser
-destroy ViewSessionCommandParser
-
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+ref over LogicManager, ViewSessionCommand : parse command arguments
 
 LogicManager -> ViewSessionCommand : execute(model)
 activate ViewSessionCommand
@@ -69,17 +39,17 @@ create CommandResult
 ViewSessionCommand -> CommandResult:
 activate CommandResult
 
-CommandResult --> ViewSessionCommand : commandResult
+CommandResult --> ViewSessionCommand : result
 deactivate CommandResult
 
-ViewSessionCommand --> LogicManager : commandResult
+ViewSessionCommand --> LogicManager : result
 deactivate ViewSessionCommand
-ViewSessionCommand -[hidden]-> LogicManager : commandResult
+ViewSessionCommand -[hidden]-> LogicManager : result
 destroy ViewSessionCommand
-MainWindow<--LogicManager : commandResult
+MainWindow<--LogicManager : result
 deactivate LogicManager
 
-MainWindow-> RightSideBar : update(commandResult, commandText)
+MainWindow-> RightSideBar : update(result, "sview p/week")
 activate RightSideBar
 
 ref over RightSideBar, LogicManager : update RightSideBar

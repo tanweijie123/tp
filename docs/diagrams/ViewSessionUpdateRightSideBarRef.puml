@@ -18,8 +18,13 @@ group sd update RightSideBar
 [-> RightSideBar
 activate RightSideBar
 
-RightSideBar -> RightSideBar : updateLatestPeriod(commandResult, commandText)
+RightSideBar -> RightSideBar : updateLatestPeriod(result, "sview p/week")
 activate RightSideBar
+
+note right
+RightSideBar refers to success message
+of ViewSessionCommand for updateLatestPeriod
+end note
 
 RightSideBar --> RightSideBar
 deactivate RightSideBar
