@@ -8,8 +8,6 @@ import org.controlsfx.control.textfield.TextFields;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -76,10 +74,10 @@ public class CommandBox extends UiPart<Region> {
             });
     }
 
-    /**
+    /*
      * Scroll Past Commands using Key.UP and Key.DOWN
-     */
-    /* This feature is currently under maintenance. Will be releasing it after checks are completed.
+     * This feature is currently under maintenance. Will be releasing it after checks are completed.
+
     private void bindPastCommands() {
         commandTextField.addEventHandler(KeyEvent.KEY_PRESSED, k -> {
             if (k.getCode() == KeyCode.UP) {
