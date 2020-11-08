@@ -1,6 +1,8 @@
 package seedu.address.logic.parser.session;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.session.Interval.MESSAGE_END_TIME_CONSTRAINTS;
+import static seedu.address.model.session.Interval.MESSAGE_START_TIME_CONSTRAINTS;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -17,10 +19,6 @@ import seedu.address.model.session.Interval;
  * Contains utility methods used for parsing strings in the various *SessionParser classes.
  */
 public class SessionParserUtil extends ParserUtil {
-    private static String MESSAGE_START_TIME_CONSTRAINTS = "Start time must be a valid date and time and follows "
-            + "dd/MM/yyyy HHmm pattern";
-    private static String MESSAGE_END_TIME_CONSTRAINTS = "End time must be a valid date and time and follows "
-            + "dd/MM/yyyy HHmm pattern";
 
     /**
      * Parses a {@code String gym} into a {@code Gym}.

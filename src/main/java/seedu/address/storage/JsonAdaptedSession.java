@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import static seedu.address.model.session.Interval.MESSAGE_END_TIME_CONSTRAINTS;
+import static seedu.address.model.session.Interval.MESSAGE_START_TIME_CONSTRAINTS;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -72,11 +75,11 @@ public class JsonAdaptedSession {
 
 
         if (start == null || SessionParserUtil.isInvalidDateTime(start)) {
-            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_START_TIME_CONSTRAINTS);
         }
 
         if (end == null || SessionParserUtil.isInvalidDateTime(end)) {
-            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_END_TIME_CONSTRAINTS);
         }
 
         final LocalDateTime startDateTime = SessionParserUtil.parseStringToDateTime(start);

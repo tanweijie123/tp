@@ -58,7 +58,7 @@ public class Schedule implements CheckExisting<Schedule>, Comparable<Schedule> {
     }
 
     public Name getClientName() {
-        return getClient().getName();
+        return client.getName();
     }
 
     public Email getClientEmail() {

@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import static seedu.address.model.session.Interval.MESSAGE_END_TIME_CONSTRAINTS;
+import static seedu.address.model.session.Interval.MESSAGE_START_TIME_CONSTRAINTS;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -85,7 +88,7 @@ public class JsonAdaptedSchedule {
         }
 
         if (SessionParserUtil.isInvalidDateTime(start)) {
-            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_START_TIME_CONSTRAINTS);
         }
 
         if (end == null) {
@@ -94,7 +97,7 @@ public class JsonAdaptedSchedule {
         }
 
         if (SessionParserUtil.isInvalidDateTime(end)) {
-            throw new IllegalValueException(Interval.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_END_TIME_CONSTRAINTS);
         }
 
         return SessionParserUtil.parseIntervalFromStartAndEnd(start, end);
