@@ -124,18 +124,21 @@ public class EditScheduleCommand extends Command {
 
         Client client = scheduleToEdit.getClient();
         Session session = scheduleToEdit.getSession();
+        Optional<Index> updatedOptionalSessionIndex = editScheduleDescriptor.getUpdatedSessionIndex();
+
         try {
-            if (editScheduleDescriptor.getUpdatedSessionIndex().isPresent()) {
-                if (editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased()
-                        >= lastShownSessionList.size()) {
+            if (updatedOptionalSessionIndex.isPresent()) {
+                int updatedSessionIndex = updatedOptionalSessionIndex.get().getZeroBased();
+
+                if (updatedSessionIndex >= lastShownSessionList.size()) {
                     throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
                 }
-                session = lastShownSessionList
-                        .get(editScheduleDescriptor.getUpdatedSessionIndex().get().getZeroBased());
+                session = lastShownSessionList.get(updatedSessionIndex);
             }
         } catch (NoSuchElementException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
+
         // get new PaymentStatus else return previous PaymentStatus
         PaymentStatus updatedPayment = editScheduleDescriptor
                 .getPaymentStatus().orElse(scheduleToEdit.getPaymentStatus());
