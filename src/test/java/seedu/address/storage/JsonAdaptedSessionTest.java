@@ -82,7 +82,7 @@ public class JsonAdaptedSessionTest {
     public void toModelType_invalidDuration_throwsIllegalValueException() {
         JsonAdaptedSession session =
                 new JsonAdaptedSession(VALID_GYM, VALID_EXERCISE_TYPE, VALID_END_TIME, VALID_START_TIME);
-        String expectedMessage = Interval.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Interval.MESSAGE_END_AFTER_START_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, session::toModelType);
     }
 
