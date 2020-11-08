@@ -76,13 +76,13 @@ public class JsonAdaptedScheduleTest {
     @Test
     public void toModelType_invalidInterval_throwsIllegalValueException() {
         // invalid start time
-        String expectedMessage = Interval.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Interval.MESSAGE_START_TIME_CONSTRAINTS;
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(VALID_EMAIL, INVALID_START_TIME,
                 VALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getSessionInterval);
 
         // invalid end time
-        expectedMessage = Interval.MESSAGE_CONSTRAINTS;
+        expectedMessage = Interval.MESSAGE_END_TIME_CONSTRAINTS;
         schedule = new JsonAdaptedSchedule(VALID_EMAIL, VALID_START_TIME,
                 INVALID_END_TIME, VALID_PAYMENT_STATUS, VALID_REMARK, DEFAULT_WEIGHT);
         assertThrows(IllegalValueException.class, expectedMessage, schedule::getSessionInterval);

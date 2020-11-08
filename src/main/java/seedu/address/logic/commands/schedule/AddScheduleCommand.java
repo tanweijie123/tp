@@ -54,19 +54,15 @@ public class AddScheduleCommand extends Command {
 
         // Get the Client and Session from the filtered list
         List<Client> lastShownClientList = model.getFilteredClientList();
-
         if (clientIndex.getZeroBased() >= lastShownClientList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
-
         Client clientToSchedule = lastShownClientList.get(clientIndex.getZeroBased());
 
         List<Session> lastShownSessionList = model.getFilteredSessionList();
-
         if (sessionIndex.getZeroBased() >= lastShownSessionList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SESSION_DISPLAYED_INDEX);
         }
-
         Session sessionToSchedule = lastShownSessionList.get(sessionIndex.getZeroBased());
 
         // Add Schedule associated with the Client and Session if currently no identical Schedule exist
@@ -76,6 +72,7 @@ public class AddScheduleCommand extends Command {
 
         Schedule scheduleToAdd = new Schedule(clientToSchedule, sessionToSchedule);
         model.addSchedule(scheduleToAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, scheduleToAdd));
     }
 

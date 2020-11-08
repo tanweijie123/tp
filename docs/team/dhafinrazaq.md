@@ -27,8 +27,9 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Modified and enhanced `cedit` from `edit` command (PR [#53](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/53), [\#165](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/165))
+  * Added test cases for Schedule model (PR [#158](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/158))
   * Modified Session model to use interval as unique identifier (PR [#95](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/95))
-  * Modified saving to Storage to include Schedule objects (PR [#74](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/74))
+  * Adapted saving to Storage to include Schedule objects (PR [#74](https://github.com/AY2021S1-CS2103T-T13-3/tp/pull/74))
 
 * **Documentation**:
   * User Guide:

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser.session;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.session.Interval.MESSAGE_END_TIME_CONSTRAINTS;
+import static seedu.address.model.session.Interval.MESSAGE_START_TIME_CONSTRAINTS;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -88,22 +90,25 @@ public class SessionParserUtil extends ParserUtil {
      */
     public static Interval parseIntervalFromStartAndEnd(String startTime, String endTime) throws ParseException {
         requireNonNull(startTime, endTime);
+
         if (isInvalidDateTime(startTime)) {
-            throw new ParseException(Interval.MESSAGE_DATE_TIME_CONSTRAINTS);
+            throw new ParseException(MESSAGE_START_TIME_CONSTRAINTS);
         }
 
         if (isInvalidDateTime(endTime)) {
-            throw new ParseException(Interval.MESSAGE_DATE_TIME_CONSTRAINTS);
+            throw new ParseException(MESSAGE_END_TIME_CONSTRAINTS);
         }
 
         LocalDateTime start = parseStringToDateTime(startTime);
         LocalDateTime end = parseStringToDateTime(endTime);
 
-        int dur = (int) Duration.between(start, end).toMinutes();
-        if (!Interval.isValidInterval(dur)) {
+        int duration = (int) Duration.between(start, end).toMinutes();
+
+        if (!Interval.isValidInterval(duration)) {
             throw new ParseException(Interval.MESSAGE_CONSTRAINTS);
         }
-        return new Interval(start, dur);
+
+        return new Interval(start, duration);
     }
 
     /**

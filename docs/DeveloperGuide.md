@@ -324,7 +324,7 @@ The following activity diagram summarizes the decision making process when a use
 
  <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
      <p>
-         <img src="images/AddScheduleActivityDiagram.png" style="width: 100%; height: auto;"/>
+         <img src="images/AddScheduleActivityDiagram.png" style="width: 70%; height: auto;"/>
      </p>
      <figcaption>Figure - Add Schedule activity diagram</figcaption>
  </figure>
