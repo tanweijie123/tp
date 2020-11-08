@@ -478,7 +478,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <figure style="width:auto; text-align:center; padding:0.5em; font-style: italic; font-size: smaller;">
     <p>
-        <img src="images/ViewSessionActivityDiagram.png" style="width: 50%; height: auto;"/>
+        <img src="images/ViewSessionActivityDiagram.png" style="height: auto;"/>
     </p>
     <figcaption>Figure - View Session Activity Diagram</figcaption>
 </figure>
