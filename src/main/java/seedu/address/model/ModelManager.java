@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -120,10 +119,7 @@ public class ModelManager implements Model {
     public void deleteClientAssociatedSchedules(Client client) {
         requireNonNull(client);
 
-        List<Schedule> associatedSchedules = addressBook.getScheduleList()
-                .stream()
-                .filter(schedule -> client.isIdentical(schedule.getClient()))
-                .collect(Collectors.toList());
+        List<Schedule> associatedSchedules = addressBook.findScheduleByClient(client);
 
         for (Schedule schedule : associatedSchedules) {
             this.deleteSchedule(schedule);
@@ -181,10 +177,7 @@ public class ModelManager implements Model {
     public void deleteSessionAssociatedSchedules(Session session) {
         requireNonNull(session);
 
-        List<Schedule> associatedSchedules = addressBook.getScheduleList()
-                .stream()
-                .filter(schedule -> session.isIdentical(schedule.getSession()))
-                .collect(Collectors.toList());
+        List<Schedule> associatedSchedules = addressBook.findScheduleBySession(session);
 
         for (Schedule schedule : associatedSchedules) {
             this.deleteSchedule(schedule);
@@ -246,10 +239,7 @@ public class ModelManager implements Model {
      */
     public boolean hasAnyScheduleAssociatedWithClient(Client client) {
         requireNonNull(client);
-        return addressBook.getScheduleList()
-                .stream()
-                .map(Schedule::getClient)
-                .anyMatch(client::isIdentical);
+        return addressBook.hasAnyScheduleAssociatedWithClient(client);
     }
 
     /**
@@ -258,10 +248,7 @@ public class ModelManager implements Model {
     public void editSchedulesAssociatedWithClient(Client clientToEdit, Client editedClient) {
         requireAllNonNull(clientToEdit, editedClient);
 
-        List<Schedule> associatedSchedules = addressBook.getScheduleList()
-                .stream()
-                .filter(schedule -> clientToEdit.isIdentical(schedule.getClient()))
-                .collect(Collectors.toList());
+        List<Schedule> associatedSchedules = addressBook.findScheduleByClient(clientToEdit);
 
         for (Schedule schedule : associatedSchedules) {
             this.setSchedule(schedule, schedule.setClient(editedClient));
@@ -273,10 +260,7 @@ public class ModelManager implements Model {
      */
     public boolean hasAnyScheduleAssociatedWithSession(Session session) {
         requireNonNull(session);
-        return addressBook.getScheduleList()
-                .stream()
-                .map(Schedule::getSession)
-                .anyMatch(session::isIdentical);
+        return addressBook.hasAnyScheduleAssociatedWithSession(session);
     }
 
     /**
@@ -286,10 +270,7 @@ public class ModelManager implements Model {
     public void editSchedulesAssociatedWithSession(Session sessionToEdit, Session editedSession) {
         requireAllNonNull(sessionToEdit, editedSession);
 
-        List<Schedule> associatedSchedules = addressBook.getScheduleList()
-                .stream()
-                .filter(schedule -> sessionToEdit.isIdentical(schedule.getSession()))
-                .collect(Collectors.toList());
+        List<Schedule> associatedSchedules = addressBook.findScheduleBySession(sessionToEdit);
 
         for (Schedule schedule : associatedSchedules) {
             this.setSchedule(schedule, schedule.setSession(editedSession));
@@ -302,10 +283,7 @@ public class ModelManager implements Model {
      */
     public boolean hasAnyScheduleAssociatedWithClientAndSession(Client client, Session session) {
         requireAllNonNull(client, session);
-
-        return addressBook.getScheduleList()
-                .stream()
-                .anyMatch(schedule -> schedule.getClient().equals(client) && schedule.getSession().equals(session));
+        return addressBook.hasAnyScheduleAssociatedWithClientAndSession(client, session);
     }
 
     @Override

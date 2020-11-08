@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -231,6 +232,33 @@ public class AddressBook implements ReadOnlyAddressBook {
         return schedules.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns true if a Schedule with the same client as {@code client} exists in the AddressBook.
+     */
+    public boolean hasAnyScheduleAssociatedWithClient(Client client) {
+        requireNonNull(client);
+        return schedules.findAnyMatch(schedule -> schedule.getClient().isIdentical(client)).isPresent();
+    }
+
+    /**
+     * Returns true if a Schedule with the same session as {@code session} exists in the Schedule List.
+     */
+    boolean hasAnyScheduleAssociatedWithSession(Session session) {
+        requireNonNull(session);
+        return schedules.findAnyMatch(schedule -> schedule.getSession().isIdentical(session)).isPresent();
+    }
+
+    /**
+     * Returns true if a Schedule with the same client as {@code client} and session as
+     * {@code session} exists in the Schedule List.
+     */
+    boolean hasAnyScheduleAssociatedWithClientAndSession(Client client, Session session) {
+        requireAllNonNull(client, session);
+
+        return schedules
+                .findAnyMatch(schedule -> schedule.getClient().equals(client) && schedule.getSession().equals(session))
+                .isPresent();
+    }
 
     /**
      * Finds all {@code Schedule} that contains {@code session} from this {@code ScheduleList}.
